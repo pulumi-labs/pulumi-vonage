@@ -1,0 +1,54 @@
+name: vonage-tenant-yaml
+description: Provision a Vonage subaccount tenant with its own application and a rotatable API secret (YAML)
+runtime: yaml
+
+config:
+  tenantName:
+    type: string
+    default: tenant-acme
+  newApiSecret:
+    type: string
+    secret: true
+
+resources:
+  tenant:
+    type: vonage:index:SubAccount
+    properties:
+      name: ${tenantName}
+      usePrimaryAccountBalance: true
+      # Vonage cannot delete subaccounts; suspend on destroy so it stops being usable.
+      suspendOnDelete: true
+
+  tenantApp:
+    type: vonage:index:Application
+    properties:
+      name: ${tenantName}-voice
+      voice:
+        answerUrl:
+          address: https://example.com/webhooks/answer
+          httpMethod: POST
+        eventUrl:
+          address: https://example.com/webhooks/event
+          httpMethod: POST
+
+  # An account can hold at most two API secrets: add the new one, roll consumers over,
+  # then remove the old one out of band.
+  tenantSecret:
+    type: vonage:index:ApiSecret
+    properties:
+      accountKey: ${tenant.apiKey}
+      secret: ${newApiSecret}
+
+variables:
+  lookup:
+    fn::invoke:
+      function: vonage:index:getApplication
+      arguments:
+        name: ${tenantApp.name}
+
+outputs:
+  tenantApiKey: ${tenant.apiKey}
+  tenantGeneratedSecret: ${tenant.generatedSecret}
+  applicationId: ${tenantApp.applicationId}
+  lookedUpApplicationId: ${lookup.applicationId}
+  secretId: ${tenantSecret.secretId}

@@ -1,0 +1,56 @@
+name: ${PROJECT}
+description: ${DESCRIPTION}
+runtime: yaml
+
+template:
+  description: A YAML program that provisions a Vonage application with voice and messages capabilities.
+  config:
+    vonage:apiKey:
+      description: Vonage account API key (Dashboard > API settings).
+    vonage:apiSecret:
+      description: Vonage account API secret.
+      secret: true
+    answerUrl:
+      description: Public HTTPS URL that returns an NCCO when a call arrives.
+      default: https://example.com/webhooks/answer
+
+config:
+  answerUrl:
+    type: string
+    default: https://example.com/webhooks/answer
+  eventUrl:
+    type: string
+    default: https://example.com/webhooks/event
+  msisdn:
+    type: string
+    default: ""
+  country:
+    type: string
+    default: US
+
+resources:
+  app:
+    type: vonage:index:Application
+    properties:
+      name: pulumi-voice-and-messages
+      voice:
+        answerUrl:
+          address: ${answerUrl}
+          httpMethod: POST
+        eventUrl:
+          address: ${eventUrl}
+          httpMethod: POST
+        signedCallbacks: true
+      messages:
+        version: v1
+        inboundUrl:
+          address: https://example.com/webhooks/inbound
+          httpMethod: POST
+        statusUrl:
+          address: https://example.com/webhooks/status
+          httpMethod: POST
+
+outputs:
+  applicationId: ${app.applicationId}
+  # The generated private key is returned exactly once and stored as a secret.
+  privateKey: ${app.privateKey}

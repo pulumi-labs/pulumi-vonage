@@ -1,0 +1,55 @@
+name: vonage-yaml
+description: Provision a Vonage voice and messaging application and link an owned number to it (YAML)
+runtime: yaml
+
+config:
+  answerUrl:
+    type: string
+    default: https://example.com/webhooks/answer
+  eventUrl:
+    type: string
+    default: https://example.com/webhooks/event
+  msisdn:
+    type: string
+    default: ""
+  country:
+    type: string
+    default: US
+
+resources:
+  app:
+    type: vonage:index:Application
+    properties:
+      name: pulumi-voice-and-messages
+      voice:
+        answerUrl:
+          address: ${answerUrl}
+          httpMethod: POST
+        eventUrl:
+          address: ${eventUrl}
+          httpMethod: POST
+        signedCallbacks: true
+      messages:
+        version: v1
+        inboundUrl:
+          address: https://example.com/webhooks/inbound
+          httpMethod: POST
+        statusUrl:
+          address: https://example.com/webhooks/status
+          httpMethod: POST
+
+  # Adopt a number the account already owns and route it to the application.
+  # cancelOnDelete=false: destroying the stack only forgets the number, it keeps billing.
+  number:
+    type: vonage:index:Number
+    properties:
+      country: ${country}
+      msisdn: ${msisdn}
+      acquisition: adopt
+      cancelOnDelete: false
+      appId: ${app.applicationId}
+
+outputs:
+  applicationId: ${app.applicationId}
+  # The generated private key is returned exactly once and stored as a secret.
+  privateKey: ${app.privateKey}
