@@ -29,6 +29,15 @@ Every resource in this release uses the account API key and secret over HTTP Bas
 ```bash
 pulumi config set vonage:apiKey <key>
 pulumi config set --secret vonage:apiSecret <secret>
+pulumi config set vonage:applicationId <id>                  # optional
+pulumi config set --secret vonage:privateKey <pem>           # optional
+```
+
+Or set the environment variables instead (config takes precedence when both are set):
+
+```bash
+export VONAGE_API_KEY=<key>
+export VONAGE_API_SECRET=<secret>
 ```
 
 ## Validation status

@@ -19,25 +19,34 @@ import (
 // release calls a JWT-authenticated API, so they are not required.
 type Config struct {
 	// APIKey is the Vonage account API key.
-	APIKey *string `pulumi:"apiKey,optional" env:"VONAGE_API_KEY"`
+	APIKey *string `pulumi:"apiKey,optional"`
 
 	// APISecret is the Vonage account API secret.
-	APISecret *string `pulumi:"apiSecret,optional" provider:"secret" env:"VONAGE_API_SECRET"`
+	APISecret *string `pulumi:"apiSecret,optional" provider:"secret"`
 
 	// ApplicationID is the optional application ID used for JWT-authenticated APIs.
-	ApplicationID *string `pulumi:"applicationId,optional" env:"VONAGE_APPLICATION_ID"`
+	ApplicationID *string `pulumi:"applicationId,optional"`
 
 	// PrivateKey is the optional PEM private key paired with ApplicationID.
-	PrivateKey *string `pulumi:"privateKey,optional" provider:"secret" env:"VONAGE_PRIVATE_KEY"`
+	PrivateKey *string `pulumi:"privateKey,optional" provider:"secret"`
 
 	// APIBaseURL overrides https://api.nexmo.com (Application, Subaccounts and Secrets APIs).
-	APIBaseURL *string `pulumi:"apiBaseUrl,optional" env:"VONAGE_API_BASE_URL"`
+	APIBaseURL *string `pulumi:"apiBaseUrl,optional"`
 
 	// RestBaseURL overrides https://rest.nexmo.com (Numbers API).
-	RestBaseURL *string `pulumi:"restBaseUrl,optional" env:"VONAGE_REST_BASE_URL"`
+	RestBaseURL *string `pulumi:"restBaseUrl,optional"`
 }
 
+// Annotate describes the provider config fields and wires their environment
+// variable fallbacks; infer reads env defaults only from SetDefault, not from
+// struct tags.
 func (c *Config) Annotate(a infer.Annotator) {
+	a.SetDefault(&c.APIKey, nil, "VONAGE_API_KEY")
+	a.SetDefault(&c.APISecret, nil, "VONAGE_API_SECRET")
+	a.SetDefault(&c.ApplicationID, nil, "VONAGE_APPLICATION_ID")
+	a.SetDefault(&c.PrivateKey, nil, "VONAGE_PRIVATE_KEY")
+	a.SetDefault(&c.APIBaseURL, nil, "VONAGE_API_BASE_URL")
+	a.SetDefault(&c.RestBaseURL, nil, "VONAGE_REST_BASE_URL")
 	a.Describe(&c.APIKey, "The Vonage account API key (the 8-character key shown in the Vonage API Dashboard). "+
 		"Falls back to the VONAGE_API_KEY environment variable.")
 	a.Describe(&c.APISecret, "The Vonage account API secret. Falls back to the VONAGE_API_SECRET environment variable.")

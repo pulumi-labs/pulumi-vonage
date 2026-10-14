@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+
+### Fixed
+
+- Provider config environment-variable fallbacks now work: `apiKey`, `apiSecret`, `applicationId`, `privateKey`, `apiBaseUrl` and `restBaseUrl` fall back to `VONAGE_API_KEY`, `VONAGE_API_SECRET`, `VONAGE_APPLICATION_ID`, `VONAGE_PRIVATE_KEY`, `VONAGE_API_BASE_URL` and `VONAGE_REST_BASE_URL` when the config keys are unset. The fallbacks were previously declared only as `env` struct tags, which the infer framework ignores.
+
 ## 0.1.0
 
 - Initial release: `Application`, `Number`, `SubAccount` and `ApiSecret` resources and `getApplication` and `getNumber` data sources for the Vonage account-management APIs.
