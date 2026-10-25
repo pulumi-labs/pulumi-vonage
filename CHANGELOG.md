@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Changed
+
+- `go.mod`/`go.sum` moved from `provider/` to the provider's top level (module path is now `github.com/pulumi/autoregistry/lib/providers/vonage`); the Makefile builds from there. No change to the provider binary, schema or SDKs.
+
 ### Fixed
 
 - Provider config environment-variable fallbacks now work: `apiKey`, `apiSecret`, `applicationId`, `privateKey`, `apiBaseUrl` and `restBaseUrl` fall back to `VONAGE_API_KEY`, `VONAGE_API_SECRET`, `VONAGE_APPLICATION_ID`, `VONAGE_PRIVATE_KEY`, `VONAGE_API_BASE_URL` and `VONAGE_REST_BASE_URL` when the config keys are unset. The fallbacks were previously declared only as `env` struct tags, which the infer framework ignores.
