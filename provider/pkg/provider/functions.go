@@ -180,3 +180,60 @@ func (f *GetNumber) Invoke(ctx context.Context, req infer.FunctionRequest[GetNum
 		MessagesCallbackType: n.MessagesCallbackType, MessagesCallbackValue: n.MessagesCallbackValue,
 	}}, nil
 }
+
+// GetApplications lists the account's applications, optionally filtered by exact name.
+type GetApplications struct{}
+
+// GetApplicationsArgs are the lookup arguments.
+type GetApplicationsArgs struct {
+	Name *string `pulumi:"name,optional"`
+}
+
+func (a *GetApplicationsArgs) Annotate(an infer.Annotator) {
+	an.Describe(&a.Name, "Only return applications with exactly this name.")
+}
+
+// ApplicationSummary is one listed application.
+type ApplicationSummary struct {
+	ApplicationID string   `pulumi:"applicationId"`
+	Name          string   `pulumi:"name"`
+	Capabilities  []string `pulumi:"capabilities"`
+}
+
+func (a *ApplicationSummary) Annotate(an infer.Annotator) {
+	an.Describe(&a.ApplicationID, "Application ID.")
+	an.Describe(&a.Name, "Application name.")
+	an.Describe(&a.Capabilities, "Enabled capabilities, sorted.")
+}
+
+// GetApplicationsResult lists applications.
+type GetApplicationsResult struct {
+	Applications []ApplicationSummary `pulumi:"applications"`
+}
+
+func (a *GetApplicationsResult) Annotate(an infer.Annotator) {
+	an.Describe(&a.Applications, "The matching applications.")
+}
+
+func (f *GetApplications) Annotate(a infer.Annotator) {
+	a.Describe(&f, "List the account's Vonage applications, optionally filtered by exact name.")
+}
+
+func (f *GetApplications) Invoke(ctx context.Context, req infer.FunctionRequest[GetApplicationsArgs]) (infer.FunctionResponse[GetApplicationsResult], error) {
+	c, err := clientFor(ctx)
+	if err != nil {
+		return infer.FunctionResponse[GetApplicationsResult]{}, err
+	}
+	apps, err := c.ListApplications(ctx)
+	if err != nil {
+		return infer.FunctionResponse[GetApplicationsResult]{}, fmt.Errorf("getApplications: %w", err)
+	}
+	out := GetApplicationsResult{Applications: []ApplicationSummary{}}
+	for _, a := range apps {
+		if req.Input.Name != nil && *req.Input.Name != "" && a.Name != *req.Input.Name {
+			continue
+		}
+		out.Applications = append(out.Applications, ApplicationSummary{ApplicationID: a.ID, Name: a.Name, Capabilities: capabilityNames(a.Capabilities)})
+	}
+	return infer.FunctionResponse[GetApplicationsResult]{Output: out}, nil
+}

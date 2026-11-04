@@ -12,7 +12,7 @@ func New() (provider.Provider, error) {
 	return infer.NewProviderBuilder().
 		WithDisplayName("Vonage").
 		WithDescription(
-			"Manage Vonage (formerly Nexmo) applications, numbers, subaccounts and API secrets as infrastructure with Pulumi.",
+			"Manage Vonage (formerly Nexmo) applications, numbers, subaccounts, API secrets and Verify v2 templates as infrastructure with Pulumi.",
 		).
 		WithHomepage("https://developer.vonage.com").
 		WithRepository("https://github.com/pulumi/autoregistry").
@@ -29,10 +29,18 @@ func New() (provider.Provider, error) {
 			infer.Resource[*Number, NumberArgs, NumberState](&Number{}),
 			infer.Resource[*SubAccount, SubAccountArgs, SubAccountState](&SubAccount{}),
 			infer.Resource[*ApiSecret, ApiSecretArgs, ApiSecretState](&ApiSecret{}),
+			infer.Resource[*VerifyTemplate, VerifyTemplateArgs, VerifyTemplateState](&VerifyTemplate{}),
+			infer.Resource[*VerifyTemplateFragment, VerifyTemplateFragmentArgs, VerifyTemplateFragmentState](&VerifyTemplateFragment{}),
 		).
 		WithFunctions(
 			infer.Function[*GetApplication, GetApplicationArgs, GetApplicationResult](&GetApplication{}),
 			infer.Function[*GetNumber, GetNumberArgs, GetNumberResult](&GetNumber{}),
+			infer.Function[*GetApplications, GetApplicationsArgs, GetApplicationsResult](&GetApplications{}),
+			infer.Function[*GetSubAccount, GetSubAccountArgs, GetSubAccountResult](&GetSubAccount{}),
+			infer.Function[*GetApiSecret, GetApiSecretArgs, GetApiSecretResult](&GetApiSecret{}),
+			infer.Function[*GetApiSecrets, GetApiSecretsArgs, GetApiSecretsResult](&GetApiSecrets{}),
+			infer.Function[*GetVerifyTemplate, GetVerifyTemplateArgs, GetVerifyTemplateResult](&GetVerifyTemplate{}),
+			infer.Function[*GetVerifyTemplateFragment, GetVerifyTemplateFragmentArgs, GetVerifyTemplateFragmentResult](&GetVerifyTemplateFragment{}),
 		).
 		Build()
 }

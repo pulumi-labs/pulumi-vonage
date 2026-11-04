@@ -1,6 +1,6 @@
 # Vonage Pulumi Provider
 
-A native Pulumi provider for [Vonage](https://developer.vonage.com) (formerly Nexmo). Vonage has no Terraform or Pulumi provider; this one manages the account-level building blocks of a Vonage estate as infrastructure: applications, virtual numbers, subaccounts and API secrets.
+A native Pulumi provider for [Vonage](https://developer.vonage.com) (formerly Nexmo). Vonage has no Terraform or Pulumi provider; this one manages the account-level building blocks of a Vonage estate as infrastructure: applications, virtual numbers, subaccounts, API secrets and Verify v2 templates.
 
 ## Resources
 
@@ -10,8 +10,14 @@ A native Pulumi provider for [Vonage](https://developer.vonage.com) (formerly Ne
 | `vonage:index:Number` | An owned virtual number: buy or adopt, link to an application or webhooks, optionally cancel on destroy. |
 | `vonage:index:SubAccount` | A subaccount under a primary account (primary credentials required). Vonage cannot delete subaccounts, so destroy can suspend them. |
 | `vonage:index:ApiSecret` | One API secret of an account or subaccount (at most two per account). Rotate by adding a second `ApiSecret` (blue/green), or change `secret` in place (see below). |
+| `vonage:index:VerifyTemplate` | A Verify v2 template (`name`, `isDefault`). Import with the template ID. |
+| `vonage:index:VerifyTemplateFragment` | The text of a template for one `channel` (`sms` or `voice`) and `locale`. `templateId`, `channel` and `locale` replace on change; `text` updates in place. Import with `TEMPLATE_ID/FRAGMENT_ID`. |
 
-Data sources: `vonage:index:getApplication` (by `applicationId` or exact `name`) and `vonage:index:getNumber` (by `country` and `msisdn`).
+Import IDs: `Application` the application ID; `Number` `COUNTRY:MSISDN`; `SubAccount` the subaccount API key; `ApiSecret` `ACCOUNT_API_KEY/SECRET_ID`; `VerifyTemplate` the template ID; `VerifyTemplateFragment` `TEMPLATE_ID/FRAGMENT_ID`.
+
+Verify v2 templates are documented for Basic and JWT authentication; the Vonage Node SDK uses a JWT. The provider sends Basic, which is unverified against a live account.
+
+Data sources (`vonage:index:get*`): `getApplication` (by `applicationId` or exact `name`), `getApplications`, `getNumber` (by `country` and `msisdn`), `getSubAccount` (by `subAccountApiKey`), `getApiSecret` and `getApiSecrets` (secret metadata only, Vonage never returns the value), `getVerifyTemplate` (by `templateId` or exact `name`) and `getVerifyTemplateFragment` (by `templateFragmentId`, or `channel` and `locale`). The full vendor surface and what is deferred is in `research/coverage/vonage.md`.
 
 ## Configuration
 
@@ -100,9 +106,10 @@ Examples in all six languages are in `examples/`, starter templates in `template
 ## Roadmap (not yet implemented)
 
 * Number search-and-buy by criteria (this provider buys a specific, already-known msisdn).
-* Account settings (default SMS webhooks), balance auto-reload, and subaccount balance or number transfers (imperative operations rather than resources).
+* Account settings (default SMS webhooks; there is no read endpoint), balance auto-reload, and subaccount balance or number transfers (imperative operations rather than resources).
 * JWT-authenticated APIs (Messages sender settings, Video, Meetings rooms) using `applicationId` and `privateKey`.
-* Verify v2 templates and SIP trunking.
+* SIP trunking.
+* Number pools, 10DLC, Network Registry and external accounts (see `research/coverage/vonage.md`).
 
 ## Development
 

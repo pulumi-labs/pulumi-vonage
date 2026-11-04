@@ -32,7 +32,8 @@ func mustSchema(t *testing.T) schema.PackageSpec {
 func TestSchema_ReplaceOnChangesForIdentityInputs(t *testing.T) {
 	spec := mustSchema(t)
 	want := map[string][]string{
-		"vonage:index:Number": {"country", "msisdn"},
+		"vonage:index:Number":                 {"country", "msisdn"},
+		"vonage:index:VerifyTemplateFragment": {"templateId", "channel", "locale"},
 	}
 	for tok, props := range want {
 		res, ok := spec.Resources[tok]

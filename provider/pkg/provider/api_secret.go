@@ -190,3 +190,111 @@ func (r *ApiSecret) Delete(ctx context.Context, req infer.DeleteRequest[ApiSecre
 	}
 	return infer.DeleteResponse{}, nil
 }
+
+// GetApiSecret looks up one API secret of an account (the value is never returned by Vonage).
+type GetApiSecret struct{}
+
+// GetApiSecretArgs are the lookup arguments.
+type GetApiSecretArgs struct {
+	AccountKey *string `pulumi:"accountKey,optional"`
+	SecretID   string  `pulumi:"secretId"`
+}
+
+func (a *GetApiSecretArgs) Annotate(an infer.Annotator) {
+	an.Describe(&a.AccountKey, "API key of the owning account. Defaults to the provider's account.")
+	an.Describe(&a.SecretID, "The secret ID.")
+}
+
+// GetApiSecretResult is the metadata of an API secret.
+type GetApiSecretResult struct {
+	OwnerKey  string `pulumi:"ownerKey"`
+	SecretID  string `pulumi:"secretId"`
+	CreatedAt string `pulumi:"createdAt"`
+}
+
+func (a *GetApiSecretResult) Annotate(an infer.Annotator) {
+	an.Describe(&a.OwnerKey, "The account API key that owns the secret.")
+	an.Describe(&a.SecretID, "The secret ID.")
+	an.Describe(&a.CreatedAt, "ISO 8601 creation timestamp.")
+}
+
+func (f *GetApiSecret) Annotate(a infer.Annotator) {
+	a.Describe(&f, "Look up an API secret's metadata by account and secret ID. Vonage never returns the secret value. Fails if it does not exist.")
+}
+
+func (f *GetApiSecret) Invoke(ctx context.Context, req infer.FunctionRequest[GetApiSecretArgs]) (infer.FunctionResponse[GetApiSecretResult], error) {
+	owner := ownerKey(ctx, ApiSecretArgs{AccountKey: req.Input.AccountKey})
+	if owner == "" || req.Input.SecretID == "" {
+		return infer.FunctionResponse[GetApiSecretResult]{}, fmt.Errorf("getApiSecret: secretId and an account (accountKey or the provider apiKey) are required")
+	}
+	c, err := clientFor(ctx)
+	if err != nil {
+		return infer.FunctionResponse[GetApiSecretResult]{}, err
+	}
+	s, err := c.GetSecret(ctx, owner, req.Input.SecretID)
+	if err != nil {
+		return infer.FunctionResponse[GetApiSecretResult]{}, fmt.Errorf("getApiSecret: %w", err)
+	}
+	if s == nil {
+		return infer.FunctionResponse[GetApiSecretResult]{}, fmt.Errorf("getApiSecret: secret %q of account %q was not found", req.Input.SecretID, owner)
+	}
+	return infer.FunctionResponse[GetApiSecretResult]{Output: GetApiSecretResult{OwnerKey: owner, SecretID: s.ID, CreatedAt: s.CreatedAt}}, nil
+}
+
+// GetApiSecrets lists the API secrets of an account.
+type GetApiSecrets struct{}
+
+// GetApiSecretsArgs are the lookup arguments.
+type GetApiSecretsArgs struct {
+	AccountKey *string `pulumi:"accountKey,optional"`
+}
+
+func (a *GetApiSecretsArgs) Annotate(an infer.Annotator) {
+	an.Describe(&a.AccountKey, "API key of the account. Defaults to the provider's account.")
+}
+
+// ApiSecretSummary is one listed secret.
+type ApiSecretSummary struct {
+	SecretID  string `pulumi:"secretId"`
+	CreatedAt string `pulumi:"createdAt"`
+}
+
+func (a *ApiSecretSummary) Annotate(an infer.Annotator) {
+	an.Describe(&a.SecretID, "The secret ID.")
+	an.Describe(&a.CreatedAt, "ISO 8601 creation timestamp.")
+}
+
+// GetApiSecretsResult lists an account's secrets.
+type GetApiSecretsResult struct {
+	OwnerKey string             `pulumi:"ownerKey"`
+	Secrets  []ApiSecretSummary `pulumi:"secrets"`
+}
+
+func (a *GetApiSecretsResult) Annotate(an infer.Annotator) {
+	an.Describe(&a.OwnerKey, "The account API key that was listed.")
+	an.Describe(&a.Secrets, "The account's secrets (at most two).")
+}
+
+func (f *GetApiSecrets) Annotate(a infer.Annotator) {
+	a.Describe(&f, "List the API secrets (IDs and creation times) of an account.")
+}
+
+func (f *GetApiSecrets) Invoke(ctx context.Context, req infer.FunctionRequest[GetApiSecretsArgs]) (infer.FunctionResponse[GetApiSecretsResult], error) {
+	owner := ownerKey(ctx, ApiSecretArgs{AccountKey: req.Input.AccountKey})
+	if owner == "" {
+		return infer.FunctionResponse[GetApiSecretsResult]{}, fmt.Errorf("getApiSecrets: set accountKey or the provider apiKey")
+	}
+	c, err := clientFor(ctx)
+	if err != nil {
+		return infer.FunctionResponse[GetApiSecretsResult]{}, err
+	}
+	list, err := c.ListSecrets(ctx, owner)
+	if err != nil {
+		return infer.FunctionResponse[GetApiSecretsResult]{}, fmt.Errorf("getApiSecrets: %w", err)
+	}
+	out := GetApiSecretsResult{OwnerKey: owner, Secrets: []ApiSecretSummary{}}
+	for _, s := range list {
+		out.Secrets = append(out.Secrets, ApiSecretSummary{SecretID: s.ID, CreatedAt: s.CreatedAt})
+	}
+	return infer.FunctionResponse[GetApiSecretsResult]{Output: out}, nil
+}

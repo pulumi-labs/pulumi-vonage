@@ -227,3 +227,65 @@ func ptrDiffers[T comparable](a, b *T) bool {
 	}
 	return a != nil && *a != *b
 }
+
+// GetSubAccount looks up a subaccount of the provider's primary account by API key.
+type GetSubAccount struct{}
+
+// GetSubAccountArgs are the lookup arguments.
+type GetSubAccountArgs struct {
+	SubAccountAPIKey string `pulumi:"subAccountApiKey"`
+}
+
+func (a *GetSubAccountArgs) Annotate(an infer.Annotator) {
+	an.Describe(&a.SubAccountAPIKey, "API key of the subaccount.")
+}
+
+// GetSubAccountResult is a subaccount's configuration.
+type GetSubAccountResult struct {
+	APIKey                   string   `pulumi:"apiKey"`
+	Name                     string   `pulumi:"name"`
+	PrimaryAccountAPIKey     string   `pulumi:"primaryAccountApiKey"`
+	UsePrimaryAccountBalance bool     `pulumi:"usePrimaryAccountBalance"`
+	Suspended                bool     `pulumi:"suspended"`
+	CreatedAt                string   `pulumi:"createdAt"`
+	Balance                  *float64 `pulumi:"balance,optional"`
+	CreditLimit              *float64 `pulumi:"creditLimit,optional"`
+}
+
+func (a *GetSubAccountResult) Annotate(an infer.Annotator) {
+	an.Describe(&a.APIKey, "Subaccount API key.")
+	an.Describe(&a.Name, "Subaccount name.")
+	an.Describe(&a.PrimaryAccountAPIKey, "API key of the owning primary account.")
+	an.Describe(&a.UsePrimaryAccountBalance, "Whether the subaccount draws on the primary account balance.")
+	an.Describe(&a.Suspended, "Whether the subaccount is suspended.")
+	an.Describe(&a.CreatedAt, "ISO 8601 creation timestamp.")
+	an.Describe(&a.Balance, "Subaccount balance, unset when it uses the primary balance.")
+	an.Describe(&a.CreditLimit, "Subaccount credit limit, unset when it uses the primary balance.")
+}
+
+func (f *GetSubAccount) Annotate(a infer.Annotator) {
+	a.Describe(&f, "Look up a subaccount of the provider's primary account by API key. Fails if it does not exist.")
+}
+
+func (f *GetSubAccount) Invoke(ctx context.Context, req infer.FunctionRequest[GetSubAccountArgs]) (infer.FunctionResponse[GetSubAccountResult], error) {
+	key := req.Input.SubAccountAPIKey
+	if key == "" {
+		return infer.FunctionResponse[GetSubAccountResult]{}, fmt.Errorf("getSubAccount: subAccountApiKey must not be empty")
+	}
+	c, err := clientFor(ctx)
+	if err != nil {
+		return infer.FunctionResponse[GetSubAccountResult]{}, err
+	}
+	s, err := c.GetSubaccount(ctx, key)
+	if err != nil {
+		return infer.FunctionResponse[GetSubAccountResult]{}, fmt.Errorf("getSubAccount: %w", err)
+	}
+	if s == nil {
+		return infer.FunctionResponse[GetSubAccountResult]{}, fmt.Errorf("getSubAccount: subaccount %q was not found", key)
+	}
+	return infer.FunctionResponse[GetSubAccountResult]{Output: GetSubAccountResult{
+		APIKey: s.APIKey, Name: s.Name, PrimaryAccountAPIKey: s.PrimaryAccountAPIKey,
+		UsePrimaryAccountBalance: s.UsePrimaryAccountBalance, Suspended: s.Suspended, CreatedAt: s.CreatedAt,
+		Balance: s.Balance, CreditLimit: s.CreditLimit,
+	}}, nil
+}

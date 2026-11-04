@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+### Added
+
+- `VerifyTemplate` and `VerifyTemplateFragment` resources for Verify v2 templates and their per-channel, per-locale text (import IDs: the template ID, and `TEMPLATE_ID/FRAGMENT_ID`). Request shapes follow the Vonage Node SDK; Basic authentication on these endpoints is unverified against a live account.
+- Lookup functions `getSubAccount`, `getApiSecret`, `getApiSecrets`, `getApplications`, `getVerifyTemplate` and `getVerifyTemplateFragment`, so every resource now has a lookup.
+- `research/coverage/vonage.md`: the coverage inventory of the Vonage SDKs and APIs, with what is deferred and why.
+
 ### Changed
 
 - `go.mod`/`go.sum` moved from `provider/` to the provider's top level (module path is now `github.com/pulumi/autoregistry/lib/providers/vonage`); the Makefile builds from there. No change to the provider binary, schema or SDKs.

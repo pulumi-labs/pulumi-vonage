@@ -46,6 +46,11 @@ type mockVonage struct {
 	// after runs a hook (under the mock's lock) once the matching "METHOD /path" request has
 	// been handled, so a test can break the API at an exact point of a multi-step flow.
 	after map[string]func()
+
+	// Verify v2 templates: templates by ID and fragments by template ID then fragment ID.
+	templates map[string]map[string]any
+	fragments map[string]map[string]map[string]any
+	nextTpl   int
 }
 
 // The fake follows the documented Vonage semantics rather than the provider's assumptions:
@@ -377,6 +382,8 @@ func (m *mockVonage) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		writeJSON(w, 200, map[string]any{"id": id, "created_at": created})
+	case strings.HasPrefix(p, "/v2/verify/templates"):
+		m.serveVerify(w, r, body)
 	default:
 		writeJSON(w, 404, map[string]any{"title": "unhandled " + r.Method + " " + p})
 	}
