@@ -134,11 +134,15 @@ func (r *SubAccount) Read(ctx context.Context, req infer.ReadRequest[SubAccountA
 	}
 	args := req.Inputs
 	args.Name = s.Name
-	if args.UsePrimaryAccountBalance != nil {
+	// An unset input means the server default (usePrimaryAccountBalance true, suspended
+	// false). Keep it unset while the server agrees with the default, and surface any
+	// other server value so a subaccount suspended (or detached from the primary
+	// balance) outside Pulumi shows up as drift and import adopts it.
+	if args.UsePrimaryAccountBalance != nil || !s.UsePrimaryAccountBalance {
 		v := s.UsePrimaryAccountBalance
 		args.UsePrimaryAccountBalance = &v
 	}
-	if args.Suspended != nil {
+	if args.Suspended != nil || s.Suspended {
 		v := s.Suspended
 		args.Suspended = &v
 	}
@@ -154,10 +158,10 @@ func (r *SubAccount) Diff(ctx context.Context, req infer.DiffRequest[SubAccountA
 	if in.Name != old.Name {
 		d["name"] = p.PropertyDiff{Kind: p.Update}
 	}
-	if ptrDiffers(in.UsePrimaryAccountBalance, old.UsePrimaryAccountBalance) {
+	if effective(in.UsePrimaryAccountBalance, true) != effective(old.UsePrimaryAccountBalance, true) {
 		d["usePrimaryAccountBalance"] = p.PropertyDiff{Kind: p.Update}
 	}
-	if ptrDiffers(in.Suspended, old.Suspended) {
+	if effective(in.Suspended, false) != effective(old.Suspended, false) {
 		d["suspended"] = p.PropertyDiff{Kind: p.Update}
 	}
 	if ptrDiffers(in.SuspendOnDelete, old.SuspendOnDelete) {
@@ -178,7 +182,10 @@ func (r *SubAccount) Update(ctx context.Context, req infer.UpdateRequest[SubAcco
 	if err != nil {
 		return infer.UpdateResponse[SubAccountState]{}, err
 	}
-	patch := subaccountPatch{Name: &a.Name, UsePrimaryAccountBalance: a.UsePrimaryAccountBalance, Suspended: a.Suspended}
+	// Unset means the server default, so send the effective values: removing
+	// suspended: true from the program must unsuspend the subaccount.
+	ub, susp := effective(a.UsePrimaryAccountBalance, true), effective(a.Suspended, false)
+	patch := subaccountPatch{Name: &a.Name, UsePrimaryAccountBalance: &ub, Suspended: &susp}
 	s, err := c.PatchSubaccount(ctx, req.ID, patch)
 	if err != nil {
 		return infer.UpdateResponse[SubAccountState]{}, fmt.Errorf("update subaccount %s: %w", req.ID, err)
@@ -202,6 +209,14 @@ func (r *SubAccount) Delete(ctx context.Context, req infer.DeleteRequest[SubAcco
 		return infer.DeleteResponse{}, fmt.Errorf("suspend subaccount %s: %w", req.ID, err)
 	}
 	return infer.DeleteResponse{}, nil
+}
+
+// effective returns the value of an optional bool, or def when it is unset.
+func effective(v *bool, def bool) bool {
+	if v == nil {
+		return def
+	}
+	return *v
 }
 
 // ptrDiffers reports whether two optional values differ: one set and the other

@@ -32,7 +32,7 @@ func mustSchema(t *testing.T) schema.PackageSpec {
 func TestSchema_ReplaceOnChangesForIdentityInputs(t *testing.T) {
 	spec := mustSchema(t)
 	want := map[string][]string{
-		"vonage:index:Number": {"country", "msisdn", "acquisition"},
+		"vonage:index:Number": {"country", "msisdn"},
 	}
 	for tok, props := range want {
 		res, ok := spec.Resources[tok]
@@ -48,6 +48,19 @@ func TestSchema_ReplaceOnChangesForIdentityInputs(t *testing.T) {
 				t.Errorf("%s.%s must be replaceOnChanges", tok, p)
 			}
 		}
+	}
+}
+
+// acquisition only matters at create time. Tagging it replaceOnChanges would plan a
+// same-ID replacement whose delete cancels the number.
+func TestSchema_NumberAcquisitionIsNotReplaceOnChanges(t *testing.T) {
+	spec := mustSchema(t)
+	in, ok := spec.Resources["vonage:index:Number"].InputProperties["acquisition"]
+	if !ok {
+		t.Fatal("Number missing input acquisition")
+	}
+	if in.ReplaceOnChanges {
+		t.Error("Number.acquisition must not be replaceOnChanges (it is create-only)")
 	}
 }
 

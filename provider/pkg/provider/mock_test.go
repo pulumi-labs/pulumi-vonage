@@ -7,6 +7,8 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"net/url"
+	"sort"
+	"strconv"
 	"strings"
 	"sync"
 	"testing"
@@ -34,11 +36,94 @@ type mockVonage struct {
 	calls    []string
 	fail5xx  int // number of upcoming GET /v2/applications calls to fail with 503
 	authSeen bool
+
+	// inject maps "METHOD /path" to an HTTP status returned (without touching state) for every
+	// matching request until the entry is deleted.
+	inject map[string]int
+	// fillDefaults makes the fake behave like Vonage and fill server-side defaults on
+	// create and update of applications.
+	fillDefaults bool
+	// after runs a hook (under the mock's lock) once the matching "METHOD /path" request has
+	// been handled, so a test can break the API at an exact point of a multi-step flow.
+	after map[string]func()
+}
+
+// The fake follows the documented Vonage semantics rather than the provider's assumptions:
+//   - GET /v2/applications/{id} never returns messages.version (the field is write-only) nor
+//     the private key.
+//   - GET /account/numbers never returns voiceStatusCallback.
+//   - PUT /v2/applications/{id} replaces the whole configuration.
+//   - An account holds at most two API secrets and cannot revoke its last one.
+
+// stripWriteOnly removes the fields the real GET endpoints never return.
+func stripWriteOnly(app map[string]any) map[string]any {
+	c := map[string]any{}
+	for k, v := range app {
+		c[k] = v
+	}
+	if k, ok := c["keys"].(map[string]any); ok {
+		c["keys"] = map[string]any{"public_key": k["public_key"]}
+	}
+	if caps, ok := c["capabilities"].(map[string]any); ok {
+		cc := map[string]any{}
+		for k, v := range caps {
+			cc[k] = v
+		}
+		if msg, ok := cc["messages"].(map[string]any); ok {
+			mm := map[string]any{}
+			for k, v := range msg {
+				if k != "version" {
+					mm[k] = v
+				}
+			}
+			cc["messages"] = mm
+		}
+		c["capabilities"] = cc
+	}
+	return c
+}
+
+// applyDefaults fills server-side defaults the way Vonage does for omitted optional fields.
+func applyDefaults(app map[string]any) {
+	caps, _ := app["capabilities"].(map[string]any)
+	if v, ok := caps["voice"].(map[string]any); ok {
+		if _, ok := v["signed_callbacks"]; !ok {
+			v["signed_callbacks"] = true
+		}
+		if _, ok := v["conversations_ttl"]; !ok {
+			v["conversations_ttl"] = float64(48)
+		}
+		if h, ok := v["webhooks"].(map[string]any); ok {
+			for _, hk := range h {
+				if hm, ok := hk.(map[string]any); ok {
+					if _, ok := hm["http_method"]; !ok {
+						hm["http_method"] = "POST"
+					}
+				}
+			}
+		}
+	}
+	if rt, ok := caps["rtc"].(map[string]any); ok {
+		if _, ok := rt["signed_callbacks"]; !ok {
+			rt["signed_callbacks"] = true
+		}
+	}
+}
+
+func (m *mockVonage) setNumberRaw(country, msisdn string, extra map[string]any) {
+	n := map[string]any{"country": country, "msisdn": msisdn, "type": "mobile-lvn", "features": []any{"SMS", "VOICE"}}
+	for k, v := range extra {
+		n[k] = v
+	}
+	m.mu.Lock()
+	m.numbers[country+":"+msisdn] = n
+	m.mu.Unlock()
 }
 
 func newMock(t *testing.T) (*mockVonage, *httptest.Server) {
 	m := &mockVonage{t: t, apps: map[string]map[string]any{}, numbers: map[string]map[string]any{},
-		subs: map[string]map[string]any{}, secrets: map[string]map[string]string{}}
+		subs: map[string]map[string]any{}, secrets: map[string]map[string]string{},
+		inject: map[string]int{}, after: map[string]func(){}}
 	srv := httptest.NewServer(m)
 	t.Cleanup(srv.Close)
 	return m, srv
@@ -68,6 +153,13 @@ func (m *mockVonage) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	m.calls = append(m.calls, r.Method+" "+r.URL.Path)
 	body, _ := io.ReadAll(r.Body)
 	p := r.URL.Path
+	if f := m.after[r.Method+" "+p]; f != nil {
+		defer f()
+	}
+	if code, ok := m.inject[r.Method+" "+p]; ok {
+		writeJSON(w, code, map[string]any{"title": "injected failure"})
+		return
+	}
 	switch {
 	case p == "/v2/applications" && r.Method == "POST":
 		var in map[string]any
@@ -80,6 +172,9 @@ func (m *mockVonage) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			keys = map[string]any{"public_key": "PUB-" + id, "private_key": "PRIV-" + id}
 		}
 		in["keys"] = keys
+		if m.fillDefaults {
+			applyDefaults(in)
+		}
 		m.apps[id] = in
 		writeJSON(w, 201, in)
 	case p == "/v2/applications" && r.Method == "GET":
@@ -88,21 +183,30 @@ func (m *mockVonage) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			writeJSON(w, 503, map[string]any{"title": "down"})
 			return
 		}
-		list := []any{}
+		all := []any{}
 		for i := 1; i <= m.nextApp; i++ {
 			if a, ok := m.apps[fmt.Sprintf("app-%d", i)]; ok {
-				c := map[string]any{}
-				for k, v := range a {
-					c[k] = v
-				}
-				if k, ok := c["keys"].(map[string]any); ok {
-					c["keys"] = map[string]any{"public_key": k["public_key"]}
-				}
-				list = append(list, c)
+				all = append(all, stripWriteOnly(a))
 			}
 		}
-		writeJSON(w, 200, map[string]any{"page_size": 100, "page": 1, "total_items": len(list), "total_pages": 1,
-			"_embedded": map[string]any{"applications": list}})
+		size := 100
+		if v, err := strconv.Atoi(r.URL.Query().Get("page_size")); err == nil && v > 0 {
+			size = v
+		}
+		page := 1
+		if v, err := strconv.Atoi(r.URL.Query().Get("page")); err == nil && v > 0 {
+			page = v
+		}
+		pages := (len(all) + size - 1) / size
+		lo, hi := (page-1)*size, page*size
+		if lo > len(all) {
+			lo = len(all)
+		}
+		if hi > len(all) {
+			hi = len(all)
+		}
+		writeJSON(w, 200, map[string]any{"page_size": size, "page": page, "total_items": len(all), "total_pages": pages,
+			"_embedded": map[string]any{"applications": all[lo:hi]}})
 	case strings.HasPrefix(p, "/v2/applications/"):
 		id := strings.TrimPrefix(p, "/v2/applications/")
 		app, ok := m.apps[id]
@@ -112,33 +216,57 @@ func (m *mockVonage) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		}
 		switch r.Method {
 		case "GET":
-			c := map[string]any{}
-			for k, v := range app {
-				c[k] = v
-			}
-			if k, ok := c["keys"].(map[string]any); ok {
-				c["keys"] = map[string]any{"public_key": k["public_key"]}
-			}
-			writeJSON(w, 200, c)
+			writeJSON(w, 200, stripWriteOnly(app))
 		case "PUT":
 			var in map[string]any
 			_ = json.Unmarshal(body, &in)
 			in["id"] = id
-			in["keys"] = map[string]any{"public_key": app["keys"].(map[string]any)["public_key"]}
+			if k, ok := in["keys"].(map[string]any); ok && k["public_key"] != nil {
+				in["keys"] = map[string]any{"public_key": k["public_key"]}
+			} else {
+				in["keys"] = map[string]any{"public_key": app["keys"].(map[string]any)["public_key"]}
+			}
+			if m.fillDefaults {
+				applyDefaults(in)
+			}
 			m.apps[id] = in
-			writeJSON(w, 200, in)
+			writeJSON(w, 200, stripWriteOnly(in))
 		case "DELETE":
 			delete(m.apps, id)
 			w.WriteHeader(204)
 		}
 	case p == "/account/numbers":
-		list := []any{}
-		for k, n := range m.numbers {
-			if strings.HasSuffix(k, ":"+r.URL.Query().Get("pattern")) || r.URL.Query().Get("pattern") == "" {
-				list = append(list, n)
+		keys := []string{}
+		for k := range m.numbers {
+			if r.URL.Query().Get("country") != "" && !strings.HasPrefix(k, r.URL.Query().Get("country")+":") {
+				continue
+			}
+			if strings.Contains(strings.SplitN(k, ":", 2)[1], r.URL.Query().Get("pattern")) {
+				keys = append(keys, k)
 			}
 		}
-		writeJSON(w, 200, map[string]any{"count": len(list), "numbers": list})
+		sort.Strings(keys)
+		size, index := 10, 1
+		if v, err := strconv.Atoi(r.URL.Query().Get("size")); err == nil && v > 0 {
+			size = v
+		}
+		if v, err := strconv.Atoi(r.URL.Query().Get("index")); err == nil && v > 0 {
+			index = v
+		}
+		list := []any{}
+		for i, k := range keys {
+			if i < (index-1)*size || i >= index*size {
+				continue
+			}
+			c := map[string]any{}
+			for kk, v := range m.numbers[k] {
+				if kk != "voiceStatusCallback" { // the real list endpoint does not report it
+					c[kk] = v
+				}
+			}
+			list = append(list, c)
+		}
+		writeJSON(w, 200, map[string]any{"count": len(keys), "numbers": list})
 	case p == "/number/buy" || p == "/number/cancel" || p == "/number/update":
 		vals, _ := url.ParseQuery(string(body))
 		key := vals.Get("country") + ":" + vals.Get("msisdn")
@@ -206,6 +334,18 @@ func (m *mockVonage) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 		writeJSON(w, 200, sub)
+	case strings.HasSuffix(p, "/secrets") && r.Method == "GET":
+		acct := strings.Split(p, "/")[2]
+		list := []any{}
+		ids := []string{}
+		for id := range m.secrets[acct] {
+			ids = append(ids, id)
+		}
+		sort.Strings(ids)
+		for _, id := range ids {
+			list = append(list, map[string]any{"id": id, "created_at": m.secrets[acct][id]})
+		}
+		writeJSON(w, 200, map[string]any{"_embedded": map[string]any{"secrets": list}})
 	case strings.HasSuffix(p, "/secrets") && r.Method == "POST":
 		acct := strings.Split(p, "/")[2]
 		if m.secrets[acct] == nil {

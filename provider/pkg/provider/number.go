@@ -31,7 +31,7 @@ type Number struct{}
 type NumberArgs struct {
 	Country             string  `pulumi:"country" provider:"replaceOnChanges"`
 	Msisdn              string  `pulumi:"msisdn" provider:"replaceOnChanges"`
-	Acquisition         string  `pulumi:"acquisition" provider:"replaceOnChanges"`
+	Acquisition         string  `pulumi:"acquisition"`
 	CancelOnDelete      bool    `pulumi:"cancelOnDelete"`
 	AppID               *string `pulumi:"appId,optional"`
 	MoHTTPURL           *string `pulumi:"moHttpUrl,optional"`
@@ -44,7 +44,7 @@ func (a *NumberArgs) Annotate(an infer.Annotator) {
 	an.Describe(&a.Country, "Two-letter ISO 3166-1 alpha-2 country code of the number, for example US. Changing it replaces the resource.")
 	an.Describe(&a.Msisdn, "The number in international format without a leading plus, for example 14155550100. Changing it replaces the resource.")
 	an.Describe(&a.Acquisition, "How the number joins the account: \"buy\" purchases it (BILLED, fails if the account already owns it) "+
-		"or \"adopt\" manages a number the account already owns (fails if it does not). Changing it replaces the resource.")
+		"or \"adopt\" manages a number the account already owns (fails if it does not). Only used when the resource is created; later changes are ignored (no diff, no replace), because replacing a number would cancel it.")
 	an.Describe(&a.CancelOnDelete, "Required explicit choice. true: destroying this resource CANCELS (permanently releases) the number. "+
 		"false: destroying it only removes it from Pulumi state; the number stays on the account and keeps billing.")
 	an.Describe(&a.AppID, "Application ID the number is linked to. Mutually exclusive with moHttpUrl and voiceCallbackType/Value.")
@@ -90,6 +90,7 @@ var _ infer.CustomResource[NumberArgs, NumberState] = (*Number)(nil)
 var _ infer.CustomCheck[NumberArgs] = (*Number)(nil)
 var _ infer.CustomRead[NumberArgs, NumberState] = (*Number)(nil)
 var _ infer.CustomUpdate[NumberArgs, NumberState] = (*Number)(nil)
+var _ infer.CustomDiff[NumberArgs, NumberState] = (*Number)(nil)
 var _ infer.CustomDelete[NumberState] = (*Number)(nil)
 
 func isDigits(s string) bool {
@@ -134,6 +135,41 @@ func (r *Number) Check(ctx context.Context, req infer.CheckRequest) (infer.Check
 			Reason: "appId cannot be combined with moHttpUrl, voiceCallbackType/Value or voiceStatusCallback; the application owns routing"})
 	}
 	return infer.CheckResponse[NumberArgs]{Inputs: args, Failures: failures}, nil
+}
+
+// Diff makes acquisition create-only. It only matters when the resource is
+// created: replacing a Number because acquisition flipped would create the
+// replacement first (same ID, so it succeeds or fails depending on the
+// direction) and then delete the old one, which cancels the number when
+// cancelOnDelete is true. country and msisdn identify the number and replace it.
+func (r *Number) Diff(ctx context.Context, req infer.DiffRequest[NumberArgs, NumberState]) (infer.DiffResponse, error) {
+	d := map[string]p.PropertyDiff{}
+	in, old := req.Inputs, req.State.NumberArgs
+	if in.Country != old.Country {
+		d["country"] = p.PropertyDiff{Kind: p.UpdateReplace}
+	}
+	if in.Msisdn != old.Msisdn {
+		d["msisdn"] = p.PropertyDiff{Kind: p.UpdateReplace}
+	}
+	if in.CancelOnDelete != old.CancelOnDelete {
+		d["cancelOnDelete"] = p.PropertyDiff{Kind: p.Update}
+	}
+	if ptrDiffers(in.AppID, old.AppID) {
+		d["appId"] = p.PropertyDiff{Kind: p.Update}
+	}
+	if ptrDiffers(in.MoHTTPURL, old.MoHTTPURL) {
+		d["moHttpUrl"] = p.PropertyDiff{Kind: p.Update}
+	}
+	if ptrDiffers(in.VoiceCallbackType, old.VoiceCallbackType) {
+		d["voiceCallbackType"] = p.PropertyDiff{Kind: p.Update}
+	}
+	if ptrDiffers(in.VoiceCallbackValue, old.VoiceCallbackValue) {
+		d["voiceCallbackValue"] = p.PropertyDiff{Kind: p.Update}
+	}
+	if ptrDiffers(in.VoiceStatusCallback, old.VoiceStatusCallback) {
+		d["voiceStatusCallback"] = p.PropertyDiff{Kind: p.Update}
+	}
+	return infer.DiffResponse{HasChanges: len(d) > 0, DetailedDiff: d}, nil
 }
 
 func numberUpdateFrom(a NumberArgs) numberUpdate {
@@ -183,7 +219,19 @@ func (r *Number) Create(ctx context.Context, req infer.CreateRequest[NumberArgs]
 				"number %s (%s) is already owned by this account; use acquisition=\"adopt\" to manage it without buying", a.Msisdn, a.Country)
 		}
 		if err := c.BuyNumber(ctx, a.Country, a.Msisdn); err != nil {
-			return infer.CreateResponse[NumberState]{}, fmt.Errorf("buy number %s (%s): %w", a.Msisdn, a.Country, err)
+			buyErr := fmt.Errorf("buy number %s (%s): %w", a.Msisdn, a.Country, err)
+			if isDefinitiveRefusal(err) {
+				return infer.CreateResponse[NumberState]{}, buyErr
+			}
+			// The purchase is never replayed, so after a transport error or 5xx the
+			// outcome is unknown: the purchase may have landed. Check ownership again and
+			// track the number if it is ours, so a billed number is not left untracked.
+			if now, lerr := c.FindOwnedNumber(ctx, a.Country, a.Msisdn); lerr == nil && now != nil {
+				return infer.CreateResponse[NumberState]{ID: id, Output: NumberState{NumberArgs: a, Features: []string{}}},
+					infer.ResourceInitFailedError{Reasons: []string{fmt.Sprintf(
+						"buying number %s returned an error but the account now owns it (the purchase landed): %v", a.Msisdn, err)}}
+			}
+			return infer.CreateResponse[NumberState]{}, buyErr
 		}
 	case "adopt":
 		if owned == nil {
@@ -203,14 +251,23 @@ func (r *Number) Create(ctx context.Context, req infer.CreateRequest[NumberArgs]
 	}
 	n, err := c.FindOwnedNumber(ctx, a.Country, a.Msisdn)
 	if err != nil || n == nil {
-		// Eventual consistency right after a purchase: fall back to the known inputs.
-		return infer.CreateResponse[NumberState]{ID: id, Output: NumberState{NumberArgs: a, Features: []string{}}}, nil
+		// The number is already acquired (and billed): track it with the known inputs
+		// and report the failed read-back so the next refresh or update fills in the rest.
+		reason := fmt.Sprintf("number %s acquired but reading it back failed: %v", a.Msisdn, err)
+		if err == nil {
+			reason = fmt.Sprintf("number %s acquired but it is not yet listed by the account", a.Msisdn)
+		}
+		return infer.CreateResponse[NumberState]{ID: id, Output: NumberState{NumberArgs: a, Features: []string{}}},
+			infer.ResourceInitFailedError{Reasons: []string{reason}}
 	}
 	return infer.CreateResponse[NumberState]{ID: id, Output: numberStateFrom(a, n)}, nil
 }
 
 func (r *Number) Read(ctx context.Context, req infer.ReadRequest[NumberArgs, NumberState]) (infer.ReadResponse[NumberArgs, NumberState], error) {
-	country, msisdn := splitNumberID(req.ID)
+	country, msisdn, err := splitNumberID(req.ID)
+	if err != nil {
+		return infer.ReadResponse[NumberArgs, NumberState]{}, err
+	}
 	c, err := clientFor(ctx)
 	if err != nil {
 		return infer.ReadResponse[NumberArgs, NumberState]{}, err
@@ -264,15 +321,24 @@ func nonEmptyPtr(s string) *string {
 	return &s
 }
 
-func splitNumberID(id string) (country, msisdn string) {
-	if i := strings.Index(id, ":"); i >= 0 {
-		return id[:i], id[i+1:]
+// splitNumberID parses a Number ID of the form COUNTRY:MSISDN, for example
+// US:14155550100. The country is required: without it the lookup cannot be
+// scoped and the next update would replace the resource to change its ID.
+func splitNumberID(id string) (country, msisdn string, err error) {
+	i := strings.Index(id, ":")
+	if i < 0 {
+		return "", "", fmt.Errorf("invalid Number ID %q: expected COUNTRY:MSISDN, for example US:14155550100", id)
 	}
-	return "", id
+	country, msisdn = id[:i], id[i+1:]
+	if len(country) != 2 || strings.ToUpper(country) != country || !isDigits(msisdn) {
+		return "", "", fmt.Errorf("invalid Number ID %q: expected a two-letter upper-case country code and a digits-only number, for example US:14155550100", id)
+	}
+	return country, msisdn, nil
 }
 
 func (r *Number) Update(ctx context.Context, req infer.UpdateRequest[NumberArgs, NumberState]) (infer.UpdateResponse[NumberState], error) {
 	a, old := req.Inputs, req.State.NumberArgs
+	a.Acquisition = old.Acquisition // create-only: never record a mode that was not used
 	if req.DryRun {
 		st := req.State
 		st.NumberArgs = a
@@ -299,7 +365,11 @@ func (r *Number) Update(ctx context.Context, req infer.UpdateRequest[NumberArgs,
 		u.VoiceCallbackType = clear(a.VoiceCallbackType, old.VoiceCallbackType)
 		u.VoiceCallbackValue = clear(a.VoiceCallbackValue, old.VoiceCallbackValue)
 	}
-	if hasRouting(u) || u.VoiceCallbackValue != nil {
+	// cancelOnDelete is provider-side only: skip the API call when no routing field changed.
+	routingChanged := ptrDiffers(a.AppID, old.AppID) || ptrDiffers(a.MoHTTPURL, old.MoHTTPURL) ||
+		ptrDiffers(a.VoiceCallbackType, old.VoiceCallbackType) || ptrDiffers(a.VoiceCallbackValue, old.VoiceCallbackValue) ||
+		ptrDiffers(a.VoiceStatusCallback, old.VoiceStatusCallback)
+	if routingChanged && (hasRouting(u) || u.VoiceCallbackValue != nil) {
 		if err := c.UpdateNumber(ctx, a.Country, a.Msisdn, u); err != nil {
 			return infer.UpdateResponse[NumberState]{}, fmt.Errorf("update number %s: %w", a.Msisdn, err)
 		}

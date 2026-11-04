@@ -1,7 +1,9 @@
 package provider
 
 import (
+	"bytes"
 	"context"
+	"encoding/pem"
 	"fmt"
 	"strings"
 
@@ -163,7 +165,7 @@ func (s *ApplicationState) Annotate(a infer.Annotator) {
 
 func (r *Application) Annotate(a infer.Annotator) {
 	a.Describe(&r, "A Vonage application (Application API v2): capabilities, webhooks and signing keys. "+
-		"Update replaces the whole configuration, so every capability you want must be declared in the program.")
+		"Update replaces the whole configuration, so every capability you want must be declared in the program; capabilities this provider does not model (video, network_apis) are preserved.")
 }
 
 var _ infer.CustomResource[ApplicationArgs, ApplicationState] = (*Application)(nil)
@@ -400,10 +402,30 @@ func observeVoiceHook(user *VoiceWebhook, obs *wireWebhook) *VoiceWebhook {
 	return out
 }
 
+// samePublicKey reports whether two PEM public keys carry the same key material, so
+// CRLF line endings, re-wrapped base64 or surrounding whitespace are not drift. Values
+// that do not decode as PEM fall back to a whitespace-insensitive comparison.
+func samePublicKey(a, b string) bool {
+	pa, _ := pem.Decode([]byte(strings.TrimSpace(a)))
+	pb, _ := pem.Decode([]byte(strings.TrimSpace(b)))
+	if pa != nil && pb != nil {
+		return pa.Type == pb.Type && bytes.Equal(pa.Bytes, pb.Bytes)
+	}
+	return strings.Join(strings.Fields(a), "") == strings.Join(strings.Fields(b), "")
+}
+
 // observeApplication projects the server view onto the args shape, using the
 // previous inputs to decide which optional scalars are user-managed.
 func observeApplication(prev ApplicationArgs, w *wireApplication) ApplicationArgs {
 	out := ApplicationArgs{Name: w.Name, PublicKey: prev.PublicKey}
+	// A declared publicKey is refreshed from the server so a key rotated outside
+	// Pulumi shows up as drift. PEM whitespace differences are not drift. When the
+	// key was not declared, the registered key is exposed only through the
+	// applicationPublicKey output.
+	if prev.PublicKey != nil && w.Keys != nil && w.Keys.PublicKey != "" &&
+		!samePublicKey(*prev.PublicKey, w.Keys.PublicKey) {
+		out.PublicKey = strPtr(w.Keys.PublicKey)
+	}
 	caps := w.Capabilities
 	if caps == nil {
 		caps = &wireCapabilities{}
@@ -443,8 +465,14 @@ func observeApplication(prev ApplicationArgs, w *wireApplication) ApplicationArg
 			m.InboundURL = observeHook(pm.InboundURL, cm.Webhooks.InboundURL)
 			m.StatusURL = observeHook(pm.StatusURL, cm.Webhooks.StatusURL)
 		}
-		if prev.Messages == nil || pm.Version != nil {
+		// messages.version is write-only: the Application API does not return it on
+		// GET, so when the server omits it keep what was declared rather than
+		// reading it back as removed.
+		switch {
+		case cm.Version != nil && (prev.Messages == nil || pm.Version != nil):
 			m.Version = cm.Version
+		case cm.Version == nil:
+			m.Version = pm.Version
 		}
 		if prev.Messages == nil || pm.AuthenticateInboundMedia != nil {
 			m.AuthenticateInboundMedia = cm.AuthenticateInboundMedia
@@ -474,8 +502,11 @@ func observeApplication(prev ApplicationArgs, w *wireApplication) ApplicationArg
 		if cv.Webhooks != nil {
 			v.StatusURL = observeHook(pv.StatusURL, cv.Webhooks.StatusURL)
 		}
-		if prev.Verify == nil || pv.Version != nil {
+		switch {
+		case cv.Version != nil && (prev.Verify == nil || pv.Version != nil):
 			v.Version = cv.Version
+		case cv.Version == nil:
+			v.Version = pv.Version
 		}
 		out.Verify = v
 	}
@@ -565,7 +596,23 @@ func (r *Application) Update(ctx context.Context, req infer.UpdateRequest[Applic
 	if err != nil {
 		return infer.UpdateResponse[ApplicationState]{}, err
 	}
-	w, err := c.UpdateApplication(ctx, req.ID, toWireApplication(req.Inputs))
+	body := toWireApplication(req.Inputs)
+	// The update is a full replace. Preserve capabilities this provider does not
+	// model (video, network_apis, ...) that were configured outside Pulumi.
+	cur, err := c.GetApplication(ctx, req.ID)
+	if err != nil {
+		return infer.UpdateResponse[ApplicationState]{}, fmt.Errorf("read application %s before update: %w", req.ID, err)
+	}
+	if cur == nil {
+		return infer.UpdateResponse[ApplicationState]{}, fmt.Errorf("update application %s: it no longer exists; run pulumi refresh", req.ID)
+	}
+	if cur.Capabilities != nil && len(cur.Capabilities.Extra) > 0 {
+		if body.Capabilities == nil {
+			body.Capabilities = &wireCapabilities{}
+		}
+		body.Capabilities.Extra = cur.Capabilities.Extra
+	}
+	w, err := c.UpdateApplication(ctx, req.ID, body)
 	if err != nil {
 		return infer.UpdateResponse[ApplicationState]{}, fmt.Errorf("update application %s: %w", req.ID, err)
 	}

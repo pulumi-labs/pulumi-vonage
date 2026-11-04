@@ -3,14 +3,16 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	p "github.com/pulumi/pulumi-go-provider"
 	"github.com/pulumi/pulumi-go-provider/infer"
 )
 
 // ApiSecret manages one API secret of an account. Each account (primary or
-// sub) can hold at most two secrets at a time, which is what makes zero-downtime
-// rotation possible: create the new secret, roll consumers, then remove the old one.
+// sub) can hold at most two secrets at a time. For rotation without a cut-over
+// window, manage two ApiSecret resources (blue and green); changing the value of a
+// single one replaces it, revoking the old value first when the account is at the limit.
 type ApiSecret struct{}
 
 // ApiSecretArgs are the inputs of an ApiSecret.
@@ -23,7 +25,7 @@ func (a *ApiSecretArgs) Annotate(an infer.Annotator) {
 	an.Describe(&a.AccountKey, "API key of the account that owns the secret. Defaults to the provider's account; "+
 		"set it to a subaccount's apiKey to rotate that subaccount's secrets. Changing it replaces the resource.")
 	an.Describe(&a.Secret, "The secret value (8-25 characters with at least one lowercase letter, one uppercase letter and one digit). "+
-		"Vonage never returns it again, so it is kept in state as a secret. Changing it replaces the resource (create new, then revoke old).")
+		"Vonage never returns it again, so it is kept in state as a secret. Changing it replaces the resource: when the account already holds two secrets the old one is revoked first, otherwise the new one is created first.")
 }
 
 // ApiSecretState is the persisted state of an ApiSecret.
@@ -98,11 +100,11 @@ func (r *ApiSecret) Create(ctx context.Context, req infer.CreateRequest[ApiSecre
 func (r *ApiSecret) Read(ctx context.Context, req infer.ReadRequest[ApiSecretArgs, ApiSecretState]) (infer.ReadResponse[ApiSecretArgs, ApiSecretState], error) {
 	owner, id := req.State.OwnerKey, req.State.SecretID
 	if owner == "" || id == "" {
-		for i := 0; i < len(req.ID); i++ {
-			if req.ID[i] == '/' {
-				owner, id = req.ID[:i], req.ID[i+1:]
-				break
-			}
+		var ok bool
+		owner, id, ok = strings.Cut(req.ID, "/")
+		if !ok || owner == "" || id == "" {
+			return infer.ReadResponse[ApiSecretArgs, ApiSecretState]{}, fmt.Errorf(
+				"invalid ApiSecret ID %q: expected ACCOUNT_API_KEY/SECRET_ID, for example abcd1234/ad6dc56f-07b5-46e1-a527-85530e625800", req.ID)
 		}
 	}
 	c, err := clientFor(ctx)
@@ -145,7 +147,29 @@ func (r *ApiSecret) Diff(ctx context.Context, req infer.DiffRequest[ApiSecretArg
 	case req.State.Secret != req.Inputs.Secret:
 		d["secret"] = p.PropertyDiff{Kind: p.UpdateReplace}
 	}
-	return infer.DiffResponse{HasChanges: len(d) > 0, DetailedDiff: d}, nil
+	return infer.DiffResponse{HasChanges: len(d) > 0, DetailedDiff: d, DeleteBeforeReplace: r.needsDeleteBeforeReplace(ctx, req, d)}, nil
+}
+
+// needsDeleteBeforeReplace reports whether replacing this secret must revoke the
+// old one first. An account holds at most two secrets, so when it already holds two
+// (typically its original secret plus this managed one) a create-then-revoke
+// replacement would be refused. With only one secret the old one cannot be revoked
+// first (Vonage keeps the last one), so the default create-then-delete order is used.
+func (r *ApiSecret) needsDeleteBeforeReplace(ctx context.Context, req infer.DiffRequest[ApiSecretArgs, ApiSecretState], d map[string]p.PropertyDiff) bool {
+	// Only a changed secret value on the same account needs the old one out of the way;
+	// a new owner has its own limit.
+	if d["secret"].Kind != p.UpdateReplace || d["accountKey"].Kind == p.UpdateReplace || req.State.OwnerKey == "" {
+		return false
+	}
+	c, err := clientFor(ctx)
+	if err == nil {
+		var secrets []wireSecret
+		if secrets, err = c.ListSecrets(ctx, req.State.OwnerKey); err == nil {
+			return len(secrets) >= 2
+		}
+	}
+	p.GetLogger(ctx).Warningf("could not count the API secrets of account %s, replacing the secret with create-before-delete: %v", req.State.OwnerKey, err)
+	return false
 }
 
 // Update only ever records the adopted secret of an imported resource; it makes no API call.

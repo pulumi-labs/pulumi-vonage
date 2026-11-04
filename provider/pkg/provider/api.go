@@ -2,11 +2,11 @@ package provider
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/url"
 	"strconv"
-	"strings"
 )
 
 // ---------------------------------------------------------------------------
@@ -71,6 +71,51 @@ type wireCapabilities struct {
 	VBC      *struct{}     `json:"vbc,omitempty"`
 	Verify   *wireVerify   `json:"verify,omitempty"`
 	Meetings *wireMeetings `json:"meetings,omitempty"`
+
+	// Extra holds capabilities this provider does not model (for example video
+	// and network_apis). They are captured on read and replayed on every PUT so a
+	// full-replace update never strips a capability configured outside Pulumi.
+	Extra map[string]json.RawMessage `json:"-"`
+}
+
+type wireCapabilitiesAlias wireCapabilities
+
+// UnmarshalJSON decodes the modelled capabilities and keeps every other key in Extra.
+func (c *wireCapabilities) UnmarshalJSON(b []byte) error {
+	var known wireCapabilitiesAlias
+	if err := json.Unmarshal(b, &known); err != nil {
+		return err
+	}
+	var all map[string]json.RawMessage
+	if err := json.Unmarshal(b, &all); err != nil {
+		return err
+	}
+	for _, k := range []string{"voice", "messages", "rtc", "vbc", "verify", "meetings"} {
+		delete(all, k)
+	}
+	*c = wireCapabilities(known)
+	if len(all) > 0 {
+		c.Extra = all
+	}
+	return nil
+}
+
+// MarshalJSON encodes the modelled capabilities plus any preserved extras.
+func (c wireCapabilities) MarshalJSON() ([]byte, error) {
+	b, err := json.Marshal(wireCapabilitiesAlias(c))
+	if err != nil || len(c.Extra) == 0 {
+		return b, err
+	}
+	var m map[string]json.RawMessage
+	if err := json.Unmarshal(b, &m); err != nil {
+		return nil, err
+	}
+	for k, v := range c.Extra {
+		if _, ok := m[k]; !ok {
+			m[k] = v
+		}
+	}
+	return json.Marshal(m)
 }
 
 type wirePrivacy struct {
@@ -188,9 +233,19 @@ type numberStatus struct {
 
 func (s *numberStatus) check(op string) error {
 	if s.ErrorCode != "200" {
-		return fmt.Errorf("vonage: number %s failed: error-code %s (%s)", op, s.ErrorCode, s.ErrorCodeLabel)
+		return &numberStatusError{Op: op, Code: s.ErrorCode, Label: s.ErrorCodeLabel}
 	}
 	return nil
+}
+
+// numberStatusError is a definitive refusal reported by the legacy number API in a
+// 2xx response body: Vonage understood the request and did not apply it.
+type numberStatusError struct {
+	Op, Code, Label string
+}
+
+func (e *numberStatusError) Error() string {
+	return fmt.Sprintf("vonage: number %s failed: error-code %s (%s)", e.Op, e.Code, e.Label)
 }
 
 // FindOwnedNumber returns the owned number with exactly this msisdn, or nil.
@@ -355,6 +410,21 @@ func (c *Client) CreateSecret(ctx context.Context, accountKey, secret string) (*
 	return &out, nil
 }
 
+type wireSecretList struct {
+	Embedded struct {
+		Secrets []wireSecret `json:"secrets"`
+	} `json:"_embedded"`
+}
+
+// ListSecrets returns the secrets currently held by an account.
+func (c *Client) ListSecrets(ctx context.Context, accountKey string) ([]wireSecret, error) {
+	var out wireSecretList
+	if err := c.apiJSON(ctx, http.MethodGet, secretsPath(accountKey, ""), nil, nil, &out); err != nil {
+		return nil, err
+	}
+	return out.Embedded.Secrets, nil
+}
+
 // GetSecret returns nil, nil when the secret does not exist.
 func (c *Client) GetSecret(ctx context.Context, accountKey, id string) (*wireSecret, error) {
 	var out wireSecret
@@ -396,5 +466,3 @@ func validAPISecret(s string) bool {
 	}
 	return lower && upper && digit
 }
-
-var _ = strings.TrimSpace

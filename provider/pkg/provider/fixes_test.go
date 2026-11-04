@@ -46,21 +46,22 @@ func TestNumber_ReadSurfacesVoiceDriftAndImportPopulatesState(t *testing.T) {
 	m, srv := newMock(t)
 	s := newServerFor(t, srv.URL)
 	m.numbers["US:14155550100"] = map[string]any{"country": "US", "msisdn": "14155550100", "type": "mobile-lvn", "features": []any{"VOICE"},
-		"voiceCallbackType": "tel", "voiceCallbackValue": "14155550199", "voiceStatusCallback": "https://example.com/changed"}
+		"voiceCallbackType": "tel", "voiceCallbackValue": "14155550200", "voiceStatusCallback": "https://example.com/changed"}
 	urn := vonageURN("Number", "v")
 
-	// Refresh of a managed number: voiceStatusCallback drift made outside Pulumi is visible.
+	// Refresh of a managed number: voice routing drift made outside Pulumi is visible. The
+	// list endpoint never reports voiceStatusCallback, so the declared value is kept as is.
 	rr, err := s.Read(pgp.ReadRequest{ID: "US:14155550100", Urn: urn, Properties: pm(numVoiceInputs()), Inputs: pm(numVoiceInputs())})
 	require.NoError(t, err)
-	require.Equal(t, "https://example.com/changed", str(rr.Inputs, "voiceStatusCallback"))
-	require.Equal(t, "https://example.com/changed", str(rr.Properties, "voiceStatusCallback"))
+	require.Equal(t, "14155550200", str(rr.Inputs, "voiceCallbackValue"))
+	require.Equal(t, "https://example.com/vs", str(rr.Inputs, "voiceStatusCallback"))
 
-	// Import: no inputs at all; routing is populated from Vonage.
+	// Import: no inputs at all; routing is populated from Vonage (minus the unreadable status callback).
 	rr, err = s.Read(pgp.ReadRequest{ID: "US:14155550100", Urn: urn, Properties: pm(map[string]any{})})
 	require.NoError(t, err)
 	require.Equal(t, "tel", str(rr.Inputs, "voiceCallbackType"))
-	require.Equal(t, "14155550199", str(rr.Inputs, "voiceCallbackValue"))
-	require.Equal(t, "https://example.com/changed", str(rr.Inputs, "voiceStatusCallback"))
+	require.Equal(t, "14155550200", str(rr.Inputs, "voiceCallbackValue"))
+	require.Equal(t, "", str(rr.Inputs, "voiceStatusCallback"))
 	require.Equal(t, "adopt", str(rr.Inputs, "acquisition"))
 }
 

@@ -50,6 +50,18 @@ func isNotFound(err error) bool {
 	return errors.As(err, &ae) && ae.Status == http.StatusNotFound
 }
 
+// isDefinitiveRefusal reports whether err proves the request was not applied: an HTTP
+// 4xx, or an error-code refusal in the legacy number API envelope. Transport errors,
+// unreadable responses and 5xx leave the outcome unknown.
+func isDefinitiveRefusal(err error) bool {
+	var ae *apiError
+	if errors.As(err, &ae) {
+		return ae.Status >= 400 && ae.Status < 500
+	}
+	var ne *numberStatusError
+	return errors.As(err, &ne)
+}
+
 // Client is a small HTTP client for the Vonage account-management APIs. All
 // operations the provider performs authenticate with HTTP Basic (api key and
 // api secret).
