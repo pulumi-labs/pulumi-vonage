@@ -12,8 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package version holds the provider version, injected at build time.
 package version
 
-// Version is set via -ldflags at build time. Defaults to "0.0.0-dev".
-var Version = "0.0.0-dev"
+// Version is set at build time via ldflags.
+var Version string

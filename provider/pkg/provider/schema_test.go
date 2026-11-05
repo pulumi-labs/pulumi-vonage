@@ -27,7 +27,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/property"
 	"github.com/stretchr/testify/require"
 
-	"github.com/pulumi/autoregistry/lib/providers/vonage/provider/pkg/provider"
+	"github.com/pulumi-labs/pulumi-vonage/provider/pkg/provider"
 )
 
 func mustSchema(t *testing.T) schema.PackageSpec {

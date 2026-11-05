@@ -1,0 +1,45 @@
+{
+    "compilerOptions": {
+        // Output
+        "outDir": "bin",
+        "declaration": true,
+        "declarationMap": true,
+        "sourceMap": true,
+        "stripInternal": true,
+        // Environment
+        "target": "ES2022",
+        "module": "nodenext",
+        "moduleResolution": "nodenext",
+        "moduleDetection": "force",
+        "types": ["node"],
+        // Type Checking
+        "strict": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
+        "skipLibCheck": true
+    },
+    "files": [
+        "apiSecret.ts",
+        "application.ts",
+        "config/index.ts",
+        "config/vars.ts",
+        "getApiSecret.ts",
+        "getApiSecrets.ts",
+        "getApplication.ts",
+        "getApplications.ts",
+        "getNumber.ts",
+        "getSubAccount.ts",
+        "getVerifyTemplate.ts",
+        "getVerifyTemplateFragment.ts",
+        "index.ts",
+        "number.ts",
+        "provider.ts",
+        "subAccount.ts",
+        "types/index.ts",
+        "types/input.ts",
+        "types/output.ts",
+        "utilities.ts",
+        "verifyTemplate.ts",
+        "verifyTemplateFragment.ts"
+    ]
+}

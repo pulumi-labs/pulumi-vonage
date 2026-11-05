@@ -1,4 +1,4 @@
-module github.com/pulumi/autoregistry/lib/providers/vonage
+module github.com/pulumi-labs/pulumi-vonage
 
 go 1.26.0
 

@@ -1,0 +1,1257 @@
+{
+  "name": "vonage",
+  "displayName": "Vonage",
+  "description": "Experimental: manage Vonage (formerly Nexmo) applications, numbers, subaccounts, API secrets and Verify v2 templates as infrastructure with Pulumi.",
+  "keywords": [
+    "pulumi",
+    "vonage",
+    "nexmo",
+    "communications",
+    "sms",
+    "voice",
+    "category/network"
+  ],
+  "homepage": "https://developer.vonage.com",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/pulumi-labs/pulumi-vonage",
+  "pluginDownloadURL": "github://api.github.com/pulumi-labs/pulumi-vonage",
+  "publisher": "Pulumi Labs",
+  "language": {
+    "csharp": {
+      "respectSchemaVersion": true,
+      "rootNamespace": "Pulumi.Labs"
+    },
+    "go": {
+      "generateResourceContainerTypes": true,
+      "importBasePath": "github.com/pulumi-labs/pulumi-vonage/sdk/go/vonage",
+      "respectSchemaVersion": true
+    },
+    "java": {
+      "basePackage": "com.pulumi.labs",
+      "respectSchemaVersion": true
+    },
+    "nodejs": {
+      "packageDescription": "Experimental: manage Vonage (formerly Nexmo) applications, numbers, subaccounts, API secrets and Verify v2 templates as infrastructure with Pulumi.",
+      "packageName": "@pulumi-labs/vonage",
+      "respectSchemaVersion": true
+    },
+    "python": {
+      "packageName": "pulumi_labs_vonage",
+      "pyproject": {
+        "enabled": true
+      },
+      "respectSchemaVersion": true
+    }
+  },
+  "config": {
+    "variables": {
+      "apiBaseUrl": {
+        "type": "string",
+        "description": "Override for the Vonage API host (default https://api.nexmo.com). Intended for testing against a mock server. Falls back to VONAGE_API_BASE_URL.",
+        "defaultInfo": {
+          "environment": [
+            "VONAGE_API_BASE_URL"
+          ]
+        }
+      },
+      "apiKey": {
+        "type": "string",
+        "description": "The Vonage account API key (the 8-character key shown in the Vonage API Dashboard). Falls back to the VONAGE_API_KEY environment variable.",
+        "defaultInfo": {
+          "environment": [
+            "VONAGE_API_KEY"
+          ]
+        }
+      },
+      "apiSecret": {
+        "type": "string",
+        "description": "The Vonage account API secret. Falls back to the VONAGE_API_SECRET environment variable.",
+        "defaultInfo": {
+          "environment": [
+            "VONAGE_API_SECRET"
+          ]
+        },
+        "secret": true
+      },
+      "applicationId": {
+        "type": "string",
+        "description": "Optional Vonage application ID for JWT-authenticated runtime APIs. Falls back to VONAGE_APPLICATION_ID. Not used by the resources in this release.",
+        "defaultInfo": {
+          "environment": [
+            "VONAGE_APPLICATION_ID"
+          ]
+        }
+      },
+      "privateKey": {
+        "type": "string",
+        "description": "Optional PEM private key for the application named by applicationId. Falls back to VONAGE_PRIVATE_KEY. Not used by the resources in this release.",
+        "defaultInfo": {
+          "environment": [
+            "VONAGE_PRIVATE_KEY"
+          ]
+        },
+        "secret": true
+      },
+      "restBaseUrl": {
+        "type": "string",
+        "description": "Override for the Vonage REST host used by the Numbers API (default https://rest.nexmo.com). Intended for testing against a mock server. Falls back to VONAGE_REST_BASE_URL.",
+        "defaultInfo": {
+          "environment": [
+            "VONAGE_REST_BASE_URL"
+          ]
+        }
+      }
+    }
+  },
+  "types": {
+    "vonage:index:ApiSecretSummary": {
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "description": "ISO 8601 creation timestamp."
+        },
+        "secretId": {
+          "type": "string",
+          "description": "The secret ID."
+        }
+      },
+      "type": "object",
+      "required": [
+        "secretId",
+        "createdAt"
+      ]
+    },
+    "vonage:index:ApplicationSummary": {
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "Application ID."
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Enabled capabilities, sorted."
+        },
+        "name": {
+          "type": "string",
+          "description": "Application name."
+        }
+      },
+      "type": "object",
+      "required": [
+        "applicationId",
+        "name",
+        "capabilities"
+      ]
+    },
+    "vonage:index:MeetingsCapability": {
+      "properties": {
+        "recordingChanged": {
+          "$ref": "#/types/vonage:index:Webhook",
+          "description": "Webhook that receives recording status changes (POST only)."
+        },
+        "roomChanged": {
+          "$ref": "#/types/vonage:index:Webhook",
+          "description": "Webhook that receives room changes (POST only)."
+        },
+        "sessionChanged": {
+          "$ref": "#/types/vonage:index:Webhook",
+          "description": "Webhook that receives session changes (POST only)."
+        }
+      },
+      "type": "object"
+    },
+    "vonage:index:MessagesCapability": {
+      "properties": {
+        "authenticateInboundMedia": {
+          "type": "boolean",
+          "description": "Whether inbound media URLs require authentication."
+        },
+        "inboundUrl": {
+          "$ref": "#/types/vonage:index:Webhook",
+          "description": "Webhook that receives inbound messages (POST only)."
+        },
+        "statusUrl": {
+          "$ref": "#/types/vonage:index:Webhook",
+          "description": "Webhook that receives message status events (POST only)."
+        },
+        "version": {
+          "type": "string",
+          "description": "Messages API version, for example v1 or v0.1."
+        }
+      },
+      "type": "object"
+    },
+    "vonage:index:RtcCapability": {
+      "properties": {
+        "eventUrl": {
+          "$ref": "#/types/vonage:index:Webhook",
+          "description": "Webhook that receives RTC events."
+        },
+        "signedCallbacks": {
+          "type": "boolean",
+          "description": "Whether Vonage signs webhook requests."
+        }
+      },
+      "type": "object"
+    },
+    "vonage:index:VerifyCapability": {
+      "properties": {
+        "statusUrl": {
+          "$ref": "#/types/vonage:index:Webhook",
+          "description": "Webhook that receives Verify request status events (POST only)."
+        },
+        "version": {
+          "type": "string",
+          "description": "Verify API version, for example v2."
+        }
+      },
+      "type": "object"
+    },
+    "vonage:index:VoiceCapability": {
+      "properties": {
+        "answerUrl": {
+          "$ref": "#/types/vonage:index:VoiceWebhook",
+          "description": "Webhook Vonage calls to fetch the NCCO that controls an inbound or answered call."
+        },
+        "conversationsTtl": {
+          "type": "integer",
+          "description": "Hours a named conversation stays active after creation (1-9000)."
+        },
+        "eventUrl": {
+          "$ref": "#/types/vonage:index:VoiceWebhook",
+          "description": "Webhook that receives call state events."
+        },
+        "fallbackAnswerUrl": {
+          "$ref": "#/types/vonage:index:VoiceWebhook",
+          "description": "Webhook used if answerUrl is offline or returns an HTTP error."
+        },
+        "legPersistenceTime": {
+          "type": "integer",
+          "description": "Days call legs persist (1-31)."
+        },
+        "region": {
+          "type": "string",
+          "description": "Region that handles inbound, programmable SIP and SIP Connect calls: na-east, na-west, eu-east, eu-west, apac-sng or apac-australia."
+        },
+        "signedCallbacks": {
+          "type": "boolean",
+          "description": "Whether Vonage signs webhook requests (server default true)."
+        }
+      },
+      "type": "object"
+    },
+    "vonage:index:VoiceWebhook": {
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "The URL Vonage calls."
+        },
+        "connectTimeout": {
+          "type": "integer",
+          "description": "Milliseconds Vonage waits to connect to the webhook (300-1000)."
+        },
+        "httpMethod": {
+          "type": "string",
+          "description": "HTTP method Vonage uses: GET or POST."
+        },
+        "socketTimeout": {
+          "type": "integer",
+          "description": "Milliseconds Vonage waits for the webhook response to be read (1000-10000)."
+        }
+      },
+      "type": "object",
+      "required": [
+        "address"
+      ]
+    },
+    "vonage:index:Webhook": {
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "The URL Vonage calls."
+        },
+        "httpMethod": {
+          "type": "string",
+          "description": "HTTP method Vonage uses: GET or POST. Messages, verify and meetings webhooks only accept POST."
+        }
+      },
+      "type": "object",
+      "required": [
+        "address"
+      ]
+    }
+  },
+  "provider": {
+    "properties": {
+      "apiBaseUrl": {
+        "type": "string",
+        "description": "Override for the Vonage API host (default https://api.nexmo.com). Intended for testing against a mock server. Falls back to VONAGE_API_BASE_URL.",
+        "defaultInfo": {
+          "environment": [
+            "VONAGE_API_BASE_URL"
+          ]
+        }
+      },
+      "apiKey": {
+        "type": "string",
+        "description": "The Vonage account API key (the 8-character key shown in the Vonage API Dashboard). Falls back to the VONAGE_API_KEY environment variable.",
+        "defaultInfo": {
+          "environment": [
+            "VONAGE_API_KEY"
+          ]
+        }
+      },
+      "apiSecret": {
+        "type": "string",
+        "description": "The Vonage account API secret. Falls back to the VONAGE_API_SECRET environment variable.",
+        "defaultInfo": {
+          "environment": [
+            "VONAGE_API_SECRET"
+          ]
+        },
+        "secret": true
+      },
+      "applicationId": {
+        "type": "string",
+        "description": "Optional Vonage application ID for JWT-authenticated runtime APIs. Falls back to VONAGE_APPLICATION_ID. Not used by the resources in this release.",
+        "defaultInfo": {
+          "environment": [
+            "VONAGE_APPLICATION_ID"
+          ]
+        }
+      },
+      "privateKey": {
+        "type": "string",
+        "description": "Optional PEM private key for the application named by applicationId. Falls back to VONAGE_PRIVATE_KEY. Not used by the resources in this release.",
+        "defaultInfo": {
+          "environment": [
+            "VONAGE_PRIVATE_KEY"
+          ]
+        },
+        "secret": true
+      },
+      "restBaseUrl": {
+        "type": "string",
+        "description": "Override for the Vonage REST host used by the Numbers API (default https://rest.nexmo.com). Intended for testing against a mock server. Falls back to VONAGE_REST_BASE_URL.",
+        "defaultInfo": {
+          "environment": [
+            "VONAGE_REST_BASE_URL"
+          ]
+        }
+      }
+    },
+    "inputProperties": {
+      "apiBaseUrl": {
+        "type": "string",
+        "description": "Override for the Vonage API host (default https://api.nexmo.com). Intended for testing against a mock server. Falls back to VONAGE_API_BASE_URL.",
+        "defaultInfo": {
+          "environment": [
+            "VONAGE_API_BASE_URL"
+          ]
+        }
+      },
+      "apiKey": {
+        "type": "string",
+        "description": "The Vonage account API key (the 8-character key shown in the Vonage API Dashboard). Falls back to the VONAGE_API_KEY environment variable.",
+        "defaultInfo": {
+          "environment": [
+            "VONAGE_API_KEY"
+          ]
+        }
+      },
+      "apiSecret": {
+        "type": "string",
+        "description": "The Vonage account API secret. Falls back to the VONAGE_API_SECRET environment variable.",
+        "defaultInfo": {
+          "environment": [
+            "VONAGE_API_SECRET"
+          ]
+        },
+        "secret": true
+      },
+      "applicationId": {
+        "type": "string",
+        "description": "Optional Vonage application ID for JWT-authenticated runtime APIs. Falls back to VONAGE_APPLICATION_ID. Not used by the resources in this release.",
+        "defaultInfo": {
+          "environment": [
+            "VONAGE_APPLICATION_ID"
+          ]
+        }
+      },
+      "privateKey": {
+        "type": "string",
+        "description": "Optional PEM private key for the application named by applicationId. Falls back to VONAGE_PRIVATE_KEY. Not used by the resources in this release.",
+        "defaultInfo": {
+          "environment": [
+            "VONAGE_PRIVATE_KEY"
+          ]
+        },
+        "secret": true
+      },
+      "restBaseUrl": {
+        "type": "string",
+        "description": "Override for the Vonage REST host used by the Numbers API (default https://rest.nexmo.com). Intended for testing against a mock server. Falls back to VONAGE_REST_BASE_URL.",
+        "defaultInfo": {
+          "environment": [
+            "VONAGE_REST_BASE_URL"
+          ]
+        }
+      }
+    }
+  },
+  "resources": {
+    "vonage:index:ApiSecret": {
+      "description": "An API secret for a Vonage account or subaccount. An account can have at most two secrets; Vonage refuses to revoke the last remaining one.",
+      "properties": {
+        "accountKey": {
+          "type": "string",
+          "description": "API key of the account that owns the secret. Defaults to the provider's account; set it to a subaccount's apiKey to rotate that subaccount's secrets. Changing it replaces the resource."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO 8601 creation timestamp."
+        },
+        "ownerKey": {
+          "type": "string",
+          "description": "The account API key that owns the secret."
+        },
+        "secret": {
+          "type": "string",
+          "description": "The secret value (8-25 characters with at least one lowercase letter, one uppercase letter and one digit). Vonage never returns it again, so it is kept in state as a secret. Changing it replaces the resource: when the account already holds two secrets the old one is revoked first, otherwise the new one is created first.",
+          "secret": true
+        },
+        "secretId": {
+          "type": "string",
+          "description": "The Vonage-assigned secret ID."
+        }
+      },
+      "required": [
+        "secret",
+        "secretId",
+        "ownerKey",
+        "createdAt"
+      ],
+      "inputProperties": {
+        "accountKey": {
+          "type": "string",
+          "description": "API key of the account that owns the secret. Defaults to the provider's account; set it to a subaccount's apiKey to rotate that subaccount's secrets. Changing it replaces the resource."
+        },
+        "secret": {
+          "type": "string",
+          "description": "The secret value (8-25 characters with at least one lowercase letter, one uppercase letter and one digit). Vonage never returns it again, so it is kept in state as a secret. Changing it replaces the resource: when the account already holds two secrets the old one is revoked first, otherwise the new one is created first.",
+          "secret": true
+        }
+      },
+      "requiredInputs": [
+        "secret"
+      ]
+    },
+    "vonage:index:Application": {
+      "description": "A Vonage application (Application API v2): capabilities, webhooks and signing keys. Update replaces the whole configuration, so every capability you want must be declared in the program; capabilities this provider does not model (video, network_apis) are preserved.",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "The Vonage application ID (UUID). Use it as app_id for numbers and as the JWT application_id claim."
+        },
+        "applicationPublicKey": {
+          "type": "string",
+          "description": "The PEM public key registered with the application."
+        },
+        "improveAi": {
+          "type": "boolean",
+          "description": "Whether Vonage may use traffic to improve its AI models (privacy.improve_ai)."
+        },
+        "meetings": {
+          "$ref": "#/types/vonage:index:MeetingsCapability",
+          "description": "Meetings capability. Omit to leave meetings disabled."
+        },
+        "messages": {
+          "$ref": "#/types/vonage:index:MessagesCapability",
+          "description": "Messages capability. Omit to leave messages disabled."
+        },
+        "name": {
+          "type": "string",
+          "description": "Application name (shown in the Vonage dashboard)."
+        },
+        "privateKey": {
+          "type": "string",
+          "description": "The PEM private key generated by Vonage. Vonage returns it exactly once, on creation, and never again; it is stored as a secret in Pulumi state. Unset when publicKey was supplied.",
+          "secret": true
+        },
+        "publicKey": {
+          "type": "string",
+          "description": "Optional PEM public key. When omitted Vonage generates a key pair on creation and the private key is returned once as privateKey. When set, no private key is generated."
+        },
+        "rtc": {
+          "$ref": "#/types/vonage:index:RtcCapability",
+          "description": "RTC capability. Omit to leave RTC disabled."
+        },
+        "vbc": {
+          "type": "boolean",
+          "description": "Set true to enable the (empty) vbc capability for zero-rated VBC calls."
+        },
+        "verify": {
+          "$ref": "#/types/vonage:index:VerifyCapability",
+          "description": "Verify v2 capability. Omit to leave verify disabled."
+        },
+        "voice": {
+          "$ref": "#/types/vonage:index:VoiceCapability",
+          "description": "Voice capability. Omit to leave voice disabled."
+        }
+      },
+      "required": [
+        "name",
+        "applicationId",
+        "applicationPublicKey"
+      ],
+      "inputProperties": {
+        "improveAi": {
+          "type": "boolean",
+          "description": "Whether Vonage may use traffic to improve its AI models (privacy.improve_ai)."
+        },
+        "meetings": {
+          "$ref": "#/types/vonage:index:MeetingsCapability",
+          "description": "Meetings capability. Omit to leave meetings disabled."
+        },
+        "messages": {
+          "$ref": "#/types/vonage:index:MessagesCapability",
+          "description": "Messages capability. Omit to leave messages disabled."
+        },
+        "name": {
+          "type": "string",
+          "description": "Application name (shown in the Vonage dashboard)."
+        },
+        "publicKey": {
+          "type": "string",
+          "description": "Optional PEM public key. When omitted Vonage generates a key pair on creation and the private key is returned once as privateKey. When set, no private key is generated."
+        },
+        "rtc": {
+          "$ref": "#/types/vonage:index:RtcCapability",
+          "description": "RTC capability. Omit to leave RTC disabled."
+        },
+        "vbc": {
+          "type": "boolean",
+          "description": "Set true to enable the (empty) vbc capability for zero-rated VBC calls."
+        },
+        "verify": {
+          "$ref": "#/types/vonage:index:VerifyCapability",
+          "description": "Verify v2 capability. Omit to leave verify disabled."
+        },
+        "voice": {
+          "$ref": "#/types/vonage:index:VoiceCapability",
+          "description": "Voice capability. Omit to leave voice disabled."
+        }
+      },
+      "requiredInputs": [
+        "name"
+      ]
+    },
+    "vonage:index:Number": {
+      "description": "A Vonage virtual number. Buying is billed; cancelling is permanent. Both are explicit inputs (acquisition, cancelOnDelete).",
+      "properties": {
+        "acquisition": {
+          "type": "string",
+          "description": "How the number joins the account: \"buy\" purchases it (BILLED, fails if the account already owns it) or \"adopt\" manages a number the account already owns (fails if it does not). Only used when the resource is created; later changes are ignored (no diff, no replace), because replacing a number would cancel it."
+        },
+        "appId": {
+          "type": "string",
+          "description": "Application ID the number is linked to. Mutually exclusive with moHttpUrl and voiceCallbackType/Value."
+        },
+        "cancelOnDelete": {
+          "type": "boolean",
+          "description": "Required explicit choice. true: destroying this resource CANCELS (permanently releases) the number. false: destroying it only removes it from Pulumi state; the number stays on the account and keeps billing."
+        },
+        "country": {
+          "type": "string",
+          "description": "Two-letter ISO 3166-1 alpha-2 country code of the number, for example US. Changing it replaces the resource.",
+          "replaceOnChanges": true
+        },
+        "effectiveVoiceCallbackType": {
+          "type": "string",
+          "description": "Voice routing type Vonage currently applies (sip, tel or app)."
+        },
+        "effectiveVoiceCallbackValue": {
+          "type": "string",
+          "description": "Voice routing target Vonage currently applies."
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Capabilities of the number, for example SMS, VOICE, MMS."
+        },
+        "messagesCallbackType": {
+          "type": "string",
+          "description": "Effective inbound messages routing type (app or empty)."
+        },
+        "messagesCallbackValue": {
+          "type": "string",
+          "description": "Effective inbound messages routing target (usually the linked application ID)."
+        },
+        "moHttpUrl": {
+          "type": "string",
+          "description": "Webhook for inbound SMS when the number is not linked to an application."
+        },
+        "msisdn": {
+          "type": "string",
+          "description": "The number in international format without a leading plus, for example 14155550100. Changing it replaces the resource.",
+          "replaceOnChanges": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Number type reported by Vonage, for example landline, mobile-lvn or landline-toll-free."
+        },
+        "voiceCallbackType": {
+          "type": "string",
+          "description": "Voice routing type when the number is not linked to an application: sip, tel or app."
+        },
+        "voiceCallbackValue": {
+          "type": "string",
+          "description": "Voice routing target: a SIP URI, a phone number or an application ID, matching voiceCallbackType."
+        },
+        "voiceStatusCallback": {
+          "type": "string",
+          "description": "Webhook that receives voice call status events for the number."
+        }
+      },
+      "required": [
+        "country",
+        "msisdn",
+        "acquisition",
+        "cancelOnDelete",
+        "type",
+        "features",
+        "messagesCallbackType",
+        "messagesCallbackValue",
+        "effectiveVoiceCallbackType",
+        "effectiveVoiceCallbackValue"
+      ],
+      "inputProperties": {
+        "acquisition": {
+          "type": "string",
+          "description": "How the number joins the account: \"buy\" purchases it (BILLED, fails if the account already owns it) or \"adopt\" manages a number the account already owns (fails if it does not). Only used when the resource is created; later changes are ignored (no diff, no replace), because replacing a number would cancel it."
+        },
+        "appId": {
+          "type": "string",
+          "description": "Application ID the number is linked to. Mutually exclusive with moHttpUrl and voiceCallbackType/Value."
+        },
+        "cancelOnDelete": {
+          "type": "boolean",
+          "description": "Required explicit choice. true: destroying this resource CANCELS (permanently releases) the number. false: destroying it only removes it from Pulumi state; the number stays on the account and keeps billing."
+        },
+        "country": {
+          "type": "string",
+          "description": "Two-letter ISO 3166-1 alpha-2 country code of the number, for example US. Changing it replaces the resource.",
+          "replaceOnChanges": true
+        },
+        "moHttpUrl": {
+          "type": "string",
+          "description": "Webhook for inbound SMS when the number is not linked to an application."
+        },
+        "msisdn": {
+          "type": "string",
+          "description": "The number in international format without a leading plus, for example 14155550100. Changing it replaces the resource.",
+          "replaceOnChanges": true
+        },
+        "voiceCallbackType": {
+          "type": "string",
+          "description": "Voice routing type when the number is not linked to an application: sip, tel or app."
+        },
+        "voiceCallbackValue": {
+          "type": "string",
+          "description": "Voice routing target: a SIP URI, a phone number or an application ID, matching voiceCallbackType."
+        },
+        "voiceStatusCallback": {
+          "type": "string",
+          "description": "Webhook that receives voice call status events for the number."
+        }
+      },
+      "requiredInputs": [
+        "country",
+        "msisdn",
+        "acquisition",
+        "cancelOnDelete"
+      ]
+    },
+    "vonage:index:SubAccount": {
+      "description": "A Vonage subaccount under the primary account. Subaccounts cannot be deleted through the API, only suspended (see suspendOnDelete). Requires primary account credentials.",
+      "properties": {
+        "apiKey": {
+          "type": "string",
+          "description": "The subaccount API key (also the resource ID)."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO 8601 creation timestamp."
+        },
+        "generatedSecret": {
+          "type": "string",
+          "description": "The subaccount API secret as returned by Vonage at creation. Stored as a secret.",
+          "secret": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Subaccount name (1-80 characters)."
+        },
+        "primaryAccountApiKey": {
+          "type": "string",
+          "description": "API key of the primary account that owns this subaccount."
+        },
+        "secret": {
+          "type": "string",
+          "description": "API secret for the subaccount, set at creation only (8-25 characters with at least one lowercase letter, one uppercase letter and one digit). When omitted Vonage generates one, exposed as the generatedSecret output. Create-only: the Vonage API cannot change it on an existing subaccount, so later changes are ignored (no diff, no update); manage rotation with the ApiSecret resource.",
+          "secret": true
+        },
+        "suspendOnDelete": {
+          "type": "boolean",
+          "description": "Vonage cannot delete subaccounts. When true, destroying this resource suspends the subaccount; when false or unset it is only removed from Pulumi state and stays active."
+        },
+        "suspended": {
+          "type": "boolean",
+          "description": "Whether the subaccount is suspended."
+        },
+        "usePrimaryAccountBalance": {
+          "type": "boolean",
+          "description": "Whether the subaccount draws on the primary account balance (server default true)."
+        }
+      },
+      "required": [
+        "name",
+        "apiKey",
+        "primaryAccountApiKey",
+        "createdAt"
+      ],
+      "inputProperties": {
+        "name": {
+          "type": "string",
+          "description": "Subaccount name (1-80 characters)."
+        },
+        "secret": {
+          "type": "string",
+          "description": "API secret for the subaccount, set at creation only (8-25 characters with at least one lowercase letter, one uppercase letter and one digit). When omitted Vonage generates one, exposed as the generatedSecret output. Create-only: the Vonage API cannot change it on an existing subaccount, so later changes are ignored (no diff, no update); manage rotation with the ApiSecret resource.",
+          "secret": true
+        },
+        "suspendOnDelete": {
+          "type": "boolean",
+          "description": "Vonage cannot delete subaccounts. When true, destroying this resource suspends the subaccount; when false or unset it is only removed from Pulumi state and stays active."
+        },
+        "suspended": {
+          "type": "boolean",
+          "description": "Whether the subaccount is suspended."
+        },
+        "usePrimaryAccountBalance": {
+          "type": "boolean",
+          "description": "Whether the subaccount draws on the primary account balance (server default true)."
+        }
+      },
+      "requiredInputs": [
+        "name"
+      ]
+    },
+    "vonage:index:VerifyTemplate": {
+      "description": "A Verify v2 template. Import with the template ID.",
+      "properties": {
+        "isDefault": {
+          "type": "boolean",
+          "description": "Whether this is the account's default template for Verify requests that name none (server default false). Making another template the default un-defaults this one outside Pulumi, which shows as drift."
+        },
+        "name": {
+          "type": "string",
+          "description": "Template name."
+        },
+        "templateId": {
+          "type": "string",
+          "description": "The Vonage-assigned template ID (also the resource ID)."
+        }
+      },
+      "required": [
+        "name",
+        "templateId"
+      ],
+      "inputProperties": {
+        "isDefault": {
+          "type": "boolean",
+          "description": "Whether this is the account's default template for Verify requests that name none (server default false). Making another template the default un-defaults this one outside Pulumi, which shows as drift."
+        },
+        "name": {
+          "type": "string",
+          "description": "Template name."
+        }
+      },
+      "requiredInputs": [
+        "name"
+      ]
+    },
+    "vonage:index:VerifyTemplateFragment": {
+      "description": "The text of a Verify v2 template for one channel and locale. Import with templateId/templateFragmentId.",
+      "properties": {
+        "channel": {
+          "type": "string",
+          "description": "Delivery channel: sms or voice. Changing it replaces the fragment.",
+          "replaceOnChanges": true
+        },
+        "dateCreated": {
+          "type": "string",
+          "description": "Creation timestamp."
+        },
+        "dateUpdated": {
+          "type": "string",
+          "description": "Last update timestamp."
+        },
+        "locale": {
+          "type": "string",
+          "description": "Locale of the text, for example en-us. Changing it replaces the fragment.",
+          "replaceOnChanges": true
+        },
+        "templateFragmentId": {
+          "type": "string",
+          "description": "The Vonage-assigned fragment ID. The resource ID is templateId/templateFragmentId."
+        },
+        "templateId": {
+          "type": "string",
+          "description": "ID of the VerifyTemplate this fragment belongs to. Changing it replaces the fragment.",
+          "replaceOnChanges": true
+        },
+        "text": {
+          "type": "string",
+          "description": "The message text, including Vonage placeholders such as ${code}. Updated in place."
+        }
+      },
+      "required": [
+        "templateId",
+        "channel",
+        "locale",
+        "text",
+        "templateFragmentId",
+        "dateCreated",
+        "dateUpdated"
+      ],
+      "inputProperties": {
+        "channel": {
+          "type": "string",
+          "description": "Delivery channel: sms or voice. Changing it replaces the fragment.",
+          "replaceOnChanges": true
+        },
+        "locale": {
+          "type": "string",
+          "description": "Locale of the text, for example en-us. Changing it replaces the fragment.",
+          "replaceOnChanges": true
+        },
+        "templateId": {
+          "type": "string",
+          "description": "ID of the VerifyTemplate this fragment belongs to. Changing it replaces the fragment.",
+          "replaceOnChanges": true
+        },
+        "text": {
+          "type": "string",
+          "description": "The message text, including Vonage placeholders such as ${code}. Updated in place."
+        }
+      },
+      "requiredInputs": [
+        "templateId",
+        "channel",
+        "locale",
+        "text"
+      ]
+    }
+  },
+  "functions": {
+    "vonage:index:getApiSecret": {
+      "description": "Look up an API secret's metadata by account and secret ID. Vonage never returns the secret value. Fails if it does not exist.",
+      "inputs": {
+        "properties": {
+          "accountKey": {
+            "type": "string",
+            "description": "API key of the owning account. Defaults to the provider's account."
+          },
+          "secretId": {
+            "type": "string",
+            "description": "The secret ID."
+          }
+        },
+        "type": "object",
+        "required": [
+          "secretId"
+        ]
+      },
+      "outputs": {
+        "properties": {
+          "createdAt": {
+            "description": "ISO 8601 creation timestamp.",
+            "type": "string"
+          },
+          "ownerKey": {
+            "description": "The account API key that owns the secret.",
+            "type": "string"
+          },
+          "secretId": {
+            "description": "The secret ID.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ownerKey",
+          "secretId",
+          "createdAt"
+        ],
+        "type": "object"
+      }
+    },
+    "vonage:index:getApiSecrets": {
+      "description": "List the API secrets (IDs and creation times) of an account.",
+      "inputs": {
+        "properties": {
+          "accountKey": {
+            "type": "string",
+            "description": "API key of the account. Defaults to the provider's account."
+          }
+        },
+        "type": "object"
+      },
+      "outputs": {
+        "properties": {
+          "ownerKey": {
+            "description": "The account API key that was listed.",
+            "type": "string"
+          },
+          "secrets": {
+            "description": "The account's secrets (at most two).",
+            "items": {
+              "$ref": "#/types/vonage:index:ApiSecretSummary"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "ownerKey",
+          "secrets"
+        ],
+        "type": "object"
+      }
+    },
+    "vonage:index:getApplication": {
+      "description": "Look up a Vonage application by ID or exact name.",
+      "inputs": {
+        "properties": {
+          "applicationId": {
+            "type": "string",
+            "description": "Application ID (UUID). Exactly one of applicationId or name must be set."
+          },
+          "name": {
+            "type": "string",
+            "description": "Exact application name. Fails if zero or more than one application matches."
+          }
+        },
+        "type": "object"
+      },
+      "outputs": {
+        "properties": {
+          "applicationId": {
+            "description": "Application ID.",
+            "type": "string"
+          },
+          "capabilities": {
+            "description": "Enabled capabilities, sorted: messages, meetings, rtc, vbc, verify, voice.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "name": {
+            "description": "Application name.",
+            "type": "string"
+          },
+          "publicKey": {
+            "description": "PEM public key registered with the application.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "applicationId",
+          "name",
+          "publicKey",
+          "capabilities"
+        ],
+        "type": "object"
+      }
+    },
+    "vonage:index:getApplications": {
+      "description": "List the account's Vonage applications, optionally filtered by exact name.",
+      "inputs": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Only return applications with exactly this name."
+          }
+        },
+        "type": "object"
+      },
+      "outputs": {
+        "properties": {
+          "applications": {
+            "description": "The matching applications.",
+            "items": {
+              "$ref": "#/types/vonage:index:ApplicationSummary"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "applications"
+        ],
+        "type": "object"
+      }
+    },
+    "vonage:index:getNumber": {
+      "description": "Look up a number owned by the account. Fails if the account does not own it.",
+      "inputs": {
+        "properties": {
+          "country": {
+            "type": "string",
+            "description": "Two-letter ISO country code, for example US."
+          },
+          "msisdn": {
+            "type": "string",
+            "description": "The number in international format without a leading plus."
+          }
+        },
+        "type": "object",
+        "required": [
+          "country",
+          "msisdn"
+        ]
+      },
+      "outputs": {
+        "properties": {
+          "appId": {
+            "description": "Linked application ID, empty if none.",
+            "type": "string"
+          },
+          "country": {
+            "description": "Country code.",
+            "type": "string"
+          },
+          "features": {
+            "description": "Capabilities: SMS, VOICE, MMS.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "messagesCallbackType": {
+            "description": "Messages routing type.",
+            "type": "string"
+          },
+          "messagesCallbackValue": {
+            "description": "Messages routing target.",
+            "type": "string"
+          },
+          "moHttpUrl": {
+            "description": "Inbound SMS webhook, empty if none.",
+            "type": "string"
+          },
+          "msisdn": {
+            "description": "The number.",
+            "type": "string"
+          },
+          "type": {
+            "description": "Number type (landline, mobile-lvn, landline-toll-free).",
+            "type": "string"
+          },
+          "voiceCallbackType": {
+            "description": "Voice routing type.",
+            "type": "string"
+          },
+          "voiceCallbackValue": {
+            "description": "Voice routing target.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "country",
+          "msisdn",
+          "type",
+          "features",
+          "appId",
+          "moHttpUrl",
+          "voiceCallbackType",
+          "voiceCallbackValue",
+          "messagesCallbackType",
+          "messagesCallbackValue"
+        ],
+        "type": "object"
+      }
+    },
+    "vonage:index:getSubAccount": {
+      "description": "Look up a subaccount of the provider's primary account by API key. Fails if it does not exist.",
+      "inputs": {
+        "properties": {
+          "subAccountApiKey": {
+            "type": "string",
+            "description": "API key of the subaccount."
+          }
+        },
+        "type": "object",
+        "required": [
+          "subAccountApiKey"
+        ]
+      },
+      "outputs": {
+        "properties": {
+          "apiKey": {
+            "description": "Subaccount API key.",
+            "type": "string"
+          },
+          "balance": {
+            "description": "Subaccount balance, unset when it uses the primary balance.",
+            "type": "number"
+          },
+          "createdAt": {
+            "description": "ISO 8601 creation timestamp.",
+            "type": "string"
+          },
+          "creditLimit": {
+            "description": "Subaccount credit limit, unset when it uses the primary balance.",
+            "type": "number"
+          },
+          "name": {
+            "description": "Subaccount name.",
+            "type": "string"
+          },
+          "primaryAccountApiKey": {
+            "description": "API key of the owning primary account.",
+            "type": "string"
+          },
+          "suspended": {
+            "description": "Whether the subaccount is suspended.",
+            "type": "boolean"
+          },
+          "usePrimaryAccountBalance": {
+            "description": "Whether the subaccount draws on the primary account balance.",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "apiKey",
+          "name",
+          "primaryAccountApiKey",
+          "usePrimaryAccountBalance",
+          "suspended",
+          "createdAt"
+        ],
+        "type": "object"
+      }
+    },
+    "vonage:index:getVerifyTemplate": {
+      "description": "Look up a Verify v2 template by ID or exact name.",
+      "inputs": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Exact template name. Fails if zero or more than one template matches."
+          },
+          "templateId": {
+            "type": "string",
+            "description": "Template ID. Exactly one of templateId or name must be set."
+          }
+        },
+        "type": "object"
+      },
+      "outputs": {
+        "properties": {
+          "isDefault": {
+            "description": "Whether this is the account's default template.",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "Template name.",
+            "type": "string"
+          },
+          "templateId": {
+            "description": "Template ID.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "templateId",
+          "name",
+          "isDefault"
+        ],
+        "type": "object"
+      }
+    },
+    "vonage:index:getVerifyTemplateFragment": {
+      "description": "Look up a Verify v2 template fragment by fragment ID, or by channel and locale.",
+      "inputs": {
+        "properties": {
+          "channel": {
+            "type": "string",
+            "description": "Channel (sms or voice), used with locale."
+          },
+          "locale": {
+            "type": "string",
+            "description": "Locale, used with channel."
+          },
+          "templateFragmentId": {
+            "type": "string",
+            "description": "Fragment ID. Set this, or both channel and locale."
+          },
+          "templateId": {
+            "type": "string",
+            "description": "The template the fragment belongs to."
+          }
+        },
+        "type": "object",
+        "required": [
+          "templateId"
+        ]
+      },
+      "outputs": {
+        "properties": {
+          "channel": {
+            "description": "Channel.",
+            "type": "string"
+          },
+          "dateCreated": {
+            "description": "Creation timestamp.",
+            "type": "string"
+          },
+          "dateUpdated": {
+            "description": "Last update timestamp.",
+            "type": "string"
+          },
+          "locale": {
+            "description": "Locale.",
+            "type": "string"
+          },
+          "templateFragmentId": {
+            "description": "Fragment ID.",
+            "type": "string"
+          },
+          "templateId": {
+            "description": "Template ID.",
+            "type": "string"
+          },
+          "text": {
+            "description": "Message text.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "templateId",
+          "templateFragmentId",
+          "channel",
+          "locale",
+          "text",
+          "dateCreated",
+          "dateUpdated"
+        ],
+        "type": "object"
+      }
+    }
+  }
+}

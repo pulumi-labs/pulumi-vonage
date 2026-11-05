@@ -20,8 +20,8 @@ import (
 	"context"
 	"os"
 
-	"github.com/pulumi/autoregistry/lib/providers/vonage/provider/pkg/provider"
-	"github.com/pulumi/autoregistry/lib/providers/vonage/provider/pkg/version"
+	"github.com/pulumi-labs/pulumi-vonage/provider/pkg/provider"
+	"github.com/pulumi-labs/pulumi-vonage/provider/pkg/version"
 	pgp "github.com/pulumi/pulumi-go-provider"
 )
 
