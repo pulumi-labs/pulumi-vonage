@@ -6,6 +6,6 @@
   "provider": "vonage",
   "skill_commit": "867dbf608378e7f4127793a7f075c7b20b2530ac",
   "source_repo": "pulumi/autoregistry",
-  "source_sha": "f8774e835a516e612d0ff57f1bbfd7ac985dd815",
+  "source_sha": "1171eb019c43c3347959986ce0eb5e2b26b7aff6",
   "source_version": "0.1.0"
 }

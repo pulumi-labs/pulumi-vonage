@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-04
+
 ### Added
 
 - `VerifyTemplate` and `VerifyTemplateFragment` resources for Verify v2 templates and their per-channel, per-locale text (import IDs: the template ID, and `TEMPLATE_ID/FRAGMENT_ID`). Request shapes follow the Vonage Node SDK; Basic authentication on these endpoints is unverified against a live account.
