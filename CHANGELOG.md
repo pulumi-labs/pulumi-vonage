@@ -10,7 +10,7 @@
 
 ### Changed
 
-- `go.mod`/`go.sum` moved from `provider/` to the provider's top level (module path is now `github.com/pulumi/autoregistry/lib/providers/vonage`); the Makefile builds from there. No change to the provider binary, schema or SDKs.
+- `go.mod`/`go.sum` moved from `provider/` to the provider's top level (the monorepo module path now ends in `lib/providers/vonage`); the Makefile builds from there. No change to the provider binary, schema or SDKs.
 
 ### Fixed
 

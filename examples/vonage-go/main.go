@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/pulumi/pulumi-vonage/sdk/go/vonage"
+	"github.com/pulumi-labs/pulumi-vonage/sdk/go/vonage"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 )

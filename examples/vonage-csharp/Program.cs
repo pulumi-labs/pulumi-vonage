@@ -1,6 +1,6 @@
 using Pulumi;
-using Pulumi.Vonage;
-using Pulumi.Vonage.Inputs;
+using Pulumi.Labs.Vonage;
+using Pulumi.Labs.Vonage.Inputs;
 
 return await Deployment.RunAsync(() =>
 {
@@ -33,7 +33,7 @@ return await Deployment.RunAsync(() =>
     // CancelOnDelete=false: destroying the stack only forgets the number, it keeps billing.
     if (!string.IsNullOrEmpty(msisdn))
     {
-        new Pulumi.Vonage.Number("number", new NumberArgs
+        new Pulumi.Labs.Vonage.Number("number", new NumberArgs
         {
             Country = country,
             Msisdn = msisdn,

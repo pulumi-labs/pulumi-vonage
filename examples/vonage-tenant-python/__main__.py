@@ -1,5 +1,5 @@
 import pulumi
-import pulumi_vonage as vonage
+import pulumi_labs_vonage as vonage
 
 config = pulumi.Config()
 tenant_name = config.get("tenantName") or "tenant-acme"

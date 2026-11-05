@@ -1,5 +1,5 @@
 import * as pulumi from "@pulumi/pulumi";
-import * as vonage from "@pulumi/vonage";
+import * as vonage from "@pulumi-labs/vonage";
 
 // Credentials come from `pulumi config set vonage:apiKey ...` / `vonage:apiSecret --secret`
 // or the VONAGE_API_KEY / VONAGE_API_SECRET environment variables.

@@ -2,14 +2,14 @@ package com.pulumi.example;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
-import com.pulumi.vonage.Application;
-import com.pulumi.vonage.ApplicationArgs;
-import com.pulumi.vonage.Number;
-import com.pulumi.vonage.NumberArgs;
-import com.pulumi.vonage.inputs.MessagesCapabilityArgs;
-import com.pulumi.vonage.inputs.VoiceCapabilityArgs;
-import com.pulumi.vonage.inputs.VoiceWebhookArgs;
-import com.pulumi.vonage.inputs.WebhookArgs;
+import com.pulumi.labs.vonage.Application;
+import com.pulumi.labs.vonage.ApplicationArgs;
+import com.pulumi.labs.vonage.Number;
+import com.pulumi.labs.vonage.NumberArgs;
+import com.pulumi.labs.vonage.inputs.MessagesCapabilityArgs;
+import com.pulumi.labs.vonage.inputs.VoiceCapabilityArgs;
+import com.pulumi.labs.vonage.inputs.VoiceWebhookArgs;
+import com.pulumi.labs.vonage.inputs.WebhookArgs;
 
 public class App {
     public static void main(String[] args) {

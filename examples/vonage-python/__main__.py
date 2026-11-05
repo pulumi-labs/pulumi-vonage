@@ -1,5 +1,5 @@
 import pulumi
-import pulumi_vonage as vonage
+import pulumi_labs_vonage as vonage
 
 # Credentials come from `pulumi config set vonage:apiKey ...` / `vonage:apiSecret --secret`
 # or the VONAGE_API_KEY / VONAGE_API_SECRET environment variables.

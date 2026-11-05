@@ -1,5 +1,5 @@
 import * as pulumi from "@pulumi/pulumi";
-import * as vonage from "@pulumi/vonage";
+import * as vonage from "@pulumi-labs/vonage";
 
 const config = new pulumi.Config();
 const tenantName = config.get("tenantName") ?? "tenant-acme";

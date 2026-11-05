@@ -1,5 +1,8 @@
 # Vonage Pulumi Provider
 
+> [!NOTE]
+> **Experimental.** This provider is experimental, versions are `0.x`, and its API may change without notice.
+
 A native Pulumi provider for [Vonage](https://developer.vonage.com) (formerly Nexmo). Vonage has no Terraform or Pulumi provider; this one manages the account-level building blocks of a Vonage estate as infrastructure: applications, virtual numbers, subaccounts, API secrets and Verify v2 templates.
 
 ## Resources

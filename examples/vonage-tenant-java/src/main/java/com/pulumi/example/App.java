@@ -2,16 +2,16 @@ package com.pulumi.example;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
-import com.pulumi.vonage.ApiSecret;
-import com.pulumi.vonage.ApiSecretArgs;
-import com.pulumi.vonage.Application;
-import com.pulumi.vonage.ApplicationArgs;
-import com.pulumi.vonage.SubAccount;
-import com.pulumi.vonage.SubAccountArgs;
-import com.pulumi.vonage.VonageFunctions;
-import com.pulumi.vonage.inputs.GetApplicationArgs;
-import com.pulumi.vonage.inputs.VoiceCapabilityArgs;
-import com.pulumi.vonage.inputs.VoiceWebhookArgs;
+import com.pulumi.labs.vonage.ApiSecret;
+import com.pulumi.labs.vonage.ApiSecretArgs;
+import com.pulumi.labs.vonage.Application;
+import com.pulumi.labs.vonage.ApplicationArgs;
+import com.pulumi.labs.vonage.SubAccount;
+import com.pulumi.labs.vonage.SubAccountArgs;
+import com.pulumi.labs.vonage.VonageFunctions;
+import com.pulumi.labs.vonage.inputs.GetApplicationArgs;
+import com.pulumi.labs.vonage.inputs.VoiceCapabilityArgs;
+import com.pulumi.labs.vonage.inputs.VoiceWebhookArgs;
 
 public class App {
     public static void main(String[] args) {

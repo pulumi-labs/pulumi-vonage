@@ -1,6 +1,6 @@
 using Pulumi;
-using Pulumi.Vonage;
-using Pulumi.Vonage.Inputs;
+using Pulumi.Labs.Vonage;
+using Pulumi.Labs.Vonage.Inputs;
 
 return await Deployment.RunAsync(() =>
 {
