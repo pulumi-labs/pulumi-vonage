@@ -1,0 +1,66 @@
+credentials:
+  - name: VONAGE_API_KEY
+    required: true
+  - name: VONAGE_API_SECRET
+    required: true
+  - name: VONAGE_APPLICATION_ID
+    required: false
+  - name: VONAGE_PRIVATE_KEY
+    required: false
+  - name: VONAGE_API_BASE_URL
+    required: false
+  - name: VONAGE_REST_BASE_URL
+    required: false
+account: >-
+  A Vonage API account (primary account credentials, not a subaccount) with API key and secret. Application and Verify v2 template tests use Basic auth or JWT; applicationId and privateKey are only needed for endpoints that sign a JWT, which is unverified against a live account. Verify template endpoints with Basic authentication are unverified against a live account. Subaccount, number and secret tests need no extra plan but are skipped (see reasons). Base URL overrides are only for pointing at a mock or a regional endpoint.
+resources:
+  - type: vonage:index:ApiSecret
+    test: false
+    reason: An account holds at most two API secrets and a created secret cannot be read back or recovered; replacing one at the limit revokes the old secret immediately, which can lock the test account out of its own credentials. Irreversible-ish account change.
+  - type: vonage:index:Application
+    test: true
+    update: name
+    cost: none
+  - type: vonage:index:Number
+    test: false
+    reason: Create buys a real phone number (monthly rental plus setup fee billed to the account) and delete cancels it; numbers cannot be released and re-bought at will and stock is not guaranteed.
+  - type: vonage:index:SubAccount
+    test: false
+    reason: Vonage cannot delete subaccounts, only suspend them, so every run leaves a permanent account behind; requires primary account credentials and can create billing entities.
+  - type: vonage:index:VerifyTemplate
+    test: true
+    update: name
+    cost: none
+  - type: vonage:index:VerifyTemplateFragment
+    test: true
+    update: text
+    cost: none
+functions:
+  - name: getApiSecret
+    test: true
+  - name: getApiSecrets
+    test: true
+  - name: getApplication
+    test: true
+  - name: getApplications
+    test: true
+  - name: getNumber
+    test: false
+    reason: Needs a number the account already owns, and the tests must not buy one.
+  - name: getSubAccount
+    test: false
+    reason: Needs an existing subaccount, and the tests must not create one (cannot be deleted).
+  - name: getVerifyTemplate
+    test: true
+  - name: getVerifyTemplateFragment
+    test: true
+regressions:
+  - "Number.acquisition is create-only: changing it must not replace the number or cancel it; country and msisdn still replace."
+  - "Number import IDs must be COUNTRY:MSISDN; an ID without the country is rejected."
+  - "ApiSecret at the two-secret limit: changing secret revokes the old managed secret before creating the new one; ApiSecret import IDs need ACCOUNT/SECRET_ID."
+  - "Application refresh keeps a declared messages.version and reads back a declared publicKey; no spurious update after refresh."
+  - "Application updates preserve capabilities the provider does not model (video, network_apis)."
+  - "SubAccount reconciles suspended and usePrimaryAccountBalance against Vonage defaults; removing suspended true unsuspends."
+  - "Provider config falls back to VONAGE_API_KEY, VONAGE_API_SECRET, VONAGE_APPLICATION_ID, VONAGE_PRIVATE_KEY, VONAGE_API_BASE_URL and VONAGE_REST_BASE_URL when config keys are unset."
+notes: >-
+  VerifyTemplateFragment is addressed by templateId, channel and locale (all replace); only text updates in place, and a fragment needs its parent VerifyTemplate created first and deleted before it. VerifyTemplate import ID is the template ID; fragment import ID is TEMPLATE_ID/FRAGMENT_ID. Application voiceStatusCallback cannot be refreshed. ApiSecret.Update is a no-op because every input change replaces it, so its update is null. Number, SubAccount and ApiSecret surface is deferred to manual testing on a throwaway account.
