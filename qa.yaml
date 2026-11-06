@@ -50,16 +50,26 @@ functions:
   - name: getSubAccount
     test: false
     reason: Needs an existing subaccount, and the tests must not create one (cannot be deleted).
+  - name: getSubAccounts
+    test: true
+  - name: getAccountBalance
+    test: true
+  - name: getNumbers
+    test: true
+  - name: getAvailableNumbers
+    test: true
   - name: getVerifyTemplate
     test: true
   - name: getVerifyTemplateFragment
     test: true
 regressions:
+  - "#1577 import then inspect the stack state (pulumi stack export --show-secrets off): every property the schema marks secret on an imported resource is a secret, never plaintext; a refresh of a resource created by the program keeps them secret"
+  - "getAvailableNumbers is read-only: it searches GET /number/search and never buys; getNumbers follows every page of GET /account/numbers; getAccountBalance reads GET /account/get-balance; getSubAccounts reads the _embedded.subaccounts list. All four response shapes come from the Vonage docs and are unverified against a live account."
   - "Number.acquisition is create-only: changing it must not replace the number or cancel it; country and msisdn still replace."
   - "Number import IDs must be COUNTRY:MSISDN; an ID without the country is rejected."
   - "ApiSecret at the two-secret limit: changing secret revokes the old managed secret before creating the new one; ApiSecret import IDs need ACCOUNT/SECRET_ID."
   - "Application refresh keeps a declared messages.version and reads back a declared publicKey; no spurious update after refresh."
-  - "Application updates preserve capabilities the provider does not model (video, network_apis)."
+  - "Application updates preserve undeclared video, network_apis and unmodelled capabilities; a declared video or networkApis block is managed, and removing it disables the capability."
   - "SubAccount reconciles suspended and usePrimaryAccountBalance against Vonage defaults; removing suspended true unsuspends."
   - "Provider config falls back to VONAGE_API_KEY, VONAGE_API_SECRET, VONAGE_APPLICATION_ID, VONAGE_PRIVATE_KEY, VONAGE_API_BASE_URL and VONAGE_REST_BASE_URL when config keys are unset."
 notes: >-

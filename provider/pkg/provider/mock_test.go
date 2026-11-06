@@ -39,17 +39,18 @@ import (
 
 // mockVonage is a stateful in-memory fake of the Vonage endpoints the provider uses.
 type mockVonage struct {
-	mu       sync.Mutex
-	t        *testing.T
-	apps     map[string]map[string]any
-	nextApp  int
-	numbers  map[string]map[string]any // key country:msisdn
-	subs     map[string]map[string]any
-	secrets  map[string]map[string]string // account -> id -> created
-	nextSec  int
-	calls    []string
-	fail5xx  int // number of upcoming GET /v2/applications calls to fail with 503
-	authSeen bool
+	mu        sync.Mutex
+	t         *testing.T
+	apps      map[string]map[string]any
+	nextApp   int
+	numbers   map[string]map[string]any // key country:msisdn
+	subs      map[string]map[string]any
+	available []map[string]any             // numbers for sale, served by GET /number/search
+	secrets   map[string]map[string]string // account -> id -> created
+	nextSec   int
+	calls     []string
+	fail5xx   int // number of upcoming GET /v2/applications calls to fail with 503
+	authSeen  bool
 
 	// inject maps "METHOD /path" to an HTTP status returned (without touching state) for every
 	// matching request until the entry is deleted.
@@ -254,10 +255,66 @@ func (m *mockVonage) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			delete(m.apps, id)
 			w.WriteHeader(204)
 		}
+	case p == "/account/get-balance":
+		writeJSON(w, 200, map[string]any{"value": 12.5, "autoReload": true})
+	case p == "/number/search":
+		country := r.URL.Query().Get("country")
+		if country == "" {
+			writeJSON(w, 400, map[string]any{"error-code": "3", "error-code-label": "Invalid country"})
+			return
+		}
+		list := []any{}
+		for _, n := range m.available {
+			if n["country"] != country {
+				continue
+			}
+			if t := r.URL.Query().Get("type"); t != "" && n["type"] != t {
+				continue
+			}
+			list = append(list, n)
+		}
+		total := len(list)
+		size, index := 10, 1
+		if v, err := strconv.Atoi(r.URL.Query().Get("size")); err == nil && v > 0 {
+			size = v
+		}
+		if v, err := strconv.Atoi(r.URL.Query().Get("index")); err == nil && v > 0 {
+			index = v
+		}
+		lo, hi := (index-1)*size, index*size
+		if lo > len(list) {
+			lo = len(list)
+		}
+		if hi > len(list) {
+			hi = len(list)
+		}
+		writeJSON(w, 200, map[string]any{"count": total, "numbers": list[lo:hi]})
+	case p == "/accounts/key12345/subaccounts" && r.Method == "GET":
+		keys := make([]string, 0, len(m.subs))
+		for k := range m.subs {
+			keys = append(keys, k)
+		}
+		sort.Strings(keys)
+		list := []any{}
+		for _, k := range keys {
+			list = append(list, m.subs[k])
+		}
+		writeJSON(w, 200, map[string]any{"_embedded": map[string]any{
+			"primary_account": map[string]any{"api_key": "key12345", "name": "primary"}, "subaccounts": list}})
 	case p == "/account/numbers":
 		keys := []string{}
 		for k := range m.numbers {
 			if r.URL.Query().Get("country") != "" && !strings.HasPrefix(k, r.URL.Query().Get("country")+":") {
+				continue
+			}
+			app, _ := m.numbers[k]["app_id"].(string)
+			if want := r.URL.Query().Get("application_id"); want != "" && app != want {
+				continue
+			}
+			if r.URL.Query().Get("has_application") == "true" && app == "" {
+				continue
+			}
+			if r.URL.Query().Get("has_application") == "false" && app != "" {
 				continue
 			}
 			if strings.Contains(strings.SplitN(k, ":", 2)[1], r.URL.Query().Get("pattern")) {

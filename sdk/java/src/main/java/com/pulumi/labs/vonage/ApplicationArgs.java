@@ -8,8 +8,10 @@ import com.pulumi.core.annotations.Import;
 import com.pulumi.exceptions.MissingRequiredPropertyException;
 import com.pulumi.labs.vonage.inputs.MeetingsCapabilityArgs;
 import com.pulumi.labs.vonage.inputs.MessagesCapabilityArgs;
+import com.pulumi.labs.vonage.inputs.NetworkApisCapabilityArgs;
 import com.pulumi.labs.vonage.inputs.RtcCapabilityArgs;
 import com.pulumi.labs.vonage.inputs.VerifyCapabilityArgs;
+import com.pulumi.labs.vonage.inputs.VideoCapabilityArgs;
 import com.pulumi.labs.vonage.inputs.VoiceCapabilityArgs;
 import java.lang.Boolean;
 import java.lang.String;
@@ -83,6 +85,21 @@ public final class ApplicationArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
+     * Network APIs capability (SIM Swap, Number Verification). Omit to leave it as it is on the server.
+     * 
+     */
+    @Import(name="networkApis")
+    private @Nullable Output<NetworkApisCapabilityArgs> networkApis;
+
+    /**
+     * @return Network APIs capability (SIM Swap, Number Verification). Omit to leave it as it is on the server.
+     * 
+     */
+    public Optional<Output<NetworkApisCapabilityArgs>> networkApis() {
+        return Optional.ofNullable(this.networkApis);
+    }
+
+    /**
      * Optional PEM public key. When omitted Vonage generates a key pair on creation and the private key is returned once as privateKey. When set, no private key is generated.
      * 
      */
@@ -143,6 +160,21 @@ public final class ApplicationArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
+     * Video API capability: webhooks and recording storage. Omit to leave video as it is on the server; an existing video capability configured outside Pulumi is preserved until you declare the block.
+     * 
+     */
+    @Import(name="video")
+    private @Nullable Output<VideoCapabilityArgs> video;
+
+    /**
+     * @return Video API capability: webhooks and recording storage. Omit to leave video as it is on the server; an existing video capability configured outside Pulumi is preserved until you declare the block.
+     * 
+     */
+    public Optional<Output<VideoCapabilityArgs>> video() {
+        return Optional.ofNullable(this.video);
+    }
+
+    /**
      * Voice capability. Omit to leave voice disabled.
      * 
      */
@@ -164,10 +196,12 @@ public final class ApplicationArgs extends com.pulumi.resources.ResourceArgs {
         this.meetings = $.meetings;
         this.messages = $.messages;
         this.name = $.name;
+        this.networkApis = $.networkApis;
         this.publicKey = $.publicKey;
         this.rtc = $.rtc;
         this.vbc = $.vbc;
         this.verify = $.verify;
+        this.video = $.video;
         this.voice = $.voice;
     }
 
@@ -274,6 +308,27 @@ public final class ApplicationArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
+         * @param networkApis Network APIs capability (SIM Swap, Number Verification). Omit to leave it as it is on the server.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder networkApis(@Nullable Output<NetworkApisCapabilityArgs> networkApis) {
+            $.networkApis = networkApis;
+            return this;
+        }
+
+        /**
+         * @param networkApis Network APIs capability (SIM Swap, Number Verification). Omit to leave it as it is on the server.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder networkApis(NetworkApisCapabilityArgs networkApis) {
+            return networkApis(Output.of(networkApis));
+        }
+
+        /**
          * @param publicKey Optional PEM public key. When omitted Vonage generates a key pair on creation and the private key is returned once as privateKey. When set, no private key is generated.
          * 
          * @return builder
@@ -355,6 +410,27 @@ public final class ApplicationArgs extends com.pulumi.resources.ResourceArgs {
          */
         public Builder verify(VerifyCapabilityArgs verify) {
             return verify(Output.of(verify));
+        }
+
+        /**
+         * @param video Video API capability: webhooks and recording storage. Omit to leave video as it is on the server; an existing video capability configured outside Pulumi is preserved until you declare the block.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder video(@Nullable Output<VideoCapabilityArgs> video) {
+            $.video = video;
+            return this;
+        }
+
+        /**
+         * @param video Video API capability: webhooks and recording storage. Omit to leave video as it is on the server; an existing video capability configured outside Pulumi is preserved until you declare the block.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder video(VideoCapabilityArgs video) {
+            return video(Output.of(video));
         }
 
         /**

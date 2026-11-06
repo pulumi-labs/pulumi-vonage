@@ -100,7 +100,7 @@ func fragmentState(a VerifyTemplateFragmentArgs, f *wireFragment) VerifyTemplate
 func (r *VerifyTemplateFragment) Create(ctx context.Context, req infer.CreateRequest[VerifyTemplateFragmentArgs]) (infer.CreateResponse[VerifyTemplateFragmentState], error) {
 	a := req.Inputs
 	if req.DryRun {
-		return infer.CreateResponse[VerifyTemplateFragmentState]{ID: req.Name, Output: VerifyTemplateFragmentState{VerifyTemplateFragmentArgs: a}}, nil
+		return infer.CreateResponse[VerifyTemplateFragmentState]{ID: "", Output: VerifyTemplateFragmentState{VerifyTemplateFragmentArgs: a}}, nil
 	}
 	c, err := clientFor(ctx)
 	if err != nil {

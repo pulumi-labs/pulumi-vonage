@@ -77,7 +77,7 @@ func (r *VerifyTemplate) Check(ctx context.Context, req infer.CheckRequest) (inf
 func (r *VerifyTemplate) Create(ctx context.Context, req infer.CreateRequest[VerifyTemplateArgs]) (infer.CreateResponse[VerifyTemplateState], error) {
 	a := req.Inputs
 	if req.DryRun {
-		return infer.CreateResponse[VerifyTemplateState]{ID: req.Name, Output: VerifyTemplateState{VerifyTemplateArgs: a}}, nil
+		return infer.CreateResponse[VerifyTemplateState]{ID: "", Output: VerifyTemplateState{VerifyTemplateArgs: a}}, nil
 	}
 	c, err := clientFor(ctx)
 	if err != nil {

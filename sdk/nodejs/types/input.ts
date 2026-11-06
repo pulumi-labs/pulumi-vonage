@@ -39,6 +39,17 @@ export interface MessagesCapabilityArgs {
     version?: pulumi.Input<string | undefined>;
 }
 
+export interface NetworkApisCapabilityArgs {
+    /**
+     * The Network APIs application ID.
+     */
+    networkApplicationId: pulumi.Input<string>;
+    /**
+     * Redirect URI for the Network APIs OAuth flow.
+     */
+    redirectUri?: pulumi.Input<string | undefined>;
+}
+
 export interface RtcCapabilityArgs {
     /**
      * Webhook that receives RTC events.
@@ -59,6 +70,106 @@ export interface VerifyCapabilityArgs {
      * Verify API version, for example v2.
      */
     version?: pulumi.Input<string | undefined>;
+}
+
+export interface VideoCapabilityArgs {
+    /**
+     * Recording storage and encryption settings.
+     */
+    storage?: pulumi.Input<inputs.VideoStorageArgs | undefined>;
+    /**
+     * Webhooks that receive Video API events.
+     */
+    webhooks?: pulumi.Input<inputs.VideoWebhooksArgs | undefined>;
+}
+
+export interface VideoStorageArgs {
+    /**
+     * Whether recordings go to the configured cloud storage.
+     */
+    cloudStorage?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether video streams use end-to-end encryption.
+     */
+    endToEndEncryption?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether recordings are encrypted server side.
+     */
+    serverSideEncryption?: pulumi.Input<boolean | undefined>;
+}
+
+export interface VideoWebhookArgs {
+    /**
+     * Whether Vonage calls the webhook (server default true).
+     */
+    active?: pulumi.Input<boolean | undefined>;
+    /**
+     * The URL Vonage calls.
+     */
+    address: pulumi.Input<string>;
+}
+
+export interface VideoWebhooksArgs {
+    /**
+     * Receives archive (recording) status changes.
+     */
+    archiveStatus?: pulumi.Input<inputs.VideoWebhookArgs | undefined>;
+    /**
+     * Receives broadcast status changes.
+     */
+    broadcastStatus?: pulumi.Input<inputs.VideoWebhookArgs | undefined>;
+    /**
+     * Receives live caption status changes.
+     */
+    captionsStatus?: pulumi.Input<inputs.VideoWebhookArgs | undefined>;
+    /**
+     * Receives an event when a client connects to a session.
+     */
+    connectionCreated?: pulumi.Input<inputs.VideoWebhookArgs | undefined>;
+    /**
+     * Receives an event when a client disconnects from a session.
+     */
+    connectionDestroyed?: pulumi.Input<inputs.VideoWebhookArgs | undefined>;
+    /**
+     * Receives Experience Composer render status changes.
+     */
+    renderStatus?: pulumi.Input<inputs.VideoWebhookArgs | undefined>;
+    /**
+     * Receives an event when a session is created.
+     */
+    sessionCreated?: pulumi.Input<inputs.VideoWebhookArgs | undefined>;
+    /**
+     * Receives an event when a session is destroyed.
+     */
+    sessionDestroyed?: pulumi.Input<inputs.VideoWebhookArgs | undefined>;
+    /**
+     * Receives session notifications.
+     */
+    sessionNotification?: pulumi.Input<inputs.VideoWebhookArgs | undefined>;
+    /**
+     * Receives an event when a SIP call is created.
+     */
+    sipCallCreated?: pulumi.Input<inputs.VideoWebhookArgs | undefined>;
+    /**
+     * Receives an event when a SIP call is destroyed.
+     */
+    sipCallDestroyed?: pulumi.Input<inputs.VideoWebhookArgs | undefined>;
+    /**
+     * Receives an event when a SIP call is force-muted.
+     */
+    sipCallMuteForced?: pulumi.Input<inputs.VideoWebhookArgs | undefined>;
+    /**
+     * Receives an event when a SIP call is updated.
+     */
+    sipCallUpdated?: pulumi.Input<inputs.VideoWebhookArgs | undefined>;
+    /**
+     * Receives an event when a stream is created.
+     */
+    streamCreated?: pulumi.Input<inputs.VideoWebhookArgs | undefined>;
+    /**
+     * Receives an event when a stream is destroyed.
+     */
+    streamDestroyed?: pulumi.Input<inputs.VideoWebhookArgs | undefined>;
 }
 
 export interface VoiceCapabilityArgs {

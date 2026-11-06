@@ -19,10 +19,20 @@ __all__ = [
     'MeetingsCapabilityArgsDict',
     'MessagesCapabilityArgs',
     'MessagesCapabilityArgsDict',
+    'NetworkApisCapabilityArgs',
+    'NetworkApisCapabilityArgsDict',
     'RtcCapabilityArgs',
     'RtcCapabilityArgsDict',
     'VerifyCapabilityArgs',
     'VerifyCapabilityArgsDict',
+    'VideoCapabilityArgs',
+    'VideoCapabilityArgsDict',
+    'VideoStorageArgs',
+    'VideoStorageArgsDict',
+    'VideoWebhooksArgs',
+    'VideoWebhooksArgsDict',
+    'VideoWebhookArgs',
+    'VideoWebhookArgsDict',
     'VoiceCapabilityArgs',
     'VoiceCapabilityArgsDict',
     'VoiceWebhookArgs',
@@ -189,6 +199,54 @@ class MessagesCapabilityArgs:
         pulumi.set(self, "version", value)
 
 
+class NetworkApisCapabilityArgsDict(TypedDict):
+    network_application_id: pulumi.Input[_builtins.str]
+    """
+    The Network APIs application ID.
+    """
+    redirect_uri: NotRequired[Optional[pulumi.Input[_builtins.str]]]
+    """
+    Redirect URI for the Network APIs OAuth flow.
+    """
+
+@pulumi.input_type
+class NetworkApisCapabilityArgs:
+    def __init__(__self__, *,
+                 network_application_id: pulumi.Input[_builtins.str],
+                 redirect_uri: Optional[pulumi.Input[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] network_application_id: The Network APIs application ID.
+        :param pulumi.Input[_builtins.str] redirect_uri: Redirect URI for the Network APIs OAuth flow.
+        """
+        pulumi.set(__self__, "network_application_id", network_application_id)
+        if redirect_uri is not None:
+            pulumi.set(__self__, "redirect_uri", redirect_uri)
+
+    @_builtins.property
+    @pulumi.getter(name="networkApplicationId")
+    def network_application_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The Network APIs application ID.
+        """
+        return pulumi.get(self, "network_application_id")
+
+    @network_application_id.setter
+    def network_application_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "network_application_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="redirectUri")
+    def redirect_uri(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        Redirect URI for the Network APIs OAuth flow.
+        """
+        return pulumi.get(self, "redirect_uri")
+
+    @redirect_uri.setter
+    def redirect_uri(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "redirect_uri", value)
+
+
 class RtcCapabilityArgsDict(TypedDict):
     event_url: NotRequired[Optional[pulumi.Input['WebhookArgs']]]
     """
@@ -285,6 +343,481 @@ class VerifyCapabilityArgs:
     @version.setter
     def version(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "version", value)
+
+
+class VideoCapabilityArgsDict(TypedDict):
+    storage: NotRequired[Optional[pulumi.Input['VideoStorageArgs']]]
+    """
+    Recording storage and encryption settings.
+    """
+    webhooks: NotRequired[Optional[pulumi.Input['VideoWebhooksArgs']]]
+    """
+    Webhooks that receive Video API events.
+    """
+
+@pulumi.input_type
+class VideoCapabilityArgs:
+    def __init__(__self__, *,
+                 storage: Optional[pulumi.Input['VideoStorageArgs']] = None,
+                 webhooks: Optional[pulumi.Input['VideoWebhooksArgs']] = None):
+        """
+        :param pulumi.Input['VideoStorageArgs'] storage: Recording storage and encryption settings.
+        :param pulumi.Input['VideoWebhooksArgs'] webhooks: Webhooks that receive Video API events.
+        """
+        if storage is not None:
+            pulumi.set(__self__, "storage", storage)
+        if webhooks is not None:
+            pulumi.set(__self__, "webhooks", webhooks)
+
+    @_builtins.property
+    @pulumi.getter
+    def storage(self) -> Optional[pulumi.Input['VideoStorageArgs']]:
+        """
+        Recording storage and encryption settings.
+        """
+        return pulumi.get(self, "storage")
+
+    @storage.setter
+    def storage(self, value: Optional[pulumi.Input['VideoStorageArgs']]):
+        pulumi.set(self, "storage", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def webhooks(self) -> Optional[pulumi.Input['VideoWebhooksArgs']]:
+        """
+        Webhooks that receive Video API events.
+        """
+        return pulumi.get(self, "webhooks")
+
+    @webhooks.setter
+    def webhooks(self, value: Optional[pulumi.Input['VideoWebhooksArgs']]):
+        pulumi.set(self, "webhooks", value)
+
+
+class VideoStorageArgsDict(TypedDict):
+    cloud_storage: NotRequired[Optional[pulumi.Input[_builtins.bool]]]
+    """
+    Whether recordings go to the configured cloud storage.
+    """
+    end_to_end_encryption: NotRequired[Optional[pulumi.Input[_builtins.bool]]]
+    """
+    Whether video streams use end-to-end encryption.
+    """
+    server_side_encryption: NotRequired[Optional[pulumi.Input[_builtins.bool]]]
+    """
+    Whether recordings are encrypted server side.
+    """
+
+@pulumi.input_type
+class VideoStorageArgs:
+    def __init__(__self__, *,
+                 cloud_storage: Optional[pulumi.Input[_builtins.bool]] = None,
+                 end_to_end_encryption: Optional[pulumi.Input[_builtins.bool]] = None,
+                 server_side_encryption: Optional[pulumi.Input[_builtins.bool]] = None):
+        """
+        :param pulumi.Input[_builtins.bool] cloud_storage: Whether recordings go to the configured cloud storage.
+        :param pulumi.Input[_builtins.bool] end_to_end_encryption: Whether video streams use end-to-end encryption.
+        :param pulumi.Input[_builtins.bool] server_side_encryption: Whether recordings are encrypted server side.
+        """
+        if cloud_storage is not None:
+            pulumi.set(__self__, "cloud_storage", cloud_storage)
+        if end_to_end_encryption is not None:
+            pulumi.set(__self__, "end_to_end_encryption", end_to_end_encryption)
+        if server_side_encryption is not None:
+            pulumi.set(__self__, "server_side_encryption", server_side_encryption)
+
+    @_builtins.property
+    @pulumi.getter(name="cloudStorage")
+    def cloud_storage(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        Whether recordings go to the configured cloud storage.
+        """
+        return pulumi.get(self, "cloud_storage")
+
+    @cloud_storage.setter
+    def cloud_storage(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "cloud_storage", value)
+
+    @_builtins.property
+    @pulumi.getter(name="endToEndEncryption")
+    def end_to_end_encryption(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        Whether video streams use end-to-end encryption.
+        """
+        return pulumi.get(self, "end_to_end_encryption")
+
+    @end_to_end_encryption.setter
+    def end_to_end_encryption(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "end_to_end_encryption", value)
+
+    @_builtins.property
+    @pulumi.getter(name="serverSideEncryption")
+    def server_side_encryption(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        Whether recordings are encrypted server side.
+        """
+        return pulumi.get(self, "server_side_encryption")
+
+    @server_side_encryption.setter
+    def server_side_encryption(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "server_side_encryption", value)
+
+
+class VideoWebhooksArgsDict(TypedDict):
+    archive_status: NotRequired[Optional[pulumi.Input['VideoWebhookArgs']]]
+    """
+    Receives archive (recording) status changes.
+    """
+    broadcast_status: NotRequired[Optional[pulumi.Input['VideoWebhookArgs']]]
+    """
+    Receives broadcast status changes.
+    """
+    captions_status: NotRequired[Optional[pulumi.Input['VideoWebhookArgs']]]
+    """
+    Receives live caption status changes.
+    """
+    connection_created: NotRequired[Optional[pulumi.Input['VideoWebhookArgs']]]
+    """
+    Receives an event when a client connects to a session.
+    """
+    connection_destroyed: NotRequired[Optional[pulumi.Input['VideoWebhookArgs']]]
+    """
+    Receives an event when a client disconnects from a session.
+    """
+    render_status: NotRequired[Optional[pulumi.Input['VideoWebhookArgs']]]
+    """
+    Receives Experience Composer render status changes.
+    """
+    session_created: NotRequired[Optional[pulumi.Input['VideoWebhookArgs']]]
+    """
+    Receives an event when a session is created.
+    """
+    session_destroyed: NotRequired[Optional[pulumi.Input['VideoWebhookArgs']]]
+    """
+    Receives an event when a session is destroyed.
+    """
+    session_notification: NotRequired[Optional[pulumi.Input['VideoWebhookArgs']]]
+    """
+    Receives session notifications.
+    """
+    sip_call_created: NotRequired[Optional[pulumi.Input['VideoWebhookArgs']]]
+    """
+    Receives an event when a SIP call is created.
+    """
+    sip_call_destroyed: NotRequired[Optional[pulumi.Input['VideoWebhookArgs']]]
+    """
+    Receives an event when a SIP call is destroyed.
+    """
+    sip_call_mute_forced: NotRequired[Optional[pulumi.Input['VideoWebhookArgs']]]
+    """
+    Receives an event when a SIP call is force-muted.
+    """
+    sip_call_updated: NotRequired[Optional[pulumi.Input['VideoWebhookArgs']]]
+    """
+    Receives an event when a SIP call is updated.
+    """
+    stream_created: NotRequired[Optional[pulumi.Input['VideoWebhookArgs']]]
+    """
+    Receives an event when a stream is created.
+    """
+    stream_destroyed: NotRequired[Optional[pulumi.Input['VideoWebhookArgs']]]
+    """
+    Receives an event when a stream is destroyed.
+    """
+
+@pulumi.input_type
+class VideoWebhooksArgs:
+    def __init__(__self__, *,
+                 archive_status: Optional[pulumi.Input['VideoWebhookArgs']] = None,
+                 broadcast_status: Optional[pulumi.Input['VideoWebhookArgs']] = None,
+                 captions_status: Optional[pulumi.Input['VideoWebhookArgs']] = None,
+                 connection_created: Optional[pulumi.Input['VideoWebhookArgs']] = None,
+                 connection_destroyed: Optional[pulumi.Input['VideoWebhookArgs']] = None,
+                 render_status: Optional[pulumi.Input['VideoWebhookArgs']] = None,
+                 session_created: Optional[pulumi.Input['VideoWebhookArgs']] = None,
+                 session_destroyed: Optional[pulumi.Input['VideoWebhookArgs']] = None,
+                 session_notification: Optional[pulumi.Input['VideoWebhookArgs']] = None,
+                 sip_call_created: Optional[pulumi.Input['VideoWebhookArgs']] = None,
+                 sip_call_destroyed: Optional[pulumi.Input['VideoWebhookArgs']] = None,
+                 sip_call_mute_forced: Optional[pulumi.Input['VideoWebhookArgs']] = None,
+                 sip_call_updated: Optional[pulumi.Input['VideoWebhookArgs']] = None,
+                 stream_created: Optional[pulumi.Input['VideoWebhookArgs']] = None,
+                 stream_destroyed: Optional[pulumi.Input['VideoWebhookArgs']] = None):
+        """
+        :param pulumi.Input['VideoWebhookArgs'] archive_status: Receives archive (recording) status changes.
+        :param pulumi.Input['VideoWebhookArgs'] broadcast_status: Receives broadcast status changes.
+        :param pulumi.Input['VideoWebhookArgs'] captions_status: Receives live caption status changes.
+        :param pulumi.Input['VideoWebhookArgs'] connection_created: Receives an event when a client connects to a session.
+        :param pulumi.Input['VideoWebhookArgs'] connection_destroyed: Receives an event when a client disconnects from a session.
+        :param pulumi.Input['VideoWebhookArgs'] render_status: Receives Experience Composer render status changes.
+        :param pulumi.Input['VideoWebhookArgs'] session_created: Receives an event when a session is created.
+        :param pulumi.Input['VideoWebhookArgs'] session_destroyed: Receives an event when a session is destroyed.
+        :param pulumi.Input['VideoWebhookArgs'] session_notification: Receives session notifications.
+        :param pulumi.Input['VideoWebhookArgs'] sip_call_created: Receives an event when a SIP call is created.
+        :param pulumi.Input['VideoWebhookArgs'] sip_call_destroyed: Receives an event when a SIP call is destroyed.
+        :param pulumi.Input['VideoWebhookArgs'] sip_call_mute_forced: Receives an event when a SIP call is force-muted.
+        :param pulumi.Input['VideoWebhookArgs'] sip_call_updated: Receives an event when a SIP call is updated.
+        :param pulumi.Input['VideoWebhookArgs'] stream_created: Receives an event when a stream is created.
+        :param pulumi.Input['VideoWebhookArgs'] stream_destroyed: Receives an event when a stream is destroyed.
+        """
+        if archive_status is not None:
+            pulumi.set(__self__, "archive_status", archive_status)
+        if broadcast_status is not None:
+            pulumi.set(__self__, "broadcast_status", broadcast_status)
+        if captions_status is not None:
+            pulumi.set(__self__, "captions_status", captions_status)
+        if connection_created is not None:
+            pulumi.set(__self__, "connection_created", connection_created)
+        if connection_destroyed is not None:
+            pulumi.set(__self__, "connection_destroyed", connection_destroyed)
+        if render_status is not None:
+            pulumi.set(__self__, "render_status", render_status)
+        if session_created is not None:
+            pulumi.set(__self__, "session_created", session_created)
+        if session_destroyed is not None:
+            pulumi.set(__self__, "session_destroyed", session_destroyed)
+        if session_notification is not None:
+            pulumi.set(__self__, "session_notification", session_notification)
+        if sip_call_created is not None:
+            pulumi.set(__self__, "sip_call_created", sip_call_created)
+        if sip_call_destroyed is not None:
+            pulumi.set(__self__, "sip_call_destroyed", sip_call_destroyed)
+        if sip_call_mute_forced is not None:
+            pulumi.set(__self__, "sip_call_mute_forced", sip_call_mute_forced)
+        if sip_call_updated is not None:
+            pulumi.set(__self__, "sip_call_updated", sip_call_updated)
+        if stream_created is not None:
+            pulumi.set(__self__, "stream_created", stream_created)
+        if stream_destroyed is not None:
+            pulumi.set(__self__, "stream_destroyed", stream_destroyed)
+
+    @_builtins.property
+    @pulumi.getter(name="archiveStatus")
+    def archive_status(self) -> Optional[pulumi.Input['VideoWebhookArgs']]:
+        """
+        Receives archive (recording) status changes.
+        """
+        return pulumi.get(self, "archive_status")
+
+    @archive_status.setter
+    def archive_status(self, value: Optional[pulumi.Input['VideoWebhookArgs']]):
+        pulumi.set(self, "archive_status", value)
+
+    @_builtins.property
+    @pulumi.getter(name="broadcastStatus")
+    def broadcast_status(self) -> Optional[pulumi.Input['VideoWebhookArgs']]:
+        """
+        Receives broadcast status changes.
+        """
+        return pulumi.get(self, "broadcast_status")
+
+    @broadcast_status.setter
+    def broadcast_status(self, value: Optional[pulumi.Input['VideoWebhookArgs']]):
+        pulumi.set(self, "broadcast_status", value)
+
+    @_builtins.property
+    @pulumi.getter(name="captionsStatus")
+    def captions_status(self) -> Optional[pulumi.Input['VideoWebhookArgs']]:
+        """
+        Receives live caption status changes.
+        """
+        return pulumi.get(self, "captions_status")
+
+    @captions_status.setter
+    def captions_status(self, value: Optional[pulumi.Input['VideoWebhookArgs']]):
+        pulumi.set(self, "captions_status", value)
+
+    @_builtins.property
+    @pulumi.getter(name="connectionCreated")
+    def connection_created(self) -> Optional[pulumi.Input['VideoWebhookArgs']]:
+        """
+        Receives an event when a client connects to a session.
+        """
+        return pulumi.get(self, "connection_created")
+
+    @connection_created.setter
+    def connection_created(self, value: Optional[pulumi.Input['VideoWebhookArgs']]):
+        pulumi.set(self, "connection_created", value)
+
+    @_builtins.property
+    @pulumi.getter(name="connectionDestroyed")
+    def connection_destroyed(self) -> Optional[pulumi.Input['VideoWebhookArgs']]:
+        """
+        Receives an event when a client disconnects from a session.
+        """
+        return pulumi.get(self, "connection_destroyed")
+
+    @connection_destroyed.setter
+    def connection_destroyed(self, value: Optional[pulumi.Input['VideoWebhookArgs']]):
+        pulumi.set(self, "connection_destroyed", value)
+
+    @_builtins.property
+    @pulumi.getter(name="renderStatus")
+    def render_status(self) -> Optional[pulumi.Input['VideoWebhookArgs']]:
+        """
+        Receives Experience Composer render status changes.
+        """
+        return pulumi.get(self, "render_status")
+
+    @render_status.setter
+    def render_status(self, value: Optional[pulumi.Input['VideoWebhookArgs']]):
+        pulumi.set(self, "render_status", value)
+
+    @_builtins.property
+    @pulumi.getter(name="sessionCreated")
+    def session_created(self) -> Optional[pulumi.Input['VideoWebhookArgs']]:
+        """
+        Receives an event when a session is created.
+        """
+        return pulumi.get(self, "session_created")
+
+    @session_created.setter
+    def session_created(self, value: Optional[pulumi.Input['VideoWebhookArgs']]):
+        pulumi.set(self, "session_created", value)
+
+    @_builtins.property
+    @pulumi.getter(name="sessionDestroyed")
+    def session_destroyed(self) -> Optional[pulumi.Input['VideoWebhookArgs']]:
+        """
+        Receives an event when a session is destroyed.
+        """
+        return pulumi.get(self, "session_destroyed")
+
+    @session_destroyed.setter
+    def session_destroyed(self, value: Optional[pulumi.Input['VideoWebhookArgs']]):
+        pulumi.set(self, "session_destroyed", value)
+
+    @_builtins.property
+    @pulumi.getter(name="sessionNotification")
+    def session_notification(self) -> Optional[pulumi.Input['VideoWebhookArgs']]:
+        """
+        Receives session notifications.
+        """
+        return pulumi.get(self, "session_notification")
+
+    @session_notification.setter
+    def session_notification(self, value: Optional[pulumi.Input['VideoWebhookArgs']]):
+        pulumi.set(self, "session_notification", value)
+
+    @_builtins.property
+    @pulumi.getter(name="sipCallCreated")
+    def sip_call_created(self) -> Optional[pulumi.Input['VideoWebhookArgs']]:
+        """
+        Receives an event when a SIP call is created.
+        """
+        return pulumi.get(self, "sip_call_created")
+
+    @sip_call_created.setter
+    def sip_call_created(self, value: Optional[pulumi.Input['VideoWebhookArgs']]):
+        pulumi.set(self, "sip_call_created", value)
+
+    @_builtins.property
+    @pulumi.getter(name="sipCallDestroyed")
+    def sip_call_destroyed(self) -> Optional[pulumi.Input['VideoWebhookArgs']]:
+        """
+        Receives an event when a SIP call is destroyed.
+        """
+        return pulumi.get(self, "sip_call_destroyed")
+
+    @sip_call_destroyed.setter
+    def sip_call_destroyed(self, value: Optional[pulumi.Input['VideoWebhookArgs']]):
+        pulumi.set(self, "sip_call_destroyed", value)
+
+    @_builtins.property
+    @pulumi.getter(name="sipCallMuteForced")
+    def sip_call_mute_forced(self) -> Optional[pulumi.Input['VideoWebhookArgs']]:
+        """
+        Receives an event when a SIP call is force-muted.
+        """
+        return pulumi.get(self, "sip_call_mute_forced")
+
+    @sip_call_mute_forced.setter
+    def sip_call_mute_forced(self, value: Optional[pulumi.Input['VideoWebhookArgs']]):
+        pulumi.set(self, "sip_call_mute_forced", value)
+
+    @_builtins.property
+    @pulumi.getter(name="sipCallUpdated")
+    def sip_call_updated(self) -> Optional[pulumi.Input['VideoWebhookArgs']]:
+        """
+        Receives an event when a SIP call is updated.
+        """
+        return pulumi.get(self, "sip_call_updated")
+
+    @sip_call_updated.setter
+    def sip_call_updated(self, value: Optional[pulumi.Input['VideoWebhookArgs']]):
+        pulumi.set(self, "sip_call_updated", value)
+
+    @_builtins.property
+    @pulumi.getter(name="streamCreated")
+    def stream_created(self) -> Optional[pulumi.Input['VideoWebhookArgs']]:
+        """
+        Receives an event when a stream is created.
+        """
+        return pulumi.get(self, "stream_created")
+
+    @stream_created.setter
+    def stream_created(self, value: Optional[pulumi.Input['VideoWebhookArgs']]):
+        pulumi.set(self, "stream_created", value)
+
+    @_builtins.property
+    @pulumi.getter(name="streamDestroyed")
+    def stream_destroyed(self) -> Optional[pulumi.Input['VideoWebhookArgs']]:
+        """
+        Receives an event when a stream is destroyed.
+        """
+        return pulumi.get(self, "stream_destroyed")
+
+    @stream_destroyed.setter
+    def stream_destroyed(self, value: Optional[pulumi.Input['VideoWebhookArgs']]):
+        pulumi.set(self, "stream_destroyed", value)
+
+
+class VideoWebhookArgsDict(TypedDict):
+    address: pulumi.Input[_builtins.str]
+    """
+    The URL Vonage calls.
+    """
+    active: NotRequired[Optional[pulumi.Input[_builtins.bool]]]
+    """
+    Whether Vonage calls the webhook (server default true).
+    """
+
+@pulumi.input_type
+class VideoWebhookArgs:
+    def __init__(__self__, *,
+                 address: pulumi.Input[_builtins.str],
+                 active: Optional[pulumi.Input[_builtins.bool]] = None):
+        """
+        :param pulumi.Input[_builtins.str] address: The URL Vonage calls.
+        :param pulumi.Input[_builtins.bool] active: Whether Vonage calls the webhook (server default true).
+        """
+        pulumi.set(__self__, "address", address)
+        if active is not None:
+            pulumi.set(__self__, "active", active)
+
+    @_builtins.property
+    @pulumi.getter
+    def address(self) -> pulumi.Input[_builtins.str]:
+        """
+        The URL Vonage calls.
+        """
+        return pulumi.get(self, "address")
+
+    @address.setter
+    def address(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "address", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def active(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        Whether Vonage calls the webhook (server default true).
+        """
+        return pulumi.get(self, "active")
+
+    @active.setter
+    def active(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "active", value)
 
 
 class VoiceCapabilityArgsDict(TypedDict):

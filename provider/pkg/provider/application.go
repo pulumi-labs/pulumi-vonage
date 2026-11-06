@@ -134,15 +134,18 @@ func (m *MeetingsCapability) Annotate(a infer.Annotator) {
 
 // ApplicationArgs are the inputs of an Application.
 type ApplicationArgs struct {
-	Name      string              `pulumi:"name"`
-	Voice     *VoiceCapability    `pulumi:"voice,optional"`
-	Messages  *MessagesCapability `pulumi:"messages,optional"`
-	Rtc       *RtcCapability      `pulumi:"rtc,optional"`
-	Verify    *VerifyCapability   `pulumi:"verify,optional"`
-	Meetings  *MeetingsCapability `pulumi:"meetings,optional"`
-	Vbc       *bool               `pulumi:"vbc,optional"`
-	ImproveAi *bool               `pulumi:"improveAi,optional"`
-	PublicKey *string             `pulumi:"publicKey,optional"`
+	Name     string              `pulumi:"name"`
+	Voice    *VoiceCapability    `pulumi:"voice,optional"`
+	Messages *MessagesCapability `pulumi:"messages,optional"`
+	Rtc      *RtcCapability      `pulumi:"rtc,optional"`
+	Verify   *VerifyCapability   `pulumi:"verify,optional"`
+	Meetings *MeetingsCapability `pulumi:"meetings,optional"`
+	Video    *VideoCapability    `pulumi:"video,optional"`
+	// NetworkApis configures the network_apis capability.
+	NetworkApis *NetworkApisCapability `pulumi:"networkApis,optional"`
+	Vbc         *bool                  `pulumi:"vbc,optional"`
+	ImproveAi   *bool                  `pulumi:"improveAi,optional"`
+	PublicKey   *string                `pulumi:"publicKey,optional"`
 }
 
 func (a *ApplicationArgs) Annotate(an infer.Annotator) {
@@ -152,6 +155,8 @@ func (a *ApplicationArgs) Annotate(an infer.Annotator) {
 	an.Describe(&a.Rtc, "RTC capability. Omit to leave RTC disabled.")
 	an.Describe(&a.Verify, "Verify v2 capability. Omit to leave verify disabled.")
 	an.Describe(&a.Meetings, "Meetings capability. Omit to leave meetings disabled.")
+	an.Describe(&a.Video, "Video API capability: webhooks and recording storage. Omit to leave video as it is on the server; an existing video capability configured outside Pulumi is preserved until you declare the block.")
+	an.Describe(&a.NetworkApis, "Network APIs capability (SIM Swap, Number Verification). Omit to leave it as it is on the server.")
 	an.Describe(&a.Vbc, "Set true to enable the (empty) vbc capability for zero-rated VBC calls.")
 	an.Describe(&a.ImproveAi, "Whether Vonage may use traffic to improve its AI models (privacy.improve_ai).")
 	an.Describe(&a.PublicKey, "Optional PEM public key. When omitted Vonage generates a key pair on creation and "+
@@ -179,7 +184,7 @@ func (s *ApplicationState) Annotate(a infer.Annotator) {
 
 func (r *Application) Annotate(a infer.Annotator) {
 	a.Describe(&r, "A Vonage application (Application API v2): capabilities, webhooks and signing keys. "+
-		"Update replaces the whole configuration, so every capability you want must be declared in the program; capabilities this provider does not model (video, network_apis) are preserved.")
+		"Update replaces the whole configuration, so every capability you want must be declared in the program; video and networkApis you do not declare are preserved as they are on the server, and removing a block you declared earlier disables that capability.")
 }
 
 var _ infer.CustomResource[ApplicationArgs, ApplicationState] = (*Application)(nil)
@@ -270,6 +275,11 @@ func (r *Application) Check(ctx context.Context, req infer.CheckRequest) (infer.
 		checkWebhook(&failures, "meetings.roomChanged", m.RoomChanged, true)
 		checkWebhook(&failures, "meetings.sessionChanged", m.SessionChanged, true)
 	}
+	checkVideoWebhooks(&failures, args.Video)
+	if n := args.NetworkApis; n != nil && strings.TrimSpace(n.NetworkApplicationID) == "" {
+		failures = append(failures, p.CheckFailure{Property: "networkApis.networkApplicationId",
+			Reason: "networkApplicationId must not be empty"})
+	}
 	return infer.CheckResponse[ApplicationArgs]{Inputs: args, Failures: failures}, nil
 }
 
@@ -358,6 +368,7 @@ func toWireApplication(a ApplicationArgs) *wireApplication {
 	if hasCap {
 		w.Capabilities = caps
 	}
+	withDeclaredExtras(w, a)
 	if a.ImproveAi != nil {
 		w.Privacy = &wirePrivacy{ImproveAI: a.ImproveAi}
 	}
@@ -537,6 +548,16 @@ func observeApplication(prev ApplicationArgs, w *wireApplication) ApplicationArg
 		}
 		out.Meetings = m
 	}
+	if prev.Video != nil {
+		if raw, ok := caps.Extra[capVideo]; ok {
+			out.Video = observeVideo(prev.Video, raw)
+		}
+	}
+	if prev.NetworkApis != nil {
+		if raw, ok := caps.Extra[capNetworkAPI]; ok {
+			out.NetworkApis = observeNetworkAPIs(prev.NetworkApis, raw)
+		}
+	}
 	if caps.VBC != nil {
 		t := true
 		out.Vbc = &t
@@ -565,7 +586,7 @@ func stateFromWire(args ApplicationArgs, w *wireApplication, priorPrivate *strin
 
 func (r *Application) Create(ctx context.Context, req infer.CreateRequest[ApplicationArgs]) (infer.CreateResponse[ApplicationState], error) {
 	if req.DryRun {
-		return infer.CreateResponse[ApplicationState]{ID: req.Name, Output: ApplicationState{ApplicationArgs: req.Inputs}}, nil
+		return infer.CreateResponse[ApplicationState]{ID: "", Output: ApplicationState{ApplicationArgs: req.Inputs}}, nil
 	}
 	c, err := clientFor(ctx)
 	if err != nil {
@@ -620,12 +641,7 @@ func (r *Application) Update(ctx context.Context, req infer.UpdateRequest[Applic
 	if cur == nil {
 		return infer.UpdateResponse[ApplicationState]{}, fmt.Errorf("update application %s: it no longer exists; run pulumi refresh", req.ID)
 	}
-	if cur.Capabilities != nil && len(cur.Capabilities.Extra) > 0 {
-		if body.Capabilities == nil {
-			body.Capabilities = &wireCapabilities{}
-		}
-		body.Capabilities.Extra = cur.Capabilities.Extra
-	}
+	preserveUnmanagedExtras(body, cur, req.State.ApplicationArgs)
 	w, err := c.UpdateApplication(ctx, req.ID, body)
 	if err != nil {
 		return infer.UpdateResponse[ApplicationState]{}, fmt.Errorf("update application %s: %w", req.ID, err)

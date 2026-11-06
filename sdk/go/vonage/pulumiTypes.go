@@ -122,6 +122,171 @@ func (o ApplicationSummaryArrayOutput) Index(i pulumi.IntInput) ApplicationSumma
 	}).(ApplicationSummaryOutput)
 }
 
+type AvailableNumber struct {
+	// Monthly rental in euros, as Vonage reports it (a decimal string).
+	Cost string `pulumi:"cost"`
+	// Country code.
+	Country string `pulumi:"country"`
+	// Capabilities: SMS, VOICE, MMS.
+	Features []string `pulumi:"features"`
+	// The number in international format without a leading plus.
+	Msisdn string `pulumi:"msisdn"`
+	// Number type.
+	Type string `pulumi:"type"`
+}
+
+type AvailableNumberOutput struct{ *pulumi.OutputState }
+
+func (AvailableNumberOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AvailableNumber)(nil)).Elem()
+}
+
+func (o AvailableNumberOutput) ToAvailableNumberOutput() AvailableNumberOutput {
+	return o
+}
+
+func (o AvailableNumberOutput) ToAvailableNumberOutputWithContext(ctx context.Context) AvailableNumberOutput {
+	return o
+}
+
+// Monthly rental in euros, as Vonage reports it (a decimal string).
+func (o AvailableNumberOutput) Cost() pulumi.StringOutput {
+	return o.ApplyT(func(v AvailableNumber) string { return v.Cost }).(pulumi.StringOutput)
+}
+
+// Country code.
+func (o AvailableNumberOutput) Country() pulumi.StringOutput {
+	return o.ApplyT(func(v AvailableNumber) string { return v.Country }).(pulumi.StringOutput)
+}
+
+// Capabilities: SMS, VOICE, MMS.
+func (o AvailableNumberOutput) Features() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AvailableNumber) []string { return v.Features }).(pulumi.StringArrayOutput)
+}
+
+// The number in international format without a leading plus.
+func (o AvailableNumberOutput) Msisdn() pulumi.StringOutput {
+	return o.ApplyT(func(v AvailableNumber) string { return v.Msisdn }).(pulumi.StringOutput)
+}
+
+// Number type.
+func (o AvailableNumberOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v AvailableNumber) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type AvailableNumberArrayOutput struct{ *pulumi.OutputState }
+
+func (AvailableNumberArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AvailableNumber)(nil)).Elem()
+}
+
+func (o AvailableNumberArrayOutput) ToAvailableNumberArrayOutput() AvailableNumberArrayOutput {
+	return o
+}
+
+func (o AvailableNumberArrayOutput) ToAvailableNumberArrayOutputWithContext(ctx context.Context) AvailableNumberArrayOutput {
+	return o
+}
+
+func (o AvailableNumberArrayOutput) Index(i pulumi.IntInput) AvailableNumberOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AvailableNumber {
+		return vs[0].([]AvailableNumber)[vs[1].(int)]
+	}).(AvailableNumberOutput)
+}
+
+type GetSubAccountResult struct {
+	// Subaccount API key.
+	ApiKey string `pulumi:"apiKey"`
+	// Subaccount balance, unset when it uses the primary balance.
+	Balance *float64 `pulumi:"balance"`
+	// ISO 8601 creation timestamp.
+	CreatedAt string `pulumi:"createdAt"`
+	// Subaccount credit limit, unset when it uses the primary balance.
+	CreditLimit *float64 `pulumi:"creditLimit"`
+	// Subaccount name.
+	Name string `pulumi:"name"`
+	// API key of the owning primary account.
+	PrimaryAccountApiKey string `pulumi:"primaryAccountApiKey"`
+	// Whether the subaccount is suspended.
+	Suspended bool `pulumi:"suspended"`
+	// Whether the subaccount draws on the primary account balance.
+	UsePrimaryAccountBalance bool `pulumi:"usePrimaryAccountBalance"`
+}
+
+type GetSubAccountResultOutput struct{ *pulumi.OutputState }
+
+func (GetSubAccountResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSubAccountResult)(nil)).Elem()
+}
+
+func (o GetSubAccountResultOutput) ToGetSubAccountResultOutput() GetSubAccountResultOutput {
+	return o
+}
+
+func (o GetSubAccountResultOutput) ToGetSubAccountResultOutputWithContext(ctx context.Context) GetSubAccountResultOutput {
+	return o
+}
+
+// Subaccount API key.
+func (o GetSubAccountResultOutput) ApiKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSubAccountResult) string { return v.ApiKey }).(pulumi.StringOutput)
+}
+
+// Subaccount balance, unset when it uses the primary balance.
+func (o GetSubAccountResultOutput) Balance() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v GetSubAccountResult) *float64 { return v.Balance }).(pulumi.Float64PtrOutput)
+}
+
+// ISO 8601 creation timestamp.
+func (o GetSubAccountResultOutput) CreatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSubAccountResult) string { return v.CreatedAt }).(pulumi.StringOutput)
+}
+
+// Subaccount credit limit, unset when it uses the primary balance.
+func (o GetSubAccountResultOutput) CreditLimit() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v GetSubAccountResult) *float64 { return v.CreditLimit }).(pulumi.Float64PtrOutput)
+}
+
+// Subaccount name.
+func (o GetSubAccountResultOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSubAccountResult) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// API key of the owning primary account.
+func (o GetSubAccountResultOutput) PrimaryAccountApiKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSubAccountResult) string { return v.PrimaryAccountApiKey }).(pulumi.StringOutput)
+}
+
+// Whether the subaccount is suspended.
+func (o GetSubAccountResultOutput) Suspended() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetSubAccountResult) bool { return v.Suspended }).(pulumi.BoolOutput)
+}
+
+// Whether the subaccount draws on the primary account balance.
+func (o GetSubAccountResultOutput) UsePrimaryAccountBalance() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetSubAccountResult) bool { return v.UsePrimaryAccountBalance }).(pulumi.BoolOutput)
+}
+
+type GetSubAccountResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSubAccountResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSubAccountResult)(nil)).Elem()
+}
+
+func (o GetSubAccountResultArrayOutput) ToGetSubAccountResultArrayOutput() GetSubAccountResultArrayOutput {
+	return o
+}
+
+func (o GetSubAccountResultArrayOutput) ToGetSubAccountResultArrayOutputWithContext(ctx context.Context) GetSubAccountResultArrayOutput {
+	return o
+}
+
+func (o GetSubAccountResultArrayOutput) Index(i pulumi.IntInput) GetSubAccountResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSubAccountResult {
+		return vs[0].([]GetSubAccountResult)[vs[1].(int)]
+	}).(GetSubAccountResultOutput)
+}
+
 type MeetingsCapability struct {
 	// Webhook that receives recording status changes (POST only).
 	RecordingChanged *Webhook `pulumi:"recordingChanged"`
@@ -491,6 +656,269 @@ func (o MessagesCapabilityPtrOutput) Version() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type NetworkApisCapability struct {
+	// The Network APIs application ID.
+	NetworkApplicationId string `pulumi:"networkApplicationId"`
+	// Redirect URI for the Network APIs OAuth flow.
+	RedirectUri *string `pulumi:"redirectUri"`
+}
+
+// NetworkApisCapabilityInput is an input type that accepts NetworkApisCapabilityArgs and NetworkApisCapabilityOutput values.
+// You can construct a concrete instance of `NetworkApisCapabilityInput` via:
+//
+//	NetworkApisCapabilityArgs{...}
+type NetworkApisCapabilityInput interface {
+	pulumi.Input
+
+	ToNetworkApisCapabilityOutput() NetworkApisCapabilityOutput
+	ToNetworkApisCapabilityOutputWithContext(context.Context) NetworkApisCapabilityOutput
+}
+
+type NetworkApisCapabilityArgs struct {
+	// The Network APIs application ID.
+	NetworkApplicationId pulumi.StringInput `pulumi:"networkApplicationId"`
+	// Redirect URI for the Network APIs OAuth flow.
+	RedirectUri pulumi.StringPtrInput `pulumi:"redirectUri"`
+}
+
+func (NetworkApisCapabilityArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NetworkApisCapability)(nil)).Elem()
+}
+
+func (i NetworkApisCapabilityArgs) ToNetworkApisCapabilityOutput() NetworkApisCapabilityOutput {
+	return i.ToNetworkApisCapabilityOutputWithContext(context.Background())
+}
+
+func (i NetworkApisCapabilityArgs) ToNetworkApisCapabilityOutputWithContext(ctx context.Context) NetworkApisCapabilityOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NetworkApisCapabilityOutput)
+}
+
+func (i NetworkApisCapabilityArgs) ToNetworkApisCapabilityPtrOutput() NetworkApisCapabilityPtrOutput {
+	return i.ToNetworkApisCapabilityPtrOutputWithContext(context.Background())
+}
+
+func (i NetworkApisCapabilityArgs) ToNetworkApisCapabilityPtrOutputWithContext(ctx context.Context) NetworkApisCapabilityPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NetworkApisCapabilityOutput).ToNetworkApisCapabilityPtrOutputWithContext(ctx)
+}
+
+// NetworkApisCapabilityPtrInput is an input type that accepts NetworkApisCapabilityArgs, NetworkApisCapabilityPtr and NetworkApisCapabilityPtrOutput values.
+// You can construct a concrete instance of `NetworkApisCapabilityPtrInput` via:
+//
+//	        NetworkApisCapabilityArgs{...}
+//
+//	or:
+//
+//	        nil
+type NetworkApisCapabilityPtrInput interface {
+	pulumi.Input
+
+	ToNetworkApisCapabilityPtrOutput() NetworkApisCapabilityPtrOutput
+	ToNetworkApisCapabilityPtrOutputWithContext(context.Context) NetworkApisCapabilityPtrOutput
+}
+
+type networkApisCapabilityPtrType NetworkApisCapabilityArgs
+
+func NetworkApisCapabilityPtr(v *NetworkApisCapabilityArgs) NetworkApisCapabilityPtrInput {
+	return (*networkApisCapabilityPtrType)(v)
+}
+
+func (*networkApisCapabilityPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NetworkApisCapability)(nil)).Elem()
+}
+
+func (i *networkApisCapabilityPtrType) ToNetworkApisCapabilityPtrOutput() NetworkApisCapabilityPtrOutput {
+	return i.ToNetworkApisCapabilityPtrOutputWithContext(context.Background())
+}
+
+func (i *networkApisCapabilityPtrType) ToNetworkApisCapabilityPtrOutputWithContext(ctx context.Context) NetworkApisCapabilityPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NetworkApisCapabilityPtrOutput)
+}
+
+type NetworkApisCapabilityOutput struct{ *pulumi.OutputState }
+
+func (NetworkApisCapabilityOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NetworkApisCapability)(nil)).Elem()
+}
+
+func (o NetworkApisCapabilityOutput) ToNetworkApisCapabilityOutput() NetworkApisCapabilityOutput {
+	return o
+}
+
+func (o NetworkApisCapabilityOutput) ToNetworkApisCapabilityOutputWithContext(ctx context.Context) NetworkApisCapabilityOutput {
+	return o
+}
+
+func (o NetworkApisCapabilityOutput) ToNetworkApisCapabilityPtrOutput() NetworkApisCapabilityPtrOutput {
+	return o.ToNetworkApisCapabilityPtrOutputWithContext(context.Background())
+}
+
+func (o NetworkApisCapabilityOutput) ToNetworkApisCapabilityPtrOutputWithContext(ctx context.Context) NetworkApisCapabilityPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NetworkApisCapability) *NetworkApisCapability {
+		return &v
+	}).(NetworkApisCapabilityPtrOutput)
+}
+
+// The Network APIs application ID.
+func (o NetworkApisCapabilityOutput) NetworkApplicationId() pulumi.StringOutput {
+	return o.ApplyT(func(v NetworkApisCapability) string { return v.NetworkApplicationId }).(pulumi.StringOutput)
+}
+
+// Redirect URI for the Network APIs OAuth flow.
+func (o NetworkApisCapabilityOutput) RedirectUri() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NetworkApisCapability) *string { return v.RedirectUri }).(pulumi.StringPtrOutput)
+}
+
+type NetworkApisCapabilityPtrOutput struct{ *pulumi.OutputState }
+
+func (NetworkApisCapabilityPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NetworkApisCapability)(nil)).Elem()
+}
+
+func (o NetworkApisCapabilityPtrOutput) ToNetworkApisCapabilityPtrOutput() NetworkApisCapabilityPtrOutput {
+	return o
+}
+
+func (o NetworkApisCapabilityPtrOutput) ToNetworkApisCapabilityPtrOutputWithContext(ctx context.Context) NetworkApisCapabilityPtrOutput {
+	return o
+}
+
+func (o NetworkApisCapabilityPtrOutput) Elem() NetworkApisCapabilityOutput {
+	return o.ApplyT(func(v *NetworkApisCapability) NetworkApisCapability {
+		if v != nil {
+			return *v
+		}
+		var ret NetworkApisCapability
+		return ret
+	}).(NetworkApisCapabilityOutput)
+}
+
+// The Network APIs application ID.
+func (o NetworkApisCapabilityPtrOutput) NetworkApplicationId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NetworkApisCapability) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.NetworkApplicationId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Redirect URI for the Network APIs OAuth flow.
+func (o NetworkApisCapabilityPtrOutput) RedirectUri() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NetworkApisCapability) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RedirectUri
+	}).(pulumi.StringPtrOutput)
+}
+
+type OwnedNumberSummary struct {
+	// Linked application ID, empty if none.
+	AppId string `pulumi:"appId"`
+	// Country code.
+	Country string `pulumi:"country"`
+	// Capabilities: SMS, VOICE, MMS.
+	Features []string `pulumi:"features"`
+	// Messages routing type.
+	MessagesCallbackType string `pulumi:"messagesCallbackType"`
+	// Messages routing target.
+	MessagesCallbackValue string `pulumi:"messagesCallbackValue"`
+	// Inbound SMS webhook, empty if none.
+	MoHttpUrl string `pulumi:"moHttpUrl"`
+	// The number in international format without a leading plus.
+	Msisdn string `pulumi:"msisdn"`
+	// Number type (landline, mobile-lvn, landline-toll-free).
+	Type string `pulumi:"type"`
+	// Voice routing type.
+	VoiceCallbackType string `pulumi:"voiceCallbackType"`
+	// Voice routing target.
+	VoiceCallbackValue string `pulumi:"voiceCallbackValue"`
+}
+
+type OwnedNumberSummaryOutput struct{ *pulumi.OutputState }
+
+func (OwnedNumberSummaryOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*OwnedNumberSummary)(nil)).Elem()
+}
+
+func (o OwnedNumberSummaryOutput) ToOwnedNumberSummaryOutput() OwnedNumberSummaryOutput {
+	return o
+}
+
+func (o OwnedNumberSummaryOutput) ToOwnedNumberSummaryOutputWithContext(ctx context.Context) OwnedNumberSummaryOutput {
+	return o
+}
+
+// Linked application ID, empty if none.
+func (o OwnedNumberSummaryOutput) AppId() pulumi.StringOutput {
+	return o.ApplyT(func(v OwnedNumberSummary) string { return v.AppId }).(pulumi.StringOutput)
+}
+
+// Country code.
+func (o OwnedNumberSummaryOutput) Country() pulumi.StringOutput {
+	return o.ApplyT(func(v OwnedNumberSummary) string { return v.Country }).(pulumi.StringOutput)
+}
+
+// Capabilities: SMS, VOICE, MMS.
+func (o OwnedNumberSummaryOutput) Features() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v OwnedNumberSummary) []string { return v.Features }).(pulumi.StringArrayOutput)
+}
+
+// Messages routing type.
+func (o OwnedNumberSummaryOutput) MessagesCallbackType() pulumi.StringOutput {
+	return o.ApplyT(func(v OwnedNumberSummary) string { return v.MessagesCallbackType }).(pulumi.StringOutput)
+}
+
+// Messages routing target.
+func (o OwnedNumberSummaryOutput) MessagesCallbackValue() pulumi.StringOutput {
+	return o.ApplyT(func(v OwnedNumberSummary) string { return v.MessagesCallbackValue }).(pulumi.StringOutput)
+}
+
+// Inbound SMS webhook, empty if none.
+func (o OwnedNumberSummaryOutput) MoHttpUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v OwnedNumberSummary) string { return v.MoHttpUrl }).(pulumi.StringOutput)
+}
+
+// The number in international format without a leading plus.
+func (o OwnedNumberSummaryOutput) Msisdn() pulumi.StringOutput {
+	return o.ApplyT(func(v OwnedNumberSummary) string { return v.Msisdn }).(pulumi.StringOutput)
+}
+
+// Number type (landline, mobile-lvn, landline-toll-free).
+func (o OwnedNumberSummaryOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v OwnedNumberSummary) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// Voice routing type.
+func (o OwnedNumberSummaryOutput) VoiceCallbackType() pulumi.StringOutput {
+	return o.ApplyT(func(v OwnedNumberSummary) string { return v.VoiceCallbackType }).(pulumi.StringOutput)
+}
+
+// Voice routing target.
+func (o OwnedNumberSummaryOutput) VoiceCallbackValue() pulumi.StringOutput {
+	return o.ApplyT(func(v OwnedNumberSummary) string { return v.VoiceCallbackValue }).(pulumi.StringOutput)
+}
+
+type OwnedNumberSummaryArrayOutput struct{ *pulumi.OutputState }
+
+func (OwnedNumberSummaryArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]OwnedNumberSummary)(nil)).Elem()
+}
+
+func (o OwnedNumberSummaryArrayOutput) ToOwnedNumberSummaryArrayOutput() OwnedNumberSummaryArrayOutput {
+	return o
+}
+
+func (o OwnedNumberSummaryArrayOutput) ToOwnedNumberSummaryArrayOutputWithContext(ctx context.Context) OwnedNumberSummaryArrayOutput {
+	return o
+}
+
+func (o OwnedNumberSummaryArrayOutput) Index(i pulumi.IntInput) OwnedNumberSummaryOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) OwnedNumberSummary {
+		return vs[0].([]OwnedNumberSummary)[vs[1].(int)]
+	}).(OwnedNumberSummaryOutput)
+}
+
 type RtcCapability struct {
 	// Webhook that receives RTC events.
 	EventUrl *Webhook `pulumi:"eventUrl"`
@@ -801,6 +1229,896 @@ func (o VerifyCapabilityPtrOutput) Version() pulumi.StringPtrOutput {
 		}
 		return v.Version
 	}).(pulumi.StringPtrOutput)
+}
+
+type VideoCapability struct {
+	// Recording storage and encryption settings.
+	Storage *VideoStorage `pulumi:"storage"`
+	// Webhooks that receive Video API events.
+	Webhooks *VideoWebhooks `pulumi:"webhooks"`
+}
+
+// VideoCapabilityInput is an input type that accepts VideoCapabilityArgs and VideoCapabilityOutput values.
+// You can construct a concrete instance of `VideoCapabilityInput` via:
+//
+//	VideoCapabilityArgs{...}
+type VideoCapabilityInput interface {
+	pulumi.Input
+
+	ToVideoCapabilityOutput() VideoCapabilityOutput
+	ToVideoCapabilityOutputWithContext(context.Context) VideoCapabilityOutput
+}
+
+type VideoCapabilityArgs struct {
+	// Recording storage and encryption settings.
+	Storage VideoStoragePtrInput `pulumi:"storage"`
+	// Webhooks that receive Video API events.
+	Webhooks VideoWebhooksPtrInput `pulumi:"webhooks"`
+}
+
+func (VideoCapabilityArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*VideoCapability)(nil)).Elem()
+}
+
+func (i VideoCapabilityArgs) ToVideoCapabilityOutput() VideoCapabilityOutput {
+	return i.ToVideoCapabilityOutputWithContext(context.Background())
+}
+
+func (i VideoCapabilityArgs) ToVideoCapabilityOutputWithContext(ctx context.Context) VideoCapabilityOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(VideoCapabilityOutput)
+}
+
+func (i VideoCapabilityArgs) ToVideoCapabilityPtrOutput() VideoCapabilityPtrOutput {
+	return i.ToVideoCapabilityPtrOutputWithContext(context.Background())
+}
+
+func (i VideoCapabilityArgs) ToVideoCapabilityPtrOutputWithContext(ctx context.Context) VideoCapabilityPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(VideoCapabilityOutput).ToVideoCapabilityPtrOutputWithContext(ctx)
+}
+
+// VideoCapabilityPtrInput is an input type that accepts VideoCapabilityArgs, VideoCapabilityPtr and VideoCapabilityPtrOutput values.
+// You can construct a concrete instance of `VideoCapabilityPtrInput` via:
+//
+//	        VideoCapabilityArgs{...}
+//
+//	or:
+//
+//	        nil
+type VideoCapabilityPtrInput interface {
+	pulumi.Input
+
+	ToVideoCapabilityPtrOutput() VideoCapabilityPtrOutput
+	ToVideoCapabilityPtrOutputWithContext(context.Context) VideoCapabilityPtrOutput
+}
+
+type videoCapabilityPtrType VideoCapabilityArgs
+
+func VideoCapabilityPtr(v *VideoCapabilityArgs) VideoCapabilityPtrInput {
+	return (*videoCapabilityPtrType)(v)
+}
+
+func (*videoCapabilityPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**VideoCapability)(nil)).Elem()
+}
+
+func (i *videoCapabilityPtrType) ToVideoCapabilityPtrOutput() VideoCapabilityPtrOutput {
+	return i.ToVideoCapabilityPtrOutputWithContext(context.Background())
+}
+
+func (i *videoCapabilityPtrType) ToVideoCapabilityPtrOutputWithContext(ctx context.Context) VideoCapabilityPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(VideoCapabilityPtrOutput)
+}
+
+type VideoCapabilityOutput struct{ *pulumi.OutputState }
+
+func (VideoCapabilityOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*VideoCapability)(nil)).Elem()
+}
+
+func (o VideoCapabilityOutput) ToVideoCapabilityOutput() VideoCapabilityOutput {
+	return o
+}
+
+func (o VideoCapabilityOutput) ToVideoCapabilityOutputWithContext(ctx context.Context) VideoCapabilityOutput {
+	return o
+}
+
+func (o VideoCapabilityOutput) ToVideoCapabilityPtrOutput() VideoCapabilityPtrOutput {
+	return o.ToVideoCapabilityPtrOutputWithContext(context.Background())
+}
+
+func (o VideoCapabilityOutput) ToVideoCapabilityPtrOutputWithContext(ctx context.Context) VideoCapabilityPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v VideoCapability) *VideoCapability {
+		return &v
+	}).(VideoCapabilityPtrOutput)
+}
+
+// Recording storage and encryption settings.
+func (o VideoCapabilityOutput) Storage() VideoStoragePtrOutput {
+	return o.ApplyT(func(v VideoCapability) *VideoStorage { return v.Storage }).(VideoStoragePtrOutput)
+}
+
+// Webhooks that receive Video API events.
+func (o VideoCapabilityOutput) Webhooks() VideoWebhooksPtrOutput {
+	return o.ApplyT(func(v VideoCapability) *VideoWebhooks { return v.Webhooks }).(VideoWebhooksPtrOutput)
+}
+
+type VideoCapabilityPtrOutput struct{ *pulumi.OutputState }
+
+func (VideoCapabilityPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**VideoCapability)(nil)).Elem()
+}
+
+func (o VideoCapabilityPtrOutput) ToVideoCapabilityPtrOutput() VideoCapabilityPtrOutput {
+	return o
+}
+
+func (o VideoCapabilityPtrOutput) ToVideoCapabilityPtrOutputWithContext(ctx context.Context) VideoCapabilityPtrOutput {
+	return o
+}
+
+func (o VideoCapabilityPtrOutput) Elem() VideoCapabilityOutput {
+	return o.ApplyT(func(v *VideoCapability) VideoCapability {
+		if v != nil {
+			return *v
+		}
+		var ret VideoCapability
+		return ret
+	}).(VideoCapabilityOutput)
+}
+
+// Recording storage and encryption settings.
+func (o VideoCapabilityPtrOutput) Storage() VideoStoragePtrOutput {
+	return o.ApplyT(func(v *VideoCapability) *VideoStorage {
+		if v == nil {
+			return nil
+		}
+		return v.Storage
+	}).(VideoStoragePtrOutput)
+}
+
+// Webhooks that receive Video API events.
+func (o VideoCapabilityPtrOutput) Webhooks() VideoWebhooksPtrOutput {
+	return o.ApplyT(func(v *VideoCapability) *VideoWebhooks {
+		if v == nil {
+			return nil
+		}
+		return v.Webhooks
+	}).(VideoWebhooksPtrOutput)
+}
+
+type VideoStorage struct {
+	// Whether recordings go to the configured cloud storage.
+	CloudStorage *bool `pulumi:"cloudStorage"`
+	// Whether video streams use end-to-end encryption.
+	EndToEndEncryption *bool `pulumi:"endToEndEncryption"`
+	// Whether recordings are encrypted server side.
+	ServerSideEncryption *bool `pulumi:"serverSideEncryption"`
+}
+
+// VideoStorageInput is an input type that accepts VideoStorageArgs and VideoStorageOutput values.
+// You can construct a concrete instance of `VideoStorageInput` via:
+//
+//	VideoStorageArgs{...}
+type VideoStorageInput interface {
+	pulumi.Input
+
+	ToVideoStorageOutput() VideoStorageOutput
+	ToVideoStorageOutputWithContext(context.Context) VideoStorageOutput
+}
+
+type VideoStorageArgs struct {
+	// Whether recordings go to the configured cloud storage.
+	CloudStorage pulumi.BoolPtrInput `pulumi:"cloudStorage"`
+	// Whether video streams use end-to-end encryption.
+	EndToEndEncryption pulumi.BoolPtrInput `pulumi:"endToEndEncryption"`
+	// Whether recordings are encrypted server side.
+	ServerSideEncryption pulumi.BoolPtrInput `pulumi:"serverSideEncryption"`
+}
+
+func (VideoStorageArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*VideoStorage)(nil)).Elem()
+}
+
+func (i VideoStorageArgs) ToVideoStorageOutput() VideoStorageOutput {
+	return i.ToVideoStorageOutputWithContext(context.Background())
+}
+
+func (i VideoStorageArgs) ToVideoStorageOutputWithContext(ctx context.Context) VideoStorageOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(VideoStorageOutput)
+}
+
+func (i VideoStorageArgs) ToVideoStoragePtrOutput() VideoStoragePtrOutput {
+	return i.ToVideoStoragePtrOutputWithContext(context.Background())
+}
+
+func (i VideoStorageArgs) ToVideoStoragePtrOutputWithContext(ctx context.Context) VideoStoragePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(VideoStorageOutput).ToVideoStoragePtrOutputWithContext(ctx)
+}
+
+// VideoStoragePtrInput is an input type that accepts VideoStorageArgs, VideoStoragePtr and VideoStoragePtrOutput values.
+// You can construct a concrete instance of `VideoStoragePtrInput` via:
+//
+//	        VideoStorageArgs{...}
+//
+//	or:
+//
+//	        nil
+type VideoStoragePtrInput interface {
+	pulumi.Input
+
+	ToVideoStoragePtrOutput() VideoStoragePtrOutput
+	ToVideoStoragePtrOutputWithContext(context.Context) VideoStoragePtrOutput
+}
+
+type videoStoragePtrType VideoStorageArgs
+
+func VideoStoragePtr(v *VideoStorageArgs) VideoStoragePtrInput {
+	return (*videoStoragePtrType)(v)
+}
+
+func (*videoStoragePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**VideoStorage)(nil)).Elem()
+}
+
+func (i *videoStoragePtrType) ToVideoStoragePtrOutput() VideoStoragePtrOutput {
+	return i.ToVideoStoragePtrOutputWithContext(context.Background())
+}
+
+func (i *videoStoragePtrType) ToVideoStoragePtrOutputWithContext(ctx context.Context) VideoStoragePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(VideoStoragePtrOutput)
+}
+
+type VideoStorageOutput struct{ *pulumi.OutputState }
+
+func (VideoStorageOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*VideoStorage)(nil)).Elem()
+}
+
+func (o VideoStorageOutput) ToVideoStorageOutput() VideoStorageOutput {
+	return o
+}
+
+func (o VideoStorageOutput) ToVideoStorageOutputWithContext(ctx context.Context) VideoStorageOutput {
+	return o
+}
+
+func (o VideoStorageOutput) ToVideoStoragePtrOutput() VideoStoragePtrOutput {
+	return o.ToVideoStoragePtrOutputWithContext(context.Background())
+}
+
+func (o VideoStorageOutput) ToVideoStoragePtrOutputWithContext(ctx context.Context) VideoStoragePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v VideoStorage) *VideoStorage {
+		return &v
+	}).(VideoStoragePtrOutput)
+}
+
+// Whether recordings go to the configured cloud storage.
+func (o VideoStorageOutput) CloudStorage() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v VideoStorage) *bool { return v.CloudStorage }).(pulumi.BoolPtrOutput)
+}
+
+// Whether video streams use end-to-end encryption.
+func (o VideoStorageOutput) EndToEndEncryption() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v VideoStorage) *bool { return v.EndToEndEncryption }).(pulumi.BoolPtrOutput)
+}
+
+// Whether recordings are encrypted server side.
+func (o VideoStorageOutput) ServerSideEncryption() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v VideoStorage) *bool { return v.ServerSideEncryption }).(pulumi.BoolPtrOutput)
+}
+
+type VideoStoragePtrOutput struct{ *pulumi.OutputState }
+
+func (VideoStoragePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**VideoStorage)(nil)).Elem()
+}
+
+func (o VideoStoragePtrOutput) ToVideoStoragePtrOutput() VideoStoragePtrOutput {
+	return o
+}
+
+func (o VideoStoragePtrOutput) ToVideoStoragePtrOutputWithContext(ctx context.Context) VideoStoragePtrOutput {
+	return o
+}
+
+func (o VideoStoragePtrOutput) Elem() VideoStorageOutput {
+	return o.ApplyT(func(v *VideoStorage) VideoStorage {
+		if v != nil {
+			return *v
+		}
+		var ret VideoStorage
+		return ret
+	}).(VideoStorageOutput)
+}
+
+// Whether recordings go to the configured cloud storage.
+func (o VideoStoragePtrOutput) CloudStorage() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *VideoStorage) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.CloudStorage
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether video streams use end-to-end encryption.
+func (o VideoStoragePtrOutput) EndToEndEncryption() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *VideoStorage) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.EndToEndEncryption
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether recordings are encrypted server side.
+func (o VideoStoragePtrOutput) ServerSideEncryption() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *VideoStorage) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ServerSideEncryption
+	}).(pulumi.BoolPtrOutput)
+}
+
+type VideoWebhook struct {
+	// Whether Vonage calls the webhook (server default true).
+	Active *bool `pulumi:"active"`
+	// The URL Vonage calls.
+	Address string `pulumi:"address"`
+}
+
+// VideoWebhookInput is an input type that accepts VideoWebhookArgs and VideoWebhookOutput values.
+// You can construct a concrete instance of `VideoWebhookInput` via:
+//
+//	VideoWebhookArgs{...}
+type VideoWebhookInput interface {
+	pulumi.Input
+
+	ToVideoWebhookOutput() VideoWebhookOutput
+	ToVideoWebhookOutputWithContext(context.Context) VideoWebhookOutput
+}
+
+type VideoWebhookArgs struct {
+	// Whether Vonage calls the webhook (server default true).
+	Active pulumi.BoolPtrInput `pulumi:"active"`
+	// The URL Vonage calls.
+	Address pulumi.StringInput `pulumi:"address"`
+}
+
+func (VideoWebhookArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*VideoWebhook)(nil)).Elem()
+}
+
+func (i VideoWebhookArgs) ToVideoWebhookOutput() VideoWebhookOutput {
+	return i.ToVideoWebhookOutputWithContext(context.Background())
+}
+
+func (i VideoWebhookArgs) ToVideoWebhookOutputWithContext(ctx context.Context) VideoWebhookOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(VideoWebhookOutput)
+}
+
+func (i VideoWebhookArgs) ToVideoWebhookPtrOutput() VideoWebhookPtrOutput {
+	return i.ToVideoWebhookPtrOutputWithContext(context.Background())
+}
+
+func (i VideoWebhookArgs) ToVideoWebhookPtrOutputWithContext(ctx context.Context) VideoWebhookPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(VideoWebhookOutput).ToVideoWebhookPtrOutputWithContext(ctx)
+}
+
+// VideoWebhookPtrInput is an input type that accepts VideoWebhookArgs, VideoWebhookPtr and VideoWebhookPtrOutput values.
+// You can construct a concrete instance of `VideoWebhookPtrInput` via:
+//
+//	        VideoWebhookArgs{...}
+//
+//	or:
+//
+//	        nil
+type VideoWebhookPtrInput interface {
+	pulumi.Input
+
+	ToVideoWebhookPtrOutput() VideoWebhookPtrOutput
+	ToVideoWebhookPtrOutputWithContext(context.Context) VideoWebhookPtrOutput
+}
+
+type videoWebhookPtrType VideoWebhookArgs
+
+func VideoWebhookPtr(v *VideoWebhookArgs) VideoWebhookPtrInput {
+	return (*videoWebhookPtrType)(v)
+}
+
+func (*videoWebhookPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**VideoWebhook)(nil)).Elem()
+}
+
+func (i *videoWebhookPtrType) ToVideoWebhookPtrOutput() VideoWebhookPtrOutput {
+	return i.ToVideoWebhookPtrOutputWithContext(context.Background())
+}
+
+func (i *videoWebhookPtrType) ToVideoWebhookPtrOutputWithContext(ctx context.Context) VideoWebhookPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(VideoWebhookPtrOutput)
+}
+
+type VideoWebhookOutput struct{ *pulumi.OutputState }
+
+func (VideoWebhookOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*VideoWebhook)(nil)).Elem()
+}
+
+func (o VideoWebhookOutput) ToVideoWebhookOutput() VideoWebhookOutput {
+	return o
+}
+
+func (o VideoWebhookOutput) ToVideoWebhookOutputWithContext(ctx context.Context) VideoWebhookOutput {
+	return o
+}
+
+func (o VideoWebhookOutput) ToVideoWebhookPtrOutput() VideoWebhookPtrOutput {
+	return o.ToVideoWebhookPtrOutputWithContext(context.Background())
+}
+
+func (o VideoWebhookOutput) ToVideoWebhookPtrOutputWithContext(ctx context.Context) VideoWebhookPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v VideoWebhook) *VideoWebhook {
+		return &v
+	}).(VideoWebhookPtrOutput)
+}
+
+// Whether Vonage calls the webhook (server default true).
+func (o VideoWebhookOutput) Active() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v VideoWebhook) *bool { return v.Active }).(pulumi.BoolPtrOutput)
+}
+
+// The URL Vonage calls.
+func (o VideoWebhookOutput) Address() pulumi.StringOutput {
+	return o.ApplyT(func(v VideoWebhook) string { return v.Address }).(pulumi.StringOutput)
+}
+
+type VideoWebhookPtrOutput struct{ *pulumi.OutputState }
+
+func (VideoWebhookPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**VideoWebhook)(nil)).Elem()
+}
+
+func (o VideoWebhookPtrOutput) ToVideoWebhookPtrOutput() VideoWebhookPtrOutput {
+	return o
+}
+
+func (o VideoWebhookPtrOutput) ToVideoWebhookPtrOutputWithContext(ctx context.Context) VideoWebhookPtrOutput {
+	return o
+}
+
+func (o VideoWebhookPtrOutput) Elem() VideoWebhookOutput {
+	return o.ApplyT(func(v *VideoWebhook) VideoWebhook {
+		if v != nil {
+			return *v
+		}
+		var ret VideoWebhook
+		return ret
+	}).(VideoWebhookOutput)
+}
+
+// Whether Vonage calls the webhook (server default true).
+func (o VideoWebhookPtrOutput) Active() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *VideoWebhook) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.Active
+	}).(pulumi.BoolPtrOutput)
+}
+
+// The URL Vonage calls.
+func (o VideoWebhookPtrOutput) Address() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *VideoWebhook) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Address
+	}).(pulumi.StringPtrOutput)
+}
+
+type VideoWebhooks struct {
+	// Receives archive (recording) status changes.
+	ArchiveStatus *VideoWebhook `pulumi:"archiveStatus"`
+	// Receives broadcast status changes.
+	BroadcastStatus *VideoWebhook `pulumi:"broadcastStatus"`
+	// Receives live caption status changes.
+	CaptionsStatus *VideoWebhook `pulumi:"captionsStatus"`
+	// Receives an event when a client connects to a session.
+	ConnectionCreated *VideoWebhook `pulumi:"connectionCreated"`
+	// Receives an event when a client disconnects from a session.
+	ConnectionDestroyed *VideoWebhook `pulumi:"connectionDestroyed"`
+	// Receives Experience Composer render status changes.
+	RenderStatus *VideoWebhook `pulumi:"renderStatus"`
+	// Receives an event when a session is created.
+	SessionCreated *VideoWebhook `pulumi:"sessionCreated"`
+	// Receives an event when a session is destroyed.
+	SessionDestroyed *VideoWebhook `pulumi:"sessionDestroyed"`
+	// Receives session notifications.
+	SessionNotification *VideoWebhook `pulumi:"sessionNotification"`
+	// Receives an event when a SIP call is created.
+	SipCallCreated *VideoWebhook `pulumi:"sipCallCreated"`
+	// Receives an event when a SIP call is destroyed.
+	SipCallDestroyed *VideoWebhook `pulumi:"sipCallDestroyed"`
+	// Receives an event when a SIP call is force-muted.
+	SipCallMuteForced *VideoWebhook `pulumi:"sipCallMuteForced"`
+	// Receives an event when a SIP call is updated.
+	SipCallUpdated *VideoWebhook `pulumi:"sipCallUpdated"`
+	// Receives an event when a stream is created.
+	StreamCreated *VideoWebhook `pulumi:"streamCreated"`
+	// Receives an event when a stream is destroyed.
+	StreamDestroyed *VideoWebhook `pulumi:"streamDestroyed"`
+}
+
+// VideoWebhooksInput is an input type that accepts VideoWebhooksArgs and VideoWebhooksOutput values.
+// You can construct a concrete instance of `VideoWebhooksInput` via:
+//
+//	VideoWebhooksArgs{...}
+type VideoWebhooksInput interface {
+	pulumi.Input
+
+	ToVideoWebhooksOutput() VideoWebhooksOutput
+	ToVideoWebhooksOutputWithContext(context.Context) VideoWebhooksOutput
+}
+
+type VideoWebhooksArgs struct {
+	// Receives archive (recording) status changes.
+	ArchiveStatus VideoWebhookPtrInput `pulumi:"archiveStatus"`
+	// Receives broadcast status changes.
+	BroadcastStatus VideoWebhookPtrInput `pulumi:"broadcastStatus"`
+	// Receives live caption status changes.
+	CaptionsStatus VideoWebhookPtrInput `pulumi:"captionsStatus"`
+	// Receives an event when a client connects to a session.
+	ConnectionCreated VideoWebhookPtrInput `pulumi:"connectionCreated"`
+	// Receives an event when a client disconnects from a session.
+	ConnectionDestroyed VideoWebhookPtrInput `pulumi:"connectionDestroyed"`
+	// Receives Experience Composer render status changes.
+	RenderStatus VideoWebhookPtrInput `pulumi:"renderStatus"`
+	// Receives an event when a session is created.
+	SessionCreated VideoWebhookPtrInput `pulumi:"sessionCreated"`
+	// Receives an event when a session is destroyed.
+	SessionDestroyed VideoWebhookPtrInput `pulumi:"sessionDestroyed"`
+	// Receives session notifications.
+	SessionNotification VideoWebhookPtrInput `pulumi:"sessionNotification"`
+	// Receives an event when a SIP call is created.
+	SipCallCreated VideoWebhookPtrInput `pulumi:"sipCallCreated"`
+	// Receives an event when a SIP call is destroyed.
+	SipCallDestroyed VideoWebhookPtrInput `pulumi:"sipCallDestroyed"`
+	// Receives an event when a SIP call is force-muted.
+	SipCallMuteForced VideoWebhookPtrInput `pulumi:"sipCallMuteForced"`
+	// Receives an event when a SIP call is updated.
+	SipCallUpdated VideoWebhookPtrInput `pulumi:"sipCallUpdated"`
+	// Receives an event when a stream is created.
+	StreamCreated VideoWebhookPtrInput `pulumi:"streamCreated"`
+	// Receives an event when a stream is destroyed.
+	StreamDestroyed VideoWebhookPtrInput `pulumi:"streamDestroyed"`
+}
+
+func (VideoWebhooksArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*VideoWebhooks)(nil)).Elem()
+}
+
+func (i VideoWebhooksArgs) ToVideoWebhooksOutput() VideoWebhooksOutput {
+	return i.ToVideoWebhooksOutputWithContext(context.Background())
+}
+
+func (i VideoWebhooksArgs) ToVideoWebhooksOutputWithContext(ctx context.Context) VideoWebhooksOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(VideoWebhooksOutput)
+}
+
+func (i VideoWebhooksArgs) ToVideoWebhooksPtrOutput() VideoWebhooksPtrOutput {
+	return i.ToVideoWebhooksPtrOutputWithContext(context.Background())
+}
+
+func (i VideoWebhooksArgs) ToVideoWebhooksPtrOutputWithContext(ctx context.Context) VideoWebhooksPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(VideoWebhooksOutput).ToVideoWebhooksPtrOutputWithContext(ctx)
+}
+
+// VideoWebhooksPtrInput is an input type that accepts VideoWebhooksArgs, VideoWebhooksPtr and VideoWebhooksPtrOutput values.
+// You can construct a concrete instance of `VideoWebhooksPtrInput` via:
+//
+//	        VideoWebhooksArgs{...}
+//
+//	or:
+//
+//	        nil
+type VideoWebhooksPtrInput interface {
+	pulumi.Input
+
+	ToVideoWebhooksPtrOutput() VideoWebhooksPtrOutput
+	ToVideoWebhooksPtrOutputWithContext(context.Context) VideoWebhooksPtrOutput
+}
+
+type videoWebhooksPtrType VideoWebhooksArgs
+
+func VideoWebhooksPtr(v *VideoWebhooksArgs) VideoWebhooksPtrInput {
+	return (*videoWebhooksPtrType)(v)
+}
+
+func (*videoWebhooksPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**VideoWebhooks)(nil)).Elem()
+}
+
+func (i *videoWebhooksPtrType) ToVideoWebhooksPtrOutput() VideoWebhooksPtrOutput {
+	return i.ToVideoWebhooksPtrOutputWithContext(context.Background())
+}
+
+func (i *videoWebhooksPtrType) ToVideoWebhooksPtrOutputWithContext(ctx context.Context) VideoWebhooksPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(VideoWebhooksPtrOutput)
+}
+
+type VideoWebhooksOutput struct{ *pulumi.OutputState }
+
+func (VideoWebhooksOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*VideoWebhooks)(nil)).Elem()
+}
+
+func (o VideoWebhooksOutput) ToVideoWebhooksOutput() VideoWebhooksOutput {
+	return o
+}
+
+func (o VideoWebhooksOutput) ToVideoWebhooksOutputWithContext(ctx context.Context) VideoWebhooksOutput {
+	return o
+}
+
+func (o VideoWebhooksOutput) ToVideoWebhooksPtrOutput() VideoWebhooksPtrOutput {
+	return o.ToVideoWebhooksPtrOutputWithContext(context.Background())
+}
+
+func (o VideoWebhooksOutput) ToVideoWebhooksPtrOutputWithContext(ctx context.Context) VideoWebhooksPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v VideoWebhooks) *VideoWebhooks {
+		return &v
+	}).(VideoWebhooksPtrOutput)
+}
+
+// Receives archive (recording) status changes.
+func (o VideoWebhooksOutput) ArchiveStatus() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v VideoWebhooks) *VideoWebhook { return v.ArchiveStatus }).(VideoWebhookPtrOutput)
+}
+
+// Receives broadcast status changes.
+func (o VideoWebhooksOutput) BroadcastStatus() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v VideoWebhooks) *VideoWebhook { return v.BroadcastStatus }).(VideoWebhookPtrOutput)
+}
+
+// Receives live caption status changes.
+func (o VideoWebhooksOutput) CaptionsStatus() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v VideoWebhooks) *VideoWebhook { return v.CaptionsStatus }).(VideoWebhookPtrOutput)
+}
+
+// Receives an event when a client connects to a session.
+func (o VideoWebhooksOutput) ConnectionCreated() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v VideoWebhooks) *VideoWebhook { return v.ConnectionCreated }).(VideoWebhookPtrOutput)
+}
+
+// Receives an event when a client disconnects from a session.
+func (o VideoWebhooksOutput) ConnectionDestroyed() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v VideoWebhooks) *VideoWebhook { return v.ConnectionDestroyed }).(VideoWebhookPtrOutput)
+}
+
+// Receives Experience Composer render status changes.
+func (o VideoWebhooksOutput) RenderStatus() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v VideoWebhooks) *VideoWebhook { return v.RenderStatus }).(VideoWebhookPtrOutput)
+}
+
+// Receives an event when a session is created.
+func (o VideoWebhooksOutput) SessionCreated() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v VideoWebhooks) *VideoWebhook { return v.SessionCreated }).(VideoWebhookPtrOutput)
+}
+
+// Receives an event when a session is destroyed.
+func (o VideoWebhooksOutput) SessionDestroyed() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v VideoWebhooks) *VideoWebhook { return v.SessionDestroyed }).(VideoWebhookPtrOutput)
+}
+
+// Receives session notifications.
+func (o VideoWebhooksOutput) SessionNotification() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v VideoWebhooks) *VideoWebhook { return v.SessionNotification }).(VideoWebhookPtrOutput)
+}
+
+// Receives an event when a SIP call is created.
+func (o VideoWebhooksOutput) SipCallCreated() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v VideoWebhooks) *VideoWebhook { return v.SipCallCreated }).(VideoWebhookPtrOutput)
+}
+
+// Receives an event when a SIP call is destroyed.
+func (o VideoWebhooksOutput) SipCallDestroyed() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v VideoWebhooks) *VideoWebhook { return v.SipCallDestroyed }).(VideoWebhookPtrOutput)
+}
+
+// Receives an event when a SIP call is force-muted.
+func (o VideoWebhooksOutput) SipCallMuteForced() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v VideoWebhooks) *VideoWebhook { return v.SipCallMuteForced }).(VideoWebhookPtrOutput)
+}
+
+// Receives an event when a SIP call is updated.
+func (o VideoWebhooksOutput) SipCallUpdated() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v VideoWebhooks) *VideoWebhook { return v.SipCallUpdated }).(VideoWebhookPtrOutput)
+}
+
+// Receives an event when a stream is created.
+func (o VideoWebhooksOutput) StreamCreated() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v VideoWebhooks) *VideoWebhook { return v.StreamCreated }).(VideoWebhookPtrOutput)
+}
+
+// Receives an event when a stream is destroyed.
+func (o VideoWebhooksOutput) StreamDestroyed() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v VideoWebhooks) *VideoWebhook { return v.StreamDestroyed }).(VideoWebhookPtrOutput)
+}
+
+type VideoWebhooksPtrOutput struct{ *pulumi.OutputState }
+
+func (VideoWebhooksPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**VideoWebhooks)(nil)).Elem()
+}
+
+func (o VideoWebhooksPtrOutput) ToVideoWebhooksPtrOutput() VideoWebhooksPtrOutput {
+	return o
+}
+
+func (o VideoWebhooksPtrOutput) ToVideoWebhooksPtrOutputWithContext(ctx context.Context) VideoWebhooksPtrOutput {
+	return o
+}
+
+func (o VideoWebhooksPtrOutput) Elem() VideoWebhooksOutput {
+	return o.ApplyT(func(v *VideoWebhooks) VideoWebhooks {
+		if v != nil {
+			return *v
+		}
+		var ret VideoWebhooks
+		return ret
+	}).(VideoWebhooksOutput)
+}
+
+// Receives archive (recording) status changes.
+func (o VideoWebhooksPtrOutput) ArchiveStatus() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v *VideoWebhooks) *VideoWebhook {
+		if v == nil {
+			return nil
+		}
+		return v.ArchiveStatus
+	}).(VideoWebhookPtrOutput)
+}
+
+// Receives broadcast status changes.
+func (o VideoWebhooksPtrOutput) BroadcastStatus() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v *VideoWebhooks) *VideoWebhook {
+		if v == nil {
+			return nil
+		}
+		return v.BroadcastStatus
+	}).(VideoWebhookPtrOutput)
+}
+
+// Receives live caption status changes.
+func (o VideoWebhooksPtrOutput) CaptionsStatus() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v *VideoWebhooks) *VideoWebhook {
+		if v == nil {
+			return nil
+		}
+		return v.CaptionsStatus
+	}).(VideoWebhookPtrOutput)
+}
+
+// Receives an event when a client connects to a session.
+func (o VideoWebhooksPtrOutput) ConnectionCreated() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v *VideoWebhooks) *VideoWebhook {
+		if v == nil {
+			return nil
+		}
+		return v.ConnectionCreated
+	}).(VideoWebhookPtrOutput)
+}
+
+// Receives an event when a client disconnects from a session.
+func (o VideoWebhooksPtrOutput) ConnectionDestroyed() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v *VideoWebhooks) *VideoWebhook {
+		if v == nil {
+			return nil
+		}
+		return v.ConnectionDestroyed
+	}).(VideoWebhookPtrOutput)
+}
+
+// Receives Experience Composer render status changes.
+func (o VideoWebhooksPtrOutput) RenderStatus() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v *VideoWebhooks) *VideoWebhook {
+		if v == nil {
+			return nil
+		}
+		return v.RenderStatus
+	}).(VideoWebhookPtrOutput)
+}
+
+// Receives an event when a session is created.
+func (o VideoWebhooksPtrOutput) SessionCreated() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v *VideoWebhooks) *VideoWebhook {
+		if v == nil {
+			return nil
+		}
+		return v.SessionCreated
+	}).(VideoWebhookPtrOutput)
+}
+
+// Receives an event when a session is destroyed.
+func (o VideoWebhooksPtrOutput) SessionDestroyed() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v *VideoWebhooks) *VideoWebhook {
+		if v == nil {
+			return nil
+		}
+		return v.SessionDestroyed
+	}).(VideoWebhookPtrOutput)
+}
+
+// Receives session notifications.
+func (o VideoWebhooksPtrOutput) SessionNotification() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v *VideoWebhooks) *VideoWebhook {
+		if v == nil {
+			return nil
+		}
+		return v.SessionNotification
+	}).(VideoWebhookPtrOutput)
+}
+
+// Receives an event when a SIP call is created.
+func (o VideoWebhooksPtrOutput) SipCallCreated() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v *VideoWebhooks) *VideoWebhook {
+		if v == nil {
+			return nil
+		}
+		return v.SipCallCreated
+	}).(VideoWebhookPtrOutput)
+}
+
+// Receives an event when a SIP call is destroyed.
+func (o VideoWebhooksPtrOutput) SipCallDestroyed() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v *VideoWebhooks) *VideoWebhook {
+		if v == nil {
+			return nil
+		}
+		return v.SipCallDestroyed
+	}).(VideoWebhookPtrOutput)
+}
+
+// Receives an event when a SIP call is force-muted.
+func (o VideoWebhooksPtrOutput) SipCallMuteForced() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v *VideoWebhooks) *VideoWebhook {
+		if v == nil {
+			return nil
+		}
+		return v.SipCallMuteForced
+	}).(VideoWebhookPtrOutput)
+}
+
+// Receives an event when a SIP call is updated.
+func (o VideoWebhooksPtrOutput) SipCallUpdated() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v *VideoWebhooks) *VideoWebhook {
+		if v == nil {
+			return nil
+		}
+		return v.SipCallUpdated
+	}).(VideoWebhookPtrOutput)
+}
+
+// Receives an event when a stream is created.
+func (o VideoWebhooksPtrOutput) StreamCreated() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v *VideoWebhooks) *VideoWebhook {
+		if v == nil {
+			return nil
+		}
+		return v.StreamCreated
+	}).(VideoWebhookPtrOutput)
+}
+
+// Receives an event when a stream is destroyed.
+func (o VideoWebhooksPtrOutput) StreamDestroyed() VideoWebhookPtrOutput {
+	return o.ApplyT(func(v *VideoWebhooks) *VideoWebhook {
+		if v == nil {
+			return nil
+		}
+		return v.StreamDestroyed
+	}).(VideoWebhookPtrOutput)
 }
 
 type VoiceCapability struct {
@@ -1409,10 +2727,20 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*MeetingsCapabilityPtrInput)(nil)).Elem(), MeetingsCapabilityArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MessagesCapabilityInput)(nil)).Elem(), MessagesCapabilityArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MessagesCapabilityPtrInput)(nil)).Elem(), MessagesCapabilityArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NetworkApisCapabilityInput)(nil)).Elem(), NetworkApisCapabilityArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NetworkApisCapabilityPtrInput)(nil)).Elem(), NetworkApisCapabilityArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RtcCapabilityInput)(nil)).Elem(), RtcCapabilityArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RtcCapabilityPtrInput)(nil)).Elem(), RtcCapabilityArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VerifyCapabilityInput)(nil)).Elem(), VerifyCapabilityArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VerifyCapabilityPtrInput)(nil)).Elem(), VerifyCapabilityArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VideoCapabilityInput)(nil)).Elem(), VideoCapabilityArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VideoCapabilityPtrInput)(nil)).Elem(), VideoCapabilityArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VideoStorageInput)(nil)).Elem(), VideoStorageArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VideoStoragePtrInput)(nil)).Elem(), VideoStorageArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VideoWebhookInput)(nil)).Elem(), VideoWebhookArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VideoWebhookPtrInput)(nil)).Elem(), VideoWebhookArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VideoWebhooksInput)(nil)).Elem(), VideoWebhooksArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VideoWebhooksPtrInput)(nil)).Elem(), VideoWebhooksArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VoiceCapabilityInput)(nil)).Elem(), VoiceCapabilityArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VoiceCapabilityPtrInput)(nil)).Elem(), VoiceCapabilityArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VoiceWebhookInput)(nil)).Elem(), VoiceWebhookArgs{})
@@ -1423,14 +2751,30 @@ func init() {
 	pulumi.RegisterOutputType(ApiSecretSummaryArrayOutput{})
 	pulumi.RegisterOutputType(ApplicationSummaryOutput{})
 	pulumi.RegisterOutputType(ApplicationSummaryArrayOutput{})
+	pulumi.RegisterOutputType(AvailableNumberOutput{})
+	pulumi.RegisterOutputType(AvailableNumberArrayOutput{})
+	pulumi.RegisterOutputType(GetSubAccountResultOutput{})
+	pulumi.RegisterOutputType(GetSubAccountResultArrayOutput{})
 	pulumi.RegisterOutputType(MeetingsCapabilityOutput{})
 	pulumi.RegisterOutputType(MeetingsCapabilityPtrOutput{})
 	pulumi.RegisterOutputType(MessagesCapabilityOutput{})
 	pulumi.RegisterOutputType(MessagesCapabilityPtrOutput{})
+	pulumi.RegisterOutputType(NetworkApisCapabilityOutput{})
+	pulumi.RegisterOutputType(NetworkApisCapabilityPtrOutput{})
+	pulumi.RegisterOutputType(OwnedNumberSummaryOutput{})
+	pulumi.RegisterOutputType(OwnedNumberSummaryArrayOutput{})
 	pulumi.RegisterOutputType(RtcCapabilityOutput{})
 	pulumi.RegisterOutputType(RtcCapabilityPtrOutput{})
 	pulumi.RegisterOutputType(VerifyCapabilityOutput{})
 	pulumi.RegisterOutputType(VerifyCapabilityPtrOutput{})
+	pulumi.RegisterOutputType(VideoCapabilityOutput{})
+	pulumi.RegisterOutputType(VideoCapabilityPtrOutput{})
+	pulumi.RegisterOutputType(VideoStorageOutput{})
+	pulumi.RegisterOutputType(VideoStoragePtrOutput{})
+	pulumi.RegisterOutputType(VideoWebhookOutput{})
+	pulumi.RegisterOutputType(VideoWebhookPtrOutput{})
+	pulumi.RegisterOutputType(VideoWebhooksOutput{})
+	pulumi.RegisterOutputType(VideoWebhooksPtrOutput{})
 	pulumi.RegisterOutputType(VoiceCapabilityOutput{})
 	pulumi.RegisterOutputType(VoiceCapabilityPtrOutput{})
 	pulumi.RegisterOutputType(VoiceWebhookOutput{})
