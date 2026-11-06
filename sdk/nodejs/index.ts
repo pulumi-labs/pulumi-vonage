@@ -15,6 +15,11 @@ export type Application = import("./application").Application;
 export const Application: typeof import("./application").Application = null as any;
 utilities.lazyLoad(exports, ["Application"], () => require("./application"));
 
+export { GetAccountBalanceArgs, GetAccountBalanceResult } from "./getAccountBalance";
+export const getAccountBalance: typeof import("./getAccountBalance").getAccountBalance = null as any;
+export const getAccountBalanceOutput: typeof import("./getAccountBalance").getAccountBalanceOutput = null as any;
+utilities.lazyLoad(exports, ["getAccountBalance","getAccountBalanceOutput"], () => require("./getAccountBalance"));
+
 export { GetApiSecretArgs, GetApiSecretResult, GetApiSecretOutputArgs } from "./getApiSecret";
 export const getApiSecret: typeof import("./getApiSecret").getApiSecret = null as any;
 export const getApiSecretOutput: typeof import("./getApiSecret").getApiSecretOutput = null as any;
@@ -35,15 +40,30 @@ export const getApplications: typeof import("./getApplications").getApplications
 export const getApplicationsOutput: typeof import("./getApplications").getApplicationsOutput = null as any;
 utilities.lazyLoad(exports, ["getApplications","getApplicationsOutput"], () => require("./getApplications"));
 
+export { GetAvailableNumbersArgs, GetAvailableNumbersResult, GetAvailableNumbersOutputArgs } from "./getAvailableNumbers";
+export const getAvailableNumbers: typeof import("./getAvailableNumbers").getAvailableNumbers = null as any;
+export const getAvailableNumbersOutput: typeof import("./getAvailableNumbers").getAvailableNumbersOutput = null as any;
+utilities.lazyLoad(exports, ["getAvailableNumbers","getAvailableNumbersOutput"], () => require("./getAvailableNumbers"));
+
 export { GetNumberArgs, GetNumberResult, GetNumberOutputArgs } from "./getNumber";
 export const getNumber: typeof import("./getNumber").getNumber = null as any;
 export const getNumberOutput: typeof import("./getNumber").getNumberOutput = null as any;
 utilities.lazyLoad(exports, ["getNumber","getNumberOutput"], () => require("./getNumber"));
 
+export { GetNumbersArgs, GetNumbersResult, GetNumbersOutputArgs } from "./getNumbers";
+export const getNumbers: typeof import("./getNumbers").getNumbers = null as any;
+export const getNumbersOutput: typeof import("./getNumbers").getNumbersOutput = null as any;
+utilities.lazyLoad(exports, ["getNumbers","getNumbersOutput"], () => require("./getNumbers"));
+
 export { GetSubAccountArgs, GetSubAccountResult, GetSubAccountOutputArgs } from "./getSubAccount";
 export const getSubAccount: typeof import("./getSubAccount").getSubAccount = null as any;
 export const getSubAccountOutput: typeof import("./getSubAccount").getSubAccountOutput = null as any;
 utilities.lazyLoad(exports, ["getSubAccount","getSubAccountOutput"], () => require("./getSubAccount"));
+
+export { GetSubAccountsArgs, GetSubAccountsResult, GetSubAccountsOutputArgs } from "./getSubAccounts";
+export const getSubAccounts: typeof import("./getSubAccounts").getSubAccounts = null as any;
+export const getSubAccountsOutput: typeof import("./getSubAccounts").getSubAccountsOutput = null as any;
+utilities.lazyLoad(exports, ["getSubAccounts","getSubAccountsOutput"], () => require("./getSubAccounts"));
 
 export { GetVerifyTemplateArgs, GetVerifyTemplateResult, GetVerifyTemplateOutputArgs } from "./getVerifyTemplate";
 export const getVerifyTemplate: typeof import("./getVerifyTemplate").getVerifyTemplate = null as any;

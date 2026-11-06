@@ -18,10 +18,18 @@ from . import outputs
 __all__ = [
     'ApiSecretSummary',
     'ApplicationSummary',
+    'AvailableNumber',
+    'GetSubAccountResult',
     'MeetingsCapability',
     'MessagesCapability',
+    'NetworkApisCapability',
+    'OwnedNumberSummary',
     'RtcCapability',
     'VerifyCapability',
+    'VideoCapability',
+    'VideoStorage',
+    'VideoWebhook',
+    'VideoWebhooks',
     'VoiceCapability',
     'VoiceWebhook',
     'Webhook',
@@ -94,6 +102,165 @@ class ApplicationSummary(dict):
         Application name.
         """
         return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class AvailableNumber(dict):
+    def __init__(__self__, *,
+                 cost: _builtins.str,
+                 country: _builtins.str,
+                 features: Sequence[_builtins.str],
+                 msisdn: _builtins.str,
+                 type: _builtins.str):
+        """
+        :param _builtins.str cost: Monthly rental in euros, as Vonage reports it (a decimal string).
+        :param _builtins.str country: Country code.
+        :param Sequence[_builtins.str] features: Capabilities: SMS, VOICE, MMS.
+        :param _builtins.str msisdn: The number in international format without a leading plus.
+        :param _builtins.str type: Number type.
+        """
+        pulumi.set(__self__, "cost", cost)
+        pulumi.set(__self__, "country", country)
+        pulumi.set(__self__, "features", features)
+        pulumi.set(__self__, "msisdn", msisdn)
+        pulumi.set(__self__, "type", type)
+
+    @_builtins.property
+    @pulumi.getter
+    def cost(self) -> _builtins.str:
+        """
+        Monthly rental in euros, as Vonage reports it (a decimal string).
+        """
+        return pulumi.get(self, "cost")
+
+    @_builtins.property
+    @pulumi.getter
+    def country(self) -> _builtins.str:
+        """
+        Country code.
+        """
+        return pulumi.get(self, "country")
+
+    @_builtins.property
+    @pulumi.getter
+    def features(self) -> Sequence[_builtins.str]:
+        """
+        Capabilities: SMS, VOICE, MMS.
+        """
+        return pulumi.get(self, "features")
+
+    @_builtins.property
+    @pulumi.getter
+    def msisdn(self) -> _builtins.str:
+        """
+        The number in international format without a leading plus.
+        """
+        return pulumi.get(self, "msisdn")
+
+    @_builtins.property
+    @pulumi.getter
+    def type(self) -> _builtins.str:
+        """
+        Number type.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetSubAccountResult(dict):
+    def __init__(__self__, *,
+                 api_key: _builtins.str,
+                 created_at: _builtins.str,
+                 name: _builtins.str,
+                 primary_account_api_key: _builtins.str,
+                 suspended: _builtins.bool,
+                 use_primary_account_balance: _builtins.bool,
+                 balance: Optional[_builtins.float] = None,
+                 credit_limit: Optional[_builtins.float] = None):
+        """
+        :param _builtins.str api_key: Subaccount API key.
+        :param _builtins.str created_at: ISO 8601 creation timestamp.
+        :param _builtins.str name: Subaccount name.
+        :param _builtins.str primary_account_api_key: API key of the owning primary account.
+        :param _builtins.bool suspended: Whether the subaccount is suspended.
+        :param _builtins.bool use_primary_account_balance: Whether the subaccount draws on the primary account balance.
+        :param _builtins.float balance: Subaccount balance, unset when it uses the primary balance.
+        :param _builtins.float credit_limit: Subaccount credit limit, unset when it uses the primary balance.
+        """
+        pulumi.set(__self__, "api_key", api_key)
+        pulumi.set(__self__, "created_at", created_at)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "primary_account_api_key", primary_account_api_key)
+        pulumi.set(__self__, "suspended", suspended)
+        pulumi.set(__self__, "use_primary_account_balance", use_primary_account_balance)
+        if balance is not None:
+            pulumi.set(__self__, "balance", balance)
+        if credit_limit is not None:
+            pulumi.set(__self__, "credit_limit", credit_limit)
+
+    @_builtins.property
+    @pulumi.getter(name="apiKey")
+    def api_key(self) -> _builtins.str:
+        """
+        Subaccount API key.
+        """
+        return pulumi.get(self, "api_key")
+
+    @_builtins.property
+    @pulumi.getter(name="createdAt")
+    def created_at(self) -> _builtins.str:
+        """
+        ISO 8601 creation timestamp.
+        """
+        return pulumi.get(self, "created_at")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        Subaccount name.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter(name="primaryAccountApiKey")
+    def primary_account_api_key(self) -> _builtins.str:
+        """
+        API key of the owning primary account.
+        """
+        return pulumi.get(self, "primary_account_api_key")
+
+    @_builtins.property
+    @pulumi.getter
+    def suspended(self) -> _builtins.bool:
+        """
+        Whether the subaccount is suspended.
+        """
+        return pulumi.get(self, "suspended")
+
+    @_builtins.property
+    @pulumi.getter(name="usePrimaryAccountBalance")
+    def use_primary_account_balance(self) -> _builtins.bool:
+        """
+        Whether the subaccount draws on the primary account balance.
+        """
+        return pulumi.get(self, "use_primary_account_balance")
+
+    @_builtins.property
+    @pulumi.getter
+    def balance(self) -> Optional[_builtins.float]:
+        """
+        Subaccount balance, unset when it uses the primary balance.
+        """
+        return pulumi.get(self, "balance")
+
+    @_builtins.property
+    @pulumi.getter(name="creditLimit")
+    def credit_limit(self) -> Optional[_builtins.float]:
+        """
+        Subaccount credit limit, unset when it uses the primary balance.
+        """
+        return pulumi.get(self, "credit_limit")
 
 
 @pulumi.output_type
@@ -237,6 +404,172 @@ class MessagesCapability(dict):
 
 
 @pulumi.output_type
+class NetworkApisCapability(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "networkApplicationId":
+            suggest = "network_application_id"
+        elif key == "redirectUri":
+            suggest = "redirect_uri"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NetworkApisCapability. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NetworkApisCapability.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NetworkApisCapability.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 network_application_id: _builtins.str,
+                 redirect_uri: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str network_application_id: The Network APIs application ID.
+        :param _builtins.str redirect_uri: Redirect URI for the Network APIs OAuth flow.
+        """
+        pulumi.set(__self__, "network_application_id", network_application_id)
+        if redirect_uri is not None:
+            pulumi.set(__self__, "redirect_uri", redirect_uri)
+
+    @_builtins.property
+    @pulumi.getter(name="networkApplicationId")
+    def network_application_id(self) -> _builtins.str:
+        """
+        The Network APIs application ID.
+        """
+        return pulumi.get(self, "network_application_id")
+
+    @_builtins.property
+    @pulumi.getter(name="redirectUri")
+    def redirect_uri(self) -> Optional[_builtins.str]:
+        """
+        Redirect URI for the Network APIs OAuth flow.
+        """
+        return pulumi.get(self, "redirect_uri")
+
+
+@pulumi.output_type
+class OwnedNumberSummary(dict):
+    def __init__(__self__, *,
+                 app_id: _builtins.str,
+                 country: _builtins.str,
+                 features: Sequence[_builtins.str],
+                 messages_callback_type: _builtins.str,
+                 messages_callback_value: _builtins.str,
+                 mo_http_url: _builtins.str,
+                 msisdn: _builtins.str,
+                 type: _builtins.str,
+                 voice_callback_type: _builtins.str,
+                 voice_callback_value: _builtins.str):
+        """
+        :param _builtins.str app_id: Linked application ID, empty if none.
+        :param _builtins.str country: Country code.
+        :param Sequence[_builtins.str] features: Capabilities: SMS, VOICE, MMS.
+        :param _builtins.str messages_callback_type: Messages routing type.
+        :param _builtins.str messages_callback_value: Messages routing target.
+        :param _builtins.str mo_http_url: Inbound SMS webhook, empty if none.
+        :param _builtins.str msisdn: The number in international format without a leading plus.
+        :param _builtins.str type: Number type (landline, mobile-lvn, landline-toll-free).
+        :param _builtins.str voice_callback_type: Voice routing type.
+        :param _builtins.str voice_callback_value: Voice routing target.
+        """
+        pulumi.set(__self__, "app_id", app_id)
+        pulumi.set(__self__, "country", country)
+        pulumi.set(__self__, "features", features)
+        pulumi.set(__self__, "messages_callback_type", messages_callback_type)
+        pulumi.set(__self__, "messages_callback_value", messages_callback_value)
+        pulumi.set(__self__, "mo_http_url", mo_http_url)
+        pulumi.set(__self__, "msisdn", msisdn)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "voice_callback_type", voice_callback_type)
+        pulumi.set(__self__, "voice_callback_value", voice_callback_value)
+
+    @_builtins.property
+    @pulumi.getter(name="appId")
+    def app_id(self) -> _builtins.str:
+        """
+        Linked application ID, empty if none.
+        """
+        return pulumi.get(self, "app_id")
+
+    @_builtins.property
+    @pulumi.getter
+    def country(self) -> _builtins.str:
+        """
+        Country code.
+        """
+        return pulumi.get(self, "country")
+
+    @_builtins.property
+    @pulumi.getter
+    def features(self) -> Sequence[_builtins.str]:
+        """
+        Capabilities: SMS, VOICE, MMS.
+        """
+        return pulumi.get(self, "features")
+
+    @_builtins.property
+    @pulumi.getter(name="messagesCallbackType")
+    def messages_callback_type(self) -> _builtins.str:
+        """
+        Messages routing type.
+        """
+        return pulumi.get(self, "messages_callback_type")
+
+    @_builtins.property
+    @pulumi.getter(name="messagesCallbackValue")
+    def messages_callback_value(self) -> _builtins.str:
+        """
+        Messages routing target.
+        """
+        return pulumi.get(self, "messages_callback_value")
+
+    @_builtins.property
+    @pulumi.getter(name="moHttpUrl")
+    def mo_http_url(self) -> _builtins.str:
+        """
+        Inbound SMS webhook, empty if none.
+        """
+        return pulumi.get(self, "mo_http_url")
+
+    @_builtins.property
+    @pulumi.getter
+    def msisdn(self) -> _builtins.str:
+        """
+        The number in international format without a leading plus.
+        """
+        return pulumi.get(self, "msisdn")
+
+    @_builtins.property
+    @pulumi.getter
+    def type(self) -> _builtins.str:
+        """
+        Number type (landline, mobile-lvn, landline-toll-free).
+        """
+        return pulumi.get(self, "type")
+
+    @_builtins.property
+    @pulumi.getter(name="voiceCallbackType")
+    def voice_callback_type(self) -> _builtins.str:
+        """
+        Voice routing type.
+        """
+        return pulumi.get(self, "voice_callback_type")
+
+    @_builtins.property
+    @pulumi.getter(name="voiceCallbackValue")
+    def voice_callback_value(self) -> _builtins.str:
+        """
+        Voice routing target.
+        """
+        return pulumi.get(self, "voice_callback_value")
+
+
+@pulumi.output_type
 class RtcCapability(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -332,6 +665,363 @@ class VerifyCapability(dict):
         Verify API version, for example v2.
         """
         return pulumi.get(self, "version")
+
+
+@pulumi.output_type
+class VideoCapability(dict):
+    def __init__(__self__, *,
+                 storage: Optional['outputs.VideoStorage'] = None,
+                 webhooks: Optional['outputs.VideoWebhooks'] = None):
+        """
+        :param 'VideoStorage' storage: Recording storage and encryption settings.
+        :param 'VideoWebhooks' webhooks: Webhooks that receive Video API events.
+        """
+        if storage is not None:
+            pulumi.set(__self__, "storage", storage)
+        if webhooks is not None:
+            pulumi.set(__self__, "webhooks", webhooks)
+
+    @_builtins.property
+    @pulumi.getter
+    def storage(self) -> Optional['outputs.VideoStorage']:
+        """
+        Recording storage and encryption settings.
+        """
+        return pulumi.get(self, "storage")
+
+    @_builtins.property
+    @pulumi.getter
+    def webhooks(self) -> Optional['outputs.VideoWebhooks']:
+        """
+        Webhooks that receive Video API events.
+        """
+        return pulumi.get(self, "webhooks")
+
+
+@pulumi.output_type
+class VideoStorage(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "cloudStorage":
+            suggest = "cloud_storage"
+        elif key == "endToEndEncryption":
+            suggest = "end_to_end_encryption"
+        elif key == "serverSideEncryption":
+            suggest = "server_side_encryption"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in VideoStorage. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        VideoStorage.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        VideoStorage.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 cloud_storage: Optional[_builtins.bool] = None,
+                 end_to_end_encryption: Optional[_builtins.bool] = None,
+                 server_side_encryption: Optional[_builtins.bool] = None):
+        """
+        :param _builtins.bool cloud_storage: Whether recordings go to the configured cloud storage.
+        :param _builtins.bool end_to_end_encryption: Whether video streams use end-to-end encryption.
+        :param _builtins.bool server_side_encryption: Whether recordings are encrypted server side.
+        """
+        if cloud_storage is not None:
+            pulumi.set(__self__, "cloud_storage", cloud_storage)
+        if end_to_end_encryption is not None:
+            pulumi.set(__self__, "end_to_end_encryption", end_to_end_encryption)
+        if server_side_encryption is not None:
+            pulumi.set(__self__, "server_side_encryption", server_side_encryption)
+
+    @_builtins.property
+    @pulumi.getter(name="cloudStorage")
+    def cloud_storage(self) -> Optional[_builtins.bool]:
+        """
+        Whether recordings go to the configured cloud storage.
+        """
+        return pulumi.get(self, "cloud_storage")
+
+    @_builtins.property
+    @pulumi.getter(name="endToEndEncryption")
+    def end_to_end_encryption(self) -> Optional[_builtins.bool]:
+        """
+        Whether video streams use end-to-end encryption.
+        """
+        return pulumi.get(self, "end_to_end_encryption")
+
+    @_builtins.property
+    @pulumi.getter(name="serverSideEncryption")
+    def server_side_encryption(self) -> Optional[_builtins.bool]:
+        """
+        Whether recordings are encrypted server side.
+        """
+        return pulumi.get(self, "server_side_encryption")
+
+
+@pulumi.output_type
+class VideoWebhook(dict):
+    def __init__(__self__, *,
+                 address: _builtins.str,
+                 active: Optional[_builtins.bool] = None):
+        """
+        :param _builtins.str address: The URL Vonage calls.
+        :param _builtins.bool active: Whether Vonage calls the webhook (server default true).
+        """
+        pulumi.set(__self__, "address", address)
+        if active is not None:
+            pulumi.set(__self__, "active", active)
+
+    @_builtins.property
+    @pulumi.getter
+    def address(self) -> _builtins.str:
+        """
+        The URL Vonage calls.
+        """
+        return pulumi.get(self, "address")
+
+    @_builtins.property
+    @pulumi.getter
+    def active(self) -> Optional[_builtins.bool]:
+        """
+        Whether Vonage calls the webhook (server default true).
+        """
+        return pulumi.get(self, "active")
+
+
+@pulumi.output_type
+class VideoWebhooks(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "archiveStatus":
+            suggest = "archive_status"
+        elif key == "broadcastStatus":
+            suggest = "broadcast_status"
+        elif key == "captionsStatus":
+            suggest = "captions_status"
+        elif key == "connectionCreated":
+            suggest = "connection_created"
+        elif key == "connectionDestroyed":
+            suggest = "connection_destroyed"
+        elif key == "renderStatus":
+            suggest = "render_status"
+        elif key == "sessionCreated":
+            suggest = "session_created"
+        elif key == "sessionDestroyed":
+            suggest = "session_destroyed"
+        elif key == "sessionNotification":
+            suggest = "session_notification"
+        elif key == "sipCallCreated":
+            suggest = "sip_call_created"
+        elif key == "sipCallDestroyed":
+            suggest = "sip_call_destroyed"
+        elif key == "sipCallMuteForced":
+            suggest = "sip_call_mute_forced"
+        elif key == "sipCallUpdated":
+            suggest = "sip_call_updated"
+        elif key == "streamCreated":
+            suggest = "stream_created"
+        elif key == "streamDestroyed":
+            suggest = "stream_destroyed"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in VideoWebhooks. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        VideoWebhooks.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        VideoWebhooks.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 archive_status: Optional['outputs.VideoWebhook'] = None,
+                 broadcast_status: Optional['outputs.VideoWebhook'] = None,
+                 captions_status: Optional['outputs.VideoWebhook'] = None,
+                 connection_created: Optional['outputs.VideoWebhook'] = None,
+                 connection_destroyed: Optional['outputs.VideoWebhook'] = None,
+                 render_status: Optional['outputs.VideoWebhook'] = None,
+                 session_created: Optional['outputs.VideoWebhook'] = None,
+                 session_destroyed: Optional['outputs.VideoWebhook'] = None,
+                 session_notification: Optional['outputs.VideoWebhook'] = None,
+                 sip_call_created: Optional['outputs.VideoWebhook'] = None,
+                 sip_call_destroyed: Optional['outputs.VideoWebhook'] = None,
+                 sip_call_mute_forced: Optional['outputs.VideoWebhook'] = None,
+                 sip_call_updated: Optional['outputs.VideoWebhook'] = None,
+                 stream_created: Optional['outputs.VideoWebhook'] = None,
+                 stream_destroyed: Optional['outputs.VideoWebhook'] = None):
+        """
+        :param 'VideoWebhook' archive_status: Receives archive (recording) status changes.
+        :param 'VideoWebhook' broadcast_status: Receives broadcast status changes.
+        :param 'VideoWebhook' captions_status: Receives live caption status changes.
+        :param 'VideoWebhook' connection_created: Receives an event when a client connects to a session.
+        :param 'VideoWebhook' connection_destroyed: Receives an event when a client disconnects from a session.
+        :param 'VideoWebhook' render_status: Receives Experience Composer render status changes.
+        :param 'VideoWebhook' session_created: Receives an event when a session is created.
+        :param 'VideoWebhook' session_destroyed: Receives an event when a session is destroyed.
+        :param 'VideoWebhook' session_notification: Receives session notifications.
+        :param 'VideoWebhook' sip_call_created: Receives an event when a SIP call is created.
+        :param 'VideoWebhook' sip_call_destroyed: Receives an event when a SIP call is destroyed.
+        :param 'VideoWebhook' sip_call_mute_forced: Receives an event when a SIP call is force-muted.
+        :param 'VideoWebhook' sip_call_updated: Receives an event when a SIP call is updated.
+        :param 'VideoWebhook' stream_created: Receives an event when a stream is created.
+        :param 'VideoWebhook' stream_destroyed: Receives an event when a stream is destroyed.
+        """
+        if archive_status is not None:
+            pulumi.set(__self__, "archive_status", archive_status)
+        if broadcast_status is not None:
+            pulumi.set(__self__, "broadcast_status", broadcast_status)
+        if captions_status is not None:
+            pulumi.set(__self__, "captions_status", captions_status)
+        if connection_created is not None:
+            pulumi.set(__self__, "connection_created", connection_created)
+        if connection_destroyed is not None:
+            pulumi.set(__self__, "connection_destroyed", connection_destroyed)
+        if render_status is not None:
+            pulumi.set(__self__, "render_status", render_status)
+        if session_created is not None:
+            pulumi.set(__self__, "session_created", session_created)
+        if session_destroyed is not None:
+            pulumi.set(__self__, "session_destroyed", session_destroyed)
+        if session_notification is not None:
+            pulumi.set(__self__, "session_notification", session_notification)
+        if sip_call_created is not None:
+            pulumi.set(__self__, "sip_call_created", sip_call_created)
+        if sip_call_destroyed is not None:
+            pulumi.set(__self__, "sip_call_destroyed", sip_call_destroyed)
+        if sip_call_mute_forced is not None:
+            pulumi.set(__self__, "sip_call_mute_forced", sip_call_mute_forced)
+        if sip_call_updated is not None:
+            pulumi.set(__self__, "sip_call_updated", sip_call_updated)
+        if stream_created is not None:
+            pulumi.set(__self__, "stream_created", stream_created)
+        if stream_destroyed is not None:
+            pulumi.set(__self__, "stream_destroyed", stream_destroyed)
+
+    @_builtins.property
+    @pulumi.getter(name="archiveStatus")
+    def archive_status(self) -> Optional['outputs.VideoWebhook']:
+        """
+        Receives archive (recording) status changes.
+        """
+        return pulumi.get(self, "archive_status")
+
+    @_builtins.property
+    @pulumi.getter(name="broadcastStatus")
+    def broadcast_status(self) -> Optional['outputs.VideoWebhook']:
+        """
+        Receives broadcast status changes.
+        """
+        return pulumi.get(self, "broadcast_status")
+
+    @_builtins.property
+    @pulumi.getter(name="captionsStatus")
+    def captions_status(self) -> Optional['outputs.VideoWebhook']:
+        """
+        Receives live caption status changes.
+        """
+        return pulumi.get(self, "captions_status")
+
+    @_builtins.property
+    @pulumi.getter(name="connectionCreated")
+    def connection_created(self) -> Optional['outputs.VideoWebhook']:
+        """
+        Receives an event when a client connects to a session.
+        """
+        return pulumi.get(self, "connection_created")
+
+    @_builtins.property
+    @pulumi.getter(name="connectionDestroyed")
+    def connection_destroyed(self) -> Optional['outputs.VideoWebhook']:
+        """
+        Receives an event when a client disconnects from a session.
+        """
+        return pulumi.get(self, "connection_destroyed")
+
+    @_builtins.property
+    @pulumi.getter(name="renderStatus")
+    def render_status(self) -> Optional['outputs.VideoWebhook']:
+        """
+        Receives Experience Composer render status changes.
+        """
+        return pulumi.get(self, "render_status")
+
+    @_builtins.property
+    @pulumi.getter(name="sessionCreated")
+    def session_created(self) -> Optional['outputs.VideoWebhook']:
+        """
+        Receives an event when a session is created.
+        """
+        return pulumi.get(self, "session_created")
+
+    @_builtins.property
+    @pulumi.getter(name="sessionDestroyed")
+    def session_destroyed(self) -> Optional['outputs.VideoWebhook']:
+        """
+        Receives an event when a session is destroyed.
+        """
+        return pulumi.get(self, "session_destroyed")
+
+    @_builtins.property
+    @pulumi.getter(name="sessionNotification")
+    def session_notification(self) -> Optional['outputs.VideoWebhook']:
+        """
+        Receives session notifications.
+        """
+        return pulumi.get(self, "session_notification")
+
+    @_builtins.property
+    @pulumi.getter(name="sipCallCreated")
+    def sip_call_created(self) -> Optional['outputs.VideoWebhook']:
+        """
+        Receives an event when a SIP call is created.
+        """
+        return pulumi.get(self, "sip_call_created")
+
+    @_builtins.property
+    @pulumi.getter(name="sipCallDestroyed")
+    def sip_call_destroyed(self) -> Optional['outputs.VideoWebhook']:
+        """
+        Receives an event when a SIP call is destroyed.
+        """
+        return pulumi.get(self, "sip_call_destroyed")
+
+    @_builtins.property
+    @pulumi.getter(name="sipCallMuteForced")
+    def sip_call_mute_forced(self) -> Optional['outputs.VideoWebhook']:
+        """
+        Receives an event when a SIP call is force-muted.
+        """
+        return pulumi.get(self, "sip_call_mute_forced")
+
+    @_builtins.property
+    @pulumi.getter(name="sipCallUpdated")
+    def sip_call_updated(self) -> Optional['outputs.VideoWebhook']:
+        """
+        Receives an event when a SIP call is updated.
+        """
+        return pulumi.get(self, "sip_call_updated")
+
+    @_builtins.property
+    @pulumi.getter(name="streamCreated")
+    def stream_created(self) -> Optional['outputs.VideoWebhook']:
+        """
+        Receives an event when a stream is created.
+        """
+        return pulumi.get(self, "stream_created")
+
+    @_builtins.property
+    @pulumi.getter(name="streamDestroyed")
+    def stream_destroyed(self) -> Optional['outputs.VideoWebhook']:
+        """
+        Receives an event when a stream is destroyed.
+        """
+        return pulumi.get(self, "stream_destroyed")
 
 
 @pulumi.output_type

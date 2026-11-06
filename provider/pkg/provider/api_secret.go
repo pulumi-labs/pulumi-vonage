@@ -94,7 +94,7 @@ func ownerKey(ctx context.Context, a ApiSecretArgs) string {
 func (r *ApiSecret) Create(ctx context.Context, req infer.CreateRequest[ApiSecretArgs]) (infer.CreateResponse[ApiSecretState], error) {
 	a := req.Inputs
 	if req.DryRun {
-		return infer.CreateResponse[ApiSecretState]{ID: req.Name, Output: ApiSecretState{ApiSecretArgs: a}}, nil
+		return infer.CreateResponse[ApiSecretState]{ID: "", Output: ApiSecretState{ApiSecretArgs: a}}, nil
 	}
 	c, err := clientFor(ctx)
 	if err != nil {

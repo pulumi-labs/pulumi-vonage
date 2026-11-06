@@ -9,6 +9,8 @@ import com.pulumi.deployment.Deployment;
 import com.pulumi.deployment.InvokeOptions;
 import com.pulumi.deployment.InvokeOutputOptions;
 import com.pulumi.labs.vonage.Utilities;
+import com.pulumi.labs.vonage.inputs.GetAccountBalanceArgs;
+import com.pulumi.labs.vonage.inputs.GetAccountBalancePlainArgs;
 import com.pulumi.labs.vonage.inputs.GetApiSecretArgs;
 import com.pulumi.labs.vonage.inputs.GetApiSecretPlainArgs;
 import com.pulumi.labs.vonage.inputs.GetApiSecretsArgs;
@@ -17,25 +19,84 @@ import com.pulumi.labs.vonage.inputs.GetApplicationArgs;
 import com.pulumi.labs.vonage.inputs.GetApplicationPlainArgs;
 import com.pulumi.labs.vonage.inputs.GetApplicationsArgs;
 import com.pulumi.labs.vonage.inputs.GetApplicationsPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetAvailableNumbersArgs;
+import com.pulumi.labs.vonage.inputs.GetAvailableNumbersPlainArgs;
 import com.pulumi.labs.vonage.inputs.GetNumberArgs;
 import com.pulumi.labs.vonage.inputs.GetNumberPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetNumbersArgs;
+import com.pulumi.labs.vonage.inputs.GetNumbersPlainArgs;
 import com.pulumi.labs.vonage.inputs.GetSubAccountArgs;
 import com.pulumi.labs.vonage.inputs.GetSubAccountPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetSubAccountsArgs;
+import com.pulumi.labs.vonage.inputs.GetSubAccountsPlainArgs;
 import com.pulumi.labs.vonage.inputs.GetVerifyTemplateArgs;
 import com.pulumi.labs.vonage.inputs.GetVerifyTemplateFragmentArgs;
 import com.pulumi.labs.vonage.inputs.GetVerifyTemplateFragmentPlainArgs;
 import com.pulumi.labs.vonage.inputs.GetVerifyTemplatePlainArgs;
+import com.pulumi.labs.vonage.outputs.GetAccountBalanceResult;
 import com.pulumi.labs.vonage.outputs.GetApiSecretResult;
 import com.pulumi.labs.vonage.outputs.GetApiSecretsResult;
 import com.pulumi.labs.vonage.outputs.GetApplicationResult;
 import com.pulumi.labs.vonage.outputs.GetApplicationsResult;
+import com.pulumi.labs.vonage.outputs.GetAvailableNumbersResult;
 import com.pulumi.labs.vonage.outputs.GetNumberResult;
-import com.pulumi.labs.vonage.outputs.GetSubAccountResult;
+import com.pulumi.labs.vonage.outputs.GetNumbersResult;
+import com.pulumi.labs.vonage.outputs.GetSubAccountInvokeResult;
+import com.pulumi.labs.vonage.outputs.GetSubAccountsResult;
 import com.pulumi.labs.vonage.outputs.GetVerifyTemplateFragmentResult;
 import com.pulumi.labs.vonage.outputs.GetVerifyTemplateResult;
 import java.util.concurrent.CompletableFuture;
 
 public final class VonageFunctions {
+    /**
+     * Read the balance of the provider&#39;s Vonage account (GET /account/get-balance).
+     * 
+     */
+    public static Output<GetAccountBalanceResult> getAccountBalance() {
+        return getAccountBalance(GetAccountBalanceArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * Read the balance of the provider&#39;s Vonage account (GET /account/get-balance).
+     * 
+     */
+    public static CompletableFuture<GetAccountBalanceResult> getAccountBalancePlain() {
+        return getAccountBalancePlain(GetAccountBalancePlainArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * Read the balance of the provider&#39;s Vonage account (GET /account/get-balance).
+     * 
+     */
+    public static Output<GetAccountBalanceResult> getAccountBalance(GetAccountBalanceArgs args) {
+        return getAccountBalance(args, InvokeOptions.Empty);
+    }
+    /**
+     * Read the balance of the provider&#39;s Vonage account (GET /account/get-balance).
+     * 
+     */
+    public static CompletableFuture<GetAccountBalanceResult> getAccountBalancePlain(GetAccountBalancePlainArgs args) {
+        return getAccountBalancePlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * Read the balance of the provider&#39;s Vonage account (GET /account/get-balance).
+     * 
+     */
+    public static Output<GetAccountBalanceResult> getAccountBalance(GetAccountBalanceArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getAccountBalance", TypeShape.of(GetAccountBalanceResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Read the balance of the provider&#39;s Vonage account (GET /account/get-balance).
+     * 
+     */
+    public static Output<GetAccountBalanceResult> getAccountBalance(GetAccountBalanceArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getAccountBalance", TypeShape.of(GetAccountBalanceResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Read the balance of the provider&#39;s Vonage account (GET /account/get-balance).
+     * 
+     */
+    public static CompletableFuture<GetAccountBalanceResult> getAccountBalancePlain(GetAccountBalancePlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getAccountBalance", TypeShape.of(GetAccountBalanceResult.class), args, Utilities.withVersion(options));
+    }
     /**
      * Look up an API secret&#39;s metadata by account and secret ID. Vonage never returns the secret value. Fails if it does not exist.
      * 
@@ -219,6 +280,41 @@ public final class VonageFunctions {
         return Deployment.getInstance().invokeAsync("vonage:index:getApplications", TypeShape.of(GetApplicationsResult.class), args, Utilities.withVersion(options));
     }
     /**
+     * Search the numbers available to buy in a country (GET /number/search). Read-only: it never buys a number, and a Number resource still has to.
+     * 
+     */
+    public static Output<GetAvailableNumbersResult> getAvailableNumbers(GetAvailableNumbersArgs args) {
+        return getAvailableNumbers(args, InvokeOptions.Empty);
+    }
+    /**
+     * Search the numbers available to buy in a country (GET /number/search). Read-only: it never buys a number, and a Number resource still has to.
+     * 
+     */
+    public static CompletableFuture<GetAvailableNumbersResult> getAvailableNumbersPlain(GetAvailableNumbersPlainArgs args) {
+        return getAvailableNumbersPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * Search the numbers available to buy in a country (GET /number/search). Read-only: it never buys a number, and a Number resource still has to.
+     * 
+     */
+    public static Output<GetAvailableNumbersResult> getAvailableNumbers(GetAvailableNumbersArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getAvailableNumbers", TypeShape.of(GetAvailableNumbersResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Search the numbers available to buy in a country (GET /number/search). Read-only: it never buys a number, and a Number resource still has to.
+     * 
+     */
+    public static Output<GetAvailableNumbersResult> getAvailableNumbers(GetAvailableNumbersArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getAvailableNumbers", TypeShape.of(GetAvailableNumbersResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Search the numbers available to buy in a country (GET /number/search). Read-only: it never buys a number, and a Number resource still has to.
+     * 
+     */
+    public static CompletableFuture<GetAvailableNumbersResult> getAvailableNumbersPlain(GetAvailableNumbersPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getAvailableNumbers", TypeShape.of(GetAvailableNumbersResult.class), args, Utilities.withVersion(options));
+    }
+    /**
      * Look up a number owned by the account. Fails if the account does not own it.
      * 
      */
@@ -254,39 +350,137 @@ public final class VonageFunctions {
         return Deployment.getInstance().invokeAsync("vonage:index:getNumber", TypeShape.of(GetNumberResult.class), args, Utilities.withVersion(options));
     }
     /**
+     * List the numbers owned by the account (GET /account/numbers), following every page.
+     * 
+     */
+    public static Output<GetNumbersResult> getNumbers() {
+        return getNumbers(GetNumbersArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * List the numbers owned by the account (GET /account/numbers), following every page.
+     * 
+     */
+    public static CompletableFuture<GetNumbersResult> getNumbersPlain() {
+        return getNumbersPlain(GetNumbersPlainArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * List the numbers owned by the account (GET /account/numbers), following every page.
+     * 
+     */
+    public static Output<GetNumbersResult> getNumbers(GetNumbersArgs args) {
+        return getNumbers(args, InvokeOptions.Empty);
+    }
+    /**
+     * List the numbers owned by the account (GET /account/numbers), following every page.
+     * 
+     */
+    public static CompletableFuture<GetNumbersResult> getNumbersPlain(GetNumbersPlainArgs args) {
+        return getNumbersPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * List the numbers owned by the account (GET /account/numbers), following every page.
+     * 
+     */
+    public static Output<GetNumbersResult> getNumbers(GetNumbersArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getNumbers", TypeShape.of(GetNumbersResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the numbers owned by the account (GET /account/numbers), following every page.
+     * 
+     */
+    public static Output<GetNumbersResult> getNumbers(GetNumbersArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getNumbers", TypeShape.of(GetNumbersResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the numbers owned by the account (GET /account/numbers), following every page.
+     * 
+     */
+    public static CompletableFuture<GetNumbersResult> getNumbersPlain(GetNumbersPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getNumbers", TypeShape.of(GetNumbersResult.class), args, Utilities.withVersion(options));
+    }
+    /**
      * Look up a subaccount of the provider&#39;s primary account by API key. Fails if it does not exist.
      * 
      */
-    public static Output<GetSubAccountResult> getSubAccount(GetSubAccountArgs args) {
+    public static Output<GetSubAccountInvokeResult> getSubAccount(GetSubAccountArgs args) {
         return getSubAccount(args, InvokeOptions.Empty);
     }
     /**
      * Look up a subaccount of the provider&#39;s primary account by API key. Fails if it does not exist.
      * 
      */
-    public static CompletableFuture<GetSubAccountResult> getSubAccountPlain(GetSubAccountPlainArgs args) {
+    public static CompletableFuture<GetSubAccountInvokeResult> getSubAccountPlain(GetSubAccountPlainArgs args) {
         return getSubAccountPlain(args, InvokeOptions.Empty);
     }
     /**
      * Look up a subaccount of the provider&#39;s primary account by API key. Fails if it does not exist.
      * 
      */
-    public static Output<GetSubAccountResult> getSubAccount(GetSubAccountArgs args, InvokeOptions options) {
-        return Deployment.getInstance().invoke("vonage:index:getSubAccount", TypeShape.of(GetSubAccountResult.class), args, Utilities.withVersion(options));
+    public static Output<GetSubAccountInvokeResult> getSubAccount(GetSubAccountArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getSubAccount", TypeShape.of(GetSubAccountInvokeResult.class), args, Utilities.withVersion(options));
     }
     /**
      * Look up a subaccount of the provider&#39;s primary account by API key. Fails if it does not exist.
      * 
      */
-    public static Output<GetSubAccountResult> getSubAccount(GetSubAccountArgs args, InvokeOutputOptions options) {
-        return Deployment.getInstance().invoke("vonage:index:getSubAccount", TypeShape.of(GetSubAccountResult.class), args, Utilities.withVersion(options));
+    public static Output<GetSubAccountInvokeResult> getSubAccount(GetSubAccountArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getSubAccount", TypeShape.of(GetSubAccountInvokeResult.class), args, Utilities.withVersion(options));
     }
     /**
      * Look up a subaccount of the provider&#39;s primary account by API key. Fails if it does not exist.
      * 
      */
-    public static CompletableFuture<GetSubAccountResult> getSubAccountPlain(GetSubAccountPlainArgs args, InvokeOptions options) {
-        return Deployment.getInstance().invokeAsync("vonage:index:getSubAccount", TypeShape.of(GetSubAccountResult.class), args, Utilities.withVersion(options));
+    public static CompletableFuture<GetSubAccountInvokeResult> getSubAccountPlain(GetSubAccountPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getSubAccount", TypeShape.of(GetSubAccountInvokeResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the subaccounts of the provider&#39;s primary account, optionally filtered by exact name.
+     * 
+     */
+    public static Output<GetSubAccountsResult> getSubAccounts() {
+        return getSubAccounts(GetSubAccountsArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * List the subaccounts of the provider&#39;s primary account, optionally filtered by exact name.
+     * 
+     */
+    public static CompletableFuture<GetSubAccountsResult> getSubAccountsPlain() {
+        return getSubAccountsPlain(GetSubAccountsPlainArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * List the subaccounts of the provider&#39;s primary account, optionally filtered by exact name.
+     * 
+     */
+    public static Output<GetSubAccountsResult> getSubAccounts(GetSubAccountsArgs args) {
+        return getSubAccounts(args, InvokeOptions.Empty);
+    }
+    /**
+     * List the subaccounts of the provider&#39;s primary account, optionally filtered by exact name.
+     * 
+     */
+    public static CompletableFuture<GetSubAccountsResult> getSubAccountsPlain(GetSubAccountsPlainArgs args) {
+        return getSubAccountsPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * List the subaccounts of the provider&#39;s primary account, optionally filtered by exact name.
+     * 
+     */
+    public static Output<GetSubAccountsResult> getSubAccounts(GetSubAccountsArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getSubAccounts", TypeShape.of(GetSubAccountsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the subaccounts of the provider&#39;s primary account, optionally filtered by exact name.
+     * 
+     */
+    public static Output<GetSubAccountsResult> getSubAccounts(GetSubAccountsArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getSubAccounts", TypeShape.of(GetSubAccountsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the subaccounts of the provider&#39;s primary account, optionally filtered by exact name.
+     * 
+     */
+    public static CompletableFuture<GetSubAccountsResult> getSubAccountsPlain(GetSubAccountsPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getSubAccounts", TypeShape.of(GetSubAccountsResult.class), args, Utilities.withVersion(options));
     }
     /**
      * Look up a Verify v2 template by ID or exact name.

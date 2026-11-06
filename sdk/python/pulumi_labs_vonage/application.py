@@ -25,10 +25,12 @@ class ApplicationArgs:
                  improve_ai: Optional[pulumi.Input[_builtins.bool]] = None,
                  meetings: Optional[pulumi.Input['MeetingsCapabilityArgs']] = None,
                  messages: Optional[pulumi.Input['MessagesCapabilityArgs']] = None,
+                 network_apis: Optional[pulumi.Input['NetworkApisCapabilityArgs']] = None,
                  public_key: Optional[pulumi.Input[_builtins.str]] = None,
                  rtc: Optional[pulumi.Input['RtcCapabilityArgs']] = None,
                  vbc: Optional[pulumi.Input[_builtins.bool]] = None,
                  verify: Optional[pulumi.Input['VerifyCapabilityArgs']] = None,
+                 video: Optional[pulumi.Input['VideoCapabilityArgs']] = None,
                  voice: Optional[pulumi.Input['VoiceCapabilityArgs']] = None):
         """
         The set of arguments for constructing a Application resource.
@@ -37,10 +39,12 @@ class ApplicationArgs:
         :param pulumi.Input[_builtins.bool] improve_ai: Whether Vonage may use traffic to improve its AI models (privacy.improve_ai).
         :param pulumi.Input['MeetingsCapabilityArgs'] meetings: Meetings capability. Omit to leave meetings disabled.
         :param pulumi.Input['MessagesCapabilityArgs'] messages: Messages capability. Omit to leave messages disabled.
+        :param pulumi.Input['NetworkApisCapabilityArgs'] network_apis: Network APIs capability (SIM Swap, Number Verification). Omit to leave it as it is on the server.
         :param pulumi.Input[_builtins.str] public_key: Optional PEM public key. When omitted Vonage generates a key pair on creation and the private key is returned once as privateKey. When set, no private key is generated.
         :param pulumi.Input['RtcCapabilityArgs'] rtc: RTC capability. Omit to leave RTC disabled.
         :param pulumi.Input[_builtins.bool] vbc: Set true to enable the (empty) vbc capability for zero-rated VBC calls.
         :param pulumi.Input['VerifyCapabilityArgs'] verify: Verify v2 capability. Omit to leave verify disabled.
+        :param pulumi.Input['VideoCapabilityArgs'] video: Video API capability: webhooks and recording storage. Omit to leave video as it is on the server; an existing video capability configured outside Pulumi is preserved until you declare the block.
         :param pulumi.Input['VoiceCapabilityArgs'] voice: Voice capability. Omit to leave voice disabled.
         """
         pulumi.set(__self__, "name", name)
@@ -50,6 +54,8 @@ class ApplicationArgs:
             pulumi.set(__self__, "meetings", meetings)
         if messages is not None:
             pulumi.set(__self__, "messages", messages)
+        if network_apis is not None:
+            pulumi.set(__self__, "network_apis", network_apis)
         if public_key is not None:
             pulumi.set(__self__, "public_key", public_key)
         if rtc is not None:
@@ -58,6 +64,8 @@ class ApplicationArgs:
             pulumi.set(__self__, "vbc", vbc)
         if verify is not None:
             pulumi.set(__self__, "verify", verify)
+        if video is not None:
+            pulumi.set(__self__, "video", video)
         if voice is not None:
             pulumi.set(__self__, "voice", voice)
 
@@ -110,6 +118,18 @@ class ApplicationArgs:
         pulumi.set(self, "messages", value)
 
     @_builtins.property
+    @pulumi.getter(name="networkApis")
+    def network_apis(self) -> Optional[pulumi.Input['NetworkApisCapabilityArgs']]:
+        """
+        Network APIs capability (SIM Swap, Number Verification). Omit to leave it as it is on the server.
+        """
+        return pulumi.get(self, "network_apis")
+
+    @network_apis.setter
+    def network_apis(self, value: Optional[pulumi.Input['NetworkApisCapabilityArgs']]):
+        pulumi.set(self, "network_apis", value)
+
+    @_builtins.property
     @pulumi.getter(name="publicKey")
     def public_key(self) -> Optional[pulumi.Input[_builtins.str]]:
         """
@@ -159,6 +179,18 @@ class ApplicationArgs:
 
     @_builtins.property
     @pulumi.getter
+    def video(self) -> Optional[pulumi.Input['VideoCapabilityArgs']]:
+        """
+        Video API capability: webhooks and recording storage. Omit to leave video as it is on the server; an existing video capability configured outside Pulumi is preserved until you declare the block.
+        """
+        return pulumi.get(self, "video")
+
+    @video.setter
+    def video(self, value: Optional[pulumi.Input['VideoCapabilityArgs']]):
+        pulumi.set(self, "video", value)
+
+    @_builtins.property
+    @pulumi.getter
     def voice(self) -> Optional[pulumi.Input['VoiceCapabilityArgs']]:
         """
         Voice capability. Omit to leave voice disabled.
@@ -180,14 +212,16 @@ class Application(pulumi.CustomResource):
                  meetings: Optional[pulumi.Input[Union['MeetingsCapabilityArgs', 'MeetingsCapabilityArgsDict']]] = None,
                  messages: Optional[pulumi.Input[Union['MessagesCapabilityArgs', 'MessagesCapabilityArgsDict']]] = None,
                  name: Optional[pulumi.Input[_builtins.str]] = None,
+                 network_apis: Optional[pulumi.Input[Union['NetworkApisCapabilityArgs', 'NetworkApisCapabilityArgsDict']]] = None,
                  public_key: Optional[pulumi.Input[_builtins.str]] = None,
                  rtc: Optional[pulumi.Input[Union['RtcCapabilityArgs', 'RtcCapabilityArgsDict']]] = None,
                  vbc: Optional[pulumi.Input[_builtins.bool]] = None,
                  verify: Optional[pulumi.Input[Union['VerifyCapabilityArgs', 'VerifyCapabilityArgsDict']]] = None,
+                 video: Optional[pulumi.Input[Union['VideoCapabilityArgs', 'VideoCapabilityArgsDict']]] = None,
                  voice: Optional[pulumi.Input[Union['VoiceCapabilityArgs', 'VoiceCapabilityArgsDict']]] = None,
                  __props__=None):
         """
-        A Vonage application (Application API v2): capabilities, webhooks and signing keys. Update replaces the whole configuration, so every capability you want must be declared in the program; capabilities this provider does not model (video, network_apis) are preserved.
+        A Vonage application (Application API v2): capabilities, webhooks and signing keys. Update replaces the whole configuration, so every capability you want must be declared in the program; video and networkApis you do not declare are preserved as they are on the server, and removing a block you declared earlier disables that capability.
 
 
         :param str resource_name: The name of the resource.
@@ -196,10 +230,12 @@ class Application(pulumi.CustomResource):
         :param pulumi.Input[Union['MeetingsCapabilityArgs', 'MeetingsCapabilityArgsDict']] meetings: Meetings capability. Omit to leave meetings disabled.
         :param pulumi.Input[Union['MessagesCapabilityArgs', 'MessagesCapabilityArgsDict']] messages: Messages capability. Omit to leave messages disabled.
         :param pulumi.Input[_builtins.str] name: Application name (shown in the Vonage dashboard).
+        :param pulumi.Input[Union['NetworkApisCapabilityArgs', 'NetworkApisCapabilityArgsDict']] network_apis: Network APIs capability (SIM Swap, Number Verification). Omit to leave it as it is on the server.
         :param pulumi.Input[_builtins.str] public_key: Optional PEM public key. When omitted Vonage generates a key pair on creation and the private key is returned once as privateKey. When set, no private key is generated.
         :param pulumi.Input[Union['RtcCapabilityArgs', 'RtcCapabilityArgsDict']] rtc: RTC capability. Omit to leave RTC disabled.
         :param pulumi.Input[_builtins.bool] vbc: Set true to enable the (empty) vbc capability for zero-rated VBC calls.
         :param pulumi.Input[Union['VerifyCapabilityArgs', 'VerifyCapabilityArgsDict']] verify: Verify v2 capability. Omit to leave verify disabled.
+        :param pulumi.Input[Union['VideoCapabilityArgs', 'VideoCapabilityArgsDict']] video: Video API capability: webhooks and recording storage. Omit to leave video as it is on the server; an existing video capability configured outside Pulumi is preserved until you declare the block.
         :param pulumi.Input[Union['VoiceCapabilityArgs', 'VoiceCapabilityArgsDict']] voice: Voice capability. Omit to leave voice disabled.
         """
         ...
@@ -209,7 +245,7 @@ class Application(pulumi.CustomResource):
                  args: ApplicationArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        A Vonage application (Application API v2): capabilities, webhooks and signing keys. Update replaces the whole configuration, so every capability you want must be declared in the program; capabilities this provider does not model (video, network_apis) are preserved.
+        A Vonage application (Application API v2): capabilities, webhooks and signing keys. Update replaces the whole configuration, so every capability you want must be declared in the program; video and networkApis you do not declare are preserved as they are on the server, and removing a block you declared earlier disables that capability.
 
 
         :param str resource_name: The name of the resource.
@@ -231,10 +267,12 @@ class Application(pulumi.CustomResource):
                  meetings: Optional[pulumi.Input[Union['MeetingsCapabilityArgs', 'MeetingsCapabilityArgsDict']]] = None,
                  messages: Optional[pulumi.Input[Union['MessagesCapabilityArgs', 'MessagesCapabilityArgsDict']]] = None,
                  name: Optional[pulumi.Input[_builtins.str]] = None,
+                 network_apis: Optional[pulumi.Input[Union['NetworkApisCapabilityArgs', 'NetworkApisCapabilityArgsDict']]] = None,
                  public_key: Optional[pulumi.Input[_builtins.str]] = None,
                  rtc: Optional[pulumi.Input[Union['RtcCapabilityArgs', 'RtcCapabilityArgsDict']]] = None,
                  vbc: Optional[pulumi.Input[_builtins.bool]] = None,
                  verify: Optional[pulumi.Input[Union['VerifyCapabilityArgs', 'VerifyCapabilityArgsDict']]] = None,
+                 video: Optional[pulumi.Input[Union['VideoCapabilityArgs', 'VideoCapabilityArgsDict']]] = None,
                  voice: Optional[pulumi.Input[Union['VoiceCapabilityArgs', 'VoiceCapabilityArgsDict']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -251,10 +289,12 @@ class Application(pulumi.CustomResource):
             if name is None and not opts.urn:
                 raise TypeError("Missing required property 'name'")
             __props__.__dict__["name"] = name
+            __props__.__dict__["network_apis"] = network_apis
             __props__.__dict__["public_key"] = public_key
             __props__.__dict__["rtc"] = rtc
             __props__.__dict__["vbc"] = vbc
             __props__.__dict__["verify"] = verify
+            __props__.__dict__["video"] = video
             __props__.__dict__["voice"] = voice
             __props__.__dict__["application_id"] = None
             __props__.__dict__["application_public_key"] = None
@@ -289,11 +329,13 @@ class Application(pulumi.CustomResource):
         __props__.__dict__["meetings"] = None
         __props__.__dict__["messages"] = None
         __props__.__dict__["name"] = None
+        __props__.__dict__["network_apis"] = None
         __props__.__dict__["private_key"] = None
         __props__.__dict__["public_key"] = None
         __props__.__dict__["rtc"] = None
         __props__.__dict__["vbc"] = None
         __props__.__dict__["verify"] = None
+        __props__.__dict__["video"] = None
         __props__.__dict__["voice"] = None
         return Application(resource_name, opts=opts, __props__=__props__)
 
@@ -346,6 +388,14 @@ class Application(pulumi.CustomResource):
         return pulumi.get(self, "name")
 
     @_builtins.property
+    @pulumi.getter(name="networkApis")
+    def network_apis(self) -> pulumi.Output[Optional['outputs.NetworkApisCapability']]:
+        """
+        Network APIs capability (SIM Swap, Number Verification). Omit to leave it as it is on the server.
+        """
+        return pulumi.get(self, "network_apis")
+
+    @_builtins.property
     @pulumi.getter(name="privateKey")
     def private_key(self) -> pulumi.Output[Optional[_builtins.str]]:
         """
@@ -384,6 +434,14 @@ class Application(pulumi.CustomResource):
         Verify v2 capability. Omit to leave verify disabled.
         """
         return pulumi.get(self, "verify")
+
+    @_builtins.property
+    @pulumi.getter
+    def video(self) -> pulumi.Output[Optional['outputs.VideoCapability']]:
+        """
+        Video API capability: webhooks and recording storage. Omit to leave video as it is on the server; an existing video capability configured outside Pulumi is preserved until you declare the block.
+        """
+        return pulumi.get(self, "video")
 
     @_builtins.property
     @pulumi.getter

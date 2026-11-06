@@ -22,7 +22,7 @@ import (
 )
 
 // New builds the Vonage provider.
-func New() (provider.Provider, error) {
+func newProvider() (provider.Provider, error) {
 	return infer.NewProviderBuilder().
 		WithDisplayName("Vonage").
 		WithDescription(
@@ -67,6 +67,10 @@ func New() (provider.Provider, error) {
 			infer.Function[*GetNumber, GetNumberArgs, GetNumberResult](&GetNumber{}),
 			infer.Function[*GetApplications, GetApplicationsArgs, GetApplicationsResult](&GetApplications{}),
 			infer.Function[*GetSubAccount, GetSubAccountArgs, GetSubAccountResult](&GetSubAccount{}),
+			infer.Function[*GetSubAccounts, GetSubAccountsArgs, GetSubAccountsResult](&GetSubAccounts{}),
+			infer.Function[*GetAccountBalance, GetAccountBalanceArgs, GetAccountBalanceResult](&GetAccountBalance{}),
+			infer.Function[*GetNumbers, GetNumbersArgs, GetNumbersResult](&GetNumbers{}),
+			infer.Function[*GetAvailableNumbers, GetAvailableNumbersArgs, GetAvailableNumbersResult](&GetAvailableNumbers{}),
 			infer.Function[*GetApiSecret, GetApiSecretArgs, GetApiSecretResult](&GetApiSecret{}),
 			infer.Function[*GetApiSecrets, GetApiSecretsArgs, GetApiSecretsResult](&GetApiSecrets{}),
 			infer.Function[*GetVerifyTemplate, GetVerifyTemplateArgs, GetVerifyTemplateResult](&GetVerifyTemplate{}),

@@ -108,7 +108,7 @@ func subStateFrom(args SubAccountArgs, s *wireSubaccount, generated *string) Sub
 func (r *SubAccount) Create(ctx context.Context, req infer.CreateRequest[SubAccountArgs]) (infer.CreateResponse[SubAccountState], error) {
 	a := req.Inputs
 	if req.DryRun {
-		return infer.CreateResponse[SubAccountState]{ID: req.Name, Output: SubAccountState{SubAccountArgs: a}}, nil
+		return infer.CreateResponse[SubAccountState]{ID: "", Output: SubAccountState{SubAccountArgs: a}}, nil
 	}
 	c, err := clientFor(ctx)
 	if err != nil {

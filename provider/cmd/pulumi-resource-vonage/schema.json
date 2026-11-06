@@ -146,6 +146,86 @@
         "capabilities"
       ]
     },
+    "vonage:index:AvailableNumber": {
+      "properties": {
+        "cost": {
+          "type": "string",
+          "description": "Monthly rental in euros, as Vonage reports it (a decimal string)."
+        },
+        "country": {
+          "type": "string",
+          "description": "Country code."
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Capabilities: SMS, VOICE, MMS."
+        },
+        "msisdn": {
+          "type": "string",
+          "description": "The number in international format without a leading plus."
+        },
+        "type": {
+          "type": "string",
+          "description": "Number type."
+        }
+      },
+      "type": "object",
+      "required": [
+        "country",
+        "msisdn",
+        "type",
+        "cost",
+        "features"
+      ]
+    },
+    "vonage:index:GetSubAccountResult": {
+      "properties": {
+        "apiKey": {
+          "type": "string",
+          "description": "Subaccount API key."
+        },
+        "balance": {
+          "type": "number",
+          "description": "Subaccount balance, unset when it uses the primary balance."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO 8601 creation timestamp."
+        },
+        "creditLimit": {
+          "type": "number",
+          "description": "Subaccount credit limit, unset when it uses the primary balance."
+        },
+        "name": {
+          "type": "string",
+          "description": "Subaccount name."
+        },
+        "primaryAccountApiKey": {
+          "type": "string",
+          "description": "API key of the owning primary account."
+        },
+        "suspended": {
+          "type": "boolean",
+          "description": "Whether the subaccount is suspended."
+        },
+        "usePrimaryAccountBalance": {
+          "type": "boolean",
+          "description": "Whether the subaccount draws on the primary account balance."
+        }
+      },
+      "type": "object",
+      "required": [
+        "apiKey",
+        "name",
+        "primaryAccountApiKey",
+        "usePrimaryAccountBalance",
+        "suspended",
+        "createdAt"
+      ]
+    },
     "vonage:index:MeetingsCapability": {
       "properties": {
         "recordingChanged": {
@@ -184,6 +264,82 @@
       },
       "type": "object"
     },
+    "vonage:index:NetworkApisCapability": {
+      "properties": {
+        "networkApplicationId": {
+          "type": "string",
+          "description": "The Network APIs application ID."
+        },
+        "redirectUri": {
+          "type": "string",
+          "description": "Redirect URI for the Network APIs OAuth flow."
+        }
+      },
+      "type": "object",
+      "required": [
+        "networkApplicationId"
+      ]
+    },
+    "vonage:index:OwnedNumberSummary": {
+      "properties": {
+        "appId": {
+          "type": "string",
+          "description": "Linked application ID, empty if none."
+        },
+        "country": {
+          "type": "string",
+          "description": "Country code."
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Capabilities: SMS, VOICE, MMS."
+        },
+        "messagesCallbackType": {
+          "type": "string",
+          "description": "Messages routing type."
+        },
+        "messagesCallbackValue": {
+          "type": "string",
+          "description": "Messages routing target."
+        },
+        "moHttpUrl": {
+          "type": "string",
+          "description": "Inbound SMS webhook, empty if none."
+        },
+        "msisdn": {
+          "type": "string",
+          "description": "The number in international format without a leading plus."
+        },
+        "type": {
+          "type": "string",
+          "description": "Number type (landline, mobile-lvn, landline-toll-free)."
+        },
+        "voiceCallbackType": {
+          "type": "string",
+          "description": "Voice routing type."
+        },
+        "voiceCallbackValue": {
+          "type": "string",
+          "description": "Voice routing target."
+        }
+      },
+      "type": "object",
+      "required": [
+        "country",
+        "msisdn",
+        "type",
+        "features",
+        "appId",
+        "moHttpUrl",
+        "voiceCallbackType",
+        "voiceCallbackValue",
+        "messagesCallbackType",
+        "messagesCallbackValue"
+      ]
+    },
     "vonage:index:RtcCapability": {
       "properties": {
         "eventUrl": {
@@ -206,6 +362,117 @@
         "version": {
           "type": "string",
           "description": "Verify API version, for example v2."
+        }
+      },
+      "type": "object"
+    },
+    "vonage:index:VideoCapability": {
+      "properties": {
+        "storage": {
+          "$ref": "#/types/vonage:index:VideoStorage",
+          "description": "Recording storage and encryption settings."
+        },
+        "webhooks": {
+          "$ref": "#/types/vonage:index:VideoWebhooks",
+          "description": "Webhooks that receive Video API events."
+        }
+      },
+      "type": "object"
+    },
+    "vonage:index:VideoStorage": {
+      "properties": {
+        "cloudStorage": {
+          "type": "boolean",
+          "description": "Whether recordings go to the configured cloud storage."
+        },
+        "endToEndEncryption": {
+          "type": "boolean",
+          "description": "Whether video streams use end-to-end encryption."
+        },
+        "serverSideEncryption": {
+          "type": "boolean",
+          "description": "Whether recordings are encrypted server side."
+        }
+      },
+      "type": "object"
+    },
+    "vonage:index:VideoWebhook": {
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "description": "Whether Vonage calls the webhook (server default true)."
+        },
+        "address": {
+          "type": "string",
+          "description": "The URL Vonage calls."
+        }
+      },
+      "type": "object",
+      "required": [
+        "address"
+      ]
+    },
+    "vonage:index:VideoWebhooks": {
+      "properties": {
+        "archiveStatus": {
+          "$ref": "#/types/vonage:index:VideoWebhook",
+          "description": "Receives archive (recording) status changes."
+        },
+        "broadcastStatus": {
+          "$ref": "#/types/vonage:index:VideoWebhook",
+          "description": "Receives broadcast status changes."
+        },
+        "captionsStatus": {
+          "$ref": "#/types/vonage:index:VideoWebhook",
+          "description": "Receives live caption status changes."
+        },
+        "connectionCreated": {
+          "$ref": "#/types/vonage:index:VideoWebhook",
+          "description": "Receives an event when a client connects to a session."
+        },
+        "connectionDestroyed": {
+          "$ref": "#/types/vonage:index:VideoWebhook",
+          "description": "Receives an event when a client disconnects from a session."
+        },
+        "renderStatus": {
+          "$ref": "#/types/vonage:index:VideoWebhook",
+          "description": "Receives Experience Composer render status changes."
+        },
+        "sessionCreated": {
+          "$ref": "#/types/vonage:index:VideoWebhook",
+          "description": "Receives an event when a session is created."
+        },
+        "sessionDestroyed": {
+          "$ref": "#/types/vonage:index:VideoWebhook",
+          "description": "Receives an event when a session is destroyed."
+        },
+        "sessionNotification": {
+          "$ref": "#/types/vonage:index:VideoWebhook",
+          "description": "Receives session notifications."
+        },
+        "sipCallCreated": {
+          "$ref": "#/types/vonage:index:VideoWebhook",
+          "description": "Receives an event when a SIP call is created."
+        },
+        "sipCallDestroyed": {
+          "$ref": "#/types/vonage:index:VideoWebhook",
+          "description": "Receives an event when a SIP call is destroyed."
+        },
+        "sipCallMuteForced": {
+          "$ref": "#/types/vonage:index:VideoWebhook",
+          "description": "Receives an event when a SIP call is force-muted."
+        },
+        "sipCallUpdated": {
+          "$ref": "#/types/vonage:index:VideoWebhook",
+          "description": "Receives an event when a SIP call is updated."
+        },
+        "streamCreated": {
+          "$ref": "#/types/vonage:index:VideoWebhook",
+          "description": "Receives an event when a stream is created."
+        },
+        "streamDestroyed": {
+          "$ref": "#/types/vonage:index:VideoWebhook",
+          "description": "Receives an event when a stream is destroyed."
         }
       },
       "type": "object"
@@ -450,7 +717,7 @@
       ]
     },
     "vonage:index:Application": {
-      "description": "A Vonage application (Application API v2): capabilities, webhooks and signing keys. Update replaces the whole configuration, so every capability you want must be declared in the program; capabilities this provider does not model (video, network_apis) are preserved.",
+      "description": "A Vonage application (Application API v2): capabilities, webhooks and signing keys. Update replaces the whole configuration, so every capability you want must be declared in the program; video and networkApis you do not declare are preserved as they are on the server, and removing a block you declared earlier disables that capability.",
       "properties": {
         "applicationId": {
           "type": "string",
@@ -476,6 +743,10 @@
           "type": "string",
           "description": "Application name (shown in the Vonage dashboard)."
         },
+        "networkApis": {
+          "$ref": "#/types/vonage:index:NetworkApisCapability",
+          "description": "Network APIs capability (SIM Swap, Number Verification). Omit to leave it as it is on the server."
+        },
         "privateKey": {
           "type": "string",
           "description": "The PEM private key generated by Vonage. Vonage returns it exactly once, on creation, and never again; it is stored as a secret in Pulumi state. Unset when publicKey was supplied.",
@@ -496,6 +767,10 @@
         "verify": {
           "$ref": "#/types/vonage:index:VerifyCapability",
           "description": "Verify v2 capability. Omit to leave verify disabled."
+        },
+        "video": {
+          "$ref": "#/types/vonage:index:VideoCapability",
+          "description": "Video API capability: webhooks and recording storage. Omit to leave video as it is on the server; an existing video capability configured outside Pulumi is preserved until you declare the block."
         },
         "voice": {
           "$ref": "#/types/vonage:index:VoiceCapability",
@@ -524,6 +799,10 @@
           "type": "string",
           "description": "Application name (shown in the Vonage dashboard)."
         },
+        "networkApis": {
+          "$ref": "#/types/vonage:index:NetworkApisCapability",
+          "description": "Network APIs capability (SIM Swap, Number Verification). Omit to leave it as it is on the server."
+        },
         "publicKey": {
           "type": "string",
           "description": "Optional PEM public key. When omitted Vonage generates a key pair on creation and the private key is returned once as privateKey. When set, no private key is generated."
@@ -539,6 +818,10 @@
         "verify": {
           "$ref": "#/types/vonage:index:VerifyCapability",
           "description": "Verify v2 capability. Omit to leave verify disabled."
+        },
+        "video": {
+          "$ref": "#/types/vonage:index:VideoCapability",
+          "description": "Video API capability: webhooks and recording storage. Omit to leave video as it is on the server; an existing video capability configured outside Pulumi is preserved until you declare the block."
         },
         "voice": {
           "$ref": "#/types/vonage:index:VoiceCapability",
@@ -860,6 +1143,29 @@
     }
   },
   "functions": {
+    "vonage:index:getAccountBalance": {
+      "description": "Read the balance of the provider's Vonage account (GET /account/get-balance).",
+      "inputs": {
+        "type": "object"
+      },
+      "outputs": {
+        "properties": {
+          "autoReload": {
+            "description": "Whether auto-reload is enabled on the account.",
+            "type": "boolean"
+          },
+          "value": {
+            "description": "Account balance in euros.",
+            "type": "number"
+          }
+        },
+        "required": [
+          "value",
+          "autoReload"
+        ],
+        "type": "object"
+      }
+    },
     "vonage:index:getApiSecret": {
       "description": "Look up an API secret's metadata by account and secret ID. Vonage never returns the secret value. Fails if it does not exist.",
       "inputs": {
@@ -1006,6 +1312,68 @@
         "type": "object"
       }
     },
+    "vonage:index:getAvailableNumbers": {
+      "description": "Search the numbers available to buy in a country (GET /number/search). Read-only: it never buys a number, and a Number resource still has to.",
+      "inputs": {
+        "properties": {
+          "country": {
+            "type": "string",
+            "description": "Two-letter ISO country code, for example US."
+          },
+          "features": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Capabilities the number must have: SMS, VOICE and MMS."
+          },
+          "index": {
+            "type": "integer",
+            "description": "Page number, starting at 1."
+          },
+          "pattern": {
+            "type": "string",
+            "description": "Digit pattern the number must match."
+          },
+          "searchPattern": {
+            "type": "integer",
+            "description": "How pattern matches: 0 starts with, 1 contains (the default), 2 ends with."
+          },
+          "size": {
+            "type": "integer",
+            "description": "Page size, 1 to 100 (Vonage default 10)."
+          },
+          "type": {
+            "type": "string",
+            "description": "Number type: landline, mobile-lvn or landline-toll-free."
+          }
+        },
+        "type": "object",
+        "required": [
+          "country"
+        ]
+      },
+      "outputs": {
+        "properties": {
+          "count": {
+            "description": "Total number of matches Vonage reports (all pages).",
+            "type": "integer"
+          },
+          "numbers": {
+            "description": "The numbers on the requested page.",
+            "items": {
+              "$ref": "#/types/vonage:index:AvailableNumber"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "count",
+          "numbers"
+        ],
+        "type": "object"
+      }
+    },
     "vonage:index:getNumber": {
       "description": "Look up a number owned by the account. Fails if the account does not own it.",
       "inputs": {
@@ -1086,6 +1454,49 @@
         "type": "object"
       }
     },
+    "vonage:index:getNumbers": {
+      "description": "List the numbers owned by the account (GET /account/numbers), following every page.",
+      "inputs": {
+        "properties": {
+          "applicationId": {
+            "type": "string",
+            "description": "Only numbers linked to this application ID."
+          },
+          "country": {
+            "type": "string",
+            "description": "Only numbers in this two-letter ISO country code, for example US."
+          },
+          "hasApplication": {
+            "type": "boolean",
+            "description": "Only numbers that are (true) or are not (false) linked to an application."
+          },
+          "pattern": {
+            "type": "string",
+            "description": "Only numbers matching this digit pattern."
+          },
+          "searchPattern": {
+            "type": "integer",
+            "description": "How pattern matches: 0 starts with, 1 contains (the default), 2 ends with."
+          }
+        },
+        "type": "object"
+      },
+      "outputs": {
+        "properties": {
+          "numbers": {
+            "description": "The matching numbers, in the order Vonage lists them.",
+            "items": {
+              "$ref": "#/types/vonage:index:OwnedNumberSummary"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "numbers"
+        ],
+        "type": "object"
+      }
+    },
     "vonage:index:getSubAccount": {
       "description": "Look up a subaccount of the provider's primary account by API key. Fails if it does not exist.",
       "inputs": {
@@ -1142,6 +1553,38 @@
           "usePrimaryAccountBalance",
           "suspended",
           "createdAt"
+        ],
+        "type": "object"
+      }
+    },
+    "vonage:index:getSubAccounts": {
+      "description": "List the subaccounts of the provider's primary account, optionally filtered by exact name.",
+      "inputs": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Only subaccounts with exactly this name."
+          }
+        },
+        "type": "object"
+      },
+      "outputs": {
+        "properties": {
+          "primaryAccountApiKey": {
+            "description": "API key of the primary account (the provider's own key).",
+            "type": "string"
+          },
+          "subAccounts": {
+            "description": "The matching subaccounts.",
+            "items": {
+              "$ref": "#/types/vonage:index:GetSubAccountResult"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "primaryAccountApiKey",
+          "subAccounts"
         ],
         "type": "object"
       }

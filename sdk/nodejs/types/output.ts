@@ -31,6 +31,64 @@ export interface ApplicationSummary {
     name: string;
 }
 
+export interface AvailableNumber {
+    /**
+     * Monthly rental in euros, as Vonage reports it (a decimal string).
+     */
+    cost: string;
+    /**
+     * Country code.
+     */
+    country: string;
+    /**
+     * Capabilities: SMS, VOICE, MMS.
+     */
+    features: string[];
+    /**
+     * The number in international format without a leading plus.
+     */
+    msisdn: string;
+    /**
+     * Number type.
+     */
+    type: string;
+}
+
+export interface GetSubAccountResult {
+    /**
+     * Subaccount API key.
+     */
+    apiKey: string;
+    /**
+     * Subaccount balance, unset when it uses the primary balance.
+     */
+    balance?: number;
+    /**
+     * ISO 8601 creation timestamp.
+     */
+    createdAt: string;
+    /**
+     * Subaccount credit limit, unset when it uses the primary balance.
+     */
+    creditLimit?: number;
+    /**
+     * Subaccount name.
+     */
+    name: string;
+    /**
+     * API key of the owning primary account.
+     */
+    primaryAccountApiKey: string;
+    /**
+     * Whether the subaccount is suspended.
+     */
+    suspended: boolean;
+    /**
+     * Whether the subaccount draws on the primary account balance.
+     */
+    usePrimaryAccountBalance: boolean;
+}
+
 export interface MeetingsCapability {
     /**
      * Webhook that receives recording status changes (POST only).
@@ -65,6 +123,60 @@ export interface MessagesCapability {
     version?: string;
 }
 
+export interface NetworkApisCapability {
+    /**
+     * The Network APIs application ID.
+     */
+    networkApplicationId: string;
+    /**
+     * Redirect URI for the Network APIs OAuth flow.
+     */
+    redirectUri?: string;
+}
+
+export interface OwnedNumberSummary {
+    /**
+     * Linked application ID, empty if none.
+     */
+    appId: string;
+    /**
+     * Country code.
+     */
+    country: string;
+    /**
+     * Capabilities: SMS, VOICE, MMS.
+     */
+    features: string[];
+    /**
+     * Messages routing type.
+     */
+    messagesCallbackType: string;
+    /**
+     * Messages routing target.
+     */
+    messagesCallbackValue: string;
+    /**
+     * Inbound SMS webhook, empty if none.
+     */
+    moHttpUrl: string;
+    /**
+     * The number in international format without a leading plus.
+     */
+    msisdn: string;
+    /**
+     * Number type (landline, mobile-lvn, landline-toll-free).
+     */
+    type: string;
+    /**
+     * Voice routing type.
+     */
+    voiceCallbackType: string;
+    /**
+     * Voice routing target.
+     */
+    voiceCallbackValue: string;
+}
+
 export interface RtcCapability {
     /**
      * Webhook that receives RTC events.
@@ -85,6 +197,106 @@ export interface VerifyCapability {
      * Verify API version, for example v2.
      */
     version?: string;
+}
+
+export interface VideoCapability {
+    /**
+     * Recording storage and encryption settings.
+     */
+    storage?: outputs.VideoStorage;
+    /**
+     * Webhooks that receive Video API events.
+     */
+    webhooks?: outputs.VideoWebhooks;
+}
+
+export interface VideoStorage {
+    /**
+     * Whether recordings go to the configured cloud storage.
+     */
+    cloudStorage?: boolean;
+    /**
+     * Whether video streams use end-to-end encryption.
+     */
+    endToEndEncryption?: boolean;
+    /**
+     * Whether recordings are encrypted server side.
+     */
+    serverSideEncryption?: boolean;
+}
+
+export interface VideoWebhook {
+    /**
+     * Whether Vonage calls the webhook (server default true).
+     */
+    active?: boolean;
+    /**
+     * The URL Vonage calls.
+     */
+    address: string;
+}
+
+export interface VideoWebhooks {
+    /**
+     * Receives archive (recording) status changes.
+     */
+    archiveStatus?: outputs.VideoWebhook;
+    /**
+     * Receives broadcast status changes.
+     */
+    broadcastStatus?: outputs.VideoWebhook;
+    /**
+     * Receives live caption status changes.
+     */
+    captionsStatus?: outputs.VideoWebhook;
+    /**
+     * Receives an event when a client connects to a session.
+     */
+    connectionCreated?: outputs.VideoWebhook;
+    /**
+     * Receives an event when a client disconnects from a session.
+     */
+    connectionDestroyed?: outputs.VideoWebhook;
+    /**
+     * Receives Experience Composer render status changes.
+     */
+    renderStatus?: outputs.VideoWebhook;
+    /**
+     * Receives an event when a session is created.
+     */
+    sessionCreated?: outputs.VideoWebhook;
+    /**
+     * Receives an event when a session is destroyed.
+     */
+    sessionDestroyed?: outputs.VideoWebhook;
+    /**
+     * Receives session notifications.
+     */
+    sessionNotification?: outputs.VideoWebhook;
+    /**
+     * Receives an event when a SIP call is created.
+     */
+    sipCallCreated?: outputs.VideoWebhook;
+    /**
+     * Receives an event when a SIP call is destroyed.
+     */
+    sipCallDestroyed?: outputs.VideoWebhook;
+    /**
+     * Receives an event when a SIP call is force-muted.
+     */
+    sipCallMuteForced?: outputs.VideoWebhook;
+    /**
+     * Receives an event when a SIP call is updated.
+     */
+    sipCallUpdated?: outputs.VideoWebhook;
+    /**
+     * Receives an event when a stream is created.
+     */
+    streamCreated?: outputs.VideoWebhook;
+    /**
+     * Receives an event when a stream is destroyed.
+     */
+    streamDestroyed?: outputs.VideoWebhook;
 }
 
 export interface VoiceCapability {

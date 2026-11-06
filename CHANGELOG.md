@@ -2,6 +2,18 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- If the provider schema cannot be loaded during a `Read`, the failure is no longer cached for the life of the process: the next `Read` retries (#1599). The lookup functions were audited: none returns a credential value (`getApplication` returns the public key only), so no function output changes.
+- Security: `pulumi import` and `pulumi refresh` now store the properties this provider marks secret (`ApiSecret.secret`, `SubAccount.secret`, `SubAccount.generatedSecret` and `Application.privateKey`) as secrets. A `Read` response only kept the secretness of the state it was given, and an import has no state, so a value the provider recovered from the API was written to the state as plaintext. The secret properties are read from the provider's own schema, so every resource is covered. State imported before this fix stays plaintext until its next `pulumi refresh`, which re-encrypts it (#1577).
+- A preview no longer invents resource IDs. `Create` during `pulumi preview` returned the resource's logical name (or the placeholder `preview`) as its ID, so `id` was a known, wrong value and a program passing it to a lookup or to another resource ran against a name that does not exist and failed the preview (for example `getWebhook(webhook.id)`). A preview has no real ID now, so `id` stays unknown until the apply. Mirror issue https://github.com/pulumi-labs/pulumi-huggingface/issues/7 (#1590).
+- Changing the provider configuration (a rotated token, API key or secret, a new endpoint or region) is an in-place update of the default provider. By default pulumi-go-provider replaced the provider on any config change, and replacing a provider replaces every resource that uses it, so rotating a credential would have deleted and recreated every resource. Each resource's own diff still decides whether it changes. Mirror issue https://github.com/pulumi-labs/pulumi-huggingface/issues/8 (#1591).
+
+### Added
+
+- Lookup functions `getAccountBalance` (balance and auto-reload), `getNumbers` (owned numbers, filtered by country, pattern and application, following every page), `getAvailableNumbers` (numbers for sale in a country, one page, never buys) and `getSubAccounts` (all subaccounts, optionally by exact name). The response shapes come from the Vonage documentation and are unverified against a live account.
+- `Application` accepts `video` (the fifteen Video API webhooks, each with `address` and `active`, plus `storage.serverSideEncryption`, `endToEndEncryption` and `cloudStorage`) and `networkApis` (`networkApplicationId`, `redirectUri`) capability inputs. A `video` or `networkApis` capability that is not declared is still preserved on update; removing a declared block disables the capability. Request shapes follow the Vonage .NET SDK (the Node and Python SDKs do not model these capabilities); unverified against a live account.
+
 ## [0.1.0] - 2026-11-04
 
 ### Added
