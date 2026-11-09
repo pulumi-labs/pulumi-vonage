@@ -36,16 +36,17 @@ import (
 // account holds at most two API secrets.
 
 type vlc struct {
-	t   *testing.T
-	s   integration.Server
-	m   *mockVonage
-	urn resource.URN
+	t      *testing.T
+	s      integration.Server
+	m      *mockVonage
+	urn    resource.URN
+	srvURL string
 }
 
 func newVLC(t *testing.T, typ, name string) *vlc {
 	t.Helper()
 	m, srv := newMock(t)
-	return &vlc{t: t, s: newServerFor(t, srv.URL), m: m, urn: vonageURN(typ, name)}
+	return &vlc{t: t, s: newServerFor(t, srv.URL), m: m, urn: vonageURN(typ, name), srvURL: srv.URL}
 }
 
 // clone deep-copies a map[string]any through JSON so tests can mutate variants.

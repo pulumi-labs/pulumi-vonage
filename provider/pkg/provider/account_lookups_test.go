@@ -15,6 +15,7 @@
 package provider
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -132,3 +133,45 @@ func TestGetSubAccounts_ListsAndFilters(t *testing.T) {
 	require.NoError(t, err)
 	require.Equal(t, 0, none.Get("subAccounts").AsArray().Len())
 }
+
+// A /account/numbers response that omits "count" is the end of the list only when the page is short. A full
+// page without a count must fail loudly, in the lookup and in the ownership check a Number resource relies on,
+// instead of silently dropping the numbers on later pages.
+func TestGetNumbers_MissingCountFailsLoudlyOnFullPage(t *testing.T) {
+	l := newVLC(t, "Number", "n")
+	for i := 0; i < 100; i++ {
+		l.m.setNumberRaw("DE", fmt.Sprintf("4915000%03d", i), nil)
+	}
+	l.m.numbersOmitCount = true
+	_, err := invoke(t, l.s, "vonage:index:getNumbers", map[string]any{"country": "DE"})
+	require.ErrorContains(t, err, "without a total count")
+
+	_, err = ownedClient(l).FindOwnedNumber(t.Context(), "DE", "4915000")
+	require.ErrorContains(t, err, "without a total count")
+
+	// A short page without a count is simply the last page.
+	short := newVLC(t, "Number", "n")
+	short.m.setNumberRaw("US", "14155550001", nil)
+	short.m.numbersOmitCount = true
+	got, err := invoke(t, short.s, "vonage:index:getNumbers", map[string]any{})
+	require.NoError(t, err)
+	require.Equal(t, 1, got.Get("numbers").AsArray().Len())
+}
+
+// The walk is capped: a total that never runs out is an error naming the limit, not a truncated list or
+// a "not owned" answer.
+func TestGetNumbers_PageCapIsAnError(t *testing.T) {
+	l := newVLC(t, "Number", "n")
+	l.m.setNumberRaw("US", "14155550001", nil)
+	l.m.numbersCountOverride = 1_000_000
+	l.m.numbersRepeatFirstPage = true
+	_, err := invoke(t, l.s, "vonage:index:getNumbers", map[string]any{})
+	require.ErrorContains(t, err, "more than 10000 numbers match")
+	require.Equal(t, maxNumberPages, l.m.countCalls("GET /account/numbers"))
+
+	_, err = ownedClient(l).FindOwnedNumber(t.Context(), "US", "1415555000")
+	require.ErrorContains(t, err, "more than 10000 numbers match")
+}
+
+// ownedClient talks to the same mock the lifecycle uses.
+func ownedClient(l *vlc) *Client { return newClient("key12345", "Secret123", l.srvURL, l.srvURL) }

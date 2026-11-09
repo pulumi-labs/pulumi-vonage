@@ -166,7 +166,11 @@ func (f *GetNumbers) Invoke(ctx context.Context, req infer.FunctionRequest[GetNu
 				MessagesCallbackType: n.MessagesCallbackType, MessagesCallbackValue: n.MessagesCallbackValue,
 			})
 		}
-		if len(page.Numbers) == 0 || page.Count <= index*100 {
+		more, err := page.hasMore(index)
+		if err != nil {
+			return infer.FunctionResponse[GetNumbersResult]{}, fmt.Errorf("getNumbers: %w", err)
+		}
+		if !more {
 			return infer.FunctionResponse[GetNumbersResult]{Output: out}, nil
 		}
 	}
