@@ -235,8 +235,29 @@ type wireOwnedNumber struct {
 }
 
 type wireOwnedNumbers struct {
-	Count   int               `json:"count"`
+	// Count is the total across all pages; nil when the response omits it.
+	Count   *int              `json:"count"`
 	Numbers []wireOwnedNumber `json:"numbers"`
+}
+
+// ownedNumbersPageSize is the page size every /account/numbers walk requests (Vonage's maximum).
+const ownedNumbersPageSize = 100
+
+// hasMore reports whether another page follows page index (1-based). The walk must never stop early on
+// a guess: a response without a count is the last page only when it is short, and a full page with no
+// count is an error, because stopping there could hide numbers the account owns (and make a Number
+// resource believe it must buy one it already has).
+func (p wireOwnedNumbers) hasMore(index int) (bool, error) {
+	if len(p.Numbers) == 0 {
+		return false, nil
+	}
+	if p.Count == nil {
+		if len(p.Numbers) < ownedNumbersPageSize {
+			return false, nil
+		}
+		return false, fmt.Errorf("Vonage returned a full page of %d numbers without a total count, so the remaining pages cannot be told apart from the end of the list", ownedNumbersPageSize)
+	}
+	return *p.Count > index*ownedNumbersPageSize, nil
 }
 
 // numberStatus is the legacy envelope returned by buy/cancel/update.
@@ -264,7 +285,7 @@ func (e *numberStatusError) Error() string {
 
 // FindOwnedNumber returns the owned number with exactly this msisdn, or nil.
 func (c *Client) FindOwnedNumber(ctx context.Context, country, msisdn string) (*wireOwnedNumber, error) {
-	for index := 1; index <= 100; index++ {
+	for index := 1; index <= maxNumberPages; index++ {
 		q := url.Values{
 			"country":        {country},
 			"pattern":        {msisdn},
@@ -282,11 +303,15 @@ func (c *Client) FindOwnedNumber(ctx context.Context, country, msisdn string) (*
 				return &n, nil
 			}
 		}
-		if out.Count <= index*100 {
-			break
+		more, err := out.hasMore(index)
+		if err != nil {
+			return nil, fmt.Errorf("find owned number %s (%s): %w", msisdn, country, err)
+		}
+		if !more {
+			return nil, nil
 		}
 	}
-	return nil, nil
+	return nil, fmt.Errorf("find owned number %s (%s): more than %d numbers match the filter", msisdn, country, maxNumberPages*ownedNumbersPageSize)
 }
 
 // BuyNumber purchases a number. This is a billed, non-idempotent operation.

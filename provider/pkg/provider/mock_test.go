@@ -39,18 +39,22 @@ import (
 
 // mockVonage is a stateful in-memory fake of the Vonage endpoints the provider uses.
 type mockVonage struct {
-	mu        sync.Mutex
-	t         *testing.T
-	apps      map[string]map[string]any
-	nextApp   int
-	numbers   map[string]map[string]any // key country:msisdn
-	subs      map[string]map[string]any
-	available []map[string]any             // numbers for sale, served by GET /number/search
-	secrets   map[string]map[string]string // account -> id -> created
-	nextSec   int
-	calls     []string
-	fail5xx   int // number of upcoming GET /v2/applications calls to fail with 503
-	authSeen  bool
+	mu      sync.Mutex
+	t       *testing.T
+	apps    map[string]map[string]any
+	nextApp int
+	numbers map[string]map[string]any // key country:msisdn
+	// numbersOmitCount drops "count" from /account/numbers; numbersCountOverride (when > 0) reports that
+	// total instead of the real one; numbersRepeatFirstPage serves page 1 for every index.
+	numbersOmitCount, numbersRepeatFirstPage bool
+	numbersCountOverride                     int
+	subs                                     map[string]map[string]any
+	available                                []map[string]any             // numbers for sale, served by GET /number/search
+	secrets                                  map[string]map[string]string // account -> id -> created
+	nextSec                                  int
+	calls                                    []string
+	fail5xx                                  int // number of upcoming GET /v2/applications calls to fail with 503
+	authSeen                                 bool
 
 	// inject maps "METHOD /path" to an HTTP status returned (without touching state) for every
 	// matching request until the entry is deleted.
@@ -326,7 +330,7 @@ func (m *mockVonage) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		if v, err := strconv.Atoi(r.URL.Query().Get("size")); err == nil && v > 0 {
 			size = v
 		}
-		if v, err := strconv.Atoi(r.URL.Query().Get("index")); err == nil && v > 0 {
+		if v, err := strconv.Atoi(r.URL.Query().Get("index")); err == nil && v > 0 && !m.numbersRepeatFirstPage {
 			index = v
 		}
 		list := []any{}
@@ -342,7 +346,14 @@ func (m *mockVonage) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			}
 			list = append(list, c)
 		}
-		writeJSON(w, 200, map[string]any{"count": len(keys), "numbers": list})
+		resp := map[string]any{"count": len(keys), "numbers": list}
+		if m.numbersCountOverride > 0 {
+			resp["count"] = m.numbersCountOverride
+		}
+		if m.numbersOmitCount {
+			delete(resp, "count")
+		}
+		writeJSON(w, 200, resp)
 	case p == "/number/buy" || p == "/number/cancel" || p == "/number/update":
 		vals, _ := url.ParseQuery(string(body))
 		key := vals.Get("country") + ":" + vals.Get("msisdn")
