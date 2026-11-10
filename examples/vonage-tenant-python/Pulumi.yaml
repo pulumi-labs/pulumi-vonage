@@ -1,3 +1,0 @@
-name: vonage-tenant-python
-runtime: python
-description: Provision a Vonage subaccount tenant with its own application and a rotatable API secret (Python)
