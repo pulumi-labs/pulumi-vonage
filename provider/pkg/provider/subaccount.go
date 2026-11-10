@@ -144,6 +144,9 @@ func (r *SubAccount) Read(ctx context.Context, req infer.ReadRequest[SubAccountA
 		return infer.ReadResponse[SubAccountArgs, SubAccountState]{}, fmt.Errorf("read subaccount %s: %w", req.ID, err)
 	}
 	if s == nil {
+		if err := notFoundOnImport("subaccount", req.ID, req.Inputs, req.State); err != nil {
+			return infer.ReadResponse[SubAccountArgs, SubAccountState]{}, err
+		}
 		return infer.ReadResponse[SubAccountArgs, SubAccountState]{}, nil
 	}
 	args := req.Inputs

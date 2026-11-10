@@ -50,6 +50,44 @@ export interface NetworkApisCapabilityArgs {
     redirectUri?: pulumi.Input<string | undefined>;
 }
 
+export interface NetworkApplicationProfileApiArgs {
+    /**
+     * ID of the Network API, from getNetworkRegistryCatalogue networkApis (for example sim-swap).
+     */
+    networkApiId: pulumi.Input<string>;
+    /**
+     * IDs of the purposes the operator needs to validate the request, from getNetworkRegistryCatalogue purposes.
+     */
+    purposeIds: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface NetworkBusinessInformationArgs {
+    /**
+     * First line of the street address (at most 500 characters).
+     */
+    addressStreet1: pulumi.Input<string>;
+    /**
+     * Second line of the street address.
+     */
+    addressStreet2?: pulumi.Input<string | undefined>;
+    /**
+     * City.
+     */
+    city: pulumi.Input<string>;
+    /**
+     * Two-letter ISO 3166 country code of the address.
+     */
+    country: pulumi.Input<string>;
+    /**
+     * Postal or ZIP code.
+     */
+    postalCode: pulumi.Input<string>;
+    /**
+     * Province, state or region.
+     */
+    province?: pulumi.Input<string | undefined>;
+}
+
 export interface RtcCapabilityArgs {
     /**
      * Webhook that receives RTC events.
@@ -59,6 +97,103 @@ export interface RtcCapabilityArgs {
      * Whether Vonage signs webhook requests.
      */
     signedCallbacks?: pulumi.Input<boolean | undefined>;
+}
+
+export interface UserChannelsArgs {
+    /**
+     * Facebook Messenger IDs of the user.
+     */
+    messenger?: pulumi.Input<pulumi.Input<inputs.UserMessengerChannelArgs>[] | undefined>;
+    /**
+     * Numbers the user can receive MMS on.
+     */
+    mms?: pulumi.Input<pulumi.Input<inputs.UserNumberChannelArgs>[] | undefined>;
+    /**
+     * Phone numbers (PSTN) the user can be called on.
+     */
+    pstn?: pulumi.Input<pulumi.Input<inputs.UserPstnChannelArgs>[] | undefined>;
+    /**
+     * SIP endpoints of the user.
+     */
+    sip?: pulumi.Input<pulumi.Input<inputs.UserSipChannelArgs>[] | undefined>;
+    /**
+     * Numbers the user can receive SMS on.
+     */
+    sms?: pulumi.Input<pulumi.Input<inputs.UserNumberChannelArgs>[] | undefined>;
+    /**
+     * Vonage Business Cloud extensions of the user.
+     */
+    vbc?: pulumi.Input<pulumi.Input<inputs.UserVbcChannelArgs>[] | undefined>;
+    /**
+     * Viber numbers of the user.
+     */
+    viber?: pulumi.Input<pulumi.Input<inputs.UserNumberChannelArgs>[] | undefined>;
+    /**
+     * WebSocket endpoints of the user.
+     */
+    websocket?: pulumi.Input<pulumi.Input<inputs.UserWebsocketChannelArgs>[] | undefined>;
+    /**
+     * WhatsApp numbers of the user.
+     */
+    whatsapp?: pulumi.Input<pulumi.Input<inputs.UserNumberChannelArgs>[] | undefined>;
+}
+
+export interface UserMessengerChannelArgs {
+    /**
+     * The Facebook Messenger user ID.
+     */
+    id: pulumi.Input<string>;
+}
+
+export interface UserNumberChannelArgs {
+    /**
+     * The number in E.164 format without the leading plus.
+     */
+    number: pulumi.Input<string>;
+}
+
+export interface UserPstnChannelArgs {
+    /**
+     * The phone number in E.164 format without the leading plus, as an integer (for example 14155550100).
+     */
+    number: pulumi.Input<number>;
+}
+
+export interface UserSipChannelArgs {
+    /**
+     * Password for SIP authentication. The API never returns it, so the value recorded in state is the one last set by this program; a changed password is applied but a password changed outside Pulumi is not detected.
+     */
+    password?: pulumi.Input<string | undefined>;
+    /**
+     * The SIP URI, starting with sip: or sips:.
+     */
+    uri: pulumi.Input<string>;
+    /**
+     * Username for SIP authentication.
+     */
+    username?: pulumi.Input<string | undefined>;
+}
+
+export interface UserVbcChannelArgs {
+    /**
+     * The Vonage Business Cloud extension.
+     */
+    extension: pulumi.Input<string>;
+}
+
+export interface UserWebsocketChannelArgs {
+    /**
+     * The audio format, for example audio/l16;rate=16000 (sent to Vonage as content-type).
+     */
+    contentType?: pulumi.Input<string | undefined>;
+    /**
+     * Extra HTTP headers sent when Vonage connects to the WebSocket.
+     */
+    headers?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    /**
+     * The WebSocket URI, starting with ws:// or wss://.
+     */
+    uri: pulumi.Input<string>;
 }
 
 export interface VerifyCapabilityArgs {

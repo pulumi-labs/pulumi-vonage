@@ -11,6 +11,8 @@ import com.pulumi.deployment.InvokeOutputOptions;
 import com.pulumi.labs.vonage.Utilities;
 import com.pulumi.labs.vonage.inputs.GetAccountBalanceArgs;
 import com.pulumi.labs.vonage.inputs.GetAccountBalancePlainArgs;
+import com.pulumi.labs.vonage.inputs.GetAccountSettingsArgs;
+import com.pulumi.labs.vonage.inputs.GetAccountSettingsPlainArgs;
 import com.pulumi.labs.vonage.inputs.GetApiSecretArgs;
 import com.pulumi.labs.vonage.inputs.GetApiSecretPlainArgs;
 import com.pulumi.labs.vonage.inputs.GetApiSecretsArgs;
@@ -21,28 +23,86 @@ import com.pulumi.labs.vonage.inputs.GetApplicationsArgs;
 import com.pulumi.labs.vonage.inputs.GetApplicationsPlainArgs;
 import com.pulumi.labs.vonage.inputs.GetAvailableNumbersArgs;
 import com.pulumi.labs.vonage.inputs.GetAvailableNumbersPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetExternalAccountApplicationLinkArgs;
+import com.pulumi.labs.vonage.inputs.GetExternalAccountApplicationLinkPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetExternalAccountArgs;
+import com.pulumi.labs.vonage.inputs.GetExternalAccountPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetExternalAccountsArgs;
+import com.pulumi.labs.vonage.inputs.GetExternalAccountsPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetMessengerAccountArgs;
+import com.pulumi.labs.vonage.inputs.GetMessengerAccountPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetNetworkApplicationProfileArgs;
+import com.pulumi.labs.vonage.inputs.GetNetworkApplicationProfilePlainArgs;
+import com.pulumi.labs.vonage.inputs.GetNetworkApplicationProfileShareArgs;
+import com.pulumi.labs.vonage.inputs.GetNetworkApplicationProfileSharePlainArgs;
+import com.pulumi.labs.vonage.inputs.GetNetworkApplicationProfileSharesArgs;
+import com.pulumi.labs.vonage.inputs.GetNetworkApplicationProfileSharesPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetNetworkApplicationProfilesArgs;
+import com.pulumi.labs.vonage.inputs.GetNetworkApplicationProfilesPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetNetworkBusinessProfileArgs;
+import com.pulumi.labs.vonage.inputs.GetNetworkBusinessProfilePlainArgs;
+import com.pulumi.labs.vonage.inputs.GetNetworkBusinessProfilesArgs;
+import com.pulumi.labs.vonage.inputs.GetNetworkBusinessProfilesPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetNetworkRegistryCatalogueArgs;
+import com.pulumi.labs.vonage.inputs.GetNetworkRegistryCataloguePlainArgs;
+import com.pulumi.labs.vonage.inputs.GetNetworkTermsAndConditionsArgs;
+import com.pulumi.labs.vonage.inputs.GetNetworkTermsAndConditionsPlainArgs;
 import com.pulumi.labs.vonage.inputs.GetNumberArgs;
 import com.pulumi.labs.vonage.inputs.GetNumberPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetNumberPoolArgs;
+import com.pulumi.labs.vonage.inputs.GetNumberPoolNumberArgs;
+import com.pulumi.labs.vonage.inputs.GetNumberPoolNumberPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetNumberPoolNumbersArgs;
+import com.pulumi.labs.vonage.inputs.GetNumberPoolNumbersPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetNumberPoolPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetNumberPoolsArgs;
+import com.pulumi.labs.vonage.inputs.GetNumberPoolsPlainArgs;
 import com.pulumi.labs.vonage.inputs.GetNumbersArgs;
 import com.pulumi.labs.vonage.inputs.GetNumbersPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetPricingArgs;
+import com.pulumi.labs.vonage.inputs.GetPricingPlainArgs;
 import com.pulumi.labs.vonage.inputs.GetSubAccountArgs;
 import com.pulumi.labs.vonage.inputs.GetSubAccountPlainArgs;
 import com.pulumi.labs.vonage.inputs.GetSubAccountsArgs;
 import com.pulumi.labs.vonage.inputs.GetSubAccountsPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetUserArgs;
+import com.pulumi.labs.vonage.inputs.GetUserPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetUsersArgs;
+import com.pulumi.labs.vonage.inputs.GetUsersPlainArgs;
 import com.pulumi.labs.vonage.inputs.GetVerifyTemplateArgs;
 import com.pulumi.labs.vonage.inputs.GetVerifyTemplateFragmentArgs;
 import com.pulumi.labs.vonage.inputs.GetVerifyTemplateFragmentPlainArgs;
 import com.pulumi.labs.vonage.inputs.GetVerifyTemplatePlainArgs;
 import com.pulumi.labs.vonage.outputs.GetAccountBalanceResult;
+import com.pulumi.labs.vonage.outputs.GetAccountSettingsResult;
 import com.pulumi.labs.vonage.outputs.GetApiSecretResult;
 import com.pulumi.labs.vonage.outputs.GetApiSecretsResult;
 import com.pulumi.labs.vonage.outputs.GetApplicationResult;
 import com.pulumi.labs.vonage.outputs.GetApplicationsResult;
 import com.pulumi.labs.vonage.outputs.GetAvailableNumbersResult;
+import com.pulumi.labs.vonage.outputs.GetExternalAccountApplicationLinkResult;
+import com.pulumi.labs.vonage.outputs.GetExternalAccountResult;
+import com.pulumi.labs.vonage.outputs.GetExternalAccountsResult;
+import com.pulumi.labs.vonage.outputs.GetMessengerAccountResult;
+import com.pulumi.labs.vonage.outputs.GetNetworkApplicationProfileInvokeResult;
+import com.pulumi.labs.vonage.outputs.GetNetworkApplicationProfileShareResult;
+import com.pulumi.labs.vonage.outputs.GetNetworkApplicationProfileSharesResult;
+import com.pulumi.labs.vonage.outputs.GetNetworkApplicationProfilesResult;
+import com.pulumi.labs.vonage.outputs.GetNetworkBusinessProfileInvokeResult;
+import com.pulumi.labs.vonage.outputs.GetNetworkBusinessProfilesResult;
+import com.pulumi.labs.vonage.outputs.GetNetworkRegistryCatalogueResult;
+import com.pulumi.labs.vonage.outputs.GetNetworkTermsAndConditionsResult;
+import com.pulumi.labs.vonage.outputs.GetNumberPoolInvokeResult;
+import com.pulumi.labs.vonage.outputs.GetNumberPoolNumberResult;
+import com.pulumi.labs.vonage.outputs.GetNumberPoolNumbersResult;
+import com.pulumi.labs.vonage.outputs.GetNumberPoolsResult;
 import com.pulumi.labs.vonage.outputs.GetNumberResult;
 import com.pulumi.labs.vonage.outputs.GetNumbersResult;
+import com.pulumi.labs.vonage.outputs.GetPricingResult;
 import com.pulumi.labs.vonage.outputs.GetSubAccountInvokeResult;
 import com.pulumi.labs.vonage.outputs.GetSubAccountsResult;
+import com.pulumi.labs.vonage.outputs.GetUserResult;
+import com.pulumi.labs.vonage.outputs.GetUsersResult;
 import com.pulumi.labs.vonage.outputs.GetVerifyTemplateFragmentResult;
 import com.pulumi.labs.vonage.outputs.GetVerifyTemplateResult;
 import java.util.concurrent.CompletableFuture;
@@ -96,6 +156,55 @@ public final class VonageFunctions {
      */
     public static CompletableFuture<GetAccountBalanceResult> getAccountBalancePlain(GetAccountBalancePlainArgs args, InvokeOptions options) {
         return Deployment.getInstance().invokeAsync("vonage:index:getAccountBalance", TypeShape.of(GetAccountBalanceResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Read the default SMS webhooks and rate limits of the provider&#39;s Vonage account. Vonage has no GET for these, so this sends POST /account/settings with no fields, which returns the current values unchanged.
+     * 
+     */
+    public static Output<GetAccountSettingsResult> getAccountSettings() {
+        return getAccountSettings(GetAccountSettingsArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * Read the default SMS webhooks and rate limits of the provider&#39;s Vonage account. Vonage has no GET for these, so this sends POST /account/settings with no fields, which returns the current values unchanged.
+     * 
+     */
+    public static CompletableFuture<GetAccountSettingsResult> getAccountSettingsPlain() {
+        return getAccountSettingsPlain(GetAccountSettingsPlainArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * Read the default SMS webhooks and rate limits of the provider&#39;s Vonage account. Vonage has no GET for these, so this sends POST /account/settings with no fields, which returns the current values unchanged.
+     * 
+     */
+    public static Output<GetAccountSettingsResult> getAccountSettings(GetAccountSettingsArgs args) {
+        return getAccountSettings(args, InvokeOptions.Empty);
+    }
+    /**
+     * Read the default SMS webhooks and rate limits of the provider&#39;s Vonage account. Vonage has no GET for these, so this sends POST /account/settings with no fields, which returns the current values unchanged.
+     * 
+     */
+    public static CompletableFuture<GetAccountSettingsResult> getAccountSettingsPlain(GetAccountSettingsPlainArgs args) {
+        return getAccountSettingsPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * Read the default SMS webhooks and rate limits of the provider&#39;s Vonage account. Vonage has no GET for these, so this sends POST /account/settings with no fields, which returns the current values unchanged.
+     * 
+     */
+    public static Output<GetAccountSettingsResult> getAccountSettings(GetAccountSettingsArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getAccountSettings", TypeShape.of(GetAccountSettingsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Read the default SMS webhooks and rate limits of the provider&#39;s Vonage account. Vonage has no GET for these, so this sends POST /account/settings with no fields, which returns the current values unchanged.
+     * 
+     */
+    public static Output<GetAccountSettingsResult> getAccountSettings(GetAccountSettingsArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getAccountSettings", TypeShape.of(GetAccountSettingsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Read the default SMS webhooks and rate limits of the provider&#39;s Vonage account. Vonage has no GET for these, so this sends POST /account/settings with no fields, which returns the current values unchanged.
+     * 
+     */
+    public static CompletableFuture<GetAccountSettingsResult> getAccountSettingsPlain(GetAccountSettingsPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getAccountSettings", TypeShape.of(GetAccountSettingsResult.class), args, Utilities.withVersion(options));
     }
     /**
      * Look up an API secret&#39;s metadata by account and secret ID. Vonage never returns the secret value. Fails if it does not exist.
@@ -315,6 +424,482 @@ public final class VonageFunctions {
         return Deployment.getInstance().invokeAsync("vonage:index:getAvailableNumbers", TypeShape.of(GetAvailableNumbersResult.class), args, Utilities.withVersion(options));
     }
     /**
+     * Look up a Messenger, Viber Service Message or WhatsApp account registered with Vonage by channel and external ID. Fails if it does not exist.
+     * 
+     */
+    public static Output<GetExternalAccountResult> getExternalAccount(GetExternalAccountArgs args) {
+        return getExternalAccount(args, InvokeOptions.Empty);
+    }
+    /**
+     * Look up a Messenger, Viber Service Message or WhatsApp account registered with Vonage by channel and external ID. Fails if it does not exist.
+     * 
+     */
+    public static CompletableFuture<GetExternalAccountResult> getExternalAccountPlain(GetExternalAccountPlainArgs args) {
+        return getExternalAccountPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * Look up a Messenger, Viber Service Message or WhatsApp account registered with Vonage by channel and external ID. Fails if it does not exist.
+     * 
+     */
+    public static Output<GetExternalAccountResult> getExternalAccount(GetExternalAccountArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getExternalAccount", TypeShape.of(GetExternalAccountResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a Messenger, Viber Service Message or WhatsApp account registered with Vonage by channel and external ID. Fails if it does not exist.
+     * 
+     */
+    public static Output<GetExternalAccountResult> getExternalAccount(GetExternalAccountArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getExternalAccount", TypeShape.of(GetExternalAccountResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a Messenger, Viber Service Message or WhatsApp account registered with Vonage by channel and external ID. Fails if it does not exist.
+     * 
+     */
+    public static CompletableFuture<GetExternalAccountResult> getExternalAccountPlain(GetExternalAccountPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getExternalAccount", TypeShape.of(GetExternalAccountResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Check whether an application is linked to an external account. Fails if the account does not exist.
+     * 
+     */
+    public static Output<GetExternalAccountApplicationLinkResult> getExternalAccountApplicationLink(GetExternalAccountApplicationLinkArgs args) {
+        return getExternalAccountApplicationLink(args, InvokeOptions.Empty);
+    }
+    /**
+     * Check whether an application is linked to an external account. Fails if the account does not exist.
+     * 
+     */
+    public static CompletableFuture<GetExternalAccountApplicationLinkResult> getExternalAccountApplicationLinkPlain(GetExternalAccountApplicationLinkPlainArgs args) {
+        return getExternalAccountApplicationLinkPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * Check whether an application is linked to an external account. Fails if the account does not exist.
+     * 
+     */
+    public static Output<GetExternalAccountApplicationLinkResult> getExternalAccountApplicationLink(GetExternalAccountApplicationLinkArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getExternalAccountApplicationLink", TypeShape.of(GetExternalAccountApplicationLinkResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Check whether an application is linked to an external account. Fails if the account does not exist.
+     * 
+     */
+    public static Output<GetExternalAccountApplicationLinkResult> getExternalAccountApplicationLink(GetExternalAccountApplicationLinkArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getExternalAccountApplicationLink", TypeShape.of(GetExternalAccountApplicationLinkResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Check whether an application is linked to an external account. Fails if the account does not exist.
+     * 
+     */
+    public static CompletableFuture<GetExternalAccountApplicationLinkResult> getExternalAccountApplicationLinkPlain(GetExternalAccountApplicationLinkPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getExternalAccountApplicationLink", TypeShape.of(GetExternalAccountApplicationLinkResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the external (Messenger, Viber Service Message, WhatsApp, RCS) accounts registered with Vonage, following every page.
+     * 
+     */
+    public static Output<GetExternalAccountsResult> getExternalAccounts() {
+        return getExternalAccounts(GetExternalAccountsArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * List the external (Messenger, Viber Service Message, WhatsApp, RCS) accounts registered with Vonage, following every page.
+     * 
+     */
+    public static CompletableFuture<GetExternalAccountsResult> getExternalAccountsPlain() {
+        return getExternalAccountsPlain(GetExternalAccountsPlainArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * List the external (Messenger, Viber Service Message, WhatsApp, RCS) accounts registered with Vonage, following every page.
+     * 
+     */
+    public static Output<GetExternalAccountsResult> getExternalAccounts(GetExternalAccountsArgs args) {
+        return getExternalAccounts(args, InvokeOptions.Empty);
+    }
+    /**
+     * List the external (Messenger, Viber Service Message, WhatsApp, RCS) accounts registered with Vonage, following every page.
+     * 
+     */
+    public static CompletableFuture<GetExternalAccountsResult> getExternalAccountsPlain(GetExternalAccountsPlainArgs args) {
+        return getExternalAccountsPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * List the external (Messenger, Viber Service Message, WhatsApp, RCS) accounts registered with Vonage, following every page.
+     * 
+     */
+    public static Output<GetExternalAccountsResult> getExternalAccounts(GetExternalAccountsArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getExternalAccounts", TypeShape.of(GetExternalAccountsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the external (Messenger, Viber Service Message, WhatsApp, RCS) accounts registered with Vonage, following every page.
+     * 
+     */
+    public static Output<GetExternalAccountsResult> getExternalAccounts(GetExternalAccountsArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getExternalAccounts", TypeShape.of(GetExternalAccountsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the external (Messenger, Viber Service Message, WhatsApp, RCS) accounts registered with Vonage, following every page.
+     * 
+     */
+    public static CompletableFuture<GetExternalAccountsResult> getExternalAccountsPlain(GetExternalAccountsPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getExternalAccounts", TypeShape.of(GetExternalAccountsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a Messenger account registered with Vonage by Facebook Page ID, including its page access token (secret). Fails if it does not exist.
+     * 
+     */
+    public static Output<GetMessengerAccountResult> getMessengerAccount(GetMessengerAccountArgs args) {
+        return getMessengerAccount(args, InvokeOptions.Empty);
+    }
+    /**
+     * Look up a Messenger account registered with Vonage by Facebook Page ID, including its page access token (secret). Fails if it does not exist.
+     * 
+     */
+    public static CompletableFuture<GetMessengerAccountResult> getMessengerAccountPlain(GetMessengerAccountPlainArgs args) {
+        return getMessengerAccountPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * Look up a Messenger account registered with Vonage by Facebook Page ID, including its page access token (secret). Fails if it does not exist.
+     * 
+     */
+    public static Output<GetMessengerAccountResult> getMessengerAccount(GetMessengerAccountArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getMessengerAccount", TypeShape.of(GetMessengerAccountResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a Messenger account registered with Vonage by Facebook Page ID, including its page access token (secret). Fails if it does not exist.
+     * 
+     */
+    public static Output<GetMessengerAccountResult> getMessengerAccount(GetMessengerAccountArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getMessengerAccount", TypeShape.of(GetMessengerAccountResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a Messenger account registered with Vonage by Facebook Page ID, including its page access token (secret). Fails if it does not exist.
+     * 
+     */
+    public static CompletableFuture<GetMessengerAccountResult> getMessengerAccountPlain(GetMessengerAccountPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getMessengerAccount", TypeShape.of(GetMessengerAccountResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a Network Registry application profile by ID. A deleted profile is reported as not found.
+     * 
+     */
+    public static Output<GetNetworkApplicationProfileInvokeResult> getNetworkApplicationProfile(GetNetworkApplicationProfileArgs args) {
+        return getNetworkApplicationProfile(args, InvokeOptions.Empty);
+    }
+    /**
+     * Look up a Network Registry application profile by ID. A deleted profile is reported as not found.
+     * 
+     */
+    public static CompletableFuture<GetNetworkApplicationProfileInvokeResult> getNetworkApplicationProfilePlain(GetNetworkApplicationProfilePlainArgs args) {
+        return getNetworkApplicationProfilePlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * Look up a Network Registry application profile by ID. A deleted profile is reported as not found.
+     * 
+     */
+    public static Output<GetNetworkApplicationProfileInvokeResult> getNetworkApplicationProfile(GetNetworkApplicationProfileArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getNetworkApplicationProfile", TypeShape.of(GetNetworkApplicationProfileInvokeResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a Network Registry application profile by ID. A deleted profile is reported as not found.
+     * 
+     */
+    public static Output<GetNetworkApplicationProfileInvokeResult> getNetworkApplicationProfile(GetNetworkApplicationProfileArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getNetworkApplicationProfile", TypeShape.of(GetNetworkApplicationProfileInvokeResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a Network Registry application profile by ID. A deleted profile is reported as not found.
+     * 
+     */
+    public static CompletableFuture<GetNetworkApplicationProfileInvokeResult> getNetworkApplicationProfilePlain(GetNetworkApplicationProfilePlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getNetworkApplicationProfile", TypeShape.of(GetNetworkApplicationProfileInvokeResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up whether a Network Registry application profile is shared with an account. The API has no get-one call, so this lists the profile&#39;s shares and picks the match; an absent share is reported as not found.
+     * 
+     */
+    public static Output<GetNetworkApplicationProfileShareResult> getNetworkApplicationProfileShare(GetNetworkApplicationProfileShareArgs args) {
+        return getNetworkApplicationProfileShare(args, InvokeOptions.Empty);
+    }
+    /**
+     * Look up whether a Network Registry application profile is shared with an account. The API has no get-one call, so this lists the profile&#39;s shares and picks the match; an absent share is reported as not found.
+     * 
+     */
+    public static CompletableFuture<GetNetworkApplicationProfileShareResult> getNetworkApplicationProfileSharePlain(GetNetworkApplicationProfileSharePlainArgs args) {
+        return getNetworkApplicationProfileSharePlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * Look up whether a Network Registry application profile is shared with an account. The API has no get-one call, so this lists the profile&#39;s shares and picks the match; an absent share is reported as not found.
+     * 
+     */
+    public static Output<GetNetworkApplicationProfileShareResult> getNetworkApplicationProfileShare(GetNetworkApplicationProfileShareArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getNetworkApplicationProfileShare", TypeShape.of(GetNetworkApplicationProfileShareResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up whether a Network Registry application profile is shared with an account. The API has no get-one call, so this lists the profile&#39;s shares and picks the match; an absent share is reported as not found.
+     * 
+     */
+    public static Output<GetNetworkApplicationProfileShareResult> getNetworkApplicationProfileShare(GetNetworkApplicationProfileShareArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getNetworkApplicationProfileShare", TypeShape.of(GetNetworkApplicationProfileShareResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up whether a Network Registry application profile is shared with an account. The API has no get-one call, so this lists the profile&#39;s shares and picks the match; an absent share is reported as not found.
+     * 
+     */
+    public static CompletableFuture<GetNetworkApplicationProfileShareResult> getNetworkApplicationProfileSharePlain(GetNetworkApplicationProfileSharePlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getNetworkApplicationProfileShare", TypeShape.of(GetNetworkApplicationProfileShareResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the Vonage accounts a Network Registry application profile has been shared with, following every page.
+     * 
+     */
+    public static Output<GetNetworkApplicationProfileSharesResult> getNetworkApplicationProfileShares(GetNetworkApplicationProfileSharesArgs args) {
+        return getNetworkApplicationProfileShares(args, InvokeOptions.Empty);
+    }
+    /**
+     * List the Vonage accounts a Network Registry application profile has been shared with, following every page.
+     * 
+     */
+    public static CompletableFuture<GetNetworkApplicationProfileSharesResult> getNetworkApplicationProfileSharesPlain(GetNetworkApplicationProfileSharesPlainArgs args) {
+        return getNetworkApplicationProfileSharesPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * List the Vonage accounts a Network Registry application profile has been shared with, following every page.
+     * 
+     */
+    public static Output<GetNetworkApplicationProfileSharesResult> getNetworkApplicationProfileShares(GetNetworkApplicationProfileSharesArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getNetworkApplicationProfileShares", TypeShape.of(GetNetworkApplicationProfileSharesResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the Vonage accounts a Network Registry application profile has been shared with, following every page.
+     * 
+     */
+    public static Output<GetNetworkApplicationProfileSharesResult> getNetworkApplicationProfileShares(GetNetworkApplicationProfileSharesArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getNetworkApplicationProfileShares", TypeShape.of(GetNetworkApplicationProfileSharesResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the Vonage accounts a Network Registry application profile has been shared with, following every page.
+     * 
+     */
+    public static CompletableFuture<GetNetworkApplicationProfileSharesResult> getNetworkApplicationProfileSharesPlain(GetNetworkApplicationProfileSharesPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getNetworkApplicationProfileShares", TypeShape.of(GetNetworkApplicationProfileSharesResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the account&#39;s Network Registry application profiles, following every page.
+     * 
+     */
+    public static Output<GetNetworkApplicationProfilesResult> getNetworkApplicationProfiles() {
+        return getNetworkApplicationProfiles(GetNetworkApplicationProfilesArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * List the account&#39;s Network Registry application profiles, following every page.
+     * 
+     */
+    public static CompletableFuture<GetNetworkApplicationProfilesResult> getNetworkApplicationProfilesPlain() {
+        return getNetworkApplicationProfilesPlain(GetNetworkApplicationProfilesPlainArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * List the account&#39;s Network Registry application profiles, following every page.
+     * 
+     */
+    public static Output<GetNetworkApplicationProfilesResult> getNetworkApplicationProfiles(GetNetworkApplicationProfilesArgs args) {
+        return getNetworkApplicationProfiles(args, InvokeOptions.Empty);
+    }
+    /**
+     * List the account&#39;s Network Registry application profiles, following every page.
+     * 
+     */
+    public static CompletableFuture<GetNetworkApplicationProfilesResult> getNetworkApplicationProfilesPlain(GetNetworkApplicationProfilesPlainArgs args) {
+        return getNetworkApplicationProfilesPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * List the account&#39;s Network Registry application profiles, following every page.
+     * 
+     */
+    public static Output<GetNetworkApplicationProfilesResult> getNetworkApplicationProfiles(GetNetworkApplicationProfilesArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getNetworkApplicationProfiles", TypeShape.of(GetNetworkApplicationProfilesResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the account&#39;s Network Registry application profiles, following every page.
+     * 
+     */
+    public static Output<GetNetworkApplicationProfilesResult> getNetworkApplicationProfiles(GetNetworkApplicationProfilesArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getNetworkApplicationProfiles", TypeShape.of(GetNetworkApplicationProfilesResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the account&#39;s Network Registry application profiles, following every page.
+     * 
+     */
+    public static CompletableFuture<GetNetworkApplicationProfilesResult> getNetworkApplicationProfilesPlain(GetNetworkApplicationProfilesPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getNetworkApplicationProfiles", TypeShape.of(GetNetworkApplicationProfilesResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a Network Registry business profile by ID. Fails if it does not exist or has been deleted.
+     * 
+     */
+    public static Output<GetNetworkBusinessProfileInvokeResult> getNetworkBusinessProfile(GetNetworkBusinessProfileArgs args) {
+        return getNetworkBusinessProfile(args, InvokeOptions.Empty);
+    }
+    /**
+     * Look up a Network Registry business profile by ID. Fails if it does not exist or has been deleted.
+     * 
+     */
+    public static CompletableFuture<GetNetworkBusinessProfileInvokeResult> getNetworkBusinessProfilePlain(GetNetworkBusinessProfilePlainArgs args) {
+        return getNetworkBusinessProfilePlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * Look up a Network Registry business profile by ID. Fails if it does not exist or has been deleted.
+     * 
+     */
+    public static Output<GetNetworkBusinessProfileInvokeResult> getNetworkBusinessProfile(GetNetworkBusinessProfileArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getNetworkBusinessProfile", TypeShape.of(GetNetworkBusinessProfileInvokeResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a Network Registry business profile by ID. Fails if it does not exist or has been deleted.
+     * 
+     */
+    public static Output<GetNetworkBusinessProfileInvokeResult> getNetworkBusinessProfile(GetNetworkBusinessProfileArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getNetworkBusinessProfile", TypeShape.of(GetNetworkBusinessProfileInvokeResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a Network Registry business profile by ID. Fails if it does not exist or has been deleted.
+     * 
+     */
+    public static CompletableFuture<GetNetworkBusinessProfileInvokeResult> getNetworkBusinessProfilePlain(GetNetworkBusinessProfilePlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getNetworkBusinessProfile", TypeShape.of(GetNetworkBusinessProfileInvokeResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the account&#39;s Network Registry business profiles, following every page.
+     * 
+     */
+    public static Output<GetNetworkBusinessProfilesResult> getNetworkBusinessProfiles() {
+        return getNetworkBusinessProfiles(GetNetworkBusinessProfilesArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * List the account&#39;s Network Registry business profiles, following every page.
+     * 
+     */
+    public static CompletableFuture<GetNetworkBusinessProfilesResult> getNetworkBusinessProfilesPlain() {
+        return getNetworkBusinessProfilesPlain(GetNetworkBusinessProfilesPlainArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * List the account&#39;s Network Registry business profiles, following every page.
+     * 
+     */
+    public static Output<GetNetworkBusinessProfilesResult> getNetworkBusinessProfiles(GetNetworkBusinessProfilesArgs args) {
+        return getNetworkBusinessProfiles(args, InvokeOptions.Empty);
+    }
+    /**
+     * List the account&#39;s Network Registry business profiles, following every page.
+     * 
+     */
+    public static CompletableFuture<GetNetworkBusinessProfilesResult> getNetworkBusinessProfilesPlain(GetNetworkBusinessProfilesPlainArgs args) {
+        return getNetworkBusinessProfilesPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * List the account&#39;s Network Registry business profiles, following every page.
+     * 
+     */
+    public static Output<GetNetworkBusinessProfilesResult> getNetworkBusinessProfiles(GetNetworkBusinessProfilesArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getNetworkBusinessProfiles", TypeShape.of(GetNetworkBusinessProfilesResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the account&#39;s Network Registry business profiles, following every page.
+     * 
+     */
+    public static Output<GetNetworkBusinessProfilesResult> getNetworkBusinessProfiles(GetNetworkBusinessProfilesArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getNetworkBusinessProfiles", TypeShape.of(GetNetworkBusinessProfilesResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the account&#39;s Network Registry business profiles, following every page.
+     * 
+     */
+    public static CompletableFuture<GetNetworkBusinessProfilesResult> getNetworkBusinessProfilesPlain(GetNetworkBusinessProfilesPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getNetworkBusinessProfiles", TypeShape.of(GetNetworkBusinessProfilesResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Read the Network Registry reference data (countries, organisation types, categories, CSPs, Network APIs, purposes, vetting levels and terms and conditions), following every page. Read-only and free.
+     * 
+     */
+    public static Output<GetNetworkRegistryCatalogueResult> getNetworkRegistryCatalogue() {
+        return getNetworkRegistryCatalogue(GetNetworkRegistryCatalogueArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * Read the Network Registry reference data (countries, organisation types, categories, CSPs, Network APIs, purposes, vetting levels and terms and conditions), following every page. Read-only and free.
+     * 
+     */
+    public static CompletableFuture<GetNetworkRegistryCatalogueResult> getNetworkRegistryCataloguePlain() {
+        return getNetworkRegistryCataloguePlain(GetNetworkRegistryCataloguePlainArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * Read the Network Registry reference data (countries, organisation types, categories, CSPs, Network APIs, purposes, vetting levels and terms and conditions), following every page. Read-only and free.
+     * 
+     */
+    public static Output<GetNetworkRegistryCatalogueResult> getNetworkRegistryCatalogue(GetNetworkRegistryCatalogueArgs args) {
+        return getNetworkRegistryCatalogue(args, InvokeOptions.Empty);
+    }
+    /**
+     * Read the Network Registry reference data (countries, organisation types, categories, CSPs, Network APIs, purposes, vetting levels and terms and conditions), following every page. Read-only and free.
+     * 
+     */
+    public static CompletableFuture<GetNetworkRegistryCatalogueResult> getNetworkRegistryCataloguePlain(GetNetworkRegistryCataloguePlainArgs args) {
+        return getNetworkRegistryCataloguePlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * Read the Network Registry reference data (countries, organisation types, categories, CSPs, Network APIs, purposes, vetting levels and terms and conditions), following every page. Read-only and free.
+     * 
+     */
+    public static Output<GetNetworkRegistryCatalogueResult> getNetworkRegistryCatalogue(GetNetworkRegistryCatalogueArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getNetworkRegistryCatalogue", TypeShape.of(GetNetworkRegistryCatalogueResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Read the Network Registry reference data (countries, organisation types, categories, CSPs, Network APIs, purposes, vetting levels and terms and conditions), following every page. Read-only and free.
+     * 
+     */
+    public static Output<GetNetworkRegistryCatalogueResult> getNetworkRegistryCatalogue(GetNetworkRegistryCatalogueArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getNetworkRegistryCatalogue", TypeShape.of(GetNetworkRegistryCatalogueResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Read the Network Registry reference data (countries, organisation types, categories, CSPs, Network APIs, purposes, vetting levels and terms and conditions), following every page. Read-only and free.
+     * 
+     */
+    public static CompletableFuture<GetNetworkRegistryCatalogueResult> getNetworkRegistryCataloguePlain(GetNetworkRegistryCataloguePlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getNetworkRegistryCatalogue", TypeShape.of(GetNetworkRegistryCatalogueResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Read one Network Registry terms and conditions document by ID. Fails if it does not exist.
+     * 
+     */
+    public static Output<GetNetworkTermsAndConditionsResult> getNetworkTermsAndConditions(GetNetworkTermsAndConditionsArgs args) {
+        return getNetworkTermsAndConditions(args, InvokeOptions.Empty);
+    }
+    /**
+     * Read one Network Registry terms and conditions document by ID. Fails if it does not exist.
+     * 
+     */
+    public static CompletableFuture<GetNetworkTermsAndConditionsResult> getNetworkTermsAndConditionsPlain(GetNetworkTermsAndConditionsPlainArgs args) {
+        return getNetworkTermsAndConditionsPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * Read one Network Registry terms and conditions document by ID. Fails if it does not exist.
+     * 
+     */
+    public static Output<GetNetworkTermsAndConditionsResult> getNetworkTermsAndConditions(GetNetworkTermsAndConditionsArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getNetworkTermsAndConditions", TypeShape.of(GetNetworkTermsAndConditionsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Read one Network Registry terms and conditions document by ID. Fails if it does not exist.
+     * 
+     */
+    public static Output<GetNetworkTermsAndConditionsResult> getNetworkTermsAndConditions(GetNetworkTermsAndConditionsArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getNetworkTermsAndConditions", TypeShape.of(GetNetworkTermsAndConditionsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Read one Network Registry terms and conditions document by ID. Fails if it does not exist.
+     * 
+     */
+    public static CompletableFuture<GetNetworkTermsAndConditionsResult> getNetworkTermsAndConditionsPlain(GetNetworkTermsAndConditionsPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getNetworkTermsAndConditions", TypeShape.of(GetNetworkTermsAndConditionsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
      * Look up a number owned by the account. Fails if the account does not own it.
      * 
      */
@@ -348,6 +933,160 @@ public final class VonageFunctions {
      */
     public static CompletableFuture<GetNumberResult> getNumberPlain(GetNumberPlainArgs args, InvokeOptions options) {
         return Deployment.getInstance().invokeAsync("vonage:index:getNumber", TypeShape.of(GetNumberResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a number pool by ID. Fails if it does not exist.
+     * 
+     */
+    public static Output<GetNumberPoolInvokeResult> getNumberPool(GetNumberPoolArgs args) {
+        return getNumberPool(args, InvokeOptions.Empty);
+    }
+    /**
+     * Look up a number pool by ID. Fails if it does not exist.
+     * 
+     */
+    public static CompletableFuture<GetNumberPoolInvokeResult> getNumberPoolPlain(GetNumberPoolPlainArgs args) {
+        return getNumberPoolPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * Look up a number pool by ID. Fails if it does not exist.
+     * 
+     */
+    public static Output<GetNumberPoolInvokeResult> getNumberPool(GetNumberPoolArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getNumberPool", TypeShape.of(GetNumberPoolInvokeResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a number pool by ID. Fails if it does not exist.
+     * 
+     */
+    public static Output<GetNumberPoolInvokeResult> getNumberPool(GetNumberPoolArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getNumberPool", TypeShape.of(GetNumberPoolInvokeResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a number pool by ID. Fails if it does not exist.
+     * 
+     */
+    public static CompletableFuture<GetNumberPoolInvokeResult> getNumberPoolPlain(GetNumberPoolPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getNumberPool", TypeShape.of(GetNumberPoolInvokeResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Check that a number is in a pool. Fails if the pool does not exist or the number is not in it.
+     * 
+     */
+    public static Output<GetNumberPoolNumberResult> getNumberPoolNumber(GetNumberPoolNumberArgs args) {
+        return getNumberPoolNumber(args, InvokeOptions.Empty);
+    }
+    /**
+     * Check that a number is in a pool. Fails if the pool does not exist or the number is not in it.
+     * 
+     */
+    public static CompletableFuture<GetNumberPoolNumberResult> getNumberPoolNumberPlain(GetNumberPoolNumberPlainArgs args) {
+        return getNumberPoolNumberPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * Check that a number is in a pool. Fails if the pool does not exist or the number is not in it.
+     * 
+     */
+    public static Output<GetNumberPoolNumberResult> getNumberPoolNumber(GetNumberPoolNumberArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getNumberPoolNumber", TypeShape.of(GetNumberPoolNumberResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Check that a number is in a pool. Fails if the pool does not exist or the number is not in it.
+     * 
+     */
+    public static Output<GetNumberPoolNumberResult> getNumberPoolNumber(GetNumberPoolNumberArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getNumberPoolNumber", TypeShape.of(GetNumberPoolNumberResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Check that a number is in a pool. Fails if the pool does not exist or the number is not in it.
+     * 
+     */
+    public static CompletableFuture<GetNumberPoolNumberResult> getNumberPoolNumberPlain(GetNumberPoolNumberPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getNumberPoolNumber", TypeShape.of(GetNumberPoolNumberResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the numbers in a pool, following every page. Fails if the pool does not exist.
+     * 
+     */
+    public static Output<GetNumberPoolNumbersResult> getNumberPoolNumbers(GetNumberPoolNumbersArgs args) {
+        return getNumberPoolNumbers(args, InvokeOptions.Empty);
+    }
+    /**
+     * List the numbers in a pool, following every page. Fails if the pool does not exist.
+     * 
+     */
+    public static CompletableFuture<GetNumberPoolNumbersResult> getNumberPoolNumbersPlain(GetNumberPoolNumbersPlainArgs args) {
+        return getNumberPoolNumbersPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * List the numbers in a pool, following every page. Fails if the pool does not exist.
+     * 
+     */
+    public static Output<GetNumberPoolNumbersResult> getNumberPoolNumbers(GetNumberPoolNumbersArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getNumberPoolNumbers", TypeShape.of(GetNumberPoolNumbersResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the numbers in a pool, following every page. Fails if the pool does not exist.
+     * 
+     */
+    public static Output<GetNumberPoolNumbersResult> getNumberPoolNumbers(GetNumberPoolNumbersArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getNumberPoolNumbers", TypeShape.of(GetNumberPoolNumbersResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the numbers in a pool, following every page. Fails if the pool does not exist.
+     * 
+     */
+    public static CompletableFuture<GetNumberPoolNumbersResult> getNumberPoolNumbersPlain(GetNumberPoolNumbersPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getNumberPoolNumbers", TypeShape.of(GetNumberPoolNumbersResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the account&#39;s number pools, following every page.
+     * 
+     */
+    public static Output<GetNumberPoolsResult> getNumberPools() {
+        return getNumberPools(GetNumberPoolsArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * List the account&#39;s number pools, following every page.
+     * 
+     */
+    public static CompletableFuture<GetNumberPoolsResult> getNumberPoolsPlain() {
+        return getNumberPoolsPlain(GetNumberPoolsPlainArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * List the account&#39;s number pools, following every page.
+     * 
+     */
+    public static Output<GetNumberPoolsResult> getNumberPools(GetNumberPoolsArgs args) {
+        return getNumberPools(args, InvokeOptions.Empty);
+    }
+    /**
+     * List the account&#39;s number pools, following every page.
+     * 
+     */
+    public static CompletableFuture<GetNumberPoolsResult> getNumberPoolsPlain(GetNumberPoolsPlainArgs args) {
+        return getNumberPoolsPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * List the account&#39;s number pools, following every page.
+     * 
+     */
+    public static Output<GetNumberPoolsResult> getNumberPools(GetNumberPoolsArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getNumberPools", TypeShape.of(GetNumberPoolsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the account&#39;s number pools, following every page.
+     * 
+     */
+    public static Output<GetNumberPoolsResult> getNumberPools(GetNumberPoolsArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getNumberPools", TypeShape.of(GetNumberPoolsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the account&#39;s number pools, following every page.
+     * 
+     */
+    public static CompletableFuture<GetNumberPoolsResult> getNumberPoolsPlain(GetNumberPoolsPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getNumberPools", TypeShape.of(GetNumberPoolsResult.class), args, Utilities.withVersion(options));
     }
     /**
      * List the numbers owned by the account (GET /account/numbers), following every page.
@@ -397,6 +1136,55 @@ public final class VonageFunctions {
      */
     public static CompletableFuture<GetNumbersResult> getNumbersPlain(GetNumbersPlainArgs args, InvokeOptions options) {
         return Deployment.getInstance().invokeAsync("vonage:index:getNumbers", TypeShape.of(GetNumbersResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Read Vonage&#39;s outbound price list for SMS, SMS transit or voice, for one country (GET /account/get-pricing/outbound), for a dialling prefix (GET /account/get-prefix-pricing/outbound) or for every country (GET /account/get-full-pricing/outbound). Read-only. Prices are decimal strings in the account currency.
+     * 
+     */
+    public static Output<GetPricingResult> getPricing() {
+        return getPricing(GetPricingArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * Read Vonage&#39;s outbound price list for SMS, SMS transit or voice, for one country (GET /account/get-pricing/outbound), for a dialling prefix (GET /account/get-prefix-pricing/outbound) or for every country (GET /account/get-full-pricing/outbound). Read-only. Prices are decimal strings in the account currency.
+     * 
+     */
+    public static CompletableFuture<GetPricingResult> getPricingPlain() {
+        return getPricingPlain(GetPricingPlainArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * Read Vonage&#39;s outbound price list for SMS, SMS transit or voice, for one country (GET /account/get-pricing/outbound), for a dialling prefix (GET /account/get-prefix-pricing/outbound) or for every country (GET /account/get-full-pricing/outbound). Read-only. Prices are decimal strings in the account currency.
+     * 
+     */
+    public static Output<GetPricingResult> getPricing(GetPricingArgs args) {
+        return getPricing(args, InvokeOptions.Empty);
+    }
+    /**
+     * Read Vonage&#39;s outbound price list for SMS, SMS transit or voice, for one country (GET /account/get-pricing/outbound), for a dialling prefix (GET /account/get-prefix-pricing/outbound) or for every country (GET /account/get-full-pricing/outbound). Read-only. Prices are decimal strings in the account currency.
+     * 
+     */
+    public static CompletableFuture<GetPricingResult> getPricingPlain(GetPricingPlainArgs args) {
+        return getPricingPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * Read Vonage&#39;s outbound price list for SMS, SMS transit or voice, for one country (GET /account/get-pricing/outbound), for a dialling prefix (GET /account/get-prefix-pricing/outbound) or for every country (GET /account/get-full-pricing/outbound). Read-only. Prices are decimal strings in the account currency.
+     * 
+     */
+    public static Output<GetPricingResult> getPricing(GetPricingArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getPricing", TypeShape.of(GetPricingResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Read Vonage&#39;s outbound price list for SMS, SMS transit or voice, for one country (GET /account/get-pricing/outbound), for a dialling prefix (GET /account/get-prefix-pricing/outbound) or for every country (GET /account/get-full-pricing/outbound). Read-only. Prices are decimal strings in the account currency.
+     * 
+     */
+    public static Output<GetPricingResult> getPricing(GetPricingArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getPricing", TypeShape.of(GetPricingResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Read Vonage&#39;s outbound price list for SMS, SMS transit or voice, for one country (GET /account/get-pricing/outbound), for a dialling prefix (GET /account/get-prefix-pricing/outbound) or for every country (GET /account/get-full-pricing/outbound). Read-only. Prices are decimal strings in the account currency.
+     * 
+     */
+    public static CompletableFuture<GetPricingResult> getPricingPlain(GetPricingPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getPricing", TypeShape.of(GetPricingResult.class), args, Utilities.withVersion(options));
     }
     /**
      * Look up a subaccount of the provider&#39;s primary account by API key. Fails if it does not exist.
@@ -481,6 +1269,104 @@ public final class VonageFunctions {
      */
     public static CompletableFuture<GetSubAccountsResult> getSubAccountsPlain(GetSubAccountsPlainArgs args, InvokeOptions options) {
         return Deployment.getInstance().invokeAsync("vonage:index:getSubAccounts", TypeShape.of(GetSubAccountsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a user of the configured application by ID or exact name. Needs applicationId and privateKey. Fails if the user does not exist.
+     * 
+     */
+    public static Output<GetUserResult> getUser() {
+        return getUser(GetUserArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * Look up a user of the configured application by ID or exact name. Needs applicationId and privateKey. Fails if the user does not exist.
+     * 
+     */
+    public static CompletableFuture<GetUserResult> getUserPlain() {
+        return getUserPlain(GetUserPlainArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * Look up a user of the configured application by ID or exact name. Needs applicationId and privateKey. Fails if the user does not exist.
+     * 
+     */
+    public static Output<GetUserResult> getUser(GetUserArgs args) {
+        return getUser(args, InvokeOptions.Empty);
+    }
+    /**
+     * Look up a user of the configured application by ID or exact name. Needs applicationId and privateKey. Fails if the user does not exist.
+     * 
+     */
+    public static CompletableFuture<GetUserResult> getUserPlain(GetUserPlainArgs args) {
+        return getUserPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * Look up a user of the configured application by ID or exact name. Needs applicationId and privateKey. Fails if the user does not exist.
+     * 
+     */
+    public static Output<GetUserResult> getUser(GetUserArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getUser", TypeShape.of(GetUserResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a user of the configured application by ID or exact name. Needs applicationId and privateKey. Fails if the user does not exist.
+     * 
+     */
+    public static Output<GetUserResult> getUser(GetUserArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getUser", TypeShape.of(GetUserResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a user of the configured application by ID or exact name. Needs applicationId and privateKey. Fails if the user does not exist.
+     * 
+     */
+    public static CompletableFuture<GetUserResult> getUserPlain(GetUserPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getUser", TypeShape.of(GetUserResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the users of the configured application, following every page. Needs applicationId and privateKey.
+     * 
+     */
+    public static Output<GetUsersResult> getUsers() {
+        return getUsers(GetUsersArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * List the users of the configured application, following every page. Needs applicationId and privateKey.
+     * 
+     */
+    public static CompletableFuture<GetUsersResult> getUsersPlain() {
+        return getUsersPlain(GetUsersPlainArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * List the users of the configured application, following every page. Needs applicationId and privateKey.
+     * 
+     */
+    public static Output<GetUsersResult> getUsers(GetUsersArgs args) {
+        return getUsers(args, InvokeOptions.Empty);
+    }
+    /**
+     * List the users of the configured application, following every page. Needs applicationId and privateKey.
+     * 
+     */
+    public static CompletableFuture<GetUsersResult> getUsersPlain(GetUsersPlainArgs args) {
+        return getUsersPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * List the users of the configured application, following every page. Needs applicationId and privateKey.
+     * 
+     */
+    public static Output<GetUsersResult> getUsers(GetUsersArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getUsers", TypeShape.of(GetUsersResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the users of the configured application, following every page. Needs applicationId and privateKey.
+     * 
+     */
+    public static Output<GetUsersResult> getUsers(GetUsersArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getUsers", TypeShape.of(GetUsersResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the users of the configured application, following every page. Needs applicationId and privateKey.
+     * 
+     */
+    public static CompletableFuture<GetUsersResult> getUsersPlain(GetUsersPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getUsers", TypeShape.of(GetUsersResult.class), args, Utilities.withVersion(options));
     }
     /**
      * Look up a Verify v2 template by ID or exact name.

@@ -34,10 +34,26 @@ type LookupApplicationResult struct {
 	ApplicationId string `pulumi:"applicationId"`
 	// Enabled capabilities, sorted: messages, meetings, rtc, vbc, verify, voice.
 	Capabilities []string `pulumi:"capabilities"`
+	// The meetings capability as configured on the application, or unset when it is not enabled.
+	Meetings *MeetingsCapability `pulumi:"meetings"`
+	// The messages capability as configured on the application, or unset when it is not enabled.
+	Messages *MessagesCapability `pulumi:"messages"`
 	// Application name.
 	Name string `pulumi:"name"`
+	// The network_apis capability as configured on the application, or unset when it is not enabled.
+	NetworkApis *NetworkApisCapability `pulumi:"networkApis"`
 	// PEM public key registered with the application.
 	PublicKey string `pulumi:"publicKey"`
+	// The rtc capability as configured on the application, or unset when it is not enabled.
+	Rtc *RtcCapability `pulumi:"rtc"`
+	// True when the vbc capability is enabled; unset otherwise.
+	Vbc *bool `pulumi:"vbc"`
+	// The verify capability as configured on the application, or unset when it is not enabled.
+	Verify *VerifyCapability `pulumi:"verify"`
+	// The video capability as configured on the application, or unset when it is not enabled.
+	Video *VideoCapability `pulumi:"video"`
+	// The voice capability as configured on the application, or unset when it is not enabled.
+	Voice *VoiceCapability `pulumi:"voice"`
 }
 
 func LookupApplicationOutput(ctx *pulumi.Context, args LookupApplicationOutputArgs, opts ...pulumi.InvokeOption) LookupApplicationResultOutput {
@@ -84,14 +100,54 @@ func (o LookupApplicationResultOutput) Capabilities() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v LookupApplicationResult) []string { return v.Capabilities }).(pulumi.StringArrayOutput)
 }
 
+// The meetings capability as configured on the application, or unset when it is not enabled.
+func (o LookupApplicationResultOutput) Meetings() MeetingsCapabilityPtrOutput {
+	return o.ApplyT(func(v LookupApplicationResult) *MeetingsCapability { return v.Meetings }).(MeetingsCapabilityPtrOutput)
+}
+
+// The messages capability as configured on the application, or unset when it is not enabled.
+func (o LookupApplicationResultOutput) Messages() MessagesCapabilityPtrOutput {
+	return o.ApplyT(func(v LookupApplicationResult) *MessagesCapability { return v.Messages }).(MessagesCapabilityPtrOutput)
+}
+
 // Application name.
 func (o LookupApplicationResultOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupApplicationResult) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// The network_apis capability as configured on the application, or unset when it is not enabled.
+func (o LookupApplicationResultOutput) NetworkApis() NetworkApisCapabilityPtrOutput {
+	return o.ApplyT(func(v LookupApplicationResult) *NetworkApisCapability { return v.NetworkApis }).(NetworkApisCapabilityPtrOutput)
+}
+
 // PEM public key registered with the application.
 func (o LookupApplicationResultOutput) PublicKey() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupApplicationResult) string { return v.PublicKey }).(pulumi.StringOutput)
+}
+
+// The rtc capability as configured on the application, or unset when it is not enabled.
+func (o LookupApplicationResultOutput) Rtc() RtcCapabilityPtrOutput {
+	return o.ApplyT(func(v LookupApplicationResult) *RtcCapability { return v.Rtc }).(RtcCapabilityPtrOutput)
+}
+
+// True when the vbc capability is enabled; unset otherwise.
+func (o LookupApplicationResultOutput) Vbc() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v LookupApplicationResult) *bool { return v.Vbc }).(pulumi.BoolPtrOutput)
+}
+
+// The verify capability as configured on the application, or unset when it is not enabled.
+func (o LookupApplicationResultOutput) Verify() VerifyCapabilityPtrOutput {
+	return o.ApplyT(func(v LookupApplicationResult) *VerifyCapability { return v.Verify }).(VerifyCapabilityPtrOutput)
+}
+
+// The video capability as configured on the application, or unset when it is not enabled.
+func (o LookupApplicationResultOutput) Video() VideoCapabilityPtrOutput {
+	return o.ApplyT(func(v LookupApplicationResult) *VideoCapability { return v.Video }).(VideoCapabilityPtrOutput)
+}
+
+// The voice capability as configured on the application, or unset when it is not enabled.
+func (o LookupApplicationResultOutput) Voice() VoiceCapabilityPtrOutput {
+	return o.ApplyT(func(v LookupApplicationResult) *VoiceCapability { return v.Voice }).(VoiceCapabilityPtrOutput)
 }
 
 func init() {

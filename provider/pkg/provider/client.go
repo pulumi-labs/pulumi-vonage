@@ -76,9 +76,9 @@ func isDefinitiveRefusal(err error) bool {
 	return errors.As(err, &ne)
 }
 
-// Client is a small HTTP client for the Vonage account-management APIs. All
-// operations the provider performs authenticate with HTTP Basic (api key and
-// api secret).
+// Client is a small HTTP client for the Vonage APIs. The account-management
+// operations authenticate with HTTP Basic (api key and api secret); the Users API
+// authenticates with an application JWT (see jwt.go).
 type Client struct {
 	apiKey      string
 	apiSecret   string
@@ -86,6 +86,9 @@ type Client struct {
 	restBaseURL string
 	http        *http.Client
 	userAgent   string
+	// signer authenticates the JWT-only APIs (Users). It is nil unless the provider has an
+	// applicationId and privateKey; the account-management APIs never use it.
+	signer *jwtSigner
 }
 
 // newClient builds a Client. Empty base URLs fall back to the public hosts.
@@ -112,6 +115,31 @@ func newClient(apiKey, apiSecret, apiBaseURL, restBaseURL string) *Client {
 // are never replayed after a 5xx or transport error because the first attempt
 // may have been applied (for example a number purchase, which is billed).
 func (c *Client) do(ctx context.Context, method, base, path string, query url.Values, contentType string, body []byte, out any) error {
+	return c.doAuth(ctx, c.basicAuth, method, base, path, query, contentType, body, out)
+}
+
+// basicAuth authenticates a request with the account API key and secret.
+func (c *Client) basicAuth(req *http.Request) error {
+	req.SetBasicAuth(c.apiKey, c.apiSecret)
+	return nil
+}
+
+// bearerAuth authenticates a request with a freshly signed application JWT.
+func (c *Client) bearerAuth(req *http.Request) error {
+	if c.signer == nil {
+		return errNoJWTCredentials
+	}
+	tok, err := c.signer.token()
+	if err != nil {
+		return err
+	}
+	req.Header.Set("Authorization", "Bearer "+tok)
+	return nil
+}
+
+// doAuth is do with a pluggable authenticator, called once per attempt so a retried request
+// never carries an expired token.
+func (c *Client) doAuth(ctx context.Context, auth func(*http.Request) error, method, base, path string, query url.Values, contentType string, body []byte, out any) error {
 	full := base + path
 	if len(query) > 0 {
 		full += "?" + query.Encode()
@@ -136,7 +164,9 @@ func (c *Client) do(ctx context.Context, method, base, path string, query url.Va
 		if err != nil {
 			return err
 		}
-		req.SetBasicAuth(c.apiKey, c.apiSecret)
+		if err := auth(req); err != nil {
+			return fmt.Errorf("vonage: %s %s: %w", method, path, err)
+		}
 		req.Header.Set("Accept", "application/json")
 		req.Header.Set("User-Agent", c.userAgent)
 		if contentType != "" {
@@ -209,4 +239,18 @@ func (c *Client) restForm(ctx context.Context, method, path string, query, form 
 		body, ct = []byte(form.Encode()), "application/x-www-form-urlencoded"
 	}
 	return c.do(ctx, method, c.restBaseURL, path, query, ct, body, out)
+}
+
+// userJSON performs a JWT-authenticated request against the Users API on the API host.
+func (c *Client) userJSON(ctx context.Context, method, path string, query url.Values, in, out any) error {
+	var body []byte
+	ct := ""
+	if in != nil {
+		b, err := json.Marshal(in)
+		if err != nil {
+			return err
+		}
+		body, ct = b, "application/json"
+	}
+	return c.doAuth(ctx, c.bearerAuth, method, c.apiBaseURL, path, query, ct, body, out)
 }

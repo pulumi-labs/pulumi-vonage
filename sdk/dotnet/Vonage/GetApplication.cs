@@ -85,13 +85,45 @@ namespace Pulumi.Labs.Vonage
         /// </summary>
         public readonly ImmutableArray<string> Capabilities;
         /// <summary>
+        /// The meetings capability as configured on the application, or unset when it is not enabled.
+        /// </summary>
+        public readonly Outputs.MeetingsCapability? Meetings;
+        /// <summary>
+        /// The messages capability as configured on the application, or unset when it is not enabled.
+        /// </summary>
+        public readonly Outputs.MessagesCapability? Messages;
+        /// <summary>
         /// Application name.
         /// </summary>
         public readonly string Name;
         /// <summary>
+        /// The network_apis capability as configured on the application, or unset when it is not enabled.
+        /// </summary>
+        public readonly Outputs.NetworkApisCapability? NetworkApis;
+        /// <summary>
         /// PEM public key registered with the application.
         /// </summary>
         public readonly string PublicKey;
+        /// <summary>
+        /// The rtc capability as configured on the application, or unset when it is not enabled.
+        /// </summary>
+        public readonly Outputs.RtcCapability? Rtc;
+        /// <summary>
+        /// True when the vbc capability is enabled; unset otherwise.
+        /// </summary>
+        public readonly bool? Vbc;
+        /// <summary>
+        /// The verify capability as configured on the application, or unset when it is not enabled.
+        /// </summary>
+        public readonly Outputs.VerifyCapability? Verify;
+        /// <summary>
+        /// The video capability as configured on the application, or unset when it is not enabled.
+        /// </summary>
+        public readonly Outputs.VideoCapability? Video;
+        /// <summary>
+        /// The voice capability as configured on the application, or unset when it is not enabled.
+        /// </summary>
+        public readonly Outputs.VoiceCapability? Voice;
 
         [OutputConstructor]
         private GetApplicationResult(
@@ -99,14 +131,38 @@ namespace Pulumi.Labs.Vonage
 
             ImmutableArray<string> capabilities,
 
+            Outputs.MeetingsCapability? meetings,
+
+            Outputs.MessagesCapability? messages,
+
             string name,
 
-            string publicKey)
+            Outputs.NetworkApisCapability? networkApis,
+
+            string publicKey,
+
+            Outputs.RtcCapability? rtc,
+
+            bool? vbc,
+
+            Outputs.VerifyCapability? verify,
+
+            Outputs.VideoCapability? video,
+
+            Outputs.VoiceCapability? voice)
         {
             ApplicationId = applicationId;
             Capabilities = capabilities;
+            Meetings = meetings;
+            Messages = messages;
             Name = name;
+            NetworkApis = networkApis;
             PublicKey = publicKey;
+            Rtc = rtc;
+            Vbc = vbc;
+            Verify = verify;
+            Video = video;
+            Voice = voice;
         }
     }
 }

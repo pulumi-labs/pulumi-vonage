@@ -32,11 +32,11 @@ export class Provider extends pulumi.ProviderResource {
      */
     declare public readonly apiSecret: pulumi.Output<string | undefined>;
     /**
-     * Optional Vonage application ID for JWT-authenticated runtime APIs. Falls back to VONAGE_APPLICATION_ID. Not used by the resources in this release.
+     * Vonage application ID used to sign the JWT for the Users API (the User resource and the getUser and getUsers functions). Users belong to this application. Falls back to VONAGE_APPLICATION_ID.
      */
     declare public readonly applicationId: pulumi.Output<string | undefined>;
     /**
-     * Optional PEM private key for the application named by applicationId. Falls back to VONAGE_PRIVATE_KEY. Not used by the resources in this release.
+     * PEM private key of the application named by applicationId (PKCS#8 'BEGIN PRIVATE KEY' as downloaded from the dashboard, or PKCS#1). Newlines flattened to a literal backslash-n are accepted. Falls back to VONAGE_PRIVATE_KEY.
      */
     declare public readonly privateKey: pulumi.Output<string | undefined>;
     /**
@@ -86,11 +86,11 @@ export interface ProviderArgs {
      */
     apiSecret?: pulumi.Input<string | undefined>;
     /**
-     * Optional Vonage application ID for JWT-authenticated runtime APIs. Falls back to VONAGE_APPLICATION_ID. Not used by the resources in this release.
+     * Vonage application ID used to sign the JWT for the Users API (the User resource and the getUser and getUsers functions). Users belong to this application. Falls back to VONAGE_APPLICATION_ID.
      */
     applicationId?: pulumi.Input<string | undefined>;
     /**
-     * Optional PEM private key for the application named by applicationId. Falls back to VONAGE_PRIVATE_KEY. Not used by the resources in this release.
+     * PEM private key of the application named by applicationId (PKCS#8 'BEGIN PRIVATE KEY' as downloaded from the dashboard, or PKCS#1). Newlines flattened to a literal backslash-n are accepted. Falls back to VONAGE_PRIVATE_KEY.
      */
     privateKey?: pulumi.Input<string | undefined>;
     /**

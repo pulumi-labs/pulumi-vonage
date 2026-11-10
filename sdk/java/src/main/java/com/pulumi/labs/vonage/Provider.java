@@ -59,28 +59,28 @@ public class Provider extends com.pulumi.resources.ProviderResource {
         return Codegen.optional(this.apiSecret);
     }
     /**
-     * Optional Vonage application ID for JWT-authenticated runtime APIs. Falls back to VONAGE_APPLICATION_ID. Not used by the resources in this release.
+     * Vonage application ID used to sign the JWT for the Users API (the User resource and the getUser and getUsers functions). Users belong to this application. Falls back to VONAGE_APPLICATION_ID.
      * 
      */
     @Export(name="applicationId", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> applicationId;
 
     /**
-     * @return Optional Vonage application ID for JWT-authenticated runtime APIs. Falls back to VONAGE_APPLICATION_ID. Not used by the resources in this release.
+     * @return Vonage application ID used to sign the JWT for the Users API (the User resource and the getUser and getUsers functions). Users belong to this application. Falls back to VONAGE_APPLICATION_ID.
      * 
      */
     public Output<Optional<String>> applicationId() {
         return Codegen.optional(this.applicationId);
     }
     /**
-     * Optional PEM private key for the application named by applicationId. Falls back to VONAGE_PRIVATE_KEY. Not used by the resources in this release.
+     * PEM private key of the application named by applicationId (PKCS#8 &#39;BEGIN PRIVATE KEY&#39; as downloaded from the dashboard, or PKCS#1). Newlines flattened to a literal backslash-n are accepted. Falls back to VONAGE_PRIVATE_KEY.
      * 
      */
     @Export(name="privateKey", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> privateKey;
 
     /**
-     * @return Optional PEM private key for the application named by applicationId. Falls back to VONAGE_PRIVATE_KEY. Not used by the resources in this release.
+     * @return PEM private key of the application named by applicationId (PKCS#8 &#39;BEGIN PRIVATE KEY&#39; as downloaded from the dashboard, or PKCS#1). Newlines flattened to a literal backslash-n are accepted. Falls back to VONAGE_PRIVATE_KEY.
      * 
      */
     public Output<Optional<String>> privateKey() {

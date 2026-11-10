@@ -39,11 +39,13 @@ import (
 
 // mockVonage is a stateful in-memory fake of the Vonage endpoints the provider uses.
 type mockVonage struct {
-	mu      sync.Mutex
-	t       *testing.T
-	apps    map[string]map[string]any
-	nextApp int
-	numbers map[string]map[string]any // key country:msisdn
+	// pricingShort makes the full price list report more countries than it returns.
+	pricingShort bool
+	mu           sync.Mutex
+	t            *testing.T
+	apps         map[string]map[string]any
+	nextApp      int
+	numbers      map[string]map[string]any // key country:msisdn
 	// numbersOmitCount drops "count" from /account/numbers; numbersCountOverride (when > 0) reports that
 	// total instead of the real one; numbersRepeatFirstPage serves page 1 for every index.
 	numbersOmitCount, numbersRepeatFirstPage bool
@@ -53,8 +55,11 @@ type mockVonage struct {
 	secrets                                  map[string]map[string]string // account -> id -> created
 	nextSec                                  int
 	calls                                    []string
-	fail5xx                                  int // number of upcoming GET /v2/applications calls to fail with 503
-	authSeen                                 bool
+	// acctSettings holds the account settings; acctPosts records each POST /account/settings form.
+	acctSettings map[string]string
+	acctPosts    []url.Values
+	fail5xx      int // number of upcoming GET /v2/applications calls to fail with 503
+	authSeen     bool
 
 	// inject maps "METHOD /path" to an HTTP status returned (without touching state) for every
 	// matching request until the entry is deleted.
@@ -70,6 +75,34 @@ type mockVonage struct {
 	templates map[string]map[string]any
 	fragments map[string]map[string]map[string]any
 	nextTpl   int
+
+	// Number pools: pools by ID, member numbers by pool ID. poolOmitTotal drops total_pages from
+	// listings; poolPageSize (when > 0) overrides the page size so tests can force several pages.
+	pools         map[string]map[string]any
+	poolNumbers   map[string][]string
+	poolOmitTotal bool
+	poolPageLimit int
+
+	// External accounts by channel then external ID. extPageLimit (when > 0) caps the page size,
+	// extNoLinks drops _links from listings.
+	extAccounts  map[string]map[string]map[string]any
+	extPageLimit int
+	extNoLinks   bool
+
+	// Network Registry: business profiles by ID, catalogue lists by name. nrPageLimit (when > 0)
+	// caps the page size; nrNoNextToken serves a next link without a token; nrShared flips which
+	// listing (own or shared) returns the profiles.
+	nrProfiles         map[string]map[string]any
+	nrNext             int
+	nrCatalogue        map[string][]any
+	nrCatalogueQueries []string
+	nrPageLimit        int
+	nrNoNextToken      bool
+	nrShared           bool
+	// Network Registry application profiles by ID and the accounts each is shared with.
+	nrApps     map[string]map[string]any
+	nrAppNext  int
+	nrAppShare map[string][]string
 }
 
 // The fake follows the documented Vonage semantics rather than the provider's assumptions:
@@ -259,6 +292,11 @@ func (m *mockVonage) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			delete(m.apps, id)
 			w.WriteHeader(204)
 		}
+	case strings.HasPrefix(p, "/account/get-pricing/outbound/") || strings.HasPrefix(p, "/account/get-full-pricing/outbound/") ||
+		strings.HasPrefix(p, "/account/get-prefix-pricing/outbound/"):
+		m.pricing(w, r, p)
+	case p == "/account/settings" && r.Method == "POST":
+		m.accountSettings(w, r, body)
 	case p == "/account/get-balance":
 		writeJSON(w, 200, map[string]any{"value": 12.5, "autoReload": true})
 	case p == "/number/search":
@@ -464,6 +502,12 @@ func (m *mockVonage) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		writeJSON(w, 200, map[string]any{"id": id, "created_at": created})
+	case strings.HasPrefix(p, "/v2/numberpools/"):
+		m.servePools(w, r, body)
+	case strings.HasPrefix(p, "/v1/network-registry/"):
+		m.serveNetworkRegistry(w, r, body)
+	case strings.HasPrefix(p, "/beta/chatapp-accounts"):
+		m.serveExtAccounts(w, r, body)
 	case strings.HasPrefix(p, "/v2/verify/templates"):
 		m.serveVerify(w, r, body)
 	default:

@@ -2,6 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
@@ -37,13 +39,45 @@ export interface GetApplicationResult {
      */
     readonly capabilities: string[];
     /**
+     * The meetings capability as configured on the application, or unset when it is not enabled.
+     */
+    readonly meetings?: outputs.MeetingsCapability;
+    /**
+     * The messages capability as configured on the application, or unset when it is not enabled.
+     */
+    readonly messages?: outputs.MessagesCapability;
+    /**
      * Application name.
      */
     readonly name: string;
     /**
+     * The network_apis capability as configured on the application, or unset when it is not enabled.
+     */
+    readonly networkApis?: outputs.NetworkApisCapability;
+    /**
      * PEM public key registered with the application.
      */
     readonly publicKey: string;
+    /**
+     * The rtc capability as configured on the application, or unset when it is not enabled.
+     */
+    readonly rtc?: outputs.RtcCapability;
+    /**
+     * True when the vbc capability is enabled; unset otherwise.
+     */
+    readonly vbc?: boolean;
+    /**
+     * The verify capability as configured on the application, or unset when it is not enabled.
+     */
+    readonly verify?: outputs.VerifyCapability;
+    /**
+     * The video capability as configured on the application, or unset when it is not enabled.
+     */
+    readonly video?: outputs.VideoCapability;
+    /**
+     * The voice capability as configured on the application, or unset when it is not enabled.
+     */
+    readonly voice?: outputs.VoiceCapability;
 }
 /**
  * Look up a Vonage application by ID or exact name.

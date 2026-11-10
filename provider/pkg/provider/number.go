@@ -291,6 +291,9 @@ func (r *Number) Read(ctx context.Context, req infer.ReadRequest[NumberArgs, Num
 		return infer.ReadResponse[NumberArgs, NumberState]{}, fmt.Errorf("read number %s: %w", req.ID, err)
 	}
 	if n == nil {
+		if err := notFoundOnImport("number", req.ID, req.Inputs, req.State); err != nil {
+			return infer.ReadResponse[NumberArgs, NumberState]{}, err
+		}
 		return infer.ReadResponse[NumberArgs, NumberState]{}, nil
 	}
 	args := req.Inputs

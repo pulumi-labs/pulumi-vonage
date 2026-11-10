@@ -612,6 +612,9 @@ func (r *Application) Read(ctx context.Context, req infer.ReadRequest[Applicatio
 		return infer.ReadResponse[ApplicationArgs, ApplicationState]{}, fmt.Errorf("read application %s: %w", req.ID, err)
 	}
 	if w == nil {
+		if err := notFoundOnImport("application", req.ID, req.Inputs, req.State); err != nil {
+			return infer.ReadResponse[ApplicationArgs, ApplicationState]{}, err
+		}
 		return infer.ReadResponse[ApplicationArgs, ApplicationState]{}, nil
 	}
 	args := observeApplication(req.Inputs, w)

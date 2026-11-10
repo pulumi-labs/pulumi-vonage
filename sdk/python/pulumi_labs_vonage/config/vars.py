@@ -44,14 +44,14 @@ class _ExportableConfig(types.ModuleType):
     @_builtins.property
     def application_id(self) -> Optional[str]:
         """
-        Optional Vonage application ID for JWT-authenticated runtime APIs. Falls back to VONAGE_APPLICATION_ID. Not used by the resources in this release.
+        Vonage application ID used to sign the JWT for the Users API (the User resource and the getUser and getUsers functions). Users belong to this application. Falls back to VONAGE_APPLICATION_ID.
         """
         return __config__.get('applicationId') or _utilities.get_env('VONAGE_APPLICATION_ID')
 
     @_builtins.property
     def private_key(self) -> Optional[str]:
         """
-        Optional PEM private key for the application named by applicationId. Falls back to VONAGE_PRIVATE_KEY. Not used by the resources in this release.
+        PEM private key of the application named by applicationId (PKCS#8 'BEGIN PRIVATE KEY' as downloaded from the dashboard, or PKCS#1). Newlines flattened to a literal backslash-n are accepted. Falls back to VONAGE_PRIVATE_KEY.
         """
         return __config__.get('privateKey') or _utilities.get_env('VONAGE_PRIVATE_KEY')
 

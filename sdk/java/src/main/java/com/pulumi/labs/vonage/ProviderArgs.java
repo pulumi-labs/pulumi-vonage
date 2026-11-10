@@ -62,14 +62,14 @@ public final class ProviderArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * Optional Vonage application ID for JWT-authenticated runtime APIs. Falls back to VONAGE_APPLICATION_ID. Not used by the resources in this release.
+     * Vonage application ID used to sign the JWT for the Users API (the User resource and the getUser and getUsers functions). Users belong to this application. Falls back to VONAGE_APPLICATION_ID.
      * 
      */
     @Import(name="applicationId")
     private @Nullable Output<String> applicationId;
 
     /**
-     * @return Optional Vonage application ID for JWT-authenticated runtime APIs. Falls back to VONAGE_APPLICATION_ID. Not used by the resources in this release.
+     * @return Vonage application ID used to sign the JWT for the Users API (the User resource and the getUser and getUsers functions). Users belong to this application. Falls back to VONAGE_APPLICATION_ID.
      * 
      */
     public Optional<Output<String>> applicationId() {
@@ -77,14 +77,14 @@ public final class ProviderArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * Optional PEM private key for the application named by applicationId. Falls back to VONAGE_PRIVATE_KEY. Not used by the resources in this release.
+     * PEM private key of the application named by applicationId (PKCS#8 &#39;BEGIN PRIVATE KEY&#39; as downloaded from the dashboard, or PKCS#1). Newlines flattened to a literal backslash-n are accepted. Falls back to VONAGE_PRIVATE_KEY.
      * 
      */
     @Import(name="privateKey")
     private @Nullable Output<String> privateKey;
 
     /**
-     * @return Optional PEM private key for the application named by applicationId. Falls back to VONAGE_PRIVATE_KEY. Not used by the resources in this release.
+     * @return PEM private key of the application named by applicationId (PKCS#8 &#39;BEGIN PRIVATE KEY&#39; as downloaded from the dashboard, or PKCS#1). Newlines flattened to a literal backslash-n are accepted. Falls back to VONAGE_PRIVATE_KEY.
      * 
      */
     public Optional<Output<String>> privateKey() {
@@ -199,7 +199,7 @@ public final class ProviderArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param applicationId Optional Vonage application ID for JWT-authenticated runtime APIs. Falls back to VONAGE_APPLICATION_ID. Not used by the resources in this release.
+         * @param applicationId Vonage application ID used to sign the JWT for the Users API (the User resource and the getUser and getUsers functions). Users belong to this application. Falls back to VONAGE_APPLICATION_ID.
          * 
          * @return builder
          * 
@@ -210,7 +210,7 @@ public final class ProviderArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param applicationId Optional Vonage application ID for JWT-authenticated runtime APIs. Falls back to VONAGE_APPLICATION_ID. Not used by the resources in this release.
+         * @param applicationId Vonage application ID used to sign the JWT for the Users API (the User resource and the getUser and getUsers functions). Users belong to this application. Falls back to VONAGE_APPLICATION_ID.
          * 
          * @return builder
          * 
@@ -220,7 +220,7 @@ public final class ProviderArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param privateKey Optional PEM private key for the application named by applicationId. Falls back to VONAGE_PRIVATE_KEY. Not used by the resources in this release.
+         * @param privateKey PEM private key of the application named by applicationId (PKCS#8 &#39;BEGIN PRIVATE KEY&#39; as downloaded from the dashboard, or PKCS#1). Newlines flattened to a literal backslash-n are accepted. Falls back to VONAGE_PRIVATE_KEY.
          * 
          * @return builder
          * 
@@ -231,7 +231,7 @@ public final class ProviderArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param privateKey Optional PEM private key for the application named by applicationId. Falls back to VONAGE_PRIVATE_KEY. Not used by the resources in this release.
+         * @param privateKey PEM private key of the application named by applicationId (PKCS#8 &#39;BEGIN PRIVATE KEY&#39; as downloaded from the dashboard, or PKCS#1). Newlines flattened to a literal backslash-n are accepted. Falls back to VONAGE_PRIVATE_KEY.
          * 
          * @return builder
          * 

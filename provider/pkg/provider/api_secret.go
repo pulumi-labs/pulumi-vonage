@@ -130,6 +130,9 @@ func (r *ApiSecret) Read(ctx context.Context, req infer.ReadRequest[ApiSecretArg
 		return infer.ReadResponse[ApiSecretArgs, ApiSecretState]{}, fmt.Errorf("read API secret %s: %w", req.ID, err)
 	}
 	if s == nil {
+		if err := notFoundOnImport("API secret", req.ID, req.Inputs, req.State); err != nil {
+			return infer.ReadResponse[ApiSecretArgs, ApiSecretState]{}, err
+		}
 		return infer.ReadResponse[ApiSecretArgs, ApiSecretState]{}, nil
 	}
 	st := req.State

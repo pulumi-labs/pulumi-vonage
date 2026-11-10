@@ -118,6 +118,9 @@ func (r *VerifyTemplate) Read(ctx context.Context, req infer.ReadRequest[VerifyT
 		return infer.ReadResponse[VerifyTemplateArgs, VerifyTemplateState]{}, fmt.Errorf("read Verify template %s: %w", req.ID, err)
 	}
 	if t == nil {
+		if err := notFoundOnImport("Verify template", req.ID, req.Inputs, req.State); err != nil {
+			return infer.ReadResponse[VerifyTemplateArgs, VerifyTemplateState]{}, err
+		}
 		return infer.ReadResponse[VerifyTemplateArgs, VerifyTemplateState]{}, nil
 	}
 	args := req.Inputs

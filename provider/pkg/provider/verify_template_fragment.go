@@ -139,6 +139,9 @@ func (r *VerifyTemplateFragment) Read(ctx context.Context, req infer.ReadRequest
 		return resp{}, fmt.Errorf("read Verify template fragment %s: %w", req.ID, err)
 	}
 	if f == nil {
+		if err := notFoundOnImport("Verify template fragment", req.ID, req.Inputs, req.State); err != nil {
+			return resp{}, err
+		}
 		return resp{}, nil
 	}
 	args := VerifyTemplateFragmentArgs{TemplateID: tid, Channel: f.Channel, Locale: f.Locale, Text: f.Text}

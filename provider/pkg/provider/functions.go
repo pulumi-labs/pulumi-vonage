@@ -41,6 +41,15 @@ type GetApplicationResult struct {
 	Name          string   `pulumi:"name"`
 	PublicKey     string   `pulumi:"publicKey"`
 	Capabilities  []string `pulumi:"capabilities"`
+
+	Voice       *VoiceCapability       `pulumi:"voice,optional"`
+	Messages    *MessagesCapability    `pulumi:"messages,optional"`
+	Rtc         *RtcCapability         `pulumi:"rtc,optional"`
+	Verify      *VerifyCapability      `pulumi:"verify,optional"`
+	Meetings    *MeetingsCapability    `pulumi:"meetings,optional"`
+	Video       *VideoCapability       `pulumi:"video,optional"`
+	NetworkApis *NetworkApisCapability `pulumi:"networkApis,optional"`
+	Vbc         *bool                  `pulumi:"vbc,optional"`
 }
 
 func (a *GetApplicationResult) Annotate(an infer.Annotator) {
@@ -48,6 +57,14 @@ func (a *GetApplicationResult) Annotate(an infer.Annotator) {
 	an.Describe(&a.Name, "Application name.")
 	an.Describe(&a.PublicKey, "PEM public key registered with the application.")
 	an.Describe(&a.Capabilities, "Enabled capabilities, sorted: messages, meetings, rtc, vbc, verify, voice.")
+	an.Describe(&a.Voice, "The voice capability as configured on the application, or unset when it is not enabled.")
+	an.Describe(&a.Messages, "The messages capability as configured on the application, or unset when it is not enabled.")
+	an.Describe(&a.Rtc, "The rtc capability as configured on the application, or unset when it is not enabled.")
+	an.Describe(&a.Verify, "The verify capability as configured on the application, or unset when it is not enabled.")
+	an.Describe(&a.Meetings, "The meetings capability as configured on the application, or unset when it is not enabled.")
+	an.Describe(&a.Video, "The video capability as configured on the application, or unset when it is not enabled.")
+	an.Describe(&a.NetworkApis, "The network_apis capability as configured on the application, or unset when it is not enabled.")
+	an.Describe(&a.Vbc, "True when the vbc capability is enabled; unset otherwise.")
 }
 
 func (f *GetApplication) Annotate(a infer.Annotator) {
@@ -78,6 +95,26 @@ func capabilityNames(c *wireCapabilities) []string {
 		out = append(out, "voice")
 	}
 	return out
+}
+
+// fullTree fills the typed capability blocks from the wire application. An empty
+// prior state makes the observer report every field the API returned, not just the
+// ones a program declared; the video and networkApis observers only expose storage
+// and redirectUri when the prior state names them, so those are primed.
+func fullTree(res *GetApplicationResult, app *wireApplication) {
+	obs := observeApplication(ApplicationArgs{}, app)
+	res.Voice, res.Messages, res.Rtc, res.Verify, res.Meetings = obs.Voice, obs.Messages, obs.Rtc, obs.Verify, obs.Meetings
+	res.Vbc = obs.Vbc
+	if app.Capabilities == nil {
+		return
+	}
+	t := true
+	if raw, ok := app.Capabilities.Extra[capVideo]; ok {
+		res.Video = observeVideo(&VideoCapability{Storage: &VideoStorage{ServerSideEncryption: &t, EndToEndEncryption: &t, CloudStorage: &t}}, raw)
+	}
+	if raw, ok := app.Capabilities.Extra[capNetworkAPI]; ok {
+		res.NetworkApis = observeNetworkAPIs(&NetworkApisCapability{RedirectURI: strPtr("")}, raw)
+	}
 }
 
 func (f *GetApplication) Invoke(ctx context.Context, req infer.FunctionRequest[GetApplicationArgs]) (infer.FunctionResponse[GetApplicationResult], error) {
@@ -123,6 +160,7 @@ func (f *GetApplication) Invoke(ctx context.Context, req infer.FunctionRequest[G
 	if app.Keys != nil {
 		res.PublicKey = app.Keys.PublicKey
 	}
+	fullTree(&res, app)
 	return infer.FunctionResponse[GetApplicationResult]{Output: res}, nil
 }
 

@@ -19,12 +19,34 @@ __all__ = [
     'ApiSecretSummary',
     'ApplicationSummary',
     'AvailableNumber',
+    'CountryPricing',
+    'ExternalAccountSummary',
+    'GetNetworkApplicationProfileResult',
+    'GetNetworkBusinessProfileResult',
+    'GetNumberPoolResult',
     'GetSubAccountResult',
     'MeetingsCapability',
     'MessagesCapability',
     'NetworkApisCapability',
+    'NetworkApplicationProfileApi',
+    'NetworkBusinessInformation',
+    'NetworkRegistryCountry',
+    'NetworkRegistryCsp',
+    'NetworkRegistryEntry',
+    'NetworkRegistryNetworkApi',
+    'NetworkRegistryPurpose',
+    'NetworkRegistryVettingLevel',
     'OwnedNumberSummary',
+    'PricingNetwork',
     'RtcCapability',
+    'UserChannels',
+    'UserMessengerChannel',
+    'UserNumberChannel',
+    'UserPstnChannel',
+    'UserSipChannel',
+    'UserSummary',
+    'UserVbcChannel',
+    'UserWebsocketChannel',
     'VerifyCapability',
     'VideoCapability',
     'VideoStorage',
@@ -164,6 +186,536 @@ class AvailableNumber(dict):
         Number type.
         """
         return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class CountryPricing(dict):
+    def __init__(__self__, *,
+                 country_code: _builtins.str,
+                 country_display_name: _builtins.str,
+                 country_name: _builtins.str,
+                 currency: _builtins.str,
+                 default_price: _builtins.str,
+                 dialing_prefix: _builtins.str,
+                 networks: Sequence['outputs.PricingNetwork']):
+        """
+        :param _builtins.str country_code: Two-letter country code.
+        :param _builtins.str country_display_name: The country name for display.
+        :param _builtins.str country_name: The country name.
+        :param _builtins.str currency: The currency the account is billed in.
+        :param _builtins.str default_price: The default price in this country, as a decimal string.
+        :param _builtins.str dialing_prefix: The dialling prefix of the country.
+        :param Sequence['PricingNetwork'] networks: Prices per mobile network in the country.
+        """
+        pulumi.set(__self__, "country_code", country_code)
+        pulumi.set(__self__, "country_display_name", country_display_name)
+        pulumi.set(__self__, "country_name", country_name)
+        pulumi.set(__self__, "currency", currency)
+        pulumi.set(__self__, "default_price", default_price)
+        pulumi.set(__self__, "dialing_prefix", dialing_prefix)
+        pulumi.set(__self__, "networks", networks)
+
+    @_builtins.property
+    @pulumi.getter(name="countryCode")
+    def country_code(self) -> _builtins.str:
+        """
+        Two-letter country code.
+        """
+        return pulumi.get(self, "country_code")
+
+    @_builtins.property
+    @pulumi.getter(name="countryDisplayName")
+    def country_display_name(self) -> _builtins.str:
+        """
+        The country name for display.
+        """
+        return pulumi.get(self, "country_display_name")
+
+    @_builtins.property
+    @pulumi.getter(name="countryName")
+    def country_name(self) -> _builtins.str:
+        """
+        The country name.
+        """
+        return pulumi.get(self, "country_name")
+
+    @_builtins.property
+    @pulumi.getter
+    def currency(self) -> _builtins.str:
+        """
+        The currency the account is billed in.
+        """
+        return pulumi.get(self, "currency")
+
+    @_builtins.property
+    @pulumi.getter(name="defaultPrice")
+    def default_price(self) -> _builtins.str:
+        """
+        The default price in this country, as a decimal string.
+        """
+        return pulumi.get(self, "default_price")
+
+    @_builtins.property
+    @pulumi.getter(name="dialingPrefix")
+    def dialing_prefix(self) -> _builtins.str:
+        """
+        The dialling prefix of the country.
+        """
+        return pulumi.get(self, "dialing_prefix")
+
+    @_builtins.property
+    @pulumi.getter
+    def networks(self) -> Sequence['outputs.PricingNetwork']:
+        """
+        Prices per mobile network in the country.
+        """
+        return pulumi.get(self, "networks")
+
+
+@pulumi.output_type
+class ExternalAccountSummary(dict):
+    def __init__(__self__, *,
+                 api_key: _builtins.str,
+                 applications: Sequence[_builtins.str],
+                 channel: _builtins.str,
+                 external_id: _builtins.str,
+                 name: _builtins.str):
+        """
+        :param _builtins.str api_key: The api_key Vonage reports for the account.
+        :param Sequence[_builtins.str] applications: IDs of the linked applications (at most one). The page access token is never listed; use getMessengerAccount.
+        :param _builtins.str channel: The account's channel.
+        :param _builtins.str external_id: The account's external ID.
+        :param _builtins.str name: The account name (empty when none is set).
+        """
+        pulumi.set(__self__, "api_key", api_key)
+        pulumi.set(__self__, "applications", applications)
+        pulumi.set(__self__, "channel", channel)
+        pulumi.set(__self__, "external_id", external_id)
+        pulumi.set(__self__, "name", name)
+
+    @_builtins.property
+    @pulumi.getter(name="apiKey")
+    def api_key(self) -> _builtins.str:
+        """
+        The api_key Vonage reports for the account.
+        """
+        return pulumi.get(self, "api_key")
+
+    @_builtins.property
+    @pulumi.getter
+    def applications(self) -> Sequence[_builtins.str]:
+        """
+        IDs of the linked applications (at most one). The page access token is never listed; use getMessengerAccount.
+        """
+        return pulumi.get(self, "applications")
+
+    @_builtins.property
+    @pulumi.getter
+    def channel(self) -> _builtins.str:
+        """
+        The account's channel.
+        """
+        return pulumi.get(self, "channel")
+
+    @_builtins.property
+    @pulumi.getter(name="externalId")
+    def external_id(self) -> _builtins.str:
+        """
+        The account's external ID.
+        """
+        return pulumi.get(self, "external_id")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        The account name (empty when none is set).
+        """
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetNetworkApplicationProfileResult(dict):
+    def __init__(__self__, *,
+                 account_id: _builtins.str,
+                 business_profile_id: _builtins.str,
+                 category_id: _builtins.str,
+                 created_at: _builtins.str,
+                 description: _builtins.str,
+                 infrastructure_locations: Sequence[_builtins.str],
+                 name: _builtins.str,
+                 network_apis: Sequence['outputs.NetworkApplicationProfileApi'],
+                 privacy_policy_url: _builtins.str,
+                 profile_id: _builtins.str,
+                 status: _builtins.str,
+                 status_message: _builtins.str,
+                 updated_at: _builtins.str):
+        """
+        :param _builtins.str account_id: ID of the Vonage account that owns it.
+        :param _builtins.str business_profile_id: ID of the business profile that owns it.
+        :param _builtins.str category_id: Category of the application.
+        :param _builtins.str created_at: When the profile was created (RFC 3339).
+        :param _builtins.str description: Description of the application's use cases; empty when unset.
+        :param Sequence[_builtins.str] infrastructure_locations: Two-letter ISO 3166 codes of the countries the application's infrastructure runs in.
+        :param _builtins.str name: Name of the application.
+        :param Sequence['NetworkApplicationProfileApi'] network_apis: The Network APIs the application uses and the purposes it states for each.
+        :param _builtins.str privacy_policy_url: URL of the application's privacy policy; empty when unset.
+        :param _builtins.str profile_id: ID of the application profile.
+        :param _builtins.str status: Overall approval status: pending, provisioning, accepted, partially-accepted, rejected or failed.
+        :param _builtins.str status_message: Vonage's note about why the profile was rejected; empty when there is none.
+        :param _builtins.str updated_at: When the profile was last updated (RFC 3339).
+        """
+        pulumi.set(__self__, "account_id", account_id)
+        pulumi.set(__self__, "business_profile_id", business_profile_id)
+        pulumi.set(__self__, "category_id", category_id)
+        pulumi.set(__self__, "created_at", created_at)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "infrastructure_locations", infrastructure_locations)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "network_apis", network_apis)
+        pulumi.set(__self__, "privacy_policy_url", privacy_policy_url)
+        pulumi.set(__self__, "profile_id", profile_id)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "status_message", status_message)
+        pulumi.set(__self__, "updated_at", updated_at)
+
+    @_builtins.property
+    @pulumi.getter(name="accountId")
+    def account_id(self) -> _builtins.str:
+        """
+        ID of the Vonage account that owns it.
+        """
+        return pulumi.get(self, "account_id")
+
+    @_builtins.property
+    @pulumi.getter(name="businessProfileId")
+    def business_profile_id(self) -> _builtins.str:
+        """
+        ID of the business profile that owns it.
+        """
+        return pulumi.get(self, "business_profile_id")
+
+    @_builtins.property
+    @pulumi.getter(name="categoryId")
+    def category_id(self) -> _builtins.str:
+        """
+        Category of the application.
+        """
+        return pulumi.get(self, "category_id")
+
+    @_builtins.property
+    @pulumi.getter(name="createdAt")
+    def created_at(self) -> _builtins.str:
+        """
+        When the profile was created (RFC 3339).
+        """
+        return pulumi.get(self, "created_at")
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> _builtins.str:
+        """
+        Description of the application's use cases; empty when unset.
+        """
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter(name="infrastructureLocations")
+    def infrastructure_locations(self) -> Sequence[_builtins.str]:
+        """
+        Two-letter ISO 3166 codes of the countries the application's infrastructure runs in.
+        """
+        return pulumi.get(self, "infrastructure_locations")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        Name of the application.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter(name="networkApis")
+    def network_apis(self) -> Sequence['outputs.NetworkApplicationProfileApi']:
+        """
+        The Network APIs the application uses and the purposes it states for each.
+        """
+        return pulumi.get(self, "network_apis")
+
+    @_builtins.property
+    @pulumi.getter(name="privacyPolicyUrl")
+    def privacy_policy_url(self) -> _builtins.str:
+        """
+        URL of the application's privacy policy; empty when unset.
+        """
+        return pulumi.get(self, "privacy_policy_url")
+
+    @_builtins.property
+    @pulumi.getter(name="profileId")
+    def profile_id(self) -> _builtins.str:
+        """
+        ID of the application profile.
+        """
+        return pulumi.get(self, "profile_id")
+
+    @_builtins.property
+    @pulumi.getter
+    def status(self) -> _builtins.str:
+        """
+        Overall approval status: pending, provisioning, accepted, partially-accepted, rejected or failed.
+        """
+        return pulumi.get(self, "status")
+
+    @_builtins.property
+    @pulumi.getter(name="statusMessage")
+    def status_message(self) -> _builtins.str:
+        """
+        Vonage's note about why the profile was rejected; empty when there is none.
+        """
+        return pulumi.get(self, "status_message")
+
+    @_builtins.property
+    @pulumi.getter(name="updatedAt")
+    def updated_at(self) -> _builtins.str:
+        """
+        When the profile was last updated (RFC 3339).
+        """
+        return pulumi.get(self, "updated_at")
+
+
+@pulumi.output_type
+class GetNetworkBusinessProfileResult(dict):
+    def __init__(__self__, *,
+                 account_id: _builtins.str,
+                 business_information: 'outputs.NetworkBusinessInformation',
+                 contact_role: _builtins.str,
+                 countries: Sequence[_builtins.str],
+                 created_at: _builtins.str,
+                 name: _builtins.str,
+                 organisation_type: _builtins.str,
+                 privacy_policy_manager_email: _builtins.str,
+                 privacy_policy_url: _builtins.str,
+                 profile_id: _builtins.str,
+                 status: _builtins.str,
+                 status_message: _builtins.str,
+                 tax_number: _builtins.str,
+                 trading_name: _builtins.str,
+                 updated_at: _builtins.str):
+        """
+        :param _builtins.str account_id: ID of the account that owns the profile.
+        :param 'NetworkBusinessInformation' business_information: Postal address.
+        :param _builtins.str contact_role: Role of the contact person.
+        :param Sequence[_builtins.str] countries: Countries the profile is registered for.
+        :param _builtins.str created_at: Creation time (RFC 3339).
+        :param _builtins.str name: Legal name of the business.
+        :param _builtins.str organisation_type: Kind of organisation.
+        :param _builtins.str privacy_policy_manager_email: Privacy policy manager email.
+        :param _builtins.str privacy_policy_url: Privacy policy URL.
+        :param _builtins.str profile_id: Profile ID.
+        :param _builtins.str status: Overall registration status.
+        :param _builtins.str status_message: Vonage's note about the status, empty when there is none.
+        :param _builtins.str tax_number: Tax identification number.
+        :param _builtins.str trading_name: Trading name, empty when unset.
+        :param _builtins.str updated_at: Last update time (RFC 3339).
+        """
+        pulumi.set(__self__, "account_id", account_id)
+        pulumi.set(__self__, "business_information", business_information)
+        pulumi.set(__self__, "contact_role", contact_role)
+        pulumi.set(__self__, "countries", countries)
+        pulumi.set(__self__, "created_at", created_at)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "organisation_type", organisation_type)
+        pulumi.set(__self__, "privacy_policy_manager_email", privacy_policy_manager_email)
+        pulumi.set(__self__, "privacy_policy_url", privacy_policy_url)
+        pulumi.set(__self__, "profile_id", profile_id)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "status_message", status_message)
+        pulumi.set(__self__, "tax_number", tax_number)
+        pulumi.set(__self__, "trading_name", trading_name)
+        pulumi.set(__self__, "updated_at", updated_at)
+
+    @_builtins.property
+    @pulumi.getter(name="accountId")
+    def account_id(self) -> _builtins.str:
+        """
+        ID of the account that owns the profile.
+        """
+        return pulumi.get(self, "account_id")
+
+    @_builtins.property
+    @pulumi.getter(name="businessInformation")
+    def business_information(self) -> 'outputs.NetworkBusinessInformation':
+        """
+        Postal address.
+        """
+        return pulumi.get(self, "business_information")
+
+    @_builtins.property
+    @pulumi.getter(name="contactRole")
+    def contact_role(self) -> _builtins.str:
+        """
+        Role of the contact person.
+        """
+        return pulumi.get(self, "contact_role")
+
+    @_builtins.property
+    @pulumi.getter
+    def countries(self) -> Sequence[_builtins.str]:
+        """
+        Countries the profile is registered for.
+        """
+        return pulumi.get(self, "countries")
+
+    @_builtins.property
+    @pulumi.getter(name="createdAt")
+    def created_at(self) -> _builtins.str:
+        """
+        Creation time (RFC 3339).
+        """
+        return pulumi.get(self, "created_at")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        Legal name of the business.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter(name="organisationType")
+    def organisation_type(self) -> _builtins.str:
+        """
+        Kind of organisation.
+        """
+        return pulumi.get(self, "organisation_type")
+
+    @_builtins.property
+    @pulumi.getter(name="privacyPolicyManagerEmail")
+    def privacy_policy_manager_email(self) -> _builtins.str:
+        """
+        Privacy policy manager email.
+        """
+        return pulumi.get(self, "privacy_policy_manager_email")
+
+    @_builtins.property
+    @pulumi.getter(name="privacyPolicyUrl")
+    def privacy_policy_url(self) -> _builtins.str:
+        """
+        Privacy policy URL.
+        """
+        return pulumi.get(self, "privacy_policy_url")
+
+    @_builtins.property
+    @pulumi.getter(name="profileId")
+    def profile_id(self) -> _builtins.str:
+        """
+        Profile ID.
+        """
+        return pulumi.get(self, "profile_id")
+
+    @_builtins.property
+    @pulumi.getter
+    def status(self) -> _builtins.str:
+        """
+        Overall registration status.
+        """
+        return pulumi.get(self, "status")
+
+    @_builtins.property
+    @pulumi.getter(name="statusMessage")
+    def status_message(self) -> _builtins.str:
+        """
+        Vonage's note about the status, empty when there is none.
+        """
+        return pulumi.get(self, "status_message")
+
+    @_builtins.property
+    @pulumi.getter(name="taxNumber")
+    def tax_number(self) -> _builtins.str:
+        """
+        Tax identification number.
+        """
+        return pulumi.get(self, "tax_number")
+
+    @_builtins.property
+    @pulumi.getter(name="tradingName")
+    def trading_name(self) -> _builtins.str:
+        """
+        Trading name, empty when unset.
+        """
+        return pulumi.get(self, "trading_name")
+
+    @_builtins.property
+    @pulumi.getter(name="updatedAt")
+    def updated_at(self) -> _builtins.str:
+        """
+        Last update time (RFC 3339).
+        """
+        return pulumi.get(self, "updated_at")
+
+
+@pulumi.output_type
+class GetNumberPoolResult(dict):
+    def __init__(__self__, *,
+                 account_id: _builtins.str,
+                 fallback: _builtins.str,
+                 localized_sender_preferred: _builtins.bool,
+                 pool_id: _builtins.str,
+                 predictable_sender_preferred: _builtins.bool):
+        """
+        :param _builtins.str account_id: Owning account ID (the API key).
+        :param _builtins.str fallback: Fallback behaviour: Pool, CustomFrom or Reject.
+        :param _builtins.bool localized_sender_preferred: Whether a number local to the destination is preferred.
+        :param _builtins.str pool_id: Pool ID.
+        :param _builtins.bool predictable_sender_preferred: Whether the same number is reused for the same recipient.
+        """
+        pulumi.set(__self__, "account_id", account_id)
+        pulumi.set(__self__, "fallback", fallback)
+        pulumi.set(__self__, "localized_sender_preferred", localized_sender_preferred)
+        pulumi.set(__self__, "pool_id", pool_id)
+        pulumi.set(__self__, "predictable_sender_preferred", predictable_sender_preferred)
+
+    @_builtins.property
+    @pulumi.getter(name="accountId")
+    def account_id(self) -> _builtins.str:
+        """
+        Owning account ID (the API key).
+        """
+        return pulumi.get(self, "account_id")
+
+    @_builtins.property
+    @pulumi.getter
+    def fallback(self) -> _builtins.str:
+        """
+        Fallback behaviour: Pool, CustomFrom or Reject.
+        """
+        return pulumi.get(self, "fallback")
+
+    @_builtins.property
+    @pulumi.getter(name="localizedSenderPreferred")
+    def localized_sender_preferred(self) -> _builtins.bool:
+        """
+        Whether a number local to the destination is preferred.
+        """
+        return pulumi.get(self, "localized_sender_preferred")
+
+    @_builtins.property
+    @pulumi.getter(name="poolId")
+    def pool_id(self) -> _builtins.str:
+        """
+        Pool ID.
+        """
+        return pulumi.get(self, "pool_id")
+
+    @_builtins.property
+    @pulumi.getter(name="predictableSenderPreferred")
+    def predictable_sender_preferred(self) -> _builtins.bool:
+        """
+        Whether the same number is reused for the same recipient.
+        """
+        return pulumi.get(self, "predictable_sender_preferred")
 
 
 @pulumi.output_type
@@ -453,6 +1005,401 @@ class NetworkApisCapability(dict):
 
 
 @pulumi.output_type
+class NetworkApplicationProfileApi(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "networkApiId":
+            suggest = "network_api_id"
+        elif key == "purposeIds":
+            suggest = "purpose_ids"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NetworkApplicationProfileApi. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NetworkApplicationProfileApi.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NetworkApplicationProfileApi.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 network_api_id: _builtins.str,
+                 purpose_ids: Sequence[_builtins.str]):
+        """
+        :param _builtins.str network_api_id: ID of the Network API, from getNetworkRegistryCatalogue networkApis (for example sim-swap).
+        :param Sequence[_builtins.str] purpose_ids: IDs of the purposes the operator needs to validate the request, from getNetworkRegistryCatalogue purposes.
+        """
+        pulumi.set(__self__, "network_api_id", network_api_id)
+        pulumi.set(__self__, "purpose_ids", purpose_ids)
+
+    @_builtins.property
+    @pulumi.getter(name="networkApiId")
+    def network_api_id(self) -> _builtins.str:
+        """
+        ID of the Network API, from getNetworkRegistryCatalogue networkApis (for example sim-swap).
+        """
+        return pulumi.get(self, "network_api_id")
+
+    @_builtins.property
+    @pulumi.getter(name="purposeIds")
+    def purpose_ids(self) -> Sequence[_builtins.str]:
+        """
+        IDs of the purposes the operator needs to validate the request, from getNetworkRegistryCatalogue purposes.
+        """
+        return pulumi.get(self, "purpose_ids")
+
+
+@pulumi.output_type
+class NetworkBusinessInformation(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "addressStreet1":
+            suggest = "address_street1"
+        elif key == "postalCode":
+            suggest = "postal_code"
+        elif key == "addressStreet2":
+            suggest = "address_street2"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NetworkBusinessInformation. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NetworkBusinessInformation.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NetworkBusinessInformation.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 address_street1: _builtins.str,
+                 city: _builtins.str,
+                 country: _builtins.str,
+                 postal_code: _builtins.str,
+                 address_street2: Optional[_builtins.str] = None,
+                 province: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str address_street1: First line of the street address (at most 500 characters).
+        :param _builtins.str city: City.
+        :param _builtins.str country: Two-letter ISO 3166 country code of the address.
+        :param _builtins.str postal_code: Postal or ZIP code.
+        :param _builtins.str address_street2: Second line of the street address.
+        :param _builtins.str province: Province, state or region.
+        """
+        pulumi.set(__self__, "address_street1", address_street1)
+        pulumi.set(__self__, "city", city)
+        pulumi.set(__self__, "country", country)
+        pulumi.set(__self__, "postal_code", postal_code)
+        if address_street2 is not None:
+            pulumi.set(__self__, "address_street2", address_street2)
+        if province is not None:
+            pulumi.set(__self__, "province", province)
+
+    @_builtins.property
+    @pulumi.getter(name="addressStreet1")
+    def address_street1(self) -> _builtins.str:
+        """
+        First line of the street address (at most 500 characters).
+        """
+        return pulumi.get(self, "address_street1")
+
+    @_builtins.property
+    @pulumi.getter
+    def city(self) -> _builtins.str:
+        """
+        City.
+        """
+        return pulumi.get(self, "city")
+
+    @_builtins.property
+    @pulumi.getter
+    def country(self) -> _builtins.str:
+        """
+        Two-letter ISO 3166 country code of the address.
+        """
+        return pulumi.get(self, "country")
+
+    @_builtins.property
+    @pulumi.getter(name="postalCode")
+    def postal_code(self) -> _builtins.str:
+        """
+        Postal or ZIP code.
+        """
+        return pulumi.get(self, "postal_code")
+
+    @_builtins.property
+    @pulumi.getter(name="addressStreet2")
+    def address_street2(self) -> Optional[_builtins.str]:
+        """
+        Second line of the street address.
+        """
+        return pulumi.get(self, "address_street2")
+
+    @_builtins.property
+    @pulumi.getter
+    def province(self) -> Optional[_builtins.str]:
+        """
+        Province, state or region.
+        """
+        return pulumi.get(self, "province")
+
+
+@pulumi.output_type
+class NetworkRegistryCountry(dict):
+    def __init__(__self__, *,
+                 code: _builtins.str,
+                 name: _builtins.str):
+        """
+        :param _builtins.str code: Two-letter ISO 3166 country code.
+        :param _builtins.str name: Country name.
+        """
+        pulumi.set(__self__, "code", code)
+        pulumi.set(__self__, "name", name)
+
+    @_builtins.property
+    @pulumi.getter
+    def code(self) -> _builtins.str:
+        """
+        Two-letter ISO 3166 country code.
+        """
+        return pulumi.get(self, "code")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        Country name.
+        """
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class NetworkRegistryCsp(dict):
+    def __init__(__self__, *,
+                 country: _builtins.str,
+                 id: _builtins.str,
+                 name: _builtins.str,
+                 supported_network_apis: Sequence[_builtins.str],
+                 vetting_level: _builtins.str):
+        """
+        :param _builtins.str country: Two-letter ISO 3166 country code the CSP operates in.
+        :param _builtins.str id: CSP identifier, for example telefonica_es.
+        :param _builtins.str name: Operator name.
+        :param Sequence[_builtins.str] supported_network_apis: IDs of the Network APIs the CSP supports.
+        :param _builtins.str vetting_level: ID of the vetting level the CSP requires, empty when none.
+        """
+        pulumi.set(__self__, "country", country)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "supported_network_apis", supported_network_apis)
+        pulumi.set(__self__, "vetting_level", vetting_level)
+
+    @_builtins.property
+    @pulumi.getter
+    def country(self) -> _builtins.str:
+        """
+        Two-letter ISO 3166 country code the CSP operates in.
+        """
+        return pulumi.get(self, "country")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> _builtins.str:
+        """
+        CSP identifier, for example telefonica_es.
+        """
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        Operator name.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter(name="supportedNetworkApis")
+    def supported_network_apis(self) -> Sequence[_builtins.str]:
+        """
+        IDs of the Network APIs the CSP supports.
+        """
+        return pulumi.get(self, "supported_network_apis")
+
+    @_builtins.property
+    @pulumi.getter(name="vettingLevel")
+    def vetting_level(self) -> _builtins.str:
+        """
+        ID of the vetting level the CSP requires, empty when none.
+        """
+        return pulumi.get(self, "vetting_level")
+
+
+@pulumi.output_type
+class NetworkRegistryEntry(dict):
+    def __init__(__self__, *,
+                 id: _builtins.str,
+                 name: _builtins.str):
+        """
+        :param _builtins.str id: Identifier to use in the API, for example an organisation type or a category.
+        :param _builtins.str name: Human-readable name.
+        """
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "name", name)
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> _builtins.str:
+        """
+        Identifier to use in the API, for example an organisation type or a category.
+        """
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        Human-readable name.
+        """
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class NetworkRegistryNetworkApi(dict):
+    def __init__(__self__, *,
+                 id: _builtins.str,
+                 name: _builtins.str,
+                 requires: Sequence[_builtins.str]):
+        """
+        :param _builtins.str id: Network API identifier, for example sim-swap.
+        :param _builtins.str name: Network API name.
+        :param Sequence[_builtins.str] requires: Callback URLs an application profile must provide to use the API: nv_redirect_url, qod_callback_url or verify_callback_url.
+        """
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "requires", requires)
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> _builtins.str:
+        """
+        Network API identifier, for example sim-swap.
+        """
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        Network API name.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter
+    def requires(self) -> Sequence[_builtins.str]:
+        """
+        Callback URLs an application profile must provide to use the API: nv_redirect_url, qod_callback_url or verify_callback_url.
+        """
+        return pulumi.get(self, "requires")
+
+
+@pulumi.output_type
+class NetworkRegistryPurpose(dict):
+    def __init__(__self__, *,
+                 id: _builtins.str,
+                 name: _builtins.str,
+                 network_api_id: _builtins.str):
+        """
+        :param _builtins.str id: Purpose identifier.
+        :param _builtins.str name: Purpose name.
+        :param _builtins.str network_api_id: ID of the Network API the purpose belongs to.
+        """
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "network_api_id", network_api_id)
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> _builtins.str:
+        """
+        Purpose identifier.
+        """
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        Purpose name.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter(name="networkApiId")
+    def network_api_id(self) -> _builtins.str:
+        """
+        ID of the Network API the purpose belongs to.
+        """
+        return pulumi.get(self, "network_api_id")
+
+
+@pulumi.output_type
+class NetworkRegistryVettingLevel(dict):
+    def __init__(__self__, *,
+                 description: _builtins.str,
+                 extra_fields: Sequence[_builtins.str],
+                 id: _builtins.str,
+                 name: _builtins.str):
+        """
+        :param _builtins.str description: What the level checks.
+        :param Sequence[_builtins.str] extra_fields: Names of the vettingExtraFields a business profile must provide when the level applies.
+        :param _builtins.str id: Vetting level identifier.
+        :param _builtins.str name: Vetting level name.
+        """
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "extra_fields", extra_fields)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "name", name)
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> _builtins.str:
+        """
+        What the level checks.
+        """
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter(name="extraFields")
+    def extra_fields(self) -> Sequence[_builtins.str]:
+        """
+        Names of the vettingExtraFields a business profile must provide when the level applies.
+        """
+        return pulumi.get(self, "extra_fields")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> _builtins.str:
+        """
+        Vetting level identifier.
+        """
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        Vetting level name.
+        """
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
 class OwnedNumberSummary(dict):
     def __init__(__self__, *,
                  app_id: _builtins.str,
@@ -570,6 +1517,90 @@ class OwnedNumberSummary(dict):
 
 
 @pulumi.output_type
+class PricingNetwork(dict):
+    def __init__(__self__, *,
+                 currency: _builtins.str,
+                 mcc: _builtins.str,
+                 mnc: _builtins.str,
+                 network_code: _builtins.str,
+                 network_name: _builtins.str,
+                 price: _builtins.str,
+                 type: _builtins.str):
+        """
+        :param _builtins.str currency: The currency of the price.
+        :param _builtins.str mcc: The Mobile Country Code of the operator.
+        :param _builtins.str mnc: The Mobile Network Code of the operator.
+        :param _builtins.str network_code: The MCC and MNC combined, a unique reference for the operator.
+        :param _builtins.str network_name: The name of the operator.
+        :param _builtins.str price: The price on this network, as a decimal string in the account currency.
+        :param _builtins.str type: The type of network, such as mobile or landline.
+        """
+        pulumi.set(__self__, "currency", currency)
+        pulumi.set(__self__, "mcc", mcc)
+        pulumi.set(__self__, "mnc", mnc)
+        pulumi.set(__self__, "network_code", network_code)
+        pulumi.set(__self__, "network_name", network_name)
+        pulumi.set(__self__, "price", price)
+        pulumi.set(__self__, "type", type)
+
+    @_builtins.property
+    @pulumi.getter
+    def currency(self) -> _builtins.str:
+        """
+        The currency of the price.
+        """
+        return pulumi.get(self, "currency")
+
+    @_builtins.property
+    @pulumi.getter
+    def mcc(self) -> _builtins.str:
+        """
+        The Mobile Country Code of the operator.
+        """
+        return pulumi.get(self, "mcc")
+
+    @_builtins.property
+    @pulumi.getter
+    def mnc(self) -> _builtins.str:
+        """
+        The Mobile Network Code of the operator.
+        """
+        return pulumi.get(self, "mnc")
+
+    @_builtins.property
+    @pulumi.getter(name="networkCode")
+    def network_code(self) -> _builtins.str:
+        """
+        The MCC and MNC combined, a unique reference for the operator.
+        """
+        return pulumi.get(self, "network_code")
+
+    @_builtins.property
+    @pulumi.getter(name="networkName")
+    def network_name(self) -> _builtins.str:
+        """
+        The name of the operator.
+        """
+        return pulumi.get(self, "network_name")
+
+    @_builtins.property
+    @pulumi.getter
+    def price(self) -> _builtins.str:
+        """
+        The price on this network, as a decimal string in the account currency.
+        """
+        return pulumi.get(self, "price")
+
+    @_builtins.property
+    @pulumi.getter
+    def type(self) -> _builtins.str:
+        """
+        The type of network, such as mobile or landline.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
 class RtcCapability(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -617,6 +1648,335 @@ class RtcCapability(dict):
         Whether Vonage signs webhook requests.
         """
         return pulumi.get(self, "signed_callbacks")
+
+
+@pulumi.output_type
+class UserChannels(dict):
+    def __init__(__self__, *,
+                 messenger: Optional[Sequence['outputs.UserMessengerChannel']] = None,
+                 mms: Optional[Sequence['outputs.UserNumberChannel']] = None,
+                 pstn: Optional[Sequence['outputs.UserPstnChannel']] = None,
+                 sip: Optional[Sequence['outputs.UserSipChannel']] = None,
+                 sms: Optional[Sequence['outputs.UserNumberChannel']] = None,
+                 vbc: Optional[Sequence['outputs.UserVbcChannel']] = None,
+                 viber: Optional[Sequence['outputs.UserNumberChannel']] = None,
+                 websocket: Optional[Sequence['outputs.UserWebsocketChannel']] = None,
+                 whatsapp: Optional[Sequence['outputs.UserNumberChannel']] = None):
+        """
+        :param Sequence['UserMessengerChannel'] messenger: Facebook Messenger IDs of the user.
+        :param Sequence['UserNumberChannel'] mms: Numbers the user can receive MMS on.
+        :param Sequence['UserPstnChannel'] pstn: Phone numbers (PSTN) the user can be called on.
+        :param Sequence['UserSipChannel'] sip: SIP endpoints of the user.
+        :param Sequence['UserNumberChannel'] sms: Numbers the user can receive SMS on.
+        :param Sequence['UserVbcChannel'] vbc: Vonage Business Cloud extensions of the user.
+        :param Sequence['UserNumberChannel'] viber: Viber numbers of the user.
+        :param Sequence['UserWebsocketChannel'] websocket: WebSocket endpoints of the user.
+        :param Sequence['UserNumberChannel'] whatsapp: WhatsApp numbers of the user.
+        """
+        if messenger is not None:
+            pulumi.set(__self__, "messenger", messenger)
+        if mms is not None:
+            pulumi.set(__self__, "mms", mms)
+        if pstn is not None:
+            pulumi.set(__self__, "pstn", pstn)
+        if sip is not None:
+            pulumi.set(__self__, "sip", sip)
+        if sms is not None:
+            pulumi.set(__self__, "sms", sms)
+        if vbc is not None:
+            pulumi.set(__self__, "vbc", vbc)
+        if viber is not None:
+            pulumi.set(__self__, "viber", viber)
+        if websocket is not None:
+            pulumi.set(__self__, "websocket", websocket)
+        if whatsapp is not None:
+            pulumi.set(__self__, "whatsapp", whatsapp)
+
+    @_builtins.property
+    @pulumi.getter
+    def messenger(self) -> Optional[Sequence['outputs.UserMessengerChannel']]:
+        """
+        Facebook Messenger IDs of the user.
+        """
+        return pulumi.get(self, "messenger")
+
+    @_builtins.property
+    @pulumi.getter
+    def mms(self) -> Optional[Sequence['outputs.UserNumberChannel']]:
+        """
+        Numbers the user can receive MMS on.
+        """
+        return pulumi.get(self, "mms")
+
+    @_builtins.property
+    @pulumi.getter
+    def pstn(self) -> Optional[Sequence['outputs.UserPstnChannel']]:
+        """
+        Phone numbers (PSTN) the user can be called on.
+        """
+        return pulumi.get(self, "pstn")
+
+    @_builtins.property
+    @pulumi.getter
+    def sip(self) -> Optional[Sequence['outputs.UserSipChannel']]:
+        """
+        SIP endpoints of the user.
+        """
+        return pulumi.get(self, "sip")
+
+    @_builtins.property
+    @pulumi.getter
+    def sms(self) -> Optional[Sequence['outputs.UserNumberChannel']]:
+        """
+        Numbers the user can receive SMS on.
+        """
+        return pulumi.get(self, "sms")
+
+    @_builtins.property
+    @pulumi.getter
+    def vbc(self) -> Optional[Sequence['outputs.UserVbcChannel']]:
+        """
+        Vonage Business Cloud extensions of the user.
+        """
+        return pulumi.get(self, "vbc")
+
+    @_builtins.property
+    @pulumi.getter
+    def viber(self) -> Optional[Sequence['outputs.UserNumberChannel']]:
+        """
+        Viber numbers of the user.
+        """
+        return pulumi.get(self, "viber")
+
+    @_builtins.property
+    @pulumi.getter
+    def websocket(self) -> Optional[Sequence['outputs.UserWebsocketChannel']]:
+        """
+        WebSocket endpoints of the user.
+        """
+        return pulumi.get(self, "websocket")
+
+    @_builtins.property
+    @pulumi.getter
+    def whatsapp(self) -> Optional[Sequence['outputs.UserNumberChannel']]:
+        """
+        WhatsApp numbers of the user.
+        """
+        return pulumi.get(self, "whatsapp")
+
+
+@pulumi.output_type
+class UserMessengerChannel(dict):
+    def __init__(__self__, *,
+                 id: _builtins.str):
+        """
+        :param _builtins.str id: The Facebook Messenger user ID.
+        """
+        pulumi.set(__self__, "id", id)
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> _builtins.str:
+        """
+        The Facebook Messenger user ID.
+        """
+        return pulumi.get(self, "id")
+
+
+@pulumi.output_type
+class UserNumberChannel(dict):
+    def __init__(__self__, *,
+                 number: _builtins.str):
+        """
+        :param _builtins.str number: The number in E.164 format without the leading plus.
+        """
+        pulumi.set(__self__, "number", number)
+
+    @_builtins.property
+    @pulumi.getter
+    def number(self) -> _builtins.str:
+        """
+        The number in E.164 format without the leading plus.
+        """
+        return pulumi.get(self, "number")
+
+
+@pulumi.output_type
+class UserPstnChannel(dict):
+    def __init__(__self__, *,
+                 number: _builtins.int):
+        """
+        :param _builtins.int number: The phone number in E.164 format without the leading plus, as an integer (for example 14155550100).
+        """
+        pulumi.set(__self__, "number", number)
+
+    @_builtins.property
+    @pulumi.getter
+    def number(self) -> _builtins.int:
+        """
+        The phone number in E.164 format without the leading plus, as an integer (for example 14155550100).
+        """
+        return pulumi.get(self, "number")
+
+
+@pulumi.output_type
+class UserSipChannel(dict):
+    def __init__(__self__, *,
+                 uri: _builtins.str,
+                 password: Optional[_builtins.str] = None,
+                 username: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str uri: The SIP URI, starting with sip: or sips:.
+        :param _builtins.str password: Password for SIP authentication. The API never returns it, so the value recorded in state is the one last set by this program; a changed password is applied but a password changed outside Pulumi is not detected.
+        :param _builtins.str username: Username for SIP authentication.
+        """
+        pulumi.set(__self__, "uri", uri)
+        if password is not None:
+            pulumi.set(__self__, "password", password)
+        if username is not None:
+            pulumi.set(__self__, "username", username)
+
+    @_builtins.property
+    @pulumi.getter
+    def uri(self) -> _builtins.str:
+        """
+        The SIP URI, starting with sip: or sips:.
+        """
+        return pulumi.get(self, "uri")
+
+    @_builtins.property
+    @pulumi.getter
+    def password(self) -> Optional[_builtins.str]:
+        """
+        Password for SIP authentication. The API never returns it, so the value recorded in state is the one last set by this program; a changed password is applied but a password changed outside Pulumi is not detected.
+        """
+        return pulumi.get(self, "password")
+
+    @_builtins.property
+    @pulumi.getter
+    def username(self) -> Optional[_builtins.str]:
+        """
+        Username for SIP authentication.
+        """
+        return pulumi.get(self, "username")
+
+
+@pulumi.output_type
+class UserSummary(dict):
+    def __init__(__self__, *,
+                 name: _builtins.str,
+                 user_id: _builtins.str,
+                 display_name: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str name: Unique name of the user.
+        :param _builtins.str user_id: User ID (USR-<uuid>).
+        :param _builtins.str display_name: Human-friendly name, if set.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "user_id", user_id)
+        if display_name is not None:
+            pulumi.set(__self__, "display_name", display_name)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        Unique name of the user.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter(name="userId")
+    def user_id(self) -> _builtins.str:
+        """
+        User ID (USR-<uuid>).
+        """
+        return pulumi.get(self, "user_id")
+
+    @_builtins.property
+    @pulumi.getter(name="displayName")
+    def display_name(self) -> Optional[_builtins.str]:
+        """
+        Human-friendly name, if set.
+        """
+        return pulumi.get(self, "display_name")
+
+
+@pulumi.output_type
+class UserVbcChannel(dict):
+    def __init__(__self__, *,
+                 extension: _builtins.str):
+        """
+        :param _builtins.str extension: The Vonage Business Cloud extension.
+        """
+        pulumi.set(__self__, "extension", extension)
+
+    @_builtins.property
+    @pulumi.getter
+    def extension(self) -> _builtins.str:
+        """
+        The Vonage Business Cloud extension.
+        """
+        return pulumi.get(self, "extension")
+
+
+@pulumi.output_type
+class UserWebsocketChannel(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "contentType":
+            suggest = "content_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in UserWebsocketChannel. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        UserWebsocketChannel.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        UserWebsocketChannel.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 uri: _builtins.str,
+                 content_type: Optional[_builtins.str] = None,
+                 headers: Optional[Mapping[str, _builtins.str]] = None):
+        """
+        :param _builtins.str uri: The WebSocket URI, starting with ws:// or wss://.
+        :param _builtins.str content_type: The audio format, for example audio/l16;rate=16000 (sent to Vonage as content-type).
+        :param Mapping[str, _builtins.str] headers: Extra HTTP headers sent when Vonage connects to the WebSocket.
+        """
+        pulumi.set(__self__, "uri", uri)
+        if content_type is not None:
+            pulumi.set(__self__, "content_type", content_type)
+        if headers is not None:
+            pulumi.set(__self__, "headers", headers)
+
+    @_builtins.property
+    @pulumi.getter
+    def uri(self) -> _builtins.str:
+        """
+        The WebSocket URI, starting with ws:// or wss://.
+        """
+        return pulumi.get(self, "uri")
+
+    @_builtins.property
+    @pulumi.getter(name="contentType")
+    def content_type(self) -> Optional[_builtins.str]:
+        """
+        The audio format, for example audio/l16;rate=16000 (sent to Vonage as content-type).
+        """
+        return pulumi.get(self, "content_type")
+
+    @_builtins.property
+    @pulumi.getter
+    def headers(self) -> Optional[Mapping[str, _builtins.str]]:
+        """
+        Extra HTTP headers sent when Vonage connects to the WebSocket.
+        """
+        return pulumi.get(self, "headers")
 
 
 @pulumi.output_type

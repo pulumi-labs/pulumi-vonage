@@ -92,6 +92,14 @@ func (l *vlc) update(id string, state property.Map, inputs, old property.Map) pg
 	return u
 }
 
+// requireImportFails asserts that importing an ID that does not exist is an error and does not store
+// an empty resource (a refresh with prior state still reports the resource gone).
+func (l *vlc) requireImportFails(id string) {
+	l.t.Helper()
+	_, err := l.s.Read(pgp.ReadRequest{ID: id, Urn: l.urn, Properties: emptyMap(), Inputs: emptyMap()})
+	require.ErrorContains(l.t, err, "does not exist", id)
+}
+
 func (l *vlc) read(id string, state, inputs property.Map) pgp.ReadResponse {
 	l.t.Helper()
 	r, err := l.s.Read(pgp.ReadRequest{ID: id, Urn: l.urn, Properties: state, Inputs: inputs})
@@ -252,7 +260,7 @@ func TestApplication_FullLifecycle(t *testing.T) {
 	l.del(c.ID, ur.Properties)
 	require.Empty(t, l.read(c.ID, ur.Properties, pm(in2)).ID)
 	l.del(c.ID, ur.Properties)
-	require.Empty(t, l.read(c.ID, emptyMap(), emptyMap()).ID)
+	l.requireImportFails(c.ID)
 }
 
 func TestApplication_NestedVersionIsDiffed(t *testing.T) {
@@ -486,7 +494,7 @@ func TestNumber_FullLifecycle(t *testing.T) {
 	l.del(c.ID, u.Properties)
 	require.Equal(t, 1, l.m.countCalls("POST /number/cancel"), "no second cancel for a number that is gone")
 	require.Empty(t, l.read(c.ID, u.Properties, pm(in6)).ID)
-	require.Empty(t, l.read(c.ID, emptyMap(), emptyMap()).ID)
+	l.requireImportFails(c.ID)
 }
 
 // Bug 1: acquisition only matters at create time. Flipping it must never plan a replacement,
@@ -707,7 +715,7 @@ func TestSubAccount_FullLifecycle(t *testing.T) {
 	require.Equal(t, true, l.m.subs[c.ID]["suspended"])
 	l.m.mutate(func() { delete(l.m.subs, c.ID) })
 	require.Empty(t, l.read(c.ID, u.Properties, pm(in3)).ID)
-	require.Empty(t, l.read(c.ID, emptyMap(), emptyMap()).ID)
+	l.requireImportFails(c.ID)
 	l.del(c.ID, u.Properties) // 404 on suspend is success
 	l.del(c.ID, u.Properties)
 }

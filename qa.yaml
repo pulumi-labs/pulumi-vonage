@@ -12,8 +12,11 @@ credentials:
   - name: VONAGE_REST_BASE_URL
     required: false
 account: >-
-  A Vonage API account (primary account credentials, not a subaccount) with API key and secret. Application and Verify v2 template tests use Basic auth or JWT; applicationId and privateKey are only needed for endpoints that sign a JWT, which is unverified against a live account. Verify template endpoints with Basic authentication are unverified against a live account. Subaccount, number and secret tests need no extra plan but are skipped (see reasons). Base URL overrides are only for pointing at a mock or a regional endpoint.
+  A Vonage API account (primary account credentials, not a subaccount) with API key and secret. Application and Verify v2 template tests use Basic auth or JWT; applicationId and privateKey (the key pair of a Vonage application on the account) are required only by the User resource and the getUser and getUsers functions, which call the JWT-only Users API; they are unverified against a live account. Verify template endpoints with Basic authentication are unverified against a live account. Subaccount, number and secret tests need no extra plan but are skipped (see reasons). Base URL overrides are only for pointing at a mock or a regional endpoint.
 resources:
+  - type: vonage:index:AccountSettings
+    test: false
+    reason: A singleton that rewrites the default SMS webhooks of the account under test, and Vonage only saves a URL that answers 200, so a run needs a reachable receiver and would replace the webhooks other tests or the owner rely on. Clearing on delete cannot restore a previous value. Exercise manually on a throwaway account.
   - type: vonage:index:ApiSecret
     test: false
     reason: An account holds at most two API secrets and a created secret cannot be read back or recovered; replacing one at the limit revokes the old secret immediately, which can lock the test account out of its own credentials. Irreversible-ish account change.
@@ -27,6 +30,32 @@ resources:
   - type: vonage:index:SubAccount
     test: false
     reason: Vonage cannot delete subaccounts, only suspend them, so every run leaves a permanent account behind; requires primary account credentials and can create billing entities.
+  - type: vonage:index:ExternalAccountApplicationLink
+    test: false
+    reason: Needs an existing Messenger, Viber Service Message or WhatsApp account registered with Vonage, which a test cannot create (it needs a Facebook page token or a business account).
+  - type: vonage:index:MessengerAccount
+    test: false
+    reason: Needs a real Facebook Page ID and a valid Page access token, which the test account does not have. The API is beta.
+  - type: vonage:index:NumberPool
+    test: true
+    update: fallback
+    cost: none
+  - type: vonage:index:NumberPoolNumber
+    test: false
+    reason: Adding a number to a pool needs a number the account already owns, and the tests must not buy one.
+  - type: vonage:index:NetworkApplicationProfile
+    test: false
+    reason: Needs a registered business profile, which cannot be created with throwaway data (see NetworkBusinessProfile), and an application profile is a submission that mobile operators review; a deleted profile is only soft-deleted. The lookups cover the read paths.
+  - type: vonage:index:NetworkApplicationProfileShare
+    test: false
+    reason: Needs an application profile on the account and a second Vonage account to share it with; the tests have neither.
+  - type: vonage:index:NetworkBusinessProfile
+    test: false
+    reason: Registering a business profile is a legal submission that Vonage and mobile operators review (tax number, privacy policy, address), it cannot be created with throwaway data, and a deleted profile is only soft-deleted. The lookups cover the read paths.
+  - type: vonage:index:User
+    test: true
+    update: displayName
+    cost: none
   - type: vonage:index:VerifyTemplate
     test: true
     update: name
@@ -36,6 +65,8 @@ resources:
     update: text
     cost: none
 functions:
+  - name: getAccountSettings
+    test: true
   - name: getApiSecret
     test: true
   - name: getApiSecrets
@@ -58,12 +89,65 @@ functions:
     test: true
   - name: getAvailableNumbers
     test: true
+  - name: getPricing
+    test: true
+  - name: getExternalAccount
+    test: false
+    reason: Needs a Messenger, Viber or WhatsApp account already registered with Vonage.
+  - name: getExternalAccountApplicationLink
+    test: false
+    reason: Needs a Messenger, Viber or WhatsApp account already registered with Vonage.
+  - name: getExternalAccounts
+    test: true
+  - name: getMessengerAccount
+    test: false
+    reason: Needs a Messenger account already registered with Vonage, which needs a Facebook Page token.
+  - name: getNumberPool
+    test: true
+  - name: getNumberPools
+    test: true
+  - name: getNumberPoolNumber
+    test: false
+    reason: Needs a number the account already owns in a pool, and the tests must not buy one.
+  - name: getNumberPoolNumbers
+    test: true
+  - name: getNetworkApplicationProfile
+    test: false
+    reason: Needs an application profile already registered on the account, and the tests must not register one.
+  - name: getNetworkApplicationProfileShare
+    test: false
+    reason: Needs an application profile shared with a second Vonage account, and the tests have neither.
+  - name: getNetworkApplicationProfileShares
+    test: false
+    reason: Needs an application profile already registered on the account, and the tests must not register one.
+  - name: getNetworkApplicationProfiles
+    test: true
+  - name: getNetworkBusinessProfile
+    test: false
+    reason: Needs a business profile already registered on the account, and the tests must not register one.
+  - name: getNetworkBusinessProfiles
+    test: true
+  - name: getNetworkRegistryCatalogue
+    test: true
+  - name: getNetworkTermsAndConditions
+    test: false
+    reason: Needs a terms and conditions document ID from getNetworkRegistryCatalogue, which the test cannot know in advance.
+  - name: getUser
+    test: true
+  - name: getUsers
+    test: true
   - name: getVerifyTemplate
     test: true
   - name: getVerifyTemplateFragment
     test: true
 regressions:
+  - "Network Registry (OpenAPI v1.0.0): getNetworkRegistryCatalogue reads GET /v1/network-registry/catalogue/{countries,organisation-types,categories,csps,network-apis,purposes,vetting-levels,terms-and-conditions} and follows the opaque next token; getNetworkBusinessProfiles reads GET /v1/network-registry/business-profiles; read-only and free. If the default API host answers 404, set VONAGE_API_BASE_URL=https://api-eu.vonage.com (the host the spec names) and record which host works. Shapes are not verified on a live account. NetworkBusinessProfile (untested live, see its reason) updates through PUT .../change-request and deletes softly; confirm on a real account that a refresh while a change request is pending reports the requested values."
+  - "User, getUser and getUsers call the Users API with a JWT signed from VONAGE_APPLICATION_ID and VONAGE_PRIVATE_KEY (the key of that application); they need no API key or secret. A user with no name gets a generated NAM-... name that is not a diff; a changed displayName updates in place; changing an explicit name replaces the user; clearing displayName, imageUrl, customData or a channel type removes it. Shapes come from the Vonage SDKs, not verified on a live account: confirm PATCH merge versus replace and the null/empty clearing forms. Users belong to the application in the JWT, so the test application must be one the account owns."
+  - "#1715 pulumi import of an ID that does not exist (for example vonage:index:Application a nosuch, SubAccount, Number US:14155550199, ApiSecret <key>/nosuch) fails with 'does not exist' and leaves nothing in state; a refresh of a resource deleted in the dashboard still drops it from state"
+  - "NumberPool and NumberPoolNumber use the account API key as the account ID in /v2/numberpools/accounts/{key}/pools; a free pool is created, PATCHed (fallback) and deleted; NumberPoolNumber adds an owned number via POST .../numbers and confirms it by listing, removes via DELETE .../numbers/{number}; listings follow total_pages. Shapes come from the Number Pools OpenAPI v2.0.4, not verified on a live account."
+  - "getPricing reads GET /account/get-pricing/outbound/{sms|voice} for a country, /get-prefix-pricing for a prefix and /get-full-pricing for all countries; read-only and free; country GB returns countryCode GB with a non-empty networks list and a decimal defaultPrice (shapes taken from the Vonage SDKs, not yet verified on a live account)"
   - "#1577 import then inspect the stack state (pulumi stack export --show-secrets off): every property the schema marks secret on an imported resource is a secret, never plaintext; a refresh of a resource created by the program keeps them secret"
+  - "getAccountSettings sends POST /account/settings with no fields (Vonage has no GET); the Vonage Node SDK documents the response as the updated or current settings, so it should return the webhooks unchanged. Verify on a live account that an empty POST changes nothing and that mo-callback-url, dr-callback-url, max-outbound-request, max-inbound-request and max-calls-per-second come back (the limits may be numbers or numeric strings; both are accepted). AccountSettings (not auto-tested) manages moCallBackUrl and drCallBackUrl; its ID is the API key; removing a managed URL or destroying clears it with an empty value."
   - "getAvailableNumbers is read-only: it searches GET /number/search and never buys; getNumbers follows every page of GET /account/numbers; getAccountBalance reads GET /account/get-balance; getSubAccounts reads the _embedded.subaccounts list. All four response shapes come from the Vonage docs and are unverified against a live account."
   - "Number.acquisition is create-only: changing it must not replace the number or cancel it; country and msisdn still replace."
   - "Number import IDs must be COUNTRY:MSISDN; an ID without the country is rejected."

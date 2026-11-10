@@ -32,13 +32,13 @@ namespace Pulumi.Labs.Vonage
         public Output<string?> ApiSecret { get; private set; } = null!;
 
         /// <summary>
-        /// Optional Vonage application ID for JWT-authenticated runtime APIs. Falls back to VONAGE_APPLICATION_ID. Not used by the resources in this release.
+        /// Vonage application ID used to sign the JWT for the Users API (the User resource and the getUser and getUsers functions). Users belong to this application. Falls back to VONAGE_APPLICATION_ID.
         /// </summary>
         [Output("applicationId")]
         public Output<string?> ApplicationId { get; private set; } = null!;
 
         /// <summary>
-        /// Optional PEM private key for the application named by applicationId. Falls back to VONAGE_PRIVATE_KEY. Not used by the resources in this release.
+        /// PEM private key of the application named by applicationId (PKCS#8 'BEGIN PRIVATE KEY' as downloaded from the dashboard, or PKCS#1). Newlines flattened to a literal backslash-n are accepted. Falls back to VONAGE_PRIVATE_KEY.
         /// </summary>
         [Output("privateKey")]
         public Output<string?> PrivateKey { get; private set; } = null!;
@@ -112,7 +112,7 @@ namespace Pulumi.Labs.Vonage
         }
 
         /// <summary>
-        /// Optional Vonage application ID for JWT-authenticated runtime APIs. Falls back to VONAGE_APPLICATION_ID. Not used by the resources in this release.
+        /// Vonage application ID used to sign the JWT for the Users API (the User resource and the getUser and getUsers functions). Users belong to this application. Falls back to VONAGE_APPLICATION_ID.
         /// </summary>
         [Input("applicationId")]
         public Input<string>? ApplicationId { get; set; }
@@ -121,7 +121,7 @@ namespace Pulumi.Labs.Vonage
         private Input<string>? _privateKey;
 
         /// <summary>
-        /// Optional PEM private key for the application named by applicationId. Falls back to VONAGE_PRIVATE_KEY. Not used by the resources in this release.
+        /// PEM private key of the application named by applicationId (PKCS#8 'BEGIN PRIVATE KEY' as downloaded from the dashboard, or PKCS#1). Newlines flattened to a literal backslash-n are accepted. Falls back to VONAGE_PRIVATE_KEY.
         /// </summary>
         public Input<string>? PrivateKey
         {

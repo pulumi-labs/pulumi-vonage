@@ -175,3 +175,51 @@ func TestGetNumbers_PageCapIsAnError(t *testing.T) {
 
 // ownedClient talks to the same mock the lifecycle uses.
 func ownedClient(l *vlc) *Client { return newClient("key12345", "Secret123", l.srvURL, l.srvURL) }
+
+func TestGetPricing_CountryPrefixAndFullList(t *testing.T) {
+	l := newVLC(t, "SubAccount", "sub")
+	one, err := invoke(t, l.s, "vonage:index:getPricing", map[string]any{"country": "GB"})
+	require.NoError(t, err)
+	require.Equal(t, "sms", str(one, "serviceType"), "the service defaults to sms")
+	require.Equal(t, 1, one.Get("countries").AsArray().Len())
+	gb := one.Get("countries").AsArray().Get(0).AsMap()
+	require.Equal(t, "GB", str(gb, "countryCode"))
+	require.Equal(t, "0.03330000", str(gb, "defaultPrice"), "prices stay decimal strings")
+	require.Equal(t, "23410", str(gb.Get("networks").AsArray().Get(0).AsMap(), "networkCode"))
+	require.Contains(t, l.m.callLog(), "GET /account/get-pricing/outbound/sms")
+
+	voice, err := invoke(t, l.s, "vonage:index:getPricing", map[string]any{"country": "US", "serviceType": "voice"})
+	require.NoError(t, err)
+	require.Equal(t, "voice", str(voice, "serviceType"))
+	require.Contains(t, l.m.callLog(), "GET /account/get-pricing/outbound/voice")
+
+	pre, err := invoke(t, l.s, "vonage:index:getPricing", map[string]any{"prefix": "44"})
+	require.NoError(t, err)
+	require.Equal(t, float64(2), pre.Get("count").AsNumber(), "GB and Guernsey share 44")
+	require.Contains(t, l.m.callLog(), "GET /account/get-prefix-pricing/outbound/sms")
+
+	full, err := invoke(t, l.s, "vonage:index:getPricing", map[string]any{"serviceType": "sms-transit"})
+	require.NoError(t, err)
+	require.Equal(t, float64(3), full.Get("count").AsNumber())
+	require.Contains(t, l.m.callLog(), "GET /account/get-full-pricing/outbound/sms-transit")
+}
+
+func TestGetPricing_RejectsBadInputAndShortLists(t *testing.T) {
+	l := newVLC(t, "SubAccount", "sub")
+	for name, args := range map[string]map[string]any{
+		"service":       {"serviceType": "mms"},
+		"both":          {"country": "GB", "prefix": "44"},
+		"country shape": {"country": "GBR"},
+		"prefix shape":  {"prefix": "+44"},
+	} {
+		_, err := invoke(t, l.s, "vonage:index:getPricing", args)
+		require.Error(t, err, name)
+	}
+	_, err := invoke(t, l.s, "vonage:index:getPricing", map[string]any{"country": "ZZ"})
+	require.ErrorContains(t, err, "no pricing for country")
+
+	// A list shorter than the count Vonage reports is an error, never a partial price list.
+	l.m.pricingShort = true
+	_, err = invoke(t, l.s, "vonage:index:getPricing", map[string]any{})
+	require.ErrorContains(t, err, "reported 8 countries but returned 3")
+}

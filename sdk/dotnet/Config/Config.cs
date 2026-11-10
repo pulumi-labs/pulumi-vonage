@@ -64,7 +64,7 @@ namespace Pulumi.Labs.Vonage
 
         private static readonly __Value<string?> _applicationId = new __Value<string?>(() => __config.Get("applicationId") ?? Utilities.GetEnv("VONAGE_APPLICATION_ID"));
         /// <summary>
-        /// Optional Vonage application ID for JWT-authenticated runtime APIs. Falls back to VONAGE_APPLICATION_ID. Not used by the resources in this release.
+        /// Vonage application ID used to sign the JWT for the Users API (the User resource and the getUser and getUsers functions). Users belong to this application. Falls back to VONAGE_APPLICATION_ID.
         /// </summary>
         public static string? ApplicationId
         {
@@ -74,7 +74,7 @@ namespace Pulumi.Labs.Vonage
 
         private static readonly __Value<string?> _privateKey = new __Value<string?>(() => __config.Get("privateKey") ?? Utilities.GetEnv("VONAGE_PRIVATE_KEY"));
         /// <summary>
-        /// Optional PEM private key for the application named by applicationId. Falls back to VONAGE_PRIVATE_KEY. Not used by the resources in this release.
+        /// PEM private key of the application named by applicationId (PKCS#8 'BEGIN PRIVATE KEY' as downloaded from the dashboard, or PKCS#1). Newlines flattened to a literal backslash-n are accepted. Falls back to VONAGE_PRIVATE_KEY.
         /// </summary>
         public static string? PrivateKey
         {

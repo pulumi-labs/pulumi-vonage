@@ -41,7 +41,7 @@ Object.defineProperty(exports, "apiSecret", {
 });
 
 /**
- * Optional Vonage application ID for JWT-authenticated runtime APIs. Falls back to VONAGE_APPLICATION_ID. Not used by the resources in this release.
+ * Vonage application ID used to sign the JWT for the Users API (the User resource and the getUser and getUsers functions). Users belong to this application. Falls back to VONAGE_APPLICATION_ID.
  */
 export declare const applicationId: string | undefined;
 Object.defineProperty(exports, "applicationId", {
@@ -52,7 +52,7 @@ Object.defineProperty(exports, "applicationId", {
 });
 
 /**
- * Optional PEM private key for the application named by applicationId. Falls back to VONAGE_PRIVATE_KEY. Not used by the resources in this release.
+ * PEM private key of the application named by applicationId (PKCS#8 'BEGIN PRIVATE KEY' as downloaded from the dashboard, or PKCS#1). Newlines flattened to a literal backslash-n are accepted. Falls back to VONAGE_PRIVATE_KEY.
  */
 export declare const privateKey: string | undefined;
 Object.defineProperty(exports, "privateKey", {

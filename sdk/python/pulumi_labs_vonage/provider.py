@@ -31,8 +31,8 @@ class ProviderArgs:
         :param pulumi.Input[_builtins.str] api_base_url: Override for the Vonage API host (default https://api.nexmo.com). Intended for testing against a mock server. Falls back to VONAGE_API_BASE_URL.
         :param pulumi.Input[_builtins.str] api_key: The Vonage account API key (the 8-character key shown in the Vonage API Dashboard). Falls back to the VONAGE_API_KEY environment variable.
         :param pulumi.Input[_builtins.str] api_secret: The Vonage account API secret. Falls back to the VONAGE_API_SECRET environment variable.
-        :param pulumi.Input[_builtins.str] application_id: Optional Vonage application ID for JWT-authenticated runtime APIs. Falls back to VONAGE_APPLICATION_ID. Not used by the resources in this release.
-        :param pulumi.Input[_builtins.str] private_key: Optional PEM private key for the application named by applicationId. Falls back to VONAGE_PRIVATE_KEY. Not used by the resources in this release.
+        :param pulumi.Input[_builtins.str] application_id: Vonage application ID used to sign the JWT for the Users API (the User resource and the getUser and getUsers functions). Users belong to this application. Falls back to VONAGE_APPLICATION_ID.
+        :param pulumi.Input[_builtins.str] private_key: PEM private key of the application named by applicationId (PKCS#8 'BEGIN PRIVATE KEY' as downloaded from the dashboard, or PKCS#1). Newlines flattened to a literal backslash-n are accepted. Falls back to VONAGE_PRIVATE_KEY.
         :param pulumi.Input[_builtins.str] rest_base_url: Override for the Vonage REST host used by the Numbers API (default https://rest.nexmo.com). Intended for testing against a mock server. Falls back to VONAGE_REST_BASE_URL.
         """
         if api_base_url is None:
@@ -100,7 +100,7 @@ class ProviderArgs:
     @pulumi.getter(name="applicationId")
     def application_id(self) -> Optional[pulumi.Input[_builtins.str]]:
         """
-        Optional Vonage application ID for JWT-authenticated runtime APIs. Falls back to VONAGE_APPLICATION_ID. Not used by the resources in this release.
+        Vonage application ID used to sign the JWT for the Users API (the User resource and the getUser and getUsers functions). Users belong to this application. Falls back to VONAGE_APPLICATION_ID.
         """
         return pulumi.get(self, "application_id")
 
@@ -112,7 +112,7 @@ class ProviderArgs:
     @pulumi.getter(name="privateKey")
     def private_key(self) -> Optional[pulumi.Input[_builtins.str]]:
         """
-        Optional PEM private key for the application named by applicationId. Falls back to VONAGE_PRIVATE_KEY. Not used by the resources in this release.
+        PEM private key of the application named by applicationId (PKCS#8 'BEGIN PRIVATE KEY' as downloaded from the dashboard, or PKCS#1). Newlines flattened to a literal backslash-n are accepted. Falls back to VONAGE_PRIVATE_KEY.
         """
         return pulumi.get(self, "private_key")
 
@@ -154,8 +154,8 @@ class Provider(pulumi.ProviderResource):
         :param pulumi.Input[_builtins.str] api_base_url: Override for the Vonage API host (default https://api.nexmo.com). Intended for testing against a mock server. Falls back to VONAGE_API_BASE_URL.
         :param pulumi.Input[_builtins.str] api_key: The Vonage account API key (the 8-character key shown in the Vonage API Dashboard). Falls back to the VONAGE_API_KEY environment variable.
         :param pulumi.Input[_builtins.str] api_secret: The Vonage account API secret. Falls back to the VONAGE_API_SECRET environment variable.
-        :param pulumi.Input[_builtins.str] application_id: Optional Vonage application ID for JWT-authenticated runtime APIs. Falls back to VONAGE_APPLICATION_ID. Not used by the resources in this release.
-        :param pulumi.Input[_builtins.str] private_key: Optional PEM private key for the application named by applicationId. Falls back to VONAGE_PRIVATE_KEY. Not used by the resources in this release.
+        :param pulumi.Input[_builtins.str] application_id: Vonage application ID used to sign the JWT for the Users API (the User resource and the getUser and getUsers functions). Users belong to this application. Falls back to VONAGE_APPLICATION_ID.
+        :param pulumi.Input[_builtins.str] private_key: PEM private key of the application named by applicationId (PKCS#8 'BEGIN PRIVATE KEY' as downloaded from the dashboard, or PKCS#1). Newlines flattened to a literal backslash-n are accepted. Falls back to VONAGE_PRIVATE_KEY.
         :param pulumi.Input[_builtins.str] rest_base_url: Override for the Vonage REST host used by the Numbers API (default https://rest.nexmo.com). Intended for testing against a mock server. Falls back to VONAGE_REST_BASE_URL.
         """
         ...
@@ -251,7 +251,7 @@ class Provider(pulumi.ProviderResource):
     @pulumi.getter(name="applicationId")
     def application_id(self) -> pulumi.Output[Optional[_builtins.str]]:
         """
-        Optional Vonage application ID for JWT-authenticated runtime APIs. Falls back to VONAGE_APPLICATION_ID. Not used by the resources in this release.
+        Vonage application ID used to sign the JWT for the Users API (the User resource and the getUser and getUsers functions). Users belong to this application. Falls back to VONAGE_APPLICATION_ID.
         """
         return pulumi.get(self, "application_id")
 
@@ -259,7 +259,7 @@ class Provider(pulumi.ProviderResource):
     @pulumi.getter(name="privateKey")
     def private_key(self) -> pulumi.Output[Optional[_builtins.str]]:
         """
-        Optional PEM private key for the application named by applicationId. Falls back to VONAGE_PRIVATE_KEY. Not used by the resources in this release.
+        PEM private key of the application named by applicationId (PKCS#8 'BEGIN PRIVATE KEY' as downloaded from the dashboard, or PKCS#1). Newlines flattened to a literal backslash-n are accepted. Falls back to VONAGE_PRIVATE_KEY.
         """
         return pulumi.get(self, "private_key")
 
