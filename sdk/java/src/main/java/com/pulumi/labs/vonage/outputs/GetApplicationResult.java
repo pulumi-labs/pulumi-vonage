@@ -5,9 +5,19 @@ package com.pulumi.labs.vonage.outputs;
 
 import com.pulumi.core.annotations.CustomType;
 import com.pulumi.exceptions.MissingRequiredPropertyException;
+import com.pulumi.labs.vonage.outputs.MeetingsCapability;
+import com.pulumi.labs.vonage.outputs.MessagesCapability;
+import com.pulumi.labs.vonage.outputs.NetworkApisCapability;
+import com.pulumi.labs.vonage.outputs.RtcCapability;
+import com.pulumi.labs.vonage.outputs.VerifyCapability;
+import com.pulumi.labs.vonage.outputs.VideoCapability;
+import com.pulumi.labs.vonage.outputs.VoiceCapability;
+import java.lang.Boolean;
 import java.lang.String;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+import javax.annotation.Nullable;
 
 @CustomType
 public final class GetApplicationResult {
@@ -22,15 +32,55 @@ public final class GetApplicationResult {
      */
     private List<String> capabilities;
     /**
+     * @return The meetings capability as configured on the application, or unset when it is not enabled.
+     * 
+     */
+    private @Nullable MeetingsCapability meetings;
+    /**
+     * @return The messages capability as configured on the application, or unset when it is not enabled.
+     * 
+     */
+    private @Nullable MessagesCapability messages;
+    /**
      * @return Application name.
      * 
      */
     private String name;
     /**
+     * @return The network_apis capability as configured on the application, or unset when it is not enabled.
+     * 
+     */
+    private @Nullable NetworkApisCapability networkApis;
+    /**
      * @return PEM public key registered with the application.
      * 
      */
     private String publicKey;
+    /**
+     * @return The rtc capability as configured on the application, or unset when it is not enabled.
+     * 
+     */
+    private @Nullable RtcCapability rtc;
+    /**
+     * @return True when the vbc capability is enabled; unset otherwise.
+     * 
+     */
+    private @Nullable Boolean vbc;
+    /**
+     * @return The verify capability as configured on the application, or unset when it is not enabled.
+     * 
+     */
+    private @Nullable VerifyCapability verify;
+    /**
+     * @return The video capability as configured on the application, or unset when it is not enabled.
+     * 
+     */
+    private @Nullable VideoCapability video;
+    /**
+     * @return The voice capability as configured on the application, or unset when it is not enabled.
+     * 
+     */
+    private @Nullable VoiceCapability voice;
 
     private GetApplicationResult() {}
     /**
@@ -48,6 +98,20 @@ public final class GetApplicationResult {
         return this.capabilities;
     }
     /**
+     * @return The meetings capability as configured on the application, or unset when it is not enabled.
+     * 
+     */
+    public Optional<MeetingsCapability> meetings() {
+        return Optional.ofNullable(this.meetings);
+    }
+    /**
+     * @return The messages capability as configured on the application, or unset when it is not enabled.
+     * 
+     */
+    public Optional<MessagesCapability> messages() {
+        return Optional.ofNullable(this.messages);
+    }
+    /**
      * @return Application name.
      * 
      */
@@ -55,11 +119,53 @@ public final class GetApplicationResult {
         return this.name;
     }
     /**
+     * @return The network_apis capability as configured on the application, or unset when it is not enabled.
+     * 
+     */
+    public Optional<NetworkApisCapability> networkApis() {
+        return Optional.ofNullable(this.networkApis);
+    }
+    /**
      * @return PEM public key registered with the application.
      * 
      */
     public String publicKey() {
         return this.publicKey;
+    }
+    /**
+     * @return The rtc capability as configured on the application, or unset when it is not enabled.
+     * 
+     */
+    public Optional<RtcCapability> rtc() {
+        return Optional.ofNullable(this.rtc);
+    }
+    /**
+     * @return True when the vbc capability is enabled; unset otherwise.
+     * 
+     */
+    public Optional<Boolean> vbc() {
+        return Optional.ofNullable(this.vbc);
+    }
+    /**
+     * @return The verify capability as configured on the application, or unset when it is not enabled.
+     * 
+     */
+    public Optional<VerifyCapability> verify() {
+        return Optional.ofNullable(this.verify);
+    }
+    /**
+     * @return The video capability as configured on the application, or unset when it is not enabled.
+     * 
+     */
+    public Optional<VideoCapability> video() {
+        return Optional.ofNullable(this.video);
+    }
+    /**
+     * @return The voice capability as configured on the application, or unset when it is not enabled.
+     * 
+     */
+    public Optional<VoiceCapability> voice() {
+        return Optional.ofNullable(this.voice);
     }
 
     public static Builder builder() {
@@ -73,15 +179,31 @@ public final class GetApplicationResult {
     public static final class Builder {
         private String applicationId;
         private List<String> capabilities;
+        private @Nullable MeetingsCapability meetings;
+        private @Nullable MessagesCapability messages;
         private String name;
+        private @Nullable NetworkApisCapability networkApis;
         private String publicKey;
+        private @Nullable RtcCapability rtc;
+        private @Nullable Boolean vbc;
+        private @Nullable VerifyCapability verify;
+        private @Nullable VideoCapability video;
+        private @Nullable VoiceCapability voice;
         public Builder() {}
         public Builder(GetApplicationResult defaults) {
     	      Objects.requireNonNull(defaults);
     	      this.applicationId = defaults.applicationId;
     	      this.capabilities = defaults.capabilities;
+    	      this.meetings = defaults.meetings;
+    	      this.messages = defaults.messages;
     	      this.name = defaults.name;
+    	      this.networkApis = defaults.networkApis;
     	      this.publicKey = defaults.publicKey;
+    	      this.rtc = defaults.rtc;
+    	      this.vbc = defaults.vbc;
+    	      this.verify = defaults.verify;
+    	      this.video = defaults.video;
+    	      this.voice = defaults.voice;
         }
 
         @CustomType.Setter
@@ -104,11 +226,29 @@ public final class GetApplicationResult {
             return capabilities(List.of(capabilities));
         }
         @CustomType.Setter
+        public Builder meetings(@Nullable MeetingsCapability meetings) {
+
+            this.meetings = meetings;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder messages(@Nullable MessagesCapability messages) {
+
+            this.messages = messages;
+            return this;
+        }
+        @CustomType.Setter
         public Builder name(String name) {
             if (name == null) {
               throw new MissingRequiredPropertyException("GetApplicationResult", "name");
             }
             this.name = name;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder networkApis(@Nullable NetworkApisCapability networkApis) {
+
+            this.networkApis = networkApis;
             return this;
         }
         @CustomType.Setter
@@ -119,12 +259,50 @@ public final class GetApplicationResult {
             this.publicKey = publicKey;
             return this;
         }
+        @CustomType.Setter
+        public Builder rtc(@Nullable RtcCapability rtc) {
+
+            this.rtc = rtc;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder vbc(@Nullable Boolean vbc) {
+
+            this.vbc = vbc;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder verify(@Nullable VerifyCapability verify) {
+
+            this.verify = verify;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder video(@Nullable VideoCapability video) {
+
+            this.video = video;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder voice(@Nullable VoiceCapability voice) {
+
+            this.voice = voice;
+            return this;
+        }
         public GetApplicationResult build() {
             final var _resultValue = new GetApplicationResult();
             _resultValue.applicationId = applicationId;
             _resultValue.capabilities = capabilities;
+            _resultValue.meetings = meetings;
+            _resultValue.messages = messages;
             _resultValue.name = name;
+            _resultValue.networkApis = networkApis;
             _resultValue.publicKey = publicKey;
+            _resultValue.rtc = rtc;
+            _resultValue.vbc = vbc;
+            _resultValue.verify = verify;
+            _resultValue.video = video;
+            _resultValue.voice = voice;
             return _resultValue;
         }
     }

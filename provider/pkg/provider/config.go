@@ -16,6 +16,7 @@ package provider
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"net/url"
 
@@ -24,13 +25,13 @@ import (
 
 // Config holds the provider-level configuration.
 //
-// Every resource in this provider talks to the Vonage account-management APIs
-// (Application API v2, Numbers, Subaccounts and API Secrets), all of which
-// authenticate with the account API key and API secret over HTTP Basic.
-// ApplicationID and PrivateKey are accepted so that a single provider
-// configuration can also carry the JWT credentials of a Vonage application
-// (used by the Voice, Messages and Video runtime APIs), but no resource in this
-// release calls a JWT-authenticated API, so they are not required.
+// Most resources talk to the Vonage account-management APIs (Application API v2,
+// Numbers, Subaccounts, API Secrets, Verify and Number Pools), which authenticate
+// with the account API key and API secret. The User resource and the getUser and
+// getUsers functions call the Users API, which only accepts a JWT signed with the
+// private key of a Vonage application, so they need ApplicationID and PrivateKey
+// and do not need the API key and secret. Every credential is optional at the
+// provider level; each resource reports exactly which ones it is missing.
 type Config struct {
 	// APIKey is the Vonage account API key.
 	APIKey *string `pulumi:"apiKey,optional"`
@@ -64,10 +65,10 @@ func (c *Config) Annotate(a infer.Annotator) {
 	a.Describe(&c.APIKey, "The Vonage account API key (the 8-character key shown in the Vonage API Dashboard). "+
 		"Falls back to the VONAGE_API_KEY environment variable.")
 	a.Describe(&c.APISecret, "The Vonage account API secret. Falls back to the VONAGE_API_SECRET environment variable.")
-	a.Describe(&c.ApplicationID, "Optional Vonage application ID for JWT-authenticated runtime APIs. "+
-		"Falls back to VONAGE_APPLICATION_ID. Not used by the resources in this release.")
-	a.Describe(&c.PrivateKey, "Optional PEM private key for the application named by applicationId. "+
-		"Falls back to VONAGE_PRIVATE_KEY. Not used by the resources in this release.")
+	a.Describe(&c.ApplicationID, "Vonage application ID used to sign the JWT for the Users API (the User resource and the getUser and getUsers functions). "+
+		"Users belong to this application. Falls back to VONAGE_APPLICATION_ID.")
+	a.Describe(&c.PrivateKey, "PEM private key of the application named by applicationId (PKCS#8 'BEGIN PRIVATE KEY' as downloaded from the dashboard, or PKCS#1). "+
+		"Newlines flattened to a literal backslash-n are accepted. Falls back to VONAGE_PRIVATE_KEY.")
 	a.Describe(&c.APIBaseURL, "Override for the Vonage API host (default https://api.nexmo.com). "+
 		"Intended for testing against a mock server. Falls back to VONAGE_API_BASE_URL.")
 	a.Describe(&c.RestBaseURL, "Override for the Vonage REST host used by the Numbers API (default https://rest.nexmo.com). "+
@@ -101,6 +102,36 @@ func clientFromConfig(cfg *Config) (*Client, error) {
 		}
 	}
 	return newClient(key, secret, deref(cfg.APIBaseURL), deref(cfg.RestBaseURL)), nil
+}
+
+// errNoJWTCredentials is returned when a Client without JWT credentials is asked to call the Users API.
+var errNoJWTCredentials = errors.New("no application JWT credentials configured")
+
+// jwtClientFor builds a Client for the JWT-authenticated Users API from the provider
+// configuration in ctx. It needs applicationId and privateKey only.
+func jwtClientFor(ctx context.Context) (*Client, error) {
+	cfg := infer.GetConfig[Config](ctx)
+	return jwtClientFromConfig(&cfg)
+}
+
+func jwtClientFromConfig(cfg *Config) (*Client, error) {
+	appID, key := deref(cfg.ApplicationID), deref(cfg.PrivateKey)
+	if appID == "" {
+		return nil, fmt.Errorf("vonage: applicationId is required for the Users API (set the provider applicationId or VONAGE_APPLICATION_ID)")
+	}
+	if key == "" {
+		return nil, fmt.Errorf("vonage: privateKey is required for the Users API (set the provider privateKey or VONAGE_PRIVATE_KEY)")
+	}
+	if err := checkBaseURL(deref(cfg.APIBaseURL)); err != nil {
+		return nil, fmt.Errorf("vonage: apiBaseUrl: %w", err)
+	}
+	signer, err := newJWTSigner(appID, key)
+	if err != nil {
+		return nil, fmt.Errorf("vonage: privateKey: %w", err)
+	}
+	c := newClient("", "", deref(cfg.APIBaseURL), deref(cfg.RestBaseURL))
+	c.signer = signer
+	return c, nil
 }
 
 // providerAPIKey returns the configured account API key (empty if unset).

@@ -32,14 +32,14 @@ public final class Config {
         return Codegen.stringProp("apiSecret").config(config).env("VONAGE_API_SECRET").get();
     }
 /**
- * Optional Vonage application ID for JWT-authenticated runtime APIs. Falls back to VONAGE_APPLICATION_ID. Not used by the resources in this release.
+ * Vonage application ID used to sign the JWT for the Users API (the User resource and the getUser and getUsers functions). Users belong to this application. Falls back to VONAGE_APPLICATION_ID.
  * 
  */
     public Optional<String> applicationId() {
         return Codegen.stringProp("applicationId").config(config).env("VONAGE_APPLICATION_ID").get();
     }
 /**
- * Optional PEM private key for the application named by applicationId. Falls back to VONAGE_PRIVATE_KEY. Not used by the resources in this release.
+ * PEM private key of the application named by applicationId (PKCS#8 &#39;BEGIN PRIVATE KEY&#39; as downloaded from the dashboard, or PKCS#1). Newlines flattened to a literal backslash-n are accepted. Falls back to VONAGE_PRIVATE_KEY.
  * 
  */
     public Optional<String> privateKey() {

@@ -26,7 +26,7 @@ func newProvider() (provider.Provider, error) {
 	return infer.NewProviderBuilder().
 		WithDisplayName("Vonage").
 		WithDescription(
-			"Experimental: manage Vonage (formerly Nexmo) applications, numbers, subaccounts, API secrets and Verify v2 templates as infrastructure with Pulumi.",
+			"Experimental: manage Vonage (formerly Nexmo) applications, numbers, subaccounts, API secrets, Verify v2 templates and Network Registry business profiles as infrastructure with Pulumi.",
 		).
 		WithHomepage("https://developer.vonage.com").
 		WithRepository("https://github.com/pulumi-labs/pulumi-vonage").
@@ -35,7 +35,7 @@ func newProvider() (provider.Provider, error) {
 			"go": map[string]any{"generateResourceContainerTypes": true, "respectSchemaVersion": true},
 			"nodejs": map[string]any{
 				"packageName":          "@pulumi-labs/vonage",
-				"packageDescription":   "Experimental: manage Vonage (formerly Nexmo) applications, numbers, subaccounts, API secrets and Verify v2 templates as infrastructure with Pulumi.",
+				"packageDescription":   "Experimental: manage Vonage (formerly Nexmo) applications, numbers, subaccounts, API secrets, Verify v2 templates and Network Registry business profiles as infrastructure with Pulumi.",
 				"respectSchemaVersion": true,
 			},
 			"python": map[string]any{
@@ -58,9 +58,18 @@ func newProvider() (provider.Provider, error) {
 			infer.Resource[*Application, ApplicationArgs, ApplicationState](&Application{}),
 			infer.Resource[*Number, NumberArgs, NumberState](&Number{}),
 			infer.Resource[*SubAccount, SubAccountArgs, SubAccountState](&SubAccount{}),
+			infer.Resource[*AccountSettings, AccountSettingsArgs, AccountSettingsState](&AccountSettings{}),
 			infer.Resource[*ApiSecret, ApiSecretArgs, ApiSecretState](&ApiSecret{}),
 			infer.Resource[*VerifyTemplate, VerifyTemplateArgs, VerifyTemplateState](&VerifyTemplate{}),
 			infer.Resource[*VerifyTemplateFragment, VerifyTemplateFragmentArgs, VerifyTemplateFragmentState](&VerifyTemplateFragment{}),
+			infer.Resource[*NumberPool, NumberPoolArgs, NumberPoolState](&NumberPool{}),
+			infer.Resource[*NumberPoolNumber, NumberPoolNumberArgs, NumberPoolNumberState](&NumberPoolNumber{}),
+			infer.Resource[*User, UserArgs, UserState](&User{}),
+			infer.Resource[*MessengerAccount, MessengerAccountArgs, MessengerAccountState](&MessengerAccount{}),
+			infer.Resource[*ExternalAccountApplicationLink, ExternalAccountApplicationLinkArgs, ExternalAccountApplicationLinkState](&ExternalAccountApplicationLink{}),
+			infer.Resource[*NetworkBusinessProfile, NetworkBusinessProfileArgs, NetworkBusinessProfileState](&NetworkBusinessProfile{}),
+			infer.Resource[*NetworkApplicationProfile, NetworkApplicationProfileArgs, NetworkApplicationProfileState](&NetworkApplicationProfile{}),
+			infer.Resource[*NetworkApplicationProfileShare, NetworkApplicationProfileShareArgs, NetworkApplicationProfileShareState](&NetworkApplicationProfileShare{}),
 		).
 		WithFunctions(
 			infer.Function[*GetApplication, GetApplicationArgs, GetApplicationResult](&GetApplication{}),
@@ -68,13 +77,33 @@ func newProvider() (provider.Provider, error) {
 			infer.Function[*GetApplications, GetApplicationsArgs, GetApplicationsResult](&GetApplications{}),
 			infer.Function[*GetSubAccount, GetSubAccountArgs, GetSubAccountResult](&GetSubAccount{}),
 			infer.Function[*GetSubAccounts, GetSubAccountsArgs, GetSubAccountsResult](&GetSubAccounts{}),
+			infer.Function[*GetAccountSettings, GetAccountSettingsArgs, GetAccountSettingsResult](&GetAccountSettings{}),
 			infer.Function[*GetAccountBalance, GetAccountBalanceArgs, GetAccountBalanceResult](&GetAccountBalance{}),
 			infer.Function[*GetNumbers, GetNumbersArgs, GetNumbersResult](&GetNumbers{}),
 			infer.Function[*GetAvailableNumbers, GetAvailableNumbersArgs, GetAvailableNumbersResult](&GetAvailableNumbers{}),
+			infer.Function[*GetPricing, GetPricingArgs, GetPricingResult](&GetPricing{}),
 			infer.Function[*GetApiSecret, GetApiSecretArgs, GetApiSecretResult](&GetApiSecret{}),
 			infer.Function[*GetApiSecrets, GetApiSecretsArgs, GetApiSecretsResult](&GetApiSecrets{}),
 			infer.Function[*GetVerifyTemplate, GetVerifyTemplateArgs, GetVerifyTemplateResult](&GetVerifyTemplate{}),
 			infer.Function[*GetVerifyTemplateFragment, GetVerifyTemplateFragmentArgs, GetVerifyTemplateFragmentResult](&GetVerifyTemplateFragment{}),
+			infer.Function[*GetNumberPool, GetNumberPoolArgs, GetNumberPoolResult](&GetNumberPool{}),
+			infer.Function[*GetNumberPools, GetNumberPoolsArgs, GetNumberPoolsResult](&GetNumberPools{}),
+			infer.Function[*GetNumberPoolNumber, GetNumberPoolNumberArgs, GetNumberPoolNumberResult](&GetNumberPoolNumber{}),
+			infer.Function[*GetNumberPoolNumbers, GetNumberPoolNumbersArgs, GetNumberPoolNumbersResult](&GetNumberPoolNumbers{}),
+			infer.Function[*GetUser, GetUserArgs, GetUserResult](&GetUser{}),
+			infer.Function[*GetUsers, GetUsersArgs, GetUsersResult](&GetUsers{}),
+			infer.Function[*GetExternalAccount, GetExternalAccountArgs, GetExternalAccountResult](&GetExternalAccount{}),
+			infer.Function[*GetExternalAccounts, GetExternalAccountsArgs, GetExternalAccountsResult](&GetExternalAccounts{}),
+			infer.Function[*GetExternalAccountApplicationLink, GetExternalAccountApplicationLinkArgs, GetExternalAccountApplicationLinkResult](&GetExternalAccountApplicationLink{}),
+			infer.Function[*GetMessengerAccount, GetMessengerAccountArgs, GetExternalAccountResult](&GetMessengerAccount{}),
+			infer.Function[*GetNetworkBusinessProfile, GetNetworkBusinessProfileArgs, GetNetworkBusinessProfileResult](&GetNetworkBusinessProfile{}),
+			infer.Function[*GetNetworkBusinessProfiles, GetNetworkBusinessProfilesArgs, GetNetworkBusinessProfilesResult](&GetNetworkBusinessProfiles{}),
+			infer.Function[*GetNetworkApplicationProfile, GetNetworkApplicationProfileArgs, GetNetworkApplicationProfileResult](&GetNetworkApplicationProfile{}),
+			infer.Function[*GetNetworkApplicationProfiles, GetNetworkApplicationProfilesArgs, GetNetworkApplicationProfilesResult](&GetNetworkApplicationProfiles{}),
+			infer.Function[*GetNetworkApplicationProfileShare, GetNetworkApplicationProfileShareArgs, GetNetworkApplicationProfileShareResult](&GetNetworkApplicationProfileShare{}),
+			infer.Function[*GetNetworkApplicationProfileShares, GetNetworkApplicationProfileSharesArgs, GetNetworkApplicationProfileSharesResult](&GetNetworkApplicationProfileShares{}),
+			infer.Function[*GetNetworkRegistryCatalogue, GetNetworkRegistryCatalogueArgs, GetNetworkRegistryCatalogueResult](&GetNetworkRegistryCatalogue{}),
+			infer.Function[*GetNetworkTermsAndConditions, GetNetworkTermsAndConditionsArgs, GetNetworkTermsAndConditionsResult](&GetNetworkTermsAndConditions{}),
 		).
 		Build()
 }

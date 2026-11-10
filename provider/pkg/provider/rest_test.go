@@ -126,10 +126,55 @@ func TestGetApplication_ByIDAndName(t *testing.T) {
 	r, err = s.Invoke(pgp.InvokeRequest{Token: "vonage:index:getApplication", Args: pm(map[string]any{"applicationId": "app-1"})})
 	require.NoError(t, err)
 	require.Equal(t, "demo", str(r.Return, "name"))
+	// The full capability tree comes back, not just the names.
+	voice, ok := r.Return.GetOk("voice")
+	require.True(t, ok)
+	require.Equal(t, "eu-west", str(voice.AsMap(), "region"))
+	answer, _ := voice.AsMap().GetOk("answerUrl")
+	require.Equal(t, "https://example.com/answer", str(answer.AsMap(), "address"))
+	require.Equal(t, "GET", str(answer.AsMap(), "httpMethod"))
+	messages, ok := r.Return.GetOk("messages")
+	require.True(t, ok)
+	inbound, _ := messages.AsMap().GetOk("inboundUrl")
+	require.Equal(t, "https://example.com/in", str(inbound.AsMap(), "address"))
+	for _, absent := range []string{"rtc", "verify", "meetings", "video", "networkApis", "vbc"} {
+		_, present := r.Return.GetOk(absent)
+		require.False(t, present, absent)
+	}
 	_, err = s.Invoke(pgp.InvokeRequest{Token: "vonage:index:getApplication", Args: pm(map[string]any{})})
 	require.Error(t, err)
 	_, err = s.Invoke(pgp.InvokeRequest{Token: "vonage:index:getApplication", Args: pm(map[string]any{"applicationId": "a", "name": "b"})})
 	require.Error(t, err)
+}
+
+func TestGetApplication_ReturnsVideoAndNetworkApis(t *testing.T) {
+	_, srv := newMock(t)
+	s := newServerFor(t, srv.URL)
+	in := appInputs()
+	in["rtc"] = map[string]any{"eventUrl": map[string]any{"address": "https://example.com/rtc", "httpMethod": "POST"}}
+	in["verify"] = map[string]any{"statusUrl": map[string]any{"address": "https://example.com/verify", "httpMethod": "POST"}}
+	in["meetings"] = map[string]any{"roomChanged": map[string]any{"address": "https://example.com/room", "httpMethod": "POST"}}
+	in["video"] = map[string]any{
+		"webhooks": map[string]any{"archiveStatus": map[string]any{"address": "https://example.com/archive", "active": true}},
+		"storage":  map[string]any{"serverSideEncryption": true},
+	}
+	in["networkApis"] = map[string]any{"networkApplicationId": "net-1", "redirectUri": "https://example.com/cb"}
+	_, err := s.Create(pgp.CreateRequest{Urn: vonageURN("Application", "a"), Properties: pm(in)})
+	require.NoError(t, err)
+	r, err := s.Invoke(pgp.InvokeRequest{Token: "vonage:index:getApplication", Args: pm(map[string]any{"applicationId": "app-1"})})
+	require.NoError(t, err)
+	for _, present := range []string{"voice", "messages", "rtc", "verify", "meetings", "video", "networkApis"} {
+		_, ok := r.Return.GetOk(present)
+		require.True(t, ok, present)
+	}
+	net, _ := r.Return.GetOk("networkApis")
+	require.Equal(t, "net-1", str(net.AsMap(), "networkApplicationId"))
+	require.Equal(t, "https://example.com/cb", str(net.AsMap(), "redirectUri"))
+	video, _ := r.Return.GetOk("video")
+	storage, ok := video.AsMap().GetOk("storage")
+	require.True(t, ok)
+	sse, _ := storage.AsMap().GetOk("serverSideEncryption")
+	require.True(t, sse.AsBool())
 }
 
 func TestSubAccount_Lifecycle(t *testing.T) {

@@ -50,7 +50,7 @@ func GetApiSecret(ctx *pulumi.Context) string {
 	return value
 }
 
-// Optional Vonage application ID for JWT-authenticated runtime APIs. Falls back to VONAGE_APPLICATION_ID. Not used by the resources in this release.
+// Vonage application ID used to sign the JWT for the Users API (the User resource and the getUser and getUsers functions). Users belong to this application. Falls back to VONAGE_APPLICATION_ID.
 func GetApplicationId(ctx *pulumi.Context) string {
 	v, err := config.Try(ctx, "vonage:applicationId")
 	if err == nil {
@@ -63,7 +63,7 @@ func GetApplicationId(ctx *pulumi.Context) string {
 	return value
 }
 
-// Optional PEM private key for the application named by applicationId. Falls back to VONAGE_PRIVATE_KEY. Not used by the resources in this release.
+// PEM private key of the application named by applicationId (PKCS#8 'BEGIN PRIVATE KEY' as downloaded from the dashboard, or PKCS#1). Newlines flattened to a literal backslash-n are accepted. Falls back to VONAGE_PRIVATE_KEY.
 func GetPrivateKey(ctx *pulumi.Context) string {
 	v, err := config.Try(ctx, "vonage:privateKey")
 	if err == nil {

@@ -4,7 +4,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Pulumi Labs</Authors>
     <Company>Pulumi Labs</Company>
-    <Description>Experimental: manage Vonage (formerly Nexmo) applications, numbers, subaccounts, API secrets and Verify v2 templates as infrastructure with Pulumi.</Description>
+    <Description>Experimental: manage Vonage (formerly Nexmo) applications, numbers, subaccounts, API secrets, Verify v2 templates and Network Registry business profiles as infrastructure with Pulumi.</Description>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://developer.vonage.com</PackageProjectUrl>
     <RepositoryUrl>https://github.com/pulumi-labs/pulumi-vonage</RepositoryUrl>

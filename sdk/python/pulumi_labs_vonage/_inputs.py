@@ -21,8 +21,26 @@ __all__ = [
     'MessagesCapabilityArgsDict',
     'NetworkApisCapabilityArgs',
     'NetworkApisCapabilityArgsDict',
+    'NetworkApplicationProfileApiArgs',
+    'NetworkApplicationProfileApiArgsDict',
+    'NetworkBusinessInformationArgs',
+    'NetworkBusinessInformationArgsDict',
     'RtcCapabilityArgs',
     'RtcCapabilityArgsDict',
+    'UserChannelsArgs',
+    'UserChannelsArgsDict',
+    'UserMessengerChannelArgs',
+    'UserMessengerChannelArgsDict',
+    'UserNumberChannelArgs',
+    'UserNumberChannelArgsDict',
+    'UserPstnChannelArgs',
+    'UserPstnChannelArgsDict',
+    'UserSipChannelArgs',
+    'UserSipChannelArgsDict',
+    'UserVbcChannelArgs',
+    'UserVbcChannelArgsDict',
+    'UserWebsocketChannelArgs',
+    'UserWebsocketChannelArgsDict',
     'VerifyCapabilityArgs',
     'VerifyCapabilityArgsDict',
     'VideoCapabilityArgs',
@@ -247,6 +265,178 @@ class NetworkApisCapabilityArgs:
         pulumi.set(self, "redirect_uri", value)
 
 
+class NetworkApplicationProfileApiArgsDict(TypedDict):
+    network_api_id: pulumi.Input[_builtins.str]
+    """
+    ID of the Network API, from getNetworkRegistryCatalogue networkApis (for example sim-swap).
+    """
+    purpose_ids: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
+    """
+    IDs of the purposes the operator needs to validate the request, from getNetworkRegistryCatalogue purposes.
+    """
+
+@pulumi.input_type
+class NetworkApplicationProfileApiArgs:
+    def __init__(__self__, *,
+                 network_api_id: pulumi.Input[_builtins.str],
+                 purpose_ids: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]):
+        """
+        :param pulumi.Input[_builtins.str] network_api_id: ID of the Network API, from getNetworkRegistryCatalogue networkApis (for example sim-swap).
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] purpose_ids: IDs of the purposes the operator needs to validate the request, from getNetworkRegistryCatalogue purposes.
+        """
+        pulumi.set(__self__, "network_api_id", network_api_id)
+        pulumi.set(__self__, "purpose_ids", purpose_ids)
+
+    @_builtins.property
+    @pulumi.getter(name="networkApiId")
+    def network_api_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        ID of the Network API, from getNetworkRegistryCatalogue networkApis (for example sim-swap).
+        """
+        return pulumi.get(self, "network_api_id")
+
+    @network_api_id.setter
+    def network_api_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "network_api_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="purposeIds")
+    def purpose_ids(self) -> pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]:
+        """
+        IDs of the purposes the operator needs to validate the request, from getNetworkRegistryCatalogue purposes.
+        """
+        return pulumi.get(self, "purpose_ids")
+
+    @purpose_ids.setter
+    def purpose_ids(self, value: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]):
+        pulumi.set(self, "purpose_ids", value)
+
+
+class NetworkBusinessInformationArgsDict(TypedDict):
+    address_street1: pulumi.Input[_builtins.str]
+    """
+    First line of the street address (at most 500 characters).
+    """
+    city: pulumi.Input[_builtins.str]
+    """
+    City.
+    """
+    country: pulumi.Input[_builtins.str]
+    """
+    Two-letter ISO 3166 country code of the address.
+    """
+    postal_code: pulumi.Input[_builtins.str]
+    """
+    Postal or ZIP code.
+    """
+    address_street2: NotRequired[Optional[pulumi.Input[_builtins.str]]]
+    """
+    Second line of the street address.
+    """
+    province: NotRequired[Optional[pulumi.Input[_builtins.str]]]
+    """
+    Province, state or region.
+    """
+
+@pulumi.input_type
+class NetworkBusinessInformationArgs:
+    def __init__(__self__, *,
+                 address_street1: pulumi.Input[_builtins.str],
+                 city: pulumi.Input[_builtins.str],
+                 country: pulumi.Input[_builtins.str],
+                 postal_code: pulumi.Input[_builtins.str],
+                 address_street2: Optional[pulumi.Input[_builtins.str]] = None,
+                 province: Optional[pulumi.Input[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] address_street1: First line of the street address (at most 500 characters).
+        :param pulumi.Input[_builtins.str] city: City.
+        :param pulumi.Input[_builtins.str] country: Two-letter ISO 3166 country code of the address.
+        :param pulumi.Input[_builtins.str] postal_code: Postal or ZIP code.
+        :param pulumi.Input[_builtins.str] address_street2: Second line of the street address.
+        :param pulumi.Input[_builtins.str] province: Province, state or region.
+        """
+        pulumi.set(__self__, "address_street1", address_street1)
+        pulumi.set(__self__, "city", city)
+        pulumi.set(__self__, "country", country)
+        pulumi.set(__self__, "postal_code", postal_code)
+        if address_street2 is not None:
+            pulumi.set(__self__, "address_street2", address_street2)
+        if province is not None:
+            pulumi.set(__self__, "province", province)
+
+    @_builtins.property
+    @pulumi.getter(name="addressStreet1")
+    def address_street1(self) -> pulumi.Input[_builtins.str]:
+        """
+        First line of the street address (at most 500 characters).
+        """
+        return pulumi.get(self, "address_street1")
+
+    @address_street1.setter
+    def address_street1(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "address_street1", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def city(self) -> pulumi.Input[_builtins.str]:
+        """
+        City.
+        """
+        return pulumi.get(self, "city")
+
+    @city.setter
+    def city(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "city", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def country(self) -> pulumi.Input[_builtins.str]:
+        """
+        Two-letter ISO 3166 country code of the address.
+        """
+        return pulumi.get(self, "country")
+
+    @country.setter
+    def country(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "country", value)
+
+    @_builtins.property
+    @pulumi.getter(name="postalCode")
+    def postal_code(self) -> pulumi.Input[_builtins.str]:
+        """
+        Postal or ZIP code.
+        """
+        return pulumi.get(self, "postal_code")
+
+    @postal_code.setter
+    def postal_code(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "postal_code", value)
+
+    @_builtins.property
+    @pulumi.getter(name="addressStreet2")
+    def address_street2(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        Second line of the street address.
+        """
+        return pulumi.get(self, "address_street2")
+
+    @address_street2.setter
+    def address_street2(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "address_street2", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def province(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        Province, state or region.
+        """
+        return pulumi.get(self, "province")
+
+    @province.setter
+    def province(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "province", value)
+
+
 class RtcCapabilityArgsDict(TypedDict):
     event_url: NotRequired[Optional[pulumi.Input['WebhookArgs']]]
     """
@@ -294,6 +484,443 @@ class RtcCapabilityArgs:
     @signed_callbacks.setter
     def signed_callbacks(self, value: Optional[pulumi.Input[_builtins.bool]]):
         pulumi.set(self, "signed_callbacks", value)
+
+
+class UserChannelsArgsDict(TypedDict):
+    messenger: NotRequired[Optional[pulumi.Input[Sequence[pulumi.Input['UserMessengerChannelArgs']]]]]
+    """
+    Facebook Messenger IDs of the user.
+    """
+    mms: NotRequired[Optional[pulumi.Input[Sequence[pulumi.Input['UserNumberChannelArgs']]]]]
+    """
+    Numbers the user can receive MMS on.
+    """
+    pstn: NotRequired[Optional[pulumi.Input[Sequence[pulumi.Input['UserPstnChannelArgs']]]]]
+    """
+    Phone numbers (PSTN) the user can be called on.
+    """
+    sip: NotRequired[Optional[pulumi.Input[Sequence[pulumi.Input['UserSipChannelArgs']]]]]
+    """
+    SIP endpoints of the user.
+    """
+    sms: NotRequired[Optional[pulumi.Input[Sequence[pulumi.Input['UserNumberChannelArgs']]]]]
+    """
+    Numbers the user can receive SMS on.
+    """
+    vbc: NotRequired[Optional[pulumi.Input[Sequence[pulumi.Input['UserVbcChannelArgs']]]]]
+    """
+    Vonage Business Cloud extensions of the user.
+    """
+    viber: NotRequired[Optional[pulumi.Input[Sequence[pulumi.Input['UserNumberChannelArgs']]]]]
+    """
+    Viber numbers of the user.
+    """
+    websocket: NotRequired[Optional[pulumi.Input[Sequence[pulumi.Input['UserWebsocketChannelArgs']]]]]
+    """
+    WebSocket endpoints of the user.
+    """
+    whatsapp: NotRequired[Optional[pulumi.Input[Sequence[pulumi.Input['UserNumberChannelArgs']]]]]
+    """
+    WhatsApp numbers of the user.
+    """
+
+@pulumi.input_type
+class UserChannelsArgs:
+    def __init__(__self__, *,
+                 messenger: Optional[pulumi.Input[Sequence[pulumi.Input['UserMessengerChannelArgs']]]] = None,
+                 mms: Optional[pulumi.Input[Sequence[pulumi.Input['UserNumberChannelArgs']]]] = None,
+                 pstn: Optional[pulumi.Input[Sequence[pulumi.Input['UserPstnChannelArgs']]]] = None,
+                 sip: Optional[pulumi.Input[Sequence[pulumi.Input['UserSipChannelArgs']]]] = None,
+                 sms: Optional[pulumi.Input[Sequence[pulumi.Input['UserNumberChannelArgs']]]] = None,
+                 vbc: Optional[pulumi.Input[Sequence[pulumi.Input['UserVbcChannelArgs']]]] = None,
+                 viber: Optional[pulumi.Input[Sequence[pulumi.Input['UserNumberChannelArgs']]]] = None,
+                 websocket: Optional[pulumi.Input[Sequence[pulumi.Input['UserWebsocketChannelArgs']]]] = None,
+                 whatsapp: Optional[pulumi.Input[Sequence[pulumi.Input['UserNumberChannelArgs']]]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['UserMessengerChannelArgs']]] messenger: Facebook Messenger IDs of the user.
+        :param pulumi.Input[Sequence[pulumi.Input['UserNumberChannelArgs']]] mms: Numbers the user can receive MMS on.
+        :param pulumi.Input[Sequence[pulumi.Input['UserPstnChannelArgs']]] pstn: Phone numbers (PSTN) the user can be called on.
+        :param pulumi.Input[Sequence[pulumi.Input['UserSipChannelArgs']]] sip: SIP endpoints of the user.
+        :param pulumi.Input[Sequence[pulumi.Input['UserNumberChannelArgs']]] sms: Numbers the user can receive SMS on.
+        :param pulumi.Input[Sequence[pulumi.Input['UserVbcChannelArgs']]] vbc: Vonage Business Cloud extensions of the user.
+        :param pulumi.Input[Sequence[pulumi.Input['UserNumberChannelArgs']]] viber: Viber numbers of the user.
+        :param pulumi.Input[Sequence[pulumi.Input['UserWebsocketChannelArgs']]] websocket: WebSocket endpoints of the user.
+        :param pulumi.Input[Sequence[pulumi.Input['UserNumberChannelArgs']]] whatsapp: WhatsApp numbers of the user.
+        """
+        if messenger is not None:
+            pulumi.set(__self__, "messenger", messenger)
+        if mms is not None:
+            pulumi.set(__self__, "mms", mms)
+        if pstn is not None:
+            pulumi.set(__self__, "pstn", pstn)
+        if sip is not None:
+            pulumi.set(__self__, "sip", sip)
+        if sms is not None:
+            pulumi.set(__self__, "sms", sms)
+        if vbc is not None:
+            pulumi.set(__self__, "vbc", vbc)
+        if viber is not None:
+            pulumi.set(__self__, "viber", viber)
+        if websocket is not None:
+            pulumi.set(__self__, "websocket", websocket)
+        if whatsapp is not None:
+            pulumi.set(__self__, "whatsapp", whatsapp)
+
+    @_builtins.property
+    @pulumi.getter
+    def messenger(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['UserMessengerChannelArgs']]]]:
+        """
+        Facebook Messenger IDs of the user.
+        """
+        return pulumi.get(self, "messenger")
+
+    @messenger.setter
+    def messenger(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['UserMessengerChannelArgs']]]]):
+        pulumi.set(self, "messenger", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def mms(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['UserNumberChannelArgs']]]]:
+        """
+        Numbers the user can receive MMS on.
+        """
+        return pulumi.get(self, "mms")
+
+    @mms.setter
+    def mms(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['UserNumberChannelArgs']]]]):
+        pulumi.set(self, "mms", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def pstn(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['UserPstnChannelArgs']]]]:
+        """
+        Phone numbers (PSTN) the user can be called on.
+        """
+        return pulumi.get(self, "pstn")
+
+    @pstn.setter
+    def pstn(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['UserPstnChannelArgs']]]]):
+        pulumi.set(self, "pstn", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def sip(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['UserSipChannelArgs']]]]:
+        """
+        SIP endpoints of the user.
+        """
+        return pulumi.get(self, "sip")
+
+    @sip.setter
+    def sip(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['UserSipChannelArgs']]]]):
+        pulumi.set(self, "sip", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def sms(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['UserNumberChannelArgs']]]]:
+        """
+        Numbers the user can receive SMS on.
+        """
+        return pulumi.get(self, "sms")
+
+    @sms.setter
+    def sms(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['UserNumberChannelArgs']]]]):
+        pulumi.set(self, "sms", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def vbc(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['UserVbcChannelArgs']]]]:
+        """
+        Vonage Business Cloud extensions of the user.
+        """
+        return pulumi.get(self, "vbc")
+
+    @vbc.setter
+    def vbc(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['UserVbcChannelArgs']]]]):
+        pulumi.set(self, "vbc", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def viber(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['UserNumberChannelArgs']]]]:
+        """
+        Viber numbers of the user.
+        """
+        return pulumi.get(self, "viber")
+
+    @viber.setter
+    def viber(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['UserNumberChannelArgs']]]]):
+        pulumi.set(self, "viber", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def websocket(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['UserWebsocketChannelArgs']]]]:
+        """
+        WebSocket endpoints of the user.
+        """
+        return pulumi.get(self, "websocket")
+
+    @websocket.setter
+    def websocket(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['UserWebsocketChannelArgs']]]]):
+        pulumi.set(self, "websocket", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def whatsapp(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['UserNumberChannelArgs']]]]:
+        """
+        WhatsApp numbers of the user.
+        """
+        return pulumi.get(self, "whatsapp")
+
+    @whatsapp.setter
+    def whatsapp(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['UserNumberChannelArgs']]]]):
+        pulumi.set(self, "whatsapp", value)
+
+
+class UserMessengerChannelArgsDict(TypedDict):
+    id: pulumi.Input[_builtins.str]
+    """
+    The Facebook Messenger user ID.
+    """
+
+@pulumi.input_type
+class UserMessengerChannelArgs:
+    def __init__(__self__, *,
+                 id: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] id: The Facebook Messenger user ID.
+        """
+        pulumi.set(__self__, "id", id)
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The Facebook Messenger user ID.
+        """
+        return pulumi.get(self, "id")
+
+    @id.setter
+    def id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "id", value)
+
+
+class UserNumberChannelArgsDict(TypedDict):
+    number: pulumi.Input[_builtins.str]
+    """
+    The number in E.164 format without the leading plus.
+    """
+
+@pulumi.input_type
+class UserNumberChannelArgs:
+    def __init__(__self__, *,
+                 number: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] number: The number in E.164 format without the leading plus.
+        """
+        pulumi.set(__self__, "number", number)
+
+    @_builtins.property
+    @pulumi.getter
+    def number(self) -> pulumi.Input[_builtins.str]:
+        """
+        The number in E.164 format without the leading plus.
+        """
+        return pulumi.get(self, "number")
+
+    @number.setter
+    def number(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "number", value)
+
+
+class UserPstnChannelArgsDict(TypedDict):
+    number: pulumi.Input[_builtins.int]
+    """
+    The phone number in E.164 format without the leading plus, as an integer (for example 14155550100).
+    """
+
+@pulumi.input_type
+class UserPstnChannelArgs:
+    def __init__(__self__, *,
+                 number: pulumi.Input[_builtins.int]):
+        """
+        :param pulumi.Input[_builtins.int] number: The phone number in E.164 format without the leading plus, as an integer (for example 14155550100).
+        """
+        pulumi.set(__self__, "number", number)
+
+    @_builtins.property
+    @pulumi.getter
+    def number(self) -> pulumi.Input[_builtins.int]:
+        """
+        The phone number in E.164 format without the leading plus, as an integer (for example 14155550100).
+        """
+        return pulumi.get(self, "number")
+
+    @number.setter
+    def number(self, value: pulumi.Input[_builtins.int]):
+        pulumi.set(self, "number", value)
+
+
+class UserSipChannelArgsDict(TypedDict):
+    uri: pulumi.Input[_builtins.str]
+    """
+    The SIP URI, starting with sip: or sips:.
+    """
+    password: NotRequired[Optional[pulumi.Input[_builtins.str]]]
+    """
+    Password for SIP authentication. The API never returns it, so the value recorded in state is the one last set by this program; a changed password is applied but a password changed outside Pulumi is not detected.
+    """
+    username: NotRequired[Optional[pulumi.Input[_builtins.str]]]
+    """
+    Username for SIP authentication.
+    """
+
+@pulumi.input_type
+class UserSipChannelArgs:
+    def __init__(__self__, *,
+                 uri: pulumi.Input[_builtins.str],
+                 password: Optional[pulumi.Input[_builtins.str]] = None,
+                 username: Optional[pulumi.Input[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] uri: The SIP URI, starting with sip: or sips:.
+        :param pulumi.Input[_builtins.str] password: Password for SIP authentication. The API never returns it, so the value recorded in state is the one last set by this program; a changed password is applied but a password changed outside Pulumi is not detected.
+        :param pulumi.Input[_builtins.str] username: Username for SIP authentication.
+        """
+        pulumi.set(__self__, "uri", uri)
+        if password is not None:
+            pulumi.set(__self__, "password", password)
+        if username is not None:
+            pulumi.set(__self__, "username", username)
+
+    @_builtins.property
+    @pulumi.getter
+    def uri(self) -> pulumi.Input[_builtins.str]:
+        """
+        The SIP URI, starting with sip: or sips:.
+        """
+        return pulumi.get(self, "uri")
+
+    @uri.setter
+    def uri(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "uri", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def password(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        Password for SIP authentication. The API never returns it, so the value recorded in state is the one last set by this program; a changed password is applied but a password changed outside Pulumi is not detected.
+        """
+        return pulumi.get(self, "password")
+
+    @password.setter
+    def password(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "password", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def username(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        Username for SIP authentication.
+        """
+        return pulumi.get(self, "username")
+
+    @username.setter
+    def username(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "username", value)
+
+
+class UserVbcChannelArgsDict(TypedDict):
+    extension: pulumi.Input[_builtins.str]
+    """
+    The Vonage Business Cloud extension.
+    """
+
+@pulumi.input_type
+class UserVbcChannelArgs:
+    def __init__(__self__, *,
+                 extension: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] extension: The Vonage Business Cloud extension.
+        """
+        pulumi.set(__self__, "extension", extension)
+
+    @_builtins.property
+    @pulumi.getter
+    def extension(self) -> pulumi.Input[_builtins.str]:
+        """
+        The Vonage Business Cloud extension.
+        """
+        return pulumi.get(self, "extension")
+
+    @extension.setter
+    def extension(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "extension", value)
+
+
+class UserWebsocketChannelArgsDict(TypedDict):
+    uri: pulumi.Input[_builtins.str]
+    """
+    The WebSocket URI, starting with ws:// or wss://.
+    """
+    content_type: NotRequired[Optional[pulumi.Input[_builtins.str]]]
+    """
+    The audio format, for example audio/l16;rate=16000 (sent to Vonage as content-type).
+    """
+    headers: NotRequired[Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]]
+    """
+    Extra HTTP headers sent when Vonage connects to the WebSocket.
+    """
+
+@pulumi.input_type
+class UserWebsocketChannelArgs:
+    def __init__(__self__, *,
+                 uri: pulumi.Input[_builtins.str],
+                 content_type: Optional[pulumi.Input[_builtins.str]] = None,
+                 headers: Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]] = None):
+        """
+        :param pulumi.Input[_builtins.str] uri: The WebSocket URI, starting with ws:// or wss://.
+        :param pulumi.Input[_builtins.str] content_type: The audio format, for example audio/l16;rate=16000 (sent to Vonage as content-type).
+        :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] headers: Extra HTTP headers sent when Vonage connects to the WebSocket.
+        """
+        pulumi.set(__self__, "uri", uri)
+        if content_type is not None:
+            pulumi.set(__self__, "content_type", content_type)
+        if headers is not None:
+            pulumi.set(__self__, "headers", headers)
+
+    @_builtins.property
+    @pulumi.getter
+    def uri(self) -> pulumi.Input[_builtins.str]:
+        """
+        The WebSocket URI, starting with ws:// or wss://.
+        """
+        return pulumi.get(self, "uri")
+
+    @uri.setter
+    def uri(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "uri", value)
+
+    @_builtins.property
+    @pulumi.getter(name="contentType")
+    def content_type(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The audio format, for example audio/l16;rate=16000 (sent to Vonage as content-type).
+        """
+        return pulumi.get(self, "content_type")
+
+    @content_type.setter
+    def content_type(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "content_type", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def headers(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]:
+        """
+        Extra HTTP headers sent when Vonage connects to the WebSocket.
+        """
+        return pulumi.get(self, "headers")
+
+    @headers.setter
+    def headers(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "headers", value)
 
 
 class VerifyCapabilityArgsDict(TypedDict):

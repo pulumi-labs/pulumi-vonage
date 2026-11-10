@@ -11,16 +11,25 @@ A native Pulumi provider for [Vonage](https://developer.vonage.com) (formerly Ne
 | --- | --- |
 | `vonage:index:Application` | Application API v2 application with voice, messages, rtc, vbc, meetings and verify capabilities and their webhooks. A Vonage-generated private key is returned once as the secret output `privateKey`. |
 | `vonage:index:Number` | An owned virtual number: buy or adopt, link to an application or webhooks, optionally cancel on destroy. |
+| `vonage:index:NumberPool` | A number pool (`poolId`, `fallback`, `localizedSenderPreferred`, `predictableSenderPreferred`). Import with the pool ID. Shapes follow the Number Pools OpenAPI definition and are unverified against a live account. |
+| `vonage:index:MessengerAccount` | A Facebook Messenger page registered with Vonage (`externalId`, secret `accessToken`, `name`; beta External Accounts API). Import with the Page ID. Unverified against a live account. |
+| `vonage:index:ExternalAccountApplicationLink` | Links an application to a Messenger, Viber Service Message or WhatsApp account (`channel`, `externalId`, `applicationId`; one application per account); destroy only unlinks. Import with `CHANNEL/EXTERNAL_ID/APPLICATION_ID`. |
+| `vonage:index:NetworkApplicationProfile` | A Network Registry application profile: which Network APIs an application uses and why (business profile, name, category, Network APIs with purposes, infrastructure locations). Reviewed by operators, so `status` moves from `pending` on its own. The API has no update call, so every input change replaces the profile (new one created first; each account may hold 50). Import with the profile ID. Unverified against a live account. |
+| `vonage:index:NetworkApplicationProfileShare` | Shares an application profile with another Vonage account (`profileId`, `accountId`). Vonage accepts the share asynchronously, so a refresh right after creation may briefly not list it. Either input replaces it. Unverified against a live account. |
+| `vonage:index:NetworkBusinessProfile` | A Network Registry business profile (countries, contact, organisation type, tax number, privacy policy, postal address). Reviewed by Vonage and operators, so `status` moves from `pending` on its own; a changed input is sent as a change request. Import with the profile ID. Shapes follow the Network Registry OpenAPI definition and are unverified against a live account. |
+| `vonage:index:NumberPoolNumber` | One owned number in a pool; destroy only removes it from the pool. Import with `POOL_ID/NUMBER`. |
 | `vonage:index:SubAccount` | A subaccount under a primary account (primary credentials required). Vonage cannot delete subaccounts, so destroy can suspend them. |
+| `vonage:index:AccountSettings` | The default SMS webhooks of the account (`moCallBackUrl` for inbound SMS, `drCallBackUrl` for delivery receipts) and, as outputs, its rate limits. A singleton: create adopts the account's one settings record, the import ID is the API key, and destroy clears only the URLs the program manages. Vonage requests each URL and saves it only if it answers 200. Unverified against a live account. |
 | `vonage:index:ApiSecret` | One API secret of an account or subaccount (at most two per account). Rotate by adding a second `ApiSecret` (blue/green), or change `secret` in place (see below). |
+| `vonage:index:User` | A Users API user (`name`, `displayName`, `imageUrl`, `customData`, `channels`). Authenticates with an application JWT, so it needs `applicationId` and `privateKey` and not `apiKey`/`apiSecret`. Import with the user ID (`USR-...`). Unverified against a live account. |
 | `vonage:index:VerifyTemplate` | A Verify v2 template (`name`, `isDefault`). Import with the template ID. |
 | `vonage:index:VerifyTemplateFragment` | The text of a template for one `channel` (`sms` or `voice`) and `locale`. `templateId`, `channel` and `locale` replace on change; `text` updates in place. Import with `TEMPLATE_ID/FRAGMENT_ID`. |
 
-Import IDs: `Application` the application ID; `Number` `COUNTRY:MSISDN`; `SubAccount` the subaccount API key; `ApiSecret` `ACCOUNT_API_KEY/SECRET_ID`; `VerifyTemplate` the template ID; `VerifyTemplateFragment` `TEMPLATE_ID/FRAGMENT_ID`.
+Import IDs: `Application` the application ID; `Number` `COUNTRY:MSISDN`; `NumberPool` the pool ID; `NumberPoolNumber` `POOL_ID/NUMBER`; `NetworkBusinessProfile` the profile ID; `NetworkApplicationProfile` the profile ID; `NetworkApplicationProfileShare` `PROFILE_ID/ACCOUNT_ID`; `MessengerAccount` the Facebook Page ID; `ExternalAccountApplicationLink` `CHANNEL/EXTERNAL_ID/APPLICATION_ID`; `SubAccount` the subaccount API key; `ApiSecret` `ACCOUNT_API_KEY/SECRET_ID`; `AccountSettings` the account API key; `User` the user ID; `VerifyTemplate` the template ID; `VerifyTemplateFragment` `TEMPLATE_ID/FRAGMENT_ID`.
 
 Verify v2 templates are documented for Basic and JWT authentication; the Vonage Node SDK uses a JWT. The provider sends Basic, which is unverified against a live account.
 
-Data sources (`vonage:index:get*`): `getApplication` (by `applicationId` or exact `name`), `getApplications`, `getNumber` (by `country` and `msisdn`), `getSubAccount` (by `subAccountApiKey`), `getSubAccounts` (optionally by exact name), `getAccountBalance`, `getNumbers` (owned numbers, filtered by country, pattern, application), `getAvailableNumbers` (numbers for sale in a country; read-only, never buys), `getApiSecret` and `getApiSecrets` (secret metadata only, Vonage never returns the value), `getVerifyTemplate` (by `templateId` or exact `name`) and `getVerifyTemplateFragment` (by `templateFragmentId`, or `channel` and `locale`). The full vendor surface and what is deferred is in `research/coverage/vonage.md`.
+Data sources (`vonage:index:get*`): `getApplication` (by `applicationId` or exact `name`; returns the full capability tree, not only the names), `getApplications`, `getNumber` (by `country` and `msisdn`), `getSubAccount` (by `subAccountApiKey`), `getSubAccounts` (optionally by exact name), `getAccountBalance`, `getAccountSettings` (webhooks and rate limits; Vonage has no GET, so it sends an empty POST to `/account/settings`), `getNumbers` (owned numbers, filtered by country, pattern, application), `getAvailableNumbers` (numbers for sale in a country; read-only, never buys), `getNumberPool`, `getNumberPools`, `getNumberPoolNumber` (is a number in a pool) and `getNumberPoolNumbers` (pools and their numbers; read-only), `getUser` (by `userId` or exact `name`) and `getUsers` (every user, or the one named; JWT-authenticated), `getExternalAccount` (by `channel` and `externalId`), `getExternalAccountApplicationLink` (is an application linked), `getExternalAccounts` (every account, or one channel; no tokens) and `getMessengerAccount` (by Page ID; returns the secret page access token), `getNetworkApplicationProfile`, `getNetworkApplicationProfiles`, `getNetworkApplicationProfileShare`, `getNetworkApplicationProfileShares`, `getNetworkBusinessProfile` (by `profileId`), `getNetworkBusinessProfiles` (own or `shared`), `getNetworkRegistryCatalogue` (countries, organisation types, categories, CSPs, Network APIs, purposes, vetting levels, terms and conditions names; optional `countries` and `all` filters) and `getNetworkTermsAndConditions` (full text by `documentId`), `getPricing` (outbound sms, sms-transit or voice prices for a country, a dialling prefix or every country; read-only, prices are decimal strings), `getApiSecret` and `getApiSecrets` (secret metadata only, Vonage never returns the value), `getVerifyTemplate` (by `templateId` or exact `name`) and `getVerifyTemplateFragment` (by `templateFragmentId`, or `channel` and `locale`). The full vendor surface and what is deferred is in `research/coverage/vonage.md`.
 
 ## Configuration
 
@@ -28,12 +37,12 @@ Data sources (`vonage:index:get*`): `getApplication` (by `applicationId` or exac
 | --- | --- | --- |
 | `apiKey` | `VONAGE_API_KEY` | Account API key. |
 | `apiSecret` | `VONAGE_API_SECRET` | Secret. Account API secret (HTTP Basic). |
-| `applicationId` | `VONAGE_APPLICATION_ID` | Optional, reserved for JWT-authenticated APIs. |
-| `privateKey` | `VONAGE_PRIVATE_KEY` | Optional secret, reserved for JWT-authenticated APIs. |
+| `applicationId` | `VONAGE_APPLICATION_ID` | Application ID the JWT is signed for. Required by `User`, `getUser` and `getUsers` (users belong to this application); optional otherwise. |
+| `privateKey` | `VONAGE_PRIVATE_KEY` | Secret. PEM private key of that application (PKCS#8 or PKCS#1; a value with newlines flattened to `\n` is accepted). |
 | `apiBaseUrl` | `VONAGE_API_BASE_URL` | Override for `https://api.nexmo.com` (tests, proxies). |
 | `restBaseUrl` | `VONAGE_REST_BASE_URL` | Override for `https://rest.nexmo.com`. |
 
-Every resource in this release uses the account API key and secret over HTTP Basic. `applicationId` and `privateKey` are accepted so one provider configuration can carry them, but nothing uses them yet.
+Most resources use the account API key and secret over HTTP Basic. `User`, `getUser` and `getUsers` call the Users API, which only accepts a JWT, so they use `applicationId` and `privateKey` instead and do not need `apiKey` and `apiSecret`. A JWT is signed locally (RS256, 15 minutes) for every request; the private key never leaves the provider. Each resource names the credential it is missing.
 
 ```bash
 pulumi config set vonage:apiKey <key>
@@ -110,9 +119,9 @@ Examples in all six languages are in `examples/`, starter templates in `template
 
 * Number search-and-buy by criteria (this provider buys a specific, already-known msisdn).
 * Account settings (default SMS webhooks; there is no read endpoint), balance auto-reload, and subaccount balance or number transfers (imperative operations rather than resources).
-* JWT-authenticated APIs (Messages sender settings, Video, Meetings rooms) using `applicationId` and `privateKey`.
+* More JWT-authenticated APIs (Messages sender settings, Video, Meetings rooms); the signer exists since `User`.
 * SIP trunking.
-* Number pools, 10DLC, Network Registry and external accounts (see `research/coverage/vonage.md`).
+* 10DLC and Network Registry (see `research/coverage/vonage.md`).
 
 ## Development
 

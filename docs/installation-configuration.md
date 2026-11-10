@@ -48,8 +48,8 @@ Explicit Pulumi config wins over the environment variable. The following keys ar
 |---|---|---|---|
 | `apiKey` | `VONAGE_API_KEY` | none | The Vonage account API key. |
 | `apiSecret` (secret) | `VONAGE_API_SECRET` | none | The Vonage account API secret. |
-| `applicationId` | `VONAGE_APPLICATION_ID` | none | Optional application ID for JWT-authenticated runtime APIs. Not used by the resources in this release. |
-| `privateKey` (secret) | `VONAGE_PRIVATE_KEY` | none | Optional PEM private key for `applicationId`. Not used by the resources in this release. |
+| `applicationId` | `VONAGE_APPLICATION_ID` | none | Application ID the JWT is signed for. Required by `User`, `getUser` and `getUsers`; not used by the other resources. |
+| `privateKey` (secret) | `VONAGE_PRIVATE_KEY` | none | PEM private key for `applicationId` (PKCS#8 or PKCS#1). Required by `User`, `getUser` and `getUsers`; not used by the other resources. |
 | `apiBaseUrl` | `VONAGE_API_BASE_URL` | `https://api.nexmo.com` | Override for the Application, Subaccounts and Secrets API host. For tests. |
 | `restBaseUrl` | `VONAGE_REST_BASE_URL` | `https://rest.nexmo.com` | Override for the Numbers API host. For tests. |
 

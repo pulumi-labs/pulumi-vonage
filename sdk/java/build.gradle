@@ -97,7 +97,7 @@ publishing {
                 inceptionYear = ""
                 name = "pulumi-labs-vonage"
                 packaging = "jar"
-                description = "Experimental: manage Vonage (formerly Nexmo) applications, numbers, subaccounts, API secrets and Verify v2 templates as infrastructure with Pulumi."
+                description = "Experimental: manage Vonage (formerly Nexmo) applications, numbers, subaccounts, API secrets, Verify v2 templates and Network Registry business profiles as infrastructure with Pulumi."
 
                 url = "https://github.com/pulumi-labs/pulumi-vonage"
 

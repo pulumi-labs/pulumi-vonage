@@ -129,9 +129,12 @@ func TestApiSecret_DeleteToleratesAlreadyRevoked(t *testing.T) {
 func TestApiSecret_ReadGone(t *testing.T) {
 	_, srv := newMock(t)
 	s := newServerFor(t, srv.URL)
-	rr, err := s.Read(pgp.ReadRequest{ID: "key12345/missing", Urn: vonageURN("ApiSecret", "g"), Properties: pm(map[string]any{})})
+	rr, err := s.Read(pgp.ReadRequest{ID: "key12345/missing", Urn: vonageURN("ApiSecret", "g"), Properties: pm(map[string]any{"ownerKey": "key12345", "secretId": "missing"})})
 	require.NoError(t, err)
 	require.Empty(t, rr.ID)
+	// An import of the same missing secret is an error.
+	_, err = s.Read(pgp.ReadRequest{ID: "key12345/missing", Urn: vonageURN("ApiSecret", "g"), Properties: pm(map[string]any{})})
+	require.ErrorContains(t, err, "does not exist")
 }
 
 func TestSubAccount_SecretIsCreateOnly(t *testing.T) {

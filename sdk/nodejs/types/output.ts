@@ -54,6 +54,201 @@ export interface AvailableNumber {
     type: string;
 }
 
+export interface CountryPricing {
+    /**
+     * Two-letter country code.
+     */
+    countryCode: string;
+    /**
+     * The country name for display.
+     */
+    countryDisplayName: string;
+    /**
+     * The country name.
+     */
+    countryName: string;
+    /**
+     * The currency the account is billed in.
+     */
+    currency: string;
+    /**
+     * The default price in this country, as a decimal string.
+     */
+    defaultPrice: string;
+    /**
+     * The dialling prefix of the country.
+     */
+    dialingPrefix: string;
+    /**
+     * Prices per mobile network in the country.
+     */
+    networks: outputs.PricingNetwork[];
+}
+
+export interface ExternalAccountSummary {
+    /**
+     * The api_key Vonage reports for the account.
+     */
+    apiKey: string;
+    /**
+     * IDs of the linked applications (at most one). The page access token is never listed; use getMessengerAccount.
+     */
+    applications: string[];
+    /**
+     * The account's channel.
+     */
+    channel: string;
+    /**
+     * The account's external ID.
+     */
+    externalId: string;
+    /**
+     * The account name (empty when none is set).
+     */
+    name: string;
+}
+
+export interface GetNetworkApplicationProfileResult {
+    /**
+     * ID of the Vonage account that owns it.
+     */
+    accountId: string;
+    /**
+     * ID of the business profile that owns it.
+     */
+    businessProfileId: string;
+    /**
+     * Category of the application.
+     */
+    categoryId: string;
+    /**
+     * When the profile was created (RFC 3339).
+     */
+    createdAt: string;
+    /**
+     * Description of the application's use cases; empty when unset.
+     */
+    description: string;
+    /**
+     * Two-letter ISO 3166 codes of the countries the application's infrastructure runs in.
+     */
+    infrastructureLocations: string[];
+    /**
+     * Name of the application.
+     */
+    name: string;
+    /**
+     * The Network APIs the application uses and the purposes it states for each.
+     */
+    networkApis: outputs.NetworkApplicationProfileApi[];
+    /**
+     * URL of the application's privacy policy; empty when unset.
+     */
+    privacyPolicyUrl: string;
+    /**
+     * ID of the application profile.
+     */
+    profileId: string;
+    /**
+     * Overall approval status: pending, provisioning, accepted, partially-accepted, rejected or failed.
+     */
+    status: string;
+    /**
+     * Vonage's note about why the profile was rejected; empty when there is none.
+     */
+    statusMessage: string;
+    /**
+     * When the profile was last updated (RFC 3339).
+     */
+    updatedAt: string;
+}
+
+export interface GetNetworkBusinessProfileResult {
+    /**
+     * ID of the account that owns the profile.
+     */
+    accountId: string;
+    /**
+     * Postal address.
+     */
+    businessInformation: outputs.NetworkBusinessInformation;
+    /**
+     * Role of the contact person.
+     */
+    contactRole: string;
+    /**
+     * Countries the profile is registered for.
+     */
+    countries: string[];
+    /**
+     * Creation time (RFC 3339).
+     */
+    createdAt: string;
+    /**
+     * Legal name of the business.
+     */
+    name: string;
+    /**
+     * Kind of organisation.
+     */
+    organisationType: string;
+    /**
+     * Privacy policy manager email.
+     */
+    privacyPolicyManagerEmail: string;
+    /**
+     * Privacy policy URL.
+     */
+    privacyPolicyUrl: string;
+    /**
+     * Profile ID.
+     */
+    profileId: string;
+    /**
+     * Overall registration status.
+     */
+    status: string;
+    /**
+     * Vonage's note about the status, empty when there is none.
+     */
+    statusMessage: string;
+    /**
+     * Tax identification number.
+     */
+    taxNumber: string;
+    /**
+     * Trading name, empty when unset.
+     */
+    tradingName: string;
+    /**
+     * Last update time (RFC 3339).
+     */
+    updatedAt: string;
+}
+
+export interface GetNumberPoolResult {
+    /**
+     * Owning account ID (the API key).
+     */
+    accountId: string;
+    /**
+     * Fallback behaviour: Pool, CustomFrom or Reject.
+     */
+    fallback: string;
+    /**
+     * Whether a number local to the destination is preferred.
+     */
+    localizedSenderPreferred: boolean;
+    /**
+     * Pool ID.
+     */
+    poolId: string;
+    /**
+     * Whether the same number is reused for the same recipient.
+     */
+    predictableSenderPreferred: boolean;
+}
+
 export interface GetSubAccountResult {
     /**
      * Subaccount API key.
@@ -134,6 +329,138 @@ export interface NetworkApisCapability {
     redirectUri?: string;
 }
 
+export interface NetworkApplicationProfileApi {
+    /**
+     * ID of the Network API, from getNetworkRegistryCatalogue networkApis (for example sim-swap).
+     */
+    networkApiId: string;
+    /**
+     * IDs of the purposes the operator needs to validate the request, from getNetworkRegistryCatalogue purposes.
+     */
+    purposeIds: string[];
+}
+
+export interface NetworkBusinessInformation {
+    /**
+     * First line of the street address (at most 500 characters).
+     */
+    addressStreet1: string;
+    /**
+     * Second line of the street address.
+     */
+    addressStreet2?: string;
+    /**
+     * City.
+     */
+    city: string;
+    /**
+     * Two-letter ISO 3166 country code of the address.
+     */
+    country: string;
+    /**
+     * Postal or ZIP code.
+     */
+    postalCode: string;
+    /**
+     * Province, state or region.
+     */
+    province?: string;
+}
+
+export interface NetworkRegistryCountry {
+    /**
+     * Two-letter ISO 3166 country code.
+     */
+    code: string;
+    /**
+     * Country name.
+     */
+    name: string;
+}
+
+export interface NetworkRegistryCsp {
+    /**
+     * Two-letter ISO 3166 country code the CSP operates in.
+     */
+    country: string;
+    /**
+     * CSP identifier, for example telefonica_es.
+     */
+    id: string;
+    /**
+     * Operator name.
+     */
+    name: string;
+    /**
+     * IDs of the Network APIs the CSP supports.
+     */
+    supportedNetworkApis: string[];
+    /**
+     * ID of the vetting level the CSP requires, empty when none.
+     */
+    vettingLevel: string;
+}
+
+export interface NetworkRegistryEntry {
+    /**
+     * Identifier to use in the API, for example an organisation type or a category.
+     */
+    id: string;
+    /**
+     * Human-readable name.
+     */
+    name: string;
+}
+
+export interface NetworkRegistryNetworkApi {
+    /**
+     * Network API identifier, for example sim-swap.
+     */
+    id: string;
+    /**
+     * Network API name.
+     */
+    name: string;
+    /**
+     * Callback URLs an application profile must provide to use the API: nv_redirect_url, qod_callback_url or verify_callback_url.
+     */
+    requires: string[];
+}
+
+export interface NetworkRegistryPurpose {
+    /**
+     * Purpose identifier.
+     */
+    id: string;
+    /**
+     * Purpose name.
+     */
+    name: string;
+    /**
+     * ID of the Network API the purpose belongs to.
+     */
+    networkApiId: string;
+}
+
+export interface NetworkRegistryVettingLevel {
+    /**
+     * What the level checks.
+     */
+    description: string;
+    /**
+     * Names of the vettingExtraFields a business profile must provide when the level applies.
+     */
+    extraFields: string[];
+    /**
+     * Vetting level identifier.
+     */
+    id: string;
+    /**
+     * Vetting level name.
+     */
+    name: string;
+}
+
 export interface OwnedNumberSummary {
     /**
      * Linked application ID, empty if none.
@@ -177,6 +504,37 @@ export interface OwnedNumberSummary {
     voiceCallbackValue: string;
 }
 
+export interface PricingNetwork {
+    /**
+     * The currency of the price.
+     */
+    currency: string;
+    /**
+     * The Mobile Country Code of the operator.
+     */
+    mcc: string;
+    /**
+     * The Mobile Network Code of the operator.
+     */
+    mnc: string;
+    /**
+     * The MCC and MNC combined, a unique reference for the operator.
+     */
+    networkCode: string;
+    /**
+     * The name of the operator.
+     */
+    networkName: string;
+    /**
+     * The price on this network, as a decimal string in the account currency.
+     */
+    price: string;
+    /**
+     * The type of network, such as mobile or landline.
+     */
+    type: string;
+}
+
 export interface RtcCapability {
     /**
      * Webhook that receives RTC events.
@@ -186,6 +544,118 @@ export interface RtcCapability {
      * Whether Vonage signs webhook requests.
      */
     signedCallbacks?: boolean;
+}
+
+export interface UserChannels {
+    /**
+     * Facebook Messenger IDs of the user.
+     */
+    messenger?: outputs.UserMessengerChannel[];
+    /**
+     * Numbers the user can receive MMS on.
+     */
+    mms?: outputs.UserNumberChannel[];
+    /**
+     * Phone numbers (PSTN) the user can be called on.
+     */
+    pstn?: outputs.UserPstnChannel[];
+    /**
+     * SIP endpoints of the user.
+     */
+    sip?: outputs.UserSipChannel[];
+    /**
+     * Numbers the user can receive SMS on.
+     */
+    sms?: outputs.UserNumberChannel[];
+    /**
+     * Vonage Business Cloud extensions of the user.
+     */
+    vbc?: outputs.UserVbcChannel[];
+    /**
+     * Viber numbers of the user.
+     */
+    viber?: outputs.UserNumberChannel[];
+    /**
+     * WebSocket endpoints of the user.
+     */
+    websocket?: outputs.UserWebsocketChannel[];
+    /**
+     * WhatsApp numbers of the user.
+     */
+    whatsapp?: outputs.UserNumberChannel[];
+}
+
+export interface UserMessengerChannel {
+    /**
+     * The Facebook Messenger user ID.
+     */
+    id: string;
+}
+
+export interface UserNumberChannel {
+    /**
+     * The number in E.164 format without the leading plus.
+     */
+    number: string;
+}
+
+export interface UserPstnChannel {
+    /**
+     * The phone number in E.164 format without the leading plus, as an integer (for example 14155550100).
+     */
+    number: number;
+}
+
+export interface UserSipChannel {
+    /**
+     * Password for SIP authentication. The API never returns it, so the value recorded in state is the one last set by this program; a changed password is applied but a password changed outside Pulumi is not detected.
+     */
+    password?: string;
+    /**
+     * The SIP URI, starting with sip: or sips:.
+     */
+    uri: string;
+    /**
+     * Username for SIP authentication.
+     */
+    username?: string;
+}
+
+export interface UserSummary {
+    /**
+     * Human-friendly name, if set.
+     */
+    displayName?: string;
+    /**
+     * Unique name of the user.
+     */
+    name: string;
+    /**
+     * User ID (USR-<uuid>).
+     */
+    userId: string;
+}
+
+export interface UserVbcChannel {
+    /**
+     * The Vonage Business Cloud extension.
+     */
+    extension: string;
+}
+
+export interface UserWebsocketChannel {
+    /**
+     * The audio format, for example audio/l16;rate=16000 (sent to Vonage as content-type).
+     */
+    contentType?: string;
+    /**
+     * Extra HTTP headers sent when Vonage connects to the WebSocket.
+     */
+    headers?: {[key: string]: string};
+    /**
+     * The WebSocket URI, starting with ws:// or wss://.
+     */
+    uri: string;
 }
 
 export interface VerifyCapability {

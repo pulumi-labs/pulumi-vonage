@@ -194,6 +194,506 @@ func (o AvailableNumberArrayOutput) Index(i pulumi.IntInput) AvailableNumberOutp
 	}).(AvailableNumberOutput)
 }
 
+type CountryPricing struct {
+	// Two-letter country code.
+	CountryCode string `pulumi:"countryCode"`
+	// The country name for display.
+	CountryDisplayName string `pulumi:"countryDisplayName"`
+	// The country name.
+	CountryName string `pulumi:"countryName"`
+	// The currency the account is billed in.
+	Currency string `pulumi:"currency"`
+	// The default price in this country, as a decimal string.
+	DefaultPrice string `pulumi:"defaultPrice"`
+	// The dialling prefix of the country.
+	DialingPrefix string `pulumi:"dialingPrefix"`
+	// Prices per mobile network in the country.
+	Networks []PricingNetwork `pulumi:"networks"`
+}
+
+type CountryPricingOutput struct{ *pulumi.OutputState }
+
+func (CountryPricingOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CountryPricing)(nil)).Elem()
+}
+
+func (o CountryPricingOutput) ToCountryPricingOutput() CountryPricingOutput {
+	return o
+}
+
+func (o CountryPricingOutput) ToCountryPricingOutputWithContext(ctx context.Context) CountryPricingOutput {
+	return o
+}
+
+// Two-letter country code.
+func (o CountryPricingOutput) CountryCode() pulumi.StringOutput {
+	return o.ApplyT(func(v CountryPricing) string { return v.CountryCode }).(pulumi.StringOutput)
+}
+
+// The country name for display.
+func (o CountryPricingOutput) CountryDisplayName() pulumi.StringOutput {
+	return o.ApplyT(func(v CountryPricing) string { return v.CountryDisplayName }).(pulumi.StringOutput)
+}
+
+// The country name.
+func (o CountryPricingOutput) CountryName() pulumi.StringOutput {
+	return o.ApplyT(func(v CountryPricing) string { return v.CountryName }).(pulumi.StringOutput)
+}
+
+// The currency the account is billed in.
+func (o CountryPricingOutput) Currency() pulumi.StringOutput {
+	return o.ApplyT(func(v CountryPricing) string { return v.Currency }).(pulumi.StringOutput)
+}
+
+// The default price in this country, as a decimal string.
+func (o CountryPricingOutput) DefaultPrice() pulumi.StringOutput {
+	return o.ApplyT(func(v CountryPricing) string { return v.DefaultPrice }).(pulumi.StringOutput)
+}
+
+// The dialling prefix of the country.
+func (o CountryPricingOutput) DialingPrefix() pulumi.StringOutput {
+	return o.ApplyT(func(v CountryPricing) string { return v.DialingPrefix }).(pulumi.StringOutput)
+}
+
+// Prices per mobile network in the country.
+func (o CountryPricingOutput) Networks() PricingNetworkArrayOutput {
+	return o.ApplyT(func(v CountryPricing) []PricingNetwork { return v.Networks }).(PricingNetworkArrayOutput)
+}
+
+type CountryPricingArrayOutput struct{ *pulumi.OutputState }
+
+func (CountryPricingArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CountryPricing)(nil)).Elem()
+}
+
+func (o CountryPricingArrayOutput) ToCountryPricingArrayOutput() CountryPricingArrayOutput {
+	return o
+}
+
+func (o CountryPricingArrayOutput) ToCountryPricingArrayOutputWithContext(ctx context.Context) CountryPricingArrayOutput {
+	return o
+}
+
+func (o CountryPricingArrayOutput) Index(i pulumi.IntInput) CountryPricingOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CountryPricing {
+		return vs[0].([]CountryPricing)[vs[1].(int)]
+	}).(CountryPricingOutput)
+}
+
+type ExternalAccountSummary struct {
+	// The api_key Vonage reports for the account.
+	ApiKey string `pulumi:"apiKey"`
+	// IDs of the linked applications (at most one). The page access token is never listed; use getMessengerAccount.
+	Applications []string `pulumi:"applications"`
+	// The account's channel.
+	Channel string `pulumi:"channel"`
+	// The account's external ID.
+	ExternalId string `pulumi:"externalId"`
+	// The account name (empty when none is set).
+	Name string `pulumi:"name"`
+}
+
+type ExternalAccountSummaryOutput struct{ *pulumi.OutputState }
+
+func (ExternalAccountSummaryOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ExternalAccountSummary)(nil)).Elem()
+}
+
+func (o ExternalAccountSummaryOutput) ToExternalAccountSummaryOutput() ExternalAccountSummaryOutput {
+	return o
+}
+
+func (o ExternalAccountSummaryOutput) ToExternalAccountSummaryOutputWithContext(ctx context.Context) ExternalAccountSummaryOutput {
+	return o
+}
+
+// The api_key Vonage reports for the account.
+func (o ExternalAccountSummaryOutput) ApiKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ExternalAccountSummary) string { return v.ApiKey }).(pulumi.StringOutput)
+}
+
+// IDs of the linked applications (at most one). The page access token is never listed; use getMessengerAccount.
+func (o ExternalAccountSummaryOutput) Applications() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ExternalAccountSummary) []string { return v.Applications }).(pulumi.StringArrayOutput)
+}
+
+// The account's channel.
+func (o ExternalAccountSummaryOutput) Channel() pulumi.StringOutput {
+	return o.ApplyT(func(v ExternalAccountSummary) string { return v.Channel }).(pulumi.StringOutput)
+}
+
+// The account's external ID.
+func (o ExternalAccountSummaryOutput) ExternalId() pulumi.StringOutput {
+	return o.ApplyT(func(v ExternalAccountSummary) string { return v.ExternalId }).(pulumi.StringOutput)
+}
+
+// The account name (empty when none is set).
+func (o ExternalAccountSummaryOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ExternalAccountSummary) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type ExternalAccountSummaryArrayOutput struct{ *pulumi.OutputState }
+
+func (ExternalAccountSummaryArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ExternalAccountSummary)(nil)).Elem()
+}
+
+func (o ExternalAccountSummaryArrayOutput) ToExternalAccountSummaryArrayOutput() ExternalAccountSummaryArrayOutput {
+	return o
+}
+
+func (o ExternalAccountSummaryArrayOutput) ToExternalAccountSummaryArrayOutputWithContext(ctx context.Context) ExternalAccountSummaryArrayOutput {
+	return o
+}
+
+func (o ExternalAccountSummaryArrayOutput) Index(i pulumi.IntInput) ExternalAccountSummaryOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ExternalAccountSummary {
+		return vs[0].([]ExternalAccountSummary)[vs[1].(int)]
+	}).(ExternalAccountSummaryOutput)
+}
+
+type GetNetworkApplicationProfileResult struct {
+	// ID of the Vonage account that owns it.
+	AccountId string `pulumi:"accountId"`
+	// ID of the business profile that owns it.
+	BusinessProfileId string `pulumi:"businessProfileId"`
+	// Category of the application.
+	CategoryId string `pulumi:"categoryId"`
+	// When the profile was created (RFC 3339).
+	CreatedAt string `pulumi:"createdAt"`
+	// Description of the application's use cases; empty when unset.
+	Description string `pulumi:"description"`
+	// Two-letter ISO 3166 codes of the countries the application's infrastructure runs in.
+	InfrastructureLocations []string `pulumi:"infrastructureLocations"`
+	// Name of the application.
+	Name string `pulumi:"name"`
+	// The Network APIs the application uses and the purposes it states for each.
+	NetworkApis []NetworkApplicationProfileApi `pulumi:"networkApis"`
+	// URL of the application's privacy policy; empty when unset.
+	PrivacyPolicyUrl string `pulumi:"privacyPolicyUrl"`
+	// ID of the application profile.
+	ProfileId string `pulumi:"profileId"`
+	// Overall approval status: pending, provisioning, accepted, partially-accepted, rejected or failed.
+	Status string `pulumi:"status"`
+	// Vonage's note about why the profile was rejected; empty when there is none.
+	StatusMessage string `pulumi:"statusMessage"`
+	// When the profile was last updated (RFC 3339).
+	UpdatedAt string `pulumi:"updatedAt"`
+}
+
+type GetNetworkApplicationProfileResultOutput struct{ *pulumi.OutputState }
+
+func (GetNetworkApplicationProfileResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNetworkApplicationProfileResult)(nil)).Elem()
+}
+
+func (o GetNetworkApplicationProfileResultOutput) ToGetNetworkApplicationProfileResultOutput() GetNetworkApplicationProfileResultOutput {
+	return o
+}
+
+func (o GetNetworkApplicationProfileResultOutput) ToGetNetworkApplicationProfileResultOutputWithContext(ctx context.Context) GetNetworkApplicationProfileResultOutput {
+	return o
+}
+
+// ID of the Vonage account that owns it.
+func (o GetNetworkApplicationProfileResultOutput) AccountId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNetworkApplicationProfileResult) string { return v.AccountId }).(pulumi.StringOutput)
+}
+
+// ID of the business profile that owns it.
+func (o GetNetworkApplicationProfileResultOutput) BusinessProfileId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNetworkApplicationProfileResult) string { return v.BusinessProfileId }).(pulumi.StringOutput)
+}
+
+// Category of the application.
+func (o GetNetworkApplicationProfileResultOutput) CategoryId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNetworkApplicationProfileResult) string { return v.CategoryId }).(pulumi.StringOutput)
+}
+
+// When the profile was created (RFC 3339).
+func (o GetNetworkApplicationProfileResultOutput) CreatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNetworkApplicationProfileResult) string { return v.CreatedAt }).(pulumi.StringOutput)
+}
+
+// Description of the application's use cases; empty when unset.
+func (o GetNetworkApplicationProfileResultOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNetworkApplicationProfileResult) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Two-letter ISO 3166 codes of the countries the application's infrastructure runs in.
+func (o GetNetworkApplicationProfileResultOutput) InfrastructureLocations() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetNetworkApplicationProfileResult) []string { return v.InfrastructureLocations }).(pulumi.StringArrayOutput)
+}
+
+// Name of the application.
+func (o GetNetworkApplicationProfileResultOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNetworkApplicationProfileResult) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The Network APIs the application uses and the purposes it states for each.
+func (o GetNetworkApplicationProfileResultOutput) NetworkApis() NetworkApplicationProfileApiArrayOutput {
+	return o.ApplyT(func(v GetNetworkApplicationProfileResult) []NetworkApplicationProfileApi { return v.NetworkApis }).(NetworkApplicationProfileApiArrayOutput)
+}
+
+// URL of the application's privacy policy; empty when unset.
+func (o GetNetworkApplicationProfileResultOutput) PrivacyPolicyUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNetworkApplicationProfileResult) string { return v.PrivacyPolicyUrl }).(pulumi.StringOutput)
+}
+
+// ID of the application profile.
+func (o GetNetworkApplicationProfileResultOutput) ProfileId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNetworkApplicationProfileResult) string { return v.ProfileId }).(pulumi.StringOutput)
+}
+
+// Overall approval status: pending, provisioning, accepted, partially-accepted, rejected or failed.
+func (o GetNetworkApplicationProfileResultOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNetworkApplicationProfileResult) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Vonage's note about why the profile was rejected; empty when there is none.
+func (o GetNetworkApplicationProfileResultOutput) StatusMessage() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNetworkApplicationProfileResult) string { return v.StatusMessage }).(pulumi.StringOutput)
+}
+
+// When the profile was last updated (RFC 3339).
+func (o GetNetworkApplicationProfileResultOutput) UpdatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNetworkApplicationProfileResult) string { return v.UpdatedAt }).(pulumi.StringOutput)
+}
+
+type GetNetworkApplicationProfileResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetNetworkApplicationProfileResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNetworkApplicationProfileResult)(nil)).Elem()
+}
+
+func (o GetNetworkApplicationProfileResultArrayOutput) ToGetNetworkApplicationProfileResultArrayOutput() GetNetworkApplicationProfileResultArrayOutput {
+	return o
+}
+
+func (o GetNetworkApplicationProfileResultArrayOutput) ToGetNetworkApplicationProfileResultArrayOutputWithContext(ctx context.Context) GetNetworkApplicationProfileResultArrayOutput {
+	return o
+}
+
+func (o GetNetworkApplicationProfileResultArrayOutput) Index(i pulumi.IntInput) GetNetworkApplicationProfileResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNetworkApplicationProfileResult {
+		return vs[0].([]GetNetworkApplicationProfileResult)[vs[1].(int)]
+	}).(GetNetworkApplicationProfileResultOutput)
+}
+
+type GetNetworkBusinessProfileResult struct {
+	// ID of the account that owns the profile.
+	AccountId string `pulumi:"accountId"`
+	// Postal address.
+	BusinessInformation NetworkBusinessInformation `pulumi:"businessInformation"`
+	// Role of the contact person.
+	ContactRole string `pulumi:"contactRole"`
+	// Countries the profile is registered for.
+	Countries []string `pulumi:"countries"`
+	// Creation time (RFC 3339).
+	CreatedAt string `pulumi:"createdAt"`
+	// Legal name of the business.
+	Name string `pulumi:"name"`
+	// Kind of organisation.
+	OrganisationType string `pulumi:"organisationType"`
+	// Privacy policy manager email.
+	PrivacyPolicyManagerEmail string `pulumi:"privacyPolicyManagerEmail"`
+	// Privacy policy URL.
+	PrivacyPolicyUrl string `pulumi:"privacyPolicyUrl"`
+	// Profile ID.
+	ProfileId string `pulumi:"profileId"`
+	// Overall registration status.
+	Status string `pulumi:"status"`
+	// Vonage's note about the status, empty when there is none.
+	StatusMessage string `pulumi:"statusMessage"`
+	// Tax identification number.
+	TaxNumber string `pulumi:"taxNumber"`
+	// Trading name, empty when unset.
+	TradingName string `pulumi:"tradingName"`
+	// Last update time (RFC 3339).
+	UpdatedAt string `pulumi:"updatedAt"`
+}
+
+type GetNetworkBusinessProfileResultOutput struct{ *pulumi.OutputState }
+
+func (GetNetworkBusinessProfileResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNetworkBusinessProfileResult)(nil)).Elem()
+}
+
+func (o GetNetworkBusinessProfileResultOutput) ToGetNetworkBusinessProfileResultOutput() GetNetworkBusinessProfileResultOutput {
+	return o
+}
+
+func (o GetNetworkBusinessProfileResultOutput) ToGetNetworkBusinessProfileResultOutputWithContext(ctx context.Context) GetNetworkBusinessProfileResultOutput {
+	return o
+}
+
+// ID of the account that owns the profile.
+func (o GetNetworkBusinessProfileResultOutput) AccountId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNetworkBusinessProfileResult) string { return v.AccountId }).(pulumi.StringOutput)
+}
+
+// Postal address.
+func (o GetNetworkBusinessProfileResultOutput) BusinessInformation() NetworkBusinessInformationOutput {
+	return o.ApplyT(func(v GetNetworkBusinessProfileResult) NetworkBusinessInformation { return v.BusinessInformation }).(NetworkBusinessInformationOutput)
+}
+
+// Role of the contact person.
+func (o GetNetworkBusinessProfileResultOutput) ContactRole() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNetworkBusinessProfileResult) string { return v.ContactRole }).(pulumi.StringOutput)
+}
+
+// Countries the profile is registered for.
+func (o GetNetworkBusinessProfileResultOutput) Countries() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetNetworkBusinessProfileResult) []string { return v.Countries }).(pulumi.StringArrayOutput)
+}
+
+// Creation time (RFC 3339).
+func (o GetNetworkBusinessProfileResultOutput) CreatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNetworkBusinessProfileResult) string { return v.CreatedAt }).(pulumi.StringOutput)
+}
+
+// Legal name of the business.
+func (o GetNetworkBusinessProfileResultOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNetworkBusinessProfileResult) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Kind of organisation.
+func (o GetNetworkBusinessProfileResultOutput) OrganisationType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNetworkBusinessProfileResult) string { return v.OrganisationType }).(pulumi.StringOutput)
+}
+
+// Privacy policy manager email.
+func (o GetNetworkBusinessProfileResultOutput) PrivacyPolicyManagerEmail() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNetworkBusinessProfileResult) string { return v.PrivacyPolicyManagerEmail }).(pulumi.StringOutput)
+}
+
+// Privacy policy URL.
+func (o GetNetworkBusinessProfileResultOutput) PrivacyPolicyUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNetworkBusinessProfileResult) string { return v.PrivacyPolicyUrl }).(pulumi.StringOutput)
+}
+
+// Profile ID.
+func (o GetNetworkBusinessProfileResultOutput) ProfileId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNetworkBusinessProfileResult) string { return v.ProfileId }).(pulumi.StringOutput)
+}
+
+// Overall registration status.
+func (o GetNetworkBusinessProfileResultOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNetworkBusinessProfileResult) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Vonage's note about the status, empty when there is none.
+func (o GetNetworkBusinessProfileResultOutput) StatusMessage() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNetworkBusinessProfileResult) string { return v.StatusMessage }).(pulumi.StringOutput)
+}
+
+// Tax identification number.
+func (o GetNetworkBusinessProfileResultOutput) TaxNumber() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNetworkBusinessProfileResult) string { return v.TaxNumber }).(pulumi.StringOutput)
+}
+
+// Trading name, empty when unset.
+func (o GetNetworkBusinessProfileResultOutput) TradingName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNetworkBusinessProfileResult) string { return v.TradingName }).(pulumi.StringOutput)
+}
+
+// Last update time (RFC 3339).
+func (o GetNetworkBusinessProfileResultOutput) UpdatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNetworkBusinessProfileResult) string { return v.UpdatedAt }).(pulumi.StringOutput)
+}
+
+type GetNetworkBusinessProfileResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetNetworkBusinessProfileResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNetworkBusinessProfileResult)(nil)).Elem()
+}
+
+func (o GetNetworkBusinessProfileResultArrayOutput) ToGetNetworkBusinessProfileResultArrayOutput() GetNetworkBusinessProfileResultArrayOutput {
+	return o
+}
+
+func (o GetNetworkBusinessProfileResultArrayOutput) ToGetNetworkBusinessProfileResultArrayOutputWithContext(ctx context.Context) GetNetworkBusinessProfileResultArrayOutput {
+	return o
+}
+
+func (o GetNetworkBusinessProfileResultArrayOutput) Index(i pulumi.IntInput) GetNetworkBusinessProfileResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNetworkBusinessProfileResult {
+		return vs[0].([]GetNetworkBusinessProfileResult)[vs[1].(int)]
+	}).(GetNetworkBusinessProfileResultOutput)
+}
+
+type GetNumberPoolResult struct {
+	// Owning account ID (the API key).
+	AccountId string `pulumi:"accountId"`
+	// Fallback behaviour: Pool, CustomFrom or Reject.
+	Fallback string `pulumi:"fallback"`
+	// Whether a number local to the destination is preferred.
+	LocalizedSenderPreferred bool `pulumi:"localizedSenderPreferred"`
+	// Pool ID.
+	PoolId string `pulumi:"poolId"`
+	// Whether the same number is reused for the same recipient.
+	PredictableSenderPreferred bool `pulumi:"predictableSenderPreferred"`
+}
+
+type GetNumberPoolResultOutput struct{ *pulumi.OutputState }
+
+func (GetNumberPoolResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNumberPoolResult)(nil)).Elem()
+}
+
+func (o GetNumberPoolResultOutput) ToGetNumberPoolResultOutput() GetNumberPoolResultOutput {
+	return o
+}
+
+func (o GetNumberPoolResultOutput) ToGetNumberPoolResultOutputWithContext(ctx context.Context) GetNumberPoolResultOutput {
+	return o
+}
+
+// Owning account ID (the API key).
+func (o GetNumberPoolResultOutput) AccountId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNumberPoolResult) string { return v.AccountId }).(pulumi.StringOutput)
+}
+
+// Fallback behaviour: Pool, CustomFrom or Reject.
+func (o GetNumberPoolResultOutput) Fallback() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNumberPoolResult) string { return v.Fallback }).(pulumi.StringOutput)
+}
+
+// Whether a number local to the destination is preferred.
+func (o GetNumberPoolResultOutput) LocalizedSenderPreferred() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetNumberPoolResult) bool { return v.LocalizedSenderPreferred }).(pulumi.BoolOutput)
+}
+
+// Pool ID.
+func (o GetNumberPoolResultOutput) PoolId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNumberPoolResult) string { return v.PoolId }).(pulumi.StringOutput)
+}
+
+// Whether the same number is reused for the same recipient.
+func (o GetNumberPoolResultOutput) PredictableSenderPreferred() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetNumberPoolResult) bool { return v.PredictableSenderPreferred }).(pulumi.BoolOutput)
+}
+
+type GetNumberPoolResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetNumberPoolResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNumberPoolResult)(nil)).Elem()
+}
+
+func (o GetNumberPoolResultArrayOutput) ToGetNumberPoolResultArrayOutput() GetNumberPoolResultArrayOutput {
+	return o
+}
+
+func (o GetNumberPoolResultArrayOutput) ToGetNumberPoolResultArrayOutputWithContext(ctx context.Context) GetNumberPoolResultArrayOutput {
+	return o
+}
+
+func (o GetNumberPoolResultArrayOutput) Index(i pulumi.IntInput) GetNumberPoolResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNumberPoolResult {
+		return vs[0].([]GetNumberPoolResult)[vs[1].(int)]
+	}).(GetNumberPoolResultOutput)
+}
+
 type GetSubAccountResult struct {
 	// Subaccount API key.
 	ApiKey string `pulumi:"apiKey"`
@@ -812,6 +1312,564 @@ func (o NetworkApisCapabilityPtrOutput) RedirectUri() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type NetworkApplicationProfileApi struct {
+	// ID of the Network API, from getNetworkRegistryCatalogue networkApis (for example sim-swap).
+	NetworkApiId string `pulumi:"networkApiId"`
+	// IDs of the purposes the operator needs to validate the request, from getNetworkRegistryCatalogue purposes.
+	PurposeIds []string `pulumi:"purposeIds"`
+}
+
+// NetworkApplicationProfileApiInput is an input type that accepts NetworkApplicationProfileApiArgs and NetworkApplicationProfileApiOutput values.
+// You can construct a concrete instance of `NetworkApplicationProfileApiInput` via:
+//
+//	NetworkApplicationProfileApiArgs{...}
+type NetworkApplicationProfileApiInput interface {
+	pulumi.Input
+
+	ToNetworkApplicationProfileApiOutput() NetworkApplicationProfileApiOutput
+	ToNetworkApplicationProfileApiOutputWithContext(context.Context) NetworkApplicationProfileApiOutput
+}
+
+type NetworkApplicationProfileApiArgs struct {
+	// ID of the Network API, from getNetworkRegistryCatalogue networkApis (for example sim-swap).
+	NetworkApiId pulumi.StringInput `pulumi:"networkApiId"`
+	// IDs of the purposes the operator needs to validate the request, from getNetworkRegistryCatalogue purposes.
+	PurposeIds pulumi.StringArrayInput `pulumi:"purposeIds"`
+}
+
+func (NetworkApplicationProfileApiArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NetworkApplicationProfileApi)(nil)).Elem()
+}
+
+func (i NetworkApplicationProfileApiArgs) ToNetworkApplicationProfileApiOutput() NetworkApplicationProfileApiOutput {
+	return i.ToNetworkApplicationProfileApiOutputWithContext(context.Background())
+}
+
+func (i NetworkApplicationProfileApiArgs) ToNetworkApplicationProfileApiOutputWithContext(ctx context.Context) NetworkApplicationProfileApiOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NetworkApplicationProfileApiOutput)
+}
+
+// NetworkApplicationProfileApiArrayInput is an input type that accepts NetworkApplicationProfileApiArray and NetworkApplicationProfileApiArrayOutput values.
+// You can construct a concrete instance of `NetworkApplicationProfileApiArrayInput` via:
+//
+//	NetworkApplicationProfileApiArray{ NetworkApplicationProfileApiArgs{...} }
+type NetworkApplicationProfileApiArrayInput interface {
+	pulumi.Input
+
+	ToNetworkApplicationProfileApiArrayOutput() NetworkApplicationProfileApiArrayOutput
+	ToNetworkApplicationProfileApiArrayOutputWithContext(context.Context) NetworkApplicationProfileApiArrayOutput
+}
+
+type NetworkApplicationProfileApiArray []NetworkApplicationProfileApiInput
+
+func (NetworkApplicationProfileApiArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NetworkApplicationProfileApi)(nil)).Elem()
+}
+
+func (i NetworkApplicationProfileApiArray) ToNetworkApplicationProfileApiArrayOutput() NetworkApplicationProfileApiArrayOutput {
+	return i.ToNetworkApplicationProfileApiArrayOutputWithContext(context.Background())
+}
+
+func (i NetworkApplicationProfileApiArray) ToNetworkApplicationProfileApiArrayOutputWithContext(ctx context.Context) NetworkApplicationProfileApiArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NetworkApplicationProfileApiArrayOutput)
+}
+
+type NetworkApplicationProfileApiOutput struct{ *pulumi.OutputState }
+
+func (NetworkApplicationProfileApiOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NetworkApplicationProfileApi)(nil)).Elem()
+}
+
+func (o NetworkApplicationProfileApiOutput) ToNetworkApplicationProfileApiOutput() NetworkApplicationProfileApiOutput {
+	return o
+}
+
+func (o NetworkApplicationProfileApiOutput) ToNetworkApplicationProfileApiOutputWithContext(ctx context.Context) NetworkApplicationProfileApiOutput {
+	return o
+}
+
+// ID of the Network API, from getNetworkRegistryCatalogue networkApis (for example sim-swap).
+func (o NetworkApplicationProfileApiOutput) NetworkApiId() pulumi.StringOutput {
+	return o.ApplyT(func(v NetworkApplicationProfileApi) string { return v.NetworkApiId }).(pulumi.StringOutput)
+}
+
+// IDs of the purposes the operator needs to validate the request, from getNetworkRegistryCatalogue purposes.
+func (o NetworkApplicationProfileApiOutput) PurposeIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v NetworkApplicationProfileApi) []string { return v.PurposeIds }).(pulumi.StringArrayOutput)
+}
+
+type NetworkApplicationProfileApiArrayOutput struct{ *pulumi.OutputState }
+
+func (NetworkApplicationProfileApiArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NetworkApplicationProfileApi)(nil)).Elem()
+}
+
+func (o NetworkApplicationProfileApiArrayOutput) ToNetworkApplicationProfileApiArrayOutput() NetworkApplicationProfileApiArrayOutput {
+	return o
+}
+
+func (o NetworkApplicationProfileApiArrayOutput) ToNetworkApplicationProfileApiArrayOutputWithContext(ctx context.Context) NetworkApplicationProfileApiArrayOutput {
+	return o
+}
+
+func (o NetworkApplicationProfileApiArrayOutput) Index(i pulumi.IntInput) NetworkApplicationProfileApiOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NetworkApplicationProfileApi {
+		return vs[0].([]NetworkApplicationProfileApi)[vs[1].(int)]
+	}).(NetworkApplicationProfileApiOutput)
+}
+
+type NetworkBusinessInformation struct {
+	// First line of the street address (at most 500 characters).
+	AddressStreet1 string `pulumi:"addressStreet1"`
+	// Second line of the street address.
+	AddressStreet2 *string `pulumi:"addressStreet2"`
+	// City.
+	City string `pulumi:"city"`
+	// Two-letter ISO 3166 country code of the address.
+	Country string `pulumi:"country"`
+	// Postal or ZIP code.
+	PostalCode string `pulumi:"postalCode"`
+	// Province, state or region.
+	Province *string `pulumi:"province"`
+}
+
+// NetworkBusinessInformationInput is an input type that accepts NetworkBusinessInformationArgs and NetworkBusinessInformationOutput values.
+// You can construct a concrete instance of `NetworkBusinessInformationInput` via:
+//
+//	NetworkBusinessInformationArgs{...}
+type NetworkBusinessInformationInput interface {
+	pulumi.Input
+
+	ToNetworkBusinessInformationOutput() NetworkBusinessInformationOutput
+	ToNetworkBusinessInformationOutputWithContext(context.Context) NetworkBusinessInformationOutput
+}
+
+type NetworkBusinessInformationArgs struct {
+	// First line of the street address (at most 500 characters).
+	AddressStreet1 pulumi.StringInput `pulumi:"addressStreet1"`
+	// Second line of the street address.
+	AddressStreet2 pulumi.StringPtrInput `pulumi:"addressStreet2"`
+	// City.
+	City pulumi.StringInput `pulumi:"city"`
+	// Two-letter ISO 3166 country code of the address.
+	Country pulumi.StringInput `pulumi:"country"`
+	// Postal or ZIP code.
+	PostalCode pulumi.StringInput `pulumi:"postalCode"`
+	// Province, state or region.
+	Province pulumi.StringPtrInput `pulumi:"province"`
+}
+
+func (NetworkBusinessInformationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NetworkBusinessInformation)(nil)).Elem()
+}
+
+func (i NetworkBusinessInformationArgs) ToNetworkBusinessInformationOutput() NetworkBusinessInformationOutput {
+	return i.ToNetworkBusinessInformationOutputWithContext(context.Background())
+}
+
+func (i NetworkBusinessInformationArgs) ToNetworkBusinessInformationOutputWithContext(ctx context.Context) NetworkBusinessInformationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NetworkBusinessInformationOutput)
+}
+
+type NetworkBusinessInformationOutput struct{ *pulumi.OutputState }
+
+func (NetworkBusinessInformationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NetworkBusinessInformation)(nil)).Elem()
+}
+
+func (o NetworkBusinessInformationOutput) ToNetworkBusinessInformationOutput() NetworkBusinessInformationOutput {
+	return o
+}
+
+func (o NetworkBusinessInformationOutput) ToNetworkBusinessInformationOutputWithContext(ctx context.Context) NetworkBusinessInformationOutput {
+	return o
+}
+
+// First line of the street address (at most 500 characters).
+func (o NetworkBusinessInformationOutput) AddressStreet1() pulumi.StringOutput {
+	return o.ApplyT(func(v NetworkBusinessInformation) string { return v.AddressStreet1 }).(pulumi.StringOutput)
+}
+
+// Second line of the street address.
+func (o NetworkBusinessInformationOutput) AddressStreet2() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NetworkBusinessInformation) *string { return v.AddressStreet2 }).(pulumi.StringPtrOutput)
+}
+
+// City.
+func (o NetworkBusinessInformationOutput) City() pulumi.StringOutput {
+	return o.ApplyT(func(v NetworkBusinessInformation) string { return v.City }).(pulumi.StringOutput)
+}
+
+// Two-letter ISO 3166 country code of the address.
+func (o NetworkBusinessInformationOutput) Country() pulumi.StringOutput {
+	return o.ApplyT(func(v NetworkBusinessInformation) string { return v.Country }).(pulumi.StringOutput)
+}
+
+// Postal or ZIP code.
+func (o NetworkBusinessInformationOutput) PostalCode() pulumi.StringOutput {
+	return o.ApplyT(func(v NetworkBusinessInformation) string { return v.PostalCode }).(pulumi.StringOutput)
+}
+
+// Province, state or region.
+func (o NetworkBusinessInformationOutput) Province() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NetworkBusinessInformation) *string { return v.Province }).(pulumi.StringPtrOutput)
+}
+
+type NetworkRegistryCountry struct {
+	// Two-letter ISO 3166 country code.
+	Code string `pulumi:"code"`
+	// Country name.
+	Name string `pulumi:"name"`
+}
+
+type NetworkRegistryCountryOutput struct{ *pulumi.OutputState }
+
+func (NetworkRegistryCountryOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NetworkRegistryCountry)(nil)).Elem()
+}
+
+func (o NetworkRegistryCountryOutput) ToNetworkRegistryCountryOutput() NetworkRegistryCountryOutput {
+	return o
+}
+
+func (o NetworkRegistryCountryOutput) ToNetworkRegistryCountryOutputWithContext(ctx context.Context) NetworkRegistryCountryOutput {
+	return o
+}
+
+// Two-letter ISO 3166 country code.
+func (o NetworkRegistryCountryOutput) Code() pulumi.StringOutput {
+	return o.ApplyT(func(v NetworkRegistryCountry) string { return v.Code }).(pulumi.StringOutput)
+}
+
+// Country name.
+func (o NetworkRegistryCountryOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v NetworkRegistryCountry) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type NetworkRegistryCountryArrayOutput struct{ *pulumi.OutputState }
+
+func (NetworkRegistryCountryArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NetworkRegistryCountry)(nil)).Elem()
+}
+
+func (o NetworkRegistryCountryArrayOutput) ToNetworkRegistryCountryArrayOutput() NetworkRegistryCountryArrayOutput {
+	return o
+}
+
+func (o NetworkRegistryCountryArrayOutput) ToNetworkRegistryCountryArrayOutputWithContext(ctx context.Context) NetworkRegistryCountryArrayOutput {
+	return o
+}
+
+func (o NetworkRegistryCountryArrayOutput) Index(i pulumi.IntInput) NetworkRegistryCountryOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NetworkRegistryCountry {
+		return vs[0].([]NetworkRegistryCountry)[vs[1].(int)]
+	}).(NetworkRegistryCountryOutput)
+}
+
+type NetworkRegistryCsp struct {
+	// Two-letter ISO 3166 country code the CSP operates in.
+	Country string `pulumi:"country"`
+	// CSP identifier, for example telefonica_es.
+	Id string `pulumi:"id"`
+	// Operator name.
+	Name string `pulumi:"name"`
+	// IDs of the Network APIs the CSP supports.
+	SupportedNetworkApis []string `pulumi:"supportedNetworkApis"`
+	// ID of the vetting level the CSP requires, empty when none.
+	VettingLevel string `pulumi:"vettingLevel"`
+}
+
+type NetworkRegistryCspOutput struct{ *pulumi.OutputState }
+
+func (NetworkRegistryCspOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NetworkRegistryCsp)(nil)).Elem()
+}
+
+func (o NetworkRegistryCspOutput) ToNetworkRegistryCspOutput() NetworkRegistryCspOutput {
+	return o
+}
+
+func (o NetworkRegistryCspOutput) ToNetworkRegistryCspOutputWithContext(ctx context.Context) NetworkRegistryCspOutput {
+	return o
+}
+
+// Two-letter ISO 3166 country code the CSP operates in.
+func (o NetworkRegistryCspOutput) Country() pulumi.StringOutput {
+	return o.ApplyT(func(v NetworkRegistryCsp) string { return v.Country }).(pulumi.StringOutput)
+}
+
+// CSP identifier, for example telefonica_es.
+func (o NetworkRegistryCspOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v NetworkRegistryCsp) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Operator name.
+func (o NetworkRegistryCspOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v NetworkRegistryCsp) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// IDs of the Network APIs the CSP supports.
+func (o NetworkRegistryCspOutput) SupportedNetworkApis() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v NetworkRegistryCsp) []string { return v.SupportedNetworkApis }).(pulumi.StringArrayOutput)
+}
+
+// ID of the vetting level the CSP requires, empty when none.
+func (o NetworkRegistryCspOutput) VettingLevel() pulumi.StringOutput {
+	return o.ApplyT(func(v NetworkRegistryCsp) string { return v.VettingLevel }).(pulumi.StringOutput)
+}
+
+type NetworkRegistryCspArrayOutput struct{ *pulumi.OutputState }
+
+func (NetworkRegistryCspArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NetworkRegistryCsp)(nil)).Elem()
+}
+
+func (o NetworkRegistryCspArrayOutput) ToNetworkRegistryCspArrayOutput() NetworkRegistryCspArrayOutput {
+	return o
+}
+
+func (o NetworkRegistryCspArrayOutput) ToNetworkRegistryCspArrayOutputWithContext(ctx context.Context) NetworkRegistryCspArrayOutput {
+	return o
+}
+
+func (o NetworkRegistryCspArrayOutput) Index(i pulumi.IntInput) NetworkRegistryCspOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NetworkRegistryCsp {
+		return vs[0].([]NetworkRegistryCsp)[vs[1].(int)]
+	}).(NetworkRegistryCspOutput)
+}
+
+type NetworkRegistryEntry struct {
+	// Identifier to use in the API, for example an organisation type or a category.
+	Id string `pulumi:"id"`
+	// Human-readable name.
+	Name string `pulumi:"name"`
+}
+
+type NetworkRegistryEntryOutput struct{ *pulumi.OutputState }
+
+func (NetworkRegistryEntryOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NetworkRegistryEntry)(nil)).Elem()
+}
+
+func (o NetworkRegistryEntryOutput) ToNetworkRegistryEntryOutput() NetworkRegistryEntryOutput {
+	return o
+}
+
+func (o NetworkRegistryEntryOutput) ToNetworkRegistryEntryOutputWithContext(ctx context.Context) NetworkRegistryEntryOutput {
+	return o
+}
+
+// Identifier to use in the API, for example an organisation type or a category.
+func (o NetworkRegistryEntryOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v NetworkRegistryEntry) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Human-readable name.
+func (o NetworkRegistryEntryOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v NetworkRegistryEntry) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type NetworkRegistryEntryArrayOutput struct{ *pulumi.OutputState }
+
+func (NetworkRegistryEntryArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NetworkRegistryEntry)(nil)).Elem()
+}
+
+func (o NetworkRegistryEntryArrayOutput) ToNetworkRegistryEntryArrayOutput() NetworkRegistryEntryArrayOutput {
+	return o
+}
+
+func (o NetworkRegistryEntryArrayOutput) ToNetworkRegistryEntryArrayOutputWithContext(ctx context.Context) NetworkRegistryEntryArrayOutput {
+	return o
+}
+
+func (o NetworkRegistryEntryArrayOutput) Index(i pulumi.IntInput) NetworkRegistryEntryOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NetworkRegistryEntry {
+		return vs[0].([]NetworkRegistryEntry)[vs[1].(int)]
+	}).(NetworkRegistryEntryOutput)
+}
+
+type NetworkRegistryNetworkApi struct {
+	// Network API identifier, for example sim-swap.
+	Id string `pulumi:"id"`
+	// Network API name.
+	Name string `pulumi:"name"`
+	// Callback URLs an application profile must provide to use the API: nv_redirect_url, qod_callback_url or verify_callback_url.
+	Requires []string `pulumi:"requires"`
+}
+
+type NetworkRegistryNetworkApiOutput struct{ *pulumi.OutputState }
+
+func (NetworkRegistryNetworkApiOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NetworkRegistryNetworkApi)(nil)).Elem()
+}
+
+func (o NetworkRegistryNetworkApiOutput) ToNetworkRegistryNetworkApiOutput() NetworkRegistryNetworkApiOutput {
+	return o
+}
+
+func (o NetworkRegistryNetworkApiOutput) ToNetworkRegistryNetworkApiOutputWithContext(ctx context.Context) NetworkRegistryNetworkApiOutput {
+	return o
+}
+
+// Network API identifier, for example sim-swap.
+func (o NetworkRegistryNetworkApiOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v NetworkRegistryNetworkApi) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Network API name.
+func (o NetworkRegistryNetworkApiOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v NetworkRegistryNetworkApi) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Callback URLs an application profile must provide to use the API: nv_redirect_url, qod_callback_url or verify_callback_url.
+func (o NetworkRegistryNetworkApiOutput) Requires() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v NetworkRegistryNetworkApi) []string { return v.Requires }).(pulumi.StringArrayOutput)
+}
+
+type NetworkRegistryNetworkApiArrayOutput struct{ *pulumi.OutputState }
+
+func (NetworkRegistryNetworkApiArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NetworkRegistryNetworkApi)(nil)).Elem()
+}
+
+func (o NetworkRegistryNetworkApiArrayOutput) ToNetworkRegistryNetworkApiArrayOutput() NetworkRegistryNetworkApiArrayOutput {
+	return o
+}
+
+func (o NetworkRegistryNetworkApiArrayOutput) ToNetworkRegistryNetworkApiArrayOutputWithContext(ctx context.Context) NetworkRegistryNetworkApiArrayOutput {
+	return o
+}
+
+func (o NetworkRegistryNetworkApiArrayOutput) Index(i pulumi.IntInput) NetworkRegistryNetworkApiOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NetworkRegistryNetworkApi {
+		return vs[0].([]NetworkRegistryNetworkApi)[vs[1].(int)]
+	}).(NetworkRegistryNetworkApiOutput)
+}
+
+type NetworkRegistryPurpose struct {
+	// Purpose identifier.
+	Id string `pulumi:"id"`
+	// Purpose name.
+	Name string `pulumi:"name"`
+	// ID of the Network API the purpose belongs to.
+	NetworkApiId string `pulumi:"networkApiId"`
+}
+
+type NetworkRegistryPurposeOutput struct{ *pulumi.OutputState }
+
+func (NetworkRegistryPurposeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NetworkRegistryPurpose)(nil)).Elem()
+}
+
+func (o NetworkRegistryPurposeOutput) ToNetworkRegistryPurposeOutput() NetworkRegistryPurposeOutput {
+	return o
+}
+
+func (o NetworkRegistryPurposeOutput) ToNetworkRegistryPurposeOutputWithContext(ctx context.Context) NetworkRegistryPurposeOutput {
+	return o
+}
+
+// Purpose identifier.
+func (o NetworkRegistryPurposeOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v NetworkRegistryPurpose) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Purpose name.
+func (o NetworkRegistryPurposeOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v NetworkRegistryPurpose) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// ID of the Network API the purpose belongs to.
+func (o NetworkRegistryPurposeOutput) NetworkApiId() pulumi.StringOutput {
+	return o.ApplyT(func(v NetworkRegistryPurpose) string { return v.NetworkApiId }).(pulumi.StringOutput)
+}
+
+type NetworkRegistryPurposeArrayOutput struct{ *pulumi.OutputState }
+
+func (NetworkRegistryPurposeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NetworkRegistryPurpose)(nil)).Elem()
+}
+
+func (o NetworkRegistryPurposeArrayOutput) ToNetworkRegistryPurposeArrayOutput() NetworkRegistryPurposeArrayOutput {
+	return o
+}
+
+func (o NetworkRegistryPurposeArrayOutput) ToNetworkRegistryPurposeArrayOutputWithContext(ctx context.Context) NetworkRegistryPurposeArrayOutput {
+	return o
+}
+
+func (o NetworkRegistryPurposeArrayOutput) Index(i pulumi.IntInput) NetworkRegistryPurposeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NetworkRegistryPurpose {
+		return vs[0].([]NetworkRegistryPurpose)[vs[1].(int)]
+	}).(NetworkRegistryPurposeOutput)
+}
+
+type NetworkRegistryVettingLevel struct {
+	// What the level checks.
+	Description string `pulumi:"description"`
+	// Names of the vettingExtraFields a business profile must provide when the level applies.
+	ExtraFields []string `pulumi:"extraFields"`
+	// Vetting level identifier.
+	Id string `pulumi:"id"`
+	// Vetting level name.
+	Name string `pulumi:"name"`
+}
+
+type NetworkRegistryVettingLevelOutput struct{ *pulumi.OutputState }
+
+func (NetworkRegistryVettingLevelOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NetworkRegistryVettingLevel)(nil)).Elem()
+}
+
+func (o NetworkRegistryVettingLevelOutput) ToNetworkRegistryVettingLevelOutput() NetworkRegistryVettingLevelOutput {
+	return o
+}
+
+func (o NetworkRegistryVettingLevelOutput) ToNetworkRegistryVettingLevelOutputWithContext(ctx context.Context) NetworkRegistryVettingLevelOutput {
+	return o
+}
+
+// What the level checks.
+func (o NetworkRegistryVettingLevelOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v NetworkRegistryVettingLevel) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Names of the vettingExtraFields a business profile must provide when the level applies.
+func (o NetworkRegistryVettingLevelOutput) ExtraFields() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v NetworkRegistryVettingLevel) []string { return v.ExtraFields }).(pulumi.StringArrayOutput)
+}
+
+// Vetting level identifier.
+func (o NetworkRegistryVettingLevelOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v NetworkRegistryVettingLevel) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Vetting level name.
+func (o NetworkRegistryVettingLevelOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v NetworkRegistryVettingLevel) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type NetworkRegistryVettingLevelArrayOutput struct{ *pulumi.OutputState }
+
+func (NetworkRegistryVettingLevelArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NetworkRegistryVettingLevel)(nil)).Elem()
+}
+
+func (o NetworkRegistryVettingLevelArrayOutput) ToNetworkRegistryVettingLevelArrayOutput() NetworkRegistryVettingLevelArrayOutput {
+	return o
+}
+
+func (o NetworkRegistryVettingLevelArrayOutput) ToNetworkRegistryVettingLevelArrayOutputWithContext(ctx context.Context) NetworkRegistryVettingLevelArrayOutput {
+	return o
+}
+
+func (o NetworkRegistryVettingLevelArrayOutput) Index(i pulumi.IntInput) NetworkRegistryVettingLevelOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NetworkRegistryVettingLevel {
+		return vs[0].([]NetworkRegistryVettingLevel)[vs[1].(int)]
+	}).(NetworkRegistryVettingLevelOutput)
+}
+
 type OwnedNumberSummary struct {
 	// Linked application ID, empty if none.
 	AppId string `pulumi:"appId"`
@@ -917,6 +1975,92 @@ func (o OwnedNumberSummaryArrayOutput) Index(i pulumi.IntInput) OwnedNumberSumma
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) OwnedNumberSummary {
 		return vs[0].([]OwnedNumberSummary)[vs[1].(int)]
 	}).(OwnedNumberSummaryOutput)
+}
+
+type PricingNetwork struct {
+	// The currency of the price.
+	Currency string `pulumi:"currency"`
+	// The Mobile Country Code of the operator.
+	Mcc string `pulumi:"mcc"`
+	// The Mobile Network Code of the operator.
+	Mnc string `pulumi:"mnc"`
+	// The MCC and MNC combined, a unique reference for the operator.
+	NetworkCode string `pulumi:"networkCode"`
+	// The name of the operator.
+	NetworkName string `pulumi:"networkName"`
+	// The price on this network, as a decimal string in the account currency.
+	Price string `pulumi:"price"`
+	// The type of network, such as mobile or landline.
+	Type string `pulumi:"type"`
+}
+
+type PricingNetworkOutput struct{ *pulumi.OutputState }
+
+func (PricingNetworkOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*PricingNetwork)(nil)).Elem()
+}
+
+func (o PricingNetworkOutput) ToPricingNetworkOutput() PricingNetworkOutput {
+	return o
+}
+
+func (o PricingNetworkOutput) ToPricingNetworkOutputWithContext(ctx context.Context) PricingNetworkOutput {
+	return o
+}
+
+// The currency of the price.
+func (o PricingNetworkOutput) Currency() pulumi.StringOutput {
+	return o.ApplyT(func(v PricingNetwork) string { return v.Currency }).(pulumi.StringOutput)
+}
+
+// The Mobile Country Code of the operator.
+func (o PricingNetworkOutput) Mcc() pulumi.StringOutput {
+	return o.ApplyT(func(v PricingNetwork) string { return v.Mcc }).(pulumi.StringOutput)
+}
+
+// The Mobile Network Code of the operator.
+func (o PricingNetworkOutput) Mnc() pulumi.StringOutput {
+	return o.ApplyT(func(v PricingNetwork) string { return v.Mnc }).(pulumi.StringOutput)
+}
+
+// The MCC and MNC combined, a unique reference for the operator.
+func (o PricingNetworkOutput) NetworkCode() pulumi.StringOutput {
+	return o.ApplyT(func(v PricingNetwork) string { return v.NetworkCode }).(pulumi.StringOutput)
+}
+
+// The name of the operator.
+func (o PricingNetworkOutput) NetworkName() pulumi.StringOutput {
+	return o.ApplyT(func(v PricingNetwork) string { return v.NetworkName }).(pulumi.StringOutput)
+}
+
+// The price on this network, as a decimal string in the account currency.
+func (o PricingNetworkOutput) Price() pulumi.StringOutput {
+	return o.ApplyT(func(v PricingNetwork) string { return v.Price }).(pulumi.StringOutput)
+}
+
+// The type of network, such as mobile or landline.
+func (o PricingNetworkOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v PricingNetwork) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type PricingNetworkArrayOutput struct{ *pulumi.OutputState }
+
+func (PricingNetworkArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]PricingNetwork)(nil)).Elem()
+}
+
+func (o PricingNetworkArrayOutput) ToPricingNetworkArrayOutput() PricingNetworkArrayOutput {
+	return o
+}
+
+func (o PricingNetworkArrayOutput) ToPricingNetworkArrayOutputWithContext(ctx context.Context) PricingNetworkArrayOutput {
+	return o
+}
+
+func (o PricingNetworkArrayOutput) Index(i pulumi.IntInput) PricingNetworkOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) PricingNetwork {
+		return vs[0].([]PricingNetwork)[vs[1].(int)]
+	}).(PricingNetworkOutput)
 }
 
 type RtcCapability struct {
@@ -1073,6 +2217,971 @@ func (o RtcCapabilityPtrOutput) SignedCallbacks() pulumi.BoolPtrOutput {
 		}
 		return v.SignedCallbacks
 	}).(pulumi.BoolPtrOutput)
+}
+
+type UserChannels struct {
+	// Facebook Messenger IDs of the user.
+	Messenger []UserMessengerChannel `pulumi:"messenger"`
+	// Numbers the user can receive MMS on.
+	Mms []UserNumberChannel `pulumi:"mms"`
+	// Phone numbers (PSTN) the user can be called on.
+	Pstn []UserPstnChannel `pulumi:"pstn"`
+	// SIP endpoints of the user.
+	Sip []UserSipChannel `pulumi:"sip"`
+	// Numbers the user can receive SMS on.
+	Sms []UserNumberChannel `pulumi:"sms"`
+	// Vonage Business Cloud extensions of the user.
+	Vbc []UserVbcChannel `pulumi:"vbc"`
+	// Viber numbers of the user.
+	Viber []UserNumberChannel `pulumi:"viber"`
+	// WebSocket endpoints of the user.
+	Websocket []UserWebsocketChannel `pulumi:"websocket"`
+	// WhatsApp numbers of the user.
+	Whatsapp []UserNumberChannel `pulumi:"whatsapp"`
+}
+
+// UserChannelsInput is an input type that accepts UserChannelsArgs and UserChannelsOutput values.
+// You can construct a concrete instance of `UserChannelsInput` via:
+//
+//	UserChannelsArgs{...}
+type UserChannelsInput interface {
+	pulumi.Input
+
+	ToUserChannelsOutput() UserChannelsOutput
+	ToUserChannelsOutputWithContext(context.Context) UserChannelsOutput
+}
+
+type UserChannelsArgs struct {
+	// Facebook Messenger IDs of the user.
+	Messenger UserMessengerChannelArrayInput `pulumi:"messenger"`
+	// Numbers the user can receive MMS on.
+	Mms UserNumberChannelArrayInput `pulumi:"mms"`
+	// Phone numbers (PSTN) the user can be called on.
+	Pstn UserPstnChannelArrayInput `pulumi:"pstn"`
+	// SIP endpoints of the user.
+	Sip UserSipChannelArrayInput `pulumi:"sip"`
+	// Numbers the user can receive SMS on.
+	Sms UserNumberChannelArrayInput `pulumi:"sms"`
+	// Vonage Business Cloud extensions of the user.
+	Vbc UserVbcChannelArrayInput `pulumi:"vbc"`
+	// Viber numbers of the user.
+	Viber UserNumberChannelArrayInput `pulumi:"viber"`
+	// WebSocket endpoints of the user.
+	Websocket UserWebsocketChannelArrayInput `pulumi:"websocket"`
+	// WhatsApp numbers of the user.
+	Whatsapp UserNumberChannelArrayInput `pulumi:"whatsapp"`
+}
+
+func (UserChannelsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*UserChannels)(nil)).Elem()
+}
+
+func (i UserChannelsArgs) ToUserChannelsOutput() UserChannelsOutput {
+	return i.ToUserChannelsOutputWithContext(context.Background())
+}
+
+func (i UserChannelsArgs) ToUserChannelsOutputWithContext(ctx context.Context) UserChannelsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UserChannelsOutput)
+}
+
+func (i UserChannelsArgs) ToUserChannelsPtrOutput() UserChannelsPtrOutput {
+	return i.ToUserChannelsPtrOutputWithContext(context.Background())
+}
+
+func (i UserChannelsArgs) ToUserChannelsPtrOutputWithContext(ctx context.Context) UserChannelsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UserChannelsOutput).ToUserChannelsPtrOutputWithContext(ctx)
+}
+
+// UserChannelsPtrInput is an input type that accepts UserChannelsArgs, UserChannelsPtr and UserChannelsPtrOutput values.
+// You can construct a concrete instance of `UserChannelsPtrInput` via:
+//
+//	        UserChannelsArgs{...}
+//
+//	or:
+//
+//	        nil
+type UserChannelsPtrInput interface {
+	pulumi.Input
+
+	ToUserChannelsPtrOutput() UserChannelsPtrOutput
+	ToUserChannelsPtrOutputWithContext(context.Context) UserChannelsPtrOutput
+}
+
+type userChannelsPtrType UserChannelsArgs
+
+func UserChannelsPtr(v *UserChannelsArgs) UserChannelsPtrInput {
+	return (*userChannelsPtrType)(v)
+}
+
+func (*userChannelsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**UserChannels)(nil)).Elem()
+}
+
+func (i *userChannelsPtrType) ToUserChannelsPtrOutput() UserChannelsPtrOutput {
+	return i.ToUserChannelsPtrOutputWithContext(context.Background())
+}
+
+func (i *userChannelsPtrType) ToUserChannelsPtrOutputWithContext(ctx context.Context) UserChannelsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UserChannelsPtrOutput)
+}
+
+type UserChannelsOutput struct{ *pulumi.OutputState }
+
+func (UserChannelsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*UserChannels)(nil)).Elem()
+}
+
+func (o UserChannelsOutput) ToUserChannelsOutput() UserChannelsOutput {
+	return o
+}
+
+func (o UserChannelsOutput) ToUserChannelsOutputWithContext(ctx context.Context) UserChannelsOutput {
+	return o
+}
+
+func (o UserChannelsOutput) ToUserChannelsPtrOutput() UserChannelsPtrOutput {
+	return o.ToUserChannelsPtrOutputWithContext(context.Background())
+}
+
+func (o UserChannelsOutput) ToUserChannelsPtrOutputWithContext(ctx context.Context) UserChannelsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v UserChannels) *UserChannels {
+		return &v
+	}).(UserChannelsPtrOutput)
+}
+
+// Facebook Messenger IDs of the user.
+func (o UserChannelsOutput) Messenger() UserMessengerChannelArrayOutput {
+	return o.ApplyT(func(v UserChannels) []UserMessengerChannel { return v.Messenger }).(UserMessengerChannelArrayOutput)
+}
+
+// Numbers the user can receive MMS on.
+func (o UserChannelsOutput) Mms() UserNumberChannelArrayOutput {
+	return o.ApplyT(func(v UserChannels) []UserNumberChannel { return v.Mms }).(UserNumberChannelArrayOutput)
+}
+
+// Phone numbers (PSTN) the user can be called on.
+func (o UserChannelsOutput) Pstn() UserPstnChannelArrayOutput {
+	return o.ApplyT(func(v UserChannels) []UserPstnChannel { return v.Pstn }).(UserPstnChannelArrayOutput)
+}
+
+// SIP endpoints of the user.
+func (o UserChannelsOutput) Sip() UserSipChannelArrayOutput {
+	return o.ApplyT(func(v UserChannels) []UserSipChannel { return v.Sip }).(UserSipChannelArrayOutput)
+}
+
+// Numbers the user can receive SMS on.
+func (o UserChannelsOutput) Sms() UserNumberChannelArrayOutput {
+	return o.ApplyT(func(v UserChannels) []UserNumberChannel { return v.Sms }).(UserNumberChannelArrayOutput)
+}
+
+// Vonage Business Cloud extensions of the user.
+func (o UserChannelsOutput) Vbc() UserVbcChannelArrayOutput {
+	return o.ApplyT(func(v UserChannels) []UserVbcChannel { return v.Vbc }).(UserVbcChannelArrayOutput)
+}
+
+// Viber numbers of the user.
+func (o UserChannelsOutput) Viber() UserNumberChannelArrayOutput {
+	return o.ApplyT(func(v UserChannels) []UserNumberChannel { return v.Viber }).(UserNumberChannelArrayOutput)
+}
+
+// WebSocket endpoints of the user.
+func (o UserChannelsOutput) Websocket() UserWebsocketChannelArrayOutput {
+	return o.ApplyT(func(v UserChannels) []UserWebsocketChannel { return v.Websocket }).(UserWebsocketChannelArrayOutput)
+}
+
+// WhatsApp numbers of the user.
+func (o UserChannelsOutput) Whatsapp() UserNumberChannelArrayOutput {
+	return o.ApplyT(func(v UserChannels) []UserNumberChannel { return v.Whatsapp }).(UserNumberChannelArrayOutput)
+}
+
+type UserChannelsPtrOutput struct{ *pulumi.OutputState }
+
+func (UserChannelsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**UserChannels)(nil)).Elem()
+}
+
+func (o UserChannelsPtrOutput) ToUserChannelsPtrOutput() UserChannelsPtrOutput {
+	return o
+}
+
+func (o UserChannelsPtrOutput) ToUserChannelsPtrOutputWithContext(ctx context.Context) UserChannelsPtrOutput {
+	return o
+}
+
+func (o UserChannelsPtrOutput) Elem() UserChannelsOutput {
+	return o.ApplyT(func(v *UserChannels) UserChannels {
+		if v != nil {
+			return *v
+		}
+		var ret UserChannels
+		return ret
+	}).(UserChannelsOutput)
+}
+
+// Facebook Messenger IDs of the user.
+func (o UserChannelsPtrOutput) Messenger() UserMessengerChannelArrayOutput {
+	return o.ApplyT(func(v *UserChannels) []UserMessengerChannel {
+		if v == nil {
+			return nil
+		}
+		return v.Messenger
+	}).(UserMessengerChannelArrayOutput)
+}
+
+// Numbers the user can receive MMS on.
+func (o UserChannelsPtrOutput) Mms() UserNumberChannelArrayOutput {
+	return o.ApplyT(func(v *UserChannels) []UserNumberChannel {
+		if v == nil {
+			return nil
+		}
+		return v.Mms
+	}).(UserNumberChannelArrayOutput)
+}
+
+// Phone numbers (PSTN) the user can be called on.
+func (o UserChannelsPtrOutput) Pstn() UserPstnChannelArrayOutput {
+	return o.ApplyT(func(v *UserChannels) []UserPstnChannel {
+		if v == nil {
+			return nil
+		}
+		return v.Pstn
+	}).(UserPstnChannelArrayOutput)
+}
+
+// SIP endpoints of the user.
+func (o UserChannelsPtrOutput) Sip() UserSipChannelArrayOutput {
+	return o.ApplyT(func(v *UserChannels) []UserSipChannel {
+		if v == nil {
+			return nil
+		}
+		return v.Sip
+	}).(UserSipChannelArrayOutput)
+}
+
+// Numbers the user can receive SMS on.
+func (o UserChannelsPtrOutput) Sms() UserNumberChannelArrayOutput {
+	return o.ApplyT(func(v *UserChannels) []UserNumberChannel {
+		if v == nil {
+			return nil
+		}
+		return v.Sms
+	}).(UserNumberChannelArrayOutput)
+}
+
+// Vonage Business Cloud extensions of the user.
+func (o UserChannelsPtrOutput) Vbc() UserVbcChannelArrayOutput {
+	return o.ApplyT(func(v *UserChannels) []UserVbcChannel {
+		if v == nil {
+			return nil
+		}
+		return v.Vbc
+	}).(UserVbcChannelArrayOutput)
+}
+
+// Viber numbers of the user.
+func (o UserChannelsPtrOutput) Viber() UserNumberChannelArrayOutput {
+	return o.ApplyT(func(v *UserChannels) []UserNumberChannel {
+		if v == nil {
+			return nil
+		}
+		return v.Viber
+	}).(UserNumberChannelArrayOutput)
+}
+
+// WebSocket endpoints of the user.
+func (o UserChannelsPtrOutput) Websocket() UserWebsocketChannelArrayOutput {
+	return o.ApplyT(func(v *UserChannels) []UserWebsocketChannel {
+		if v == nil {
+			return nil
+		}
+		return v.Websocket
+	}).(UserWebsocketChannelArrayOutput)
+}
+
+// WhatsApp numbers of the user.
+func (o UserChannelsPtrOutput) Whatsapp() UserNumberChannelArrayOutput {
+	return o.ApplyT(func(v *UserChannels) []UserNumberChannel {
+		if v == nil {
+			return nil
+		}
+		return v.Whatsapp
+	}).(UserNumberChannelArrayOutput)
+}
+
+type UserMessengerChannel struct {
+	// The Facebook Messenger user ID.
+	Id string `pulumi:"id"`
+}
+
+// UserMessengerChannelInput is an input type that accepts UserMessengerChannelArgs and UserMessengerChannelOutput values.
+// You can construct a concrete instance of `UserMessengerChannelInput` via:
+//
+//	UserMessengerChannelArgs{...}
+type UserMessengerChannelInput interface {
+	pulumi.Input
+
+	ToUserMessengerChannelOutput() UserMessengerChannelOutput
+	ToUserMessengerChannelOutputWithContext(context.Context) UserMessengerChannelOutput
+}
+
+type UserMessengerChannelArgs struct {
+	// The Facebook Messenger user ID.
+	Id pulumi.StringInput `pulumi:"id"`
+}
+
+func (UserMessengerChannelArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*UserMessengerChannel)(nil)).Elem()
+}
+
+func (i UserMessengerChannelArgs) ToUserMessengerChannelOutput() UserMessengerChannelOutput {
+	return i.ToUserMessengerChannelOutputWithContext(context.Background())
+}
+
+func (i UserMessengerChannelArgs) ToUserMessengerChannelOutputWithContext(ctx context.Context) UserMessengerChannelOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UserMessengerChannelOutput)
+}
+
+// UserMessengerChannelArrayInput is an input type that accepts UserMessengerChannelArray and UserMessengerChannelArrayOutput values.
+// You can construct a concrete instance of `UserMessengerChannelArrayInput` via:
+//
+//	UserMessengerChannelArray{ UserMessengerChannelArgs{...} }
+type UserMessengerChannelArrayInput interface {
+	pulumi.Input
+
+	ToUserMessengerChannelArrayOutput() UserMessengerChannelArrayOutput
+	ToUserMessengerChannelArrayOutputWithContext(context.Context) UserMessengerChannelArrayOutput
+}
+
+type UserMessengerChannelArray []UserMessengerChannelInput
+
+func (UserMessengerChannelArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]UserMessengerChannel)(nil)).Elem()
+}
+
+func (i UserMessengerChannelArray) ToUserMessengerChannelArrayOutput() UserMessengerChannelArrayOutput {
+	return i.ToUserMessengerChannelArrayOutputWithContext(context.Background())
+}
+
+func (i UserMessengerChannelArray) ToUserMessengerChannelArrayOutputWithContext(ctx context.Context) UserMessengerChannelArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UserMessengerChannelArrayOutput)
+}
+
+type UserMessengerChannelOutput struct{ *pulumi.OutputState }
+
+func (UserMessengerChannelOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*UserMessengerChannel)(nil)).Elem()
+}
+
+func (o UserMessengerChannelOutput) ToUserMessengerChannelOutput() UserMessengerChannelOutput {
+	return o
+}
+
+func (o UserMessengerChannelOutput) ToUserMessengerChannelOutputWithContext(ctx context.Context) UserMessengerChannelOutput {
+	return o
+}
+
+// The Facebook Messenger user ID.
+func (o UserMessengerChannelOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v UserMessengerChannel) string { return v.Id }).(pulumi.StringOutput)
+}
+
+type UserMessengerChannelArrayOutput struct{ *pulumi.OutputState }
+
+func (UserMessengerChannelArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]UserMessengerChannel)(nil)).Elem()
+}
+
+func (o UserMessengerChannelArrayOutput) ToUserMessengerChannelArrayOutput() UserMessengerChannelArrayOutput {
+	return o
+}
+
+func (o UserMessengerChannelArrayOutput) ToUserMessengerChannelArrayOutputWithContext(ctx context.Context) UserMessengerChannelArrayOutput {
+	return o
+}
+
+func (o UserMessengerChannelArrayOutput) Index(i pulumi.IntInput) UserMessengerChannelOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) UserMessengerChannel {
+		return vs[0].([]UserMessengerChannel)[vs[1].(int)]
+	}).(UserMessengerChannelOutput)
+}
+
+type UserNumberChannel struct {
+	// The number in E.164 format without the leading plus.
+	Number string `pulumi:"number"`
+}
+
+// UserNumberChannelInput is an input type that accepts UserNumberChannelArgs and UserNumberChannelOutput values.
+// You can construct a concrete instance of `UserNumberChannelInput` via:
+//
+//	UserNumberChannelArgs{...}
+type UserNumberChannelInput interface {
+	pulumi.Input
+
+	ToUserNumberChannelOutput() UserNumberChannelOutput
+	ToUserNumberChannelOutputWithContext(context.Context) UserNumberChannelOutput
+}
+
+type UserNumberChannelArgs struct {
+	// The number in E.164 format without the leading plus.
+	Number pulumi.StringInput `pulumi:"number"`
+}
+
+func (UserNumberChannelArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*UserNumberChannel)(nil)).Elem()
+}
+
+func (i UserNumberChannelArgs) ToUserNumberChannelOutput() UserNumberChannelOutput {
+	return i.ToUserNumberChannelOutputWithContext(context.Background())
+}
+
+func (i UserNumberChannelArgs) ToUserNumberChannelOutputWithContext(ctx context.Context) UserNumberChannelOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UserNumberChannelOutput)
+}
+
+// UserNumberChannelArrayInput is an input type that accepts UserNumberChannelArray and UserNumberChannelArrayOutput values.
+// You can construct a concrete instance of `UserNumberChannelArrayInput` via:
+//
+//	UserNumberChannelArray{ UserNumberChannelArgs{...} }
+type UserNumberChannelArrayInput interface {
+	pulumi.Input
+
+	ToUserNumberChannelArrayOutput() UserNumberChannelArrayOutput
+	ToUserNumberChannelArrayOutputWithContext(context.Context) UserNumberChannelArrayOutput
+}
+
+type UserNumberChannelArray []UserNumberChannelInput
+
+func (UserNumberChannelArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]UserNumberChannel)(nil)).Elem()
+}
+
+func (i UserNumberChannelArray) ToUserNumberChannelArrayOutput() UserNumberChannelArrayOutput {
+	return i.ToUserNumberChannelArrayOutputWithContext(context.Background())
+}
+
+func (i UserNumberChannelArray) ToUserNumberChannelArrayOutputWithContext(ctx context.Context) UserNumberChannelArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UserNumberChannelArrayOutput)
+}
+
+type UserNumberChannelOutput struct{ *pulumi.OutputState }
+
+func (UserNumberChannelOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*UserNumberChannel)(nil)).Elem()
+}
+
+func (o UserNumberChannelOutput) ToUserNumberChannelOutput() UserNumberChannelOutput {
+	return o
+}
+
+func (o UserNumberChannelOutput) ToUserNumberChannelOutputWithContext(ctx context.Context) UserNumberChannelOutput {
+	return o
+}
+
+// The number in E.164 format without the leading plus.
+func (o UserNumberChannelOutput) Number() pulumi.StringOutput {
+	return o.ApplyT(func(v UserNumberChannel) string { return v.Number }).(pulumi.StringOutput)
+}
+
+type UserNumberChannelArrayOutput struct{ *pulumi.OutputState }
+
+func (UserNumberChannelArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]UserNumberChannel)(nil)).Elem()
+}
+
+func (o UserNumberChannelArrayOutput) ToUserNumberChannelArrayOutput() UserNumberChannelArrayOutput {
+	return o
+}
+
+func (o UserNumberChannelArrayOutput) ToUserNumberChannelArrayOutputWithContext(ctx context.Context) UserNumberChannelArrayOutput {
+	return o
+}
+
+func (o UserNumberChannelArrayOutput) Index(i pulumi.IntInput) UserNumberChannelOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) UserNumberChannel {
+		return vs[0].([]UserNumberChannel)[vs[1].(int)]
+	}).(UserNumberChannelOutput)
+}
+
+type UserPstnChannel struct {
+	// The phone number in E.164 format without the leading plus, as an integer (for example 14155550100).
+	Number int `pulumi:"number"`
+}
+
+// UserPstnChannelInput is an input type that accepts UserPstnChannelArgs and UserPstnChannelOutput values.
+// You can construct a concrete instance of `UserPstnChannelInput` via:
+//
+//	UserPstnChannelArgs{...}
+type UserPstnChannelInput interface {
+	pulumi.Input
+
+	ToUserPstnChannelOutput() UserPstnChannelOutput
+	ToUserPstnChannelOutputWithContext(context.Context) UserPstnChannelOutput
+}
+
+type UserPstnChannelArgs struct {
+	// The phone number in E.164 format without the leading plus, as an integer (for example 14155550100).
+	Number pulumi.IntInput `pulumi:"number"`
+}
+
+func (UserPstnChannelArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*UserPstnChannel)(nil)).Elem()
+}
+
+func (i UserPstnChannelArgs) ToUserPstnChannelOutput() UserPstnChannelOutput {
+	return i.ToUserPstnChannelOutputWithContext(context.Background())
+}
+
+func (i UserPstnChannelArgs) ToUserPstnChannelOutputWithContext(ctx context.Context) UserPstnChannelOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UserPstnChannelOutput)
+}
+
+// UserPstnChannelArrayInput is an input type that accepts UserPstnChannelArray and UserPstnChannelArrayOutput values.
+// You can construct a concrete instance of `UserPstnChannelArrayInput` via:
+//
+//	UserPstnChannelArray{ UserPstnChannelArgs{...} }
+type UserPstnChannelArrayInput interface {
+	pulumi.Input
+
+	ToUserPstnChannelArrayOutput() UserPstnChannelArrayOutput
+	ToUserPstnChannelArrayOutputWithContext(context.Context) UserPstnChannelArrayOutput
+}
+
+type UserPstnChannelArray []UserPstnChannelInput
+
+func (UserPstnChannelArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]UserPstnChannel)(nil)).Elem()
+}
+
+func (i UserPstnChannelArray) ToUserPstnChannelArrayOutput() UserPstnChannelArrayOutput {
+	return i.ToUserPstnChannelArrayOutputWithContext(context.Background())
+}
+
+func (i UserPstnChannelArray) ToUserPstnChannelArrayOutputWithContext(ctx context.Context) UserPstnChannelArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UserPstnChannelArrayOutput)
+}
+
+type UserPstnChannelOutput struct{ *pulumi.OutputState }
+
+func (UserPstnChannelOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*UserPstnChannel)(nil)).Elem()
+}
+
+func (o UserPstnChannelOutput) ToUserPstnChannelOutput() UserPstnChannelOutput {
+	return o
+}
+
+func (o UserPstnChannelOutput) ToUserPstnChannelOutputWithContext(ctx context.Context) UserPstnChannelOutput {
+	return o
+}
+
+// The phone number in E.164 format without the leading plus, as an integer (for example 14155550100).
+func (o UserPstnChannelOutput) Number() pulumi.IntOutput {
+	return o.ApplyT(func(v UserPstnChannel) int { return v.Number }).(pulumi.IntOutput)
+}
+
+type UserPstnChannelArrayOutput struct{ *pulumi.OutputState }
+
+func (UserPstnChannelArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]UserPstnChannel)(nil)).Elem()
+}
+
+func (o UserPstnChannelArrayOutput) ToUserPstnChannelArrayOutput() UserPstnChannelArrayOutput {
+	return o
+}
+
+func (o UserPstnChannelArrayOutput) ToUserPstnChannelArrayOutputWithContext(ctx context.Context) UserPstnChannelArrayOutput {
+	return o
+}
+
+func (o UserPstnChannelArrayOutput) Index(i pulumi.IntInput) UserPstnChannelOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) UserPstnChannel {
+		return vs[0].([]UserPstnChannel)[vs[1].(int)]
+	}).(UserPstnChannelOutput)
+}
+
+type UserSipChannel struct {
+	// Password for SIP authentication. The API never returns it, so the value recorded in state is the one last set by this program; a changed password is applied but a password changed outside Pulumi is not detected.
+	Password *string `pulumi:"password"`
+	// The SIP URI, starting with sip: or sips:.
+	Uri string `pulumi:"uri"`
+	// Username for SIP authentication.
+	Username *string `pulumi:"username"`
+}
+
+// UserSipChannelInput is an input type that accepts UserSipChannelArgs and UserSipChannelOutput values.
+// You can construct a concrete instance of `UserSipChannelInput` via:
+//
+//	UserSipChannelArgs{...}
+type UserSipChannelInput interface {
+	pulumi.Input
+
+	ToUserSipChannelOutput() UserSipChannelOutput
+	ToUserSipChannelOutputWithContext(context.Context) UserSipChannelOutput
+}
+
+type UserSipChannelArgs struct {
+	// Password for SIP authentication. The API never returns it, so the value recorded in state is the one last set by this program; a changed password is applied but a password changed outside Pulumi is not detected.
+	Password pulumi.StringPtrInput `pulumi:"password"`
+	// The SIP URI, starting with sip: or sips:.
+	Uri pulumi.StringInput `pulumi:"uri"`
+	// Username for SIP authentication.
+	Username pulumi.StringPtrInput `pulumi:"username"`
+}
+
+func (UserSipChannelArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*UserSipChannel)(nil)).Elem()
+}
+
+func (i UserSipChannelArgs) ToUserSipChannelOutput() UserSipChannelOutput {
+	return i.ToUserSipChannelOutputWithContext(context.Background())
+}
+
+func (i UserSipChannelArgs) ToUserSipChannelOutputWithContext(ctx context.Context) UserSipChannelOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UserSipChannelOutput)
+}
+
+// UserSipChannelArrayInput is an input type that accepts UserSipChannelArray and UserSipChannelArrayOutput values.
+// You can construct a concrete instance of `UserSipChannelArrayInput` via:
+//
+//	UserSipChannelArray{ UserSipChannelArgs{...} }
+type UserSipChannelArrayInput interface {
+	pulumi.Input
+
+	ToUserSipChannelArrayOutput() UserSipChannelArrayOutput
+	ToUserSipChannelArrayOutputWithContext(context.Context) UserSipChannelArrayOutput
+}
+
+type UserSipChannelArray []UserSipChannelInput
+
+func (UserSipChannelArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]UserSipChannel)(nil)).Elem()
+}
+
+func (i UserSipChannelArray) ToUserSipChannelArrayOutput() UserSipChannelArrayOutput {
+	return i.ToUserSipChannelArrayOutputWithContext(context.Background())
+}
+
+func (i UserSipChannelArray) ToUserSipChannelArrayOutputWithContext(ctx context.Context) UserSipChannelArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UserSipChannelArrayOutput)
+}
+
+type UserSipChannelOutput struct{ *pulumi.OutputState }
+
+func (UserSipChannelOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*UserSipChannel)(nil)).Elem()
+}
+
+func (o UserSipChannelOutput) ToUserSipChannelOutput() UserSipChannelOutput {
+	return o
+}
+
+func (o UserSipChannelOutput) ToUserSipChannelOutputWithContext(ctx context.Context) UserSipChannelOutput {
+	return o
+}
+
+// Password for SIP authentication. The API never returns it, so the value recorded in state is the one last set by this program; a changed password is applied but a password changed outside Pulumi is not detected.
+func (o UserSipChannelOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v UserSipChannel) *string { return v.Password }).(pulumi.StringPtrOutput)
+}
+
+// The SIP URI, starting with sip: or sips:.
+func (o UserSipChannelOutput) Uri() pulumi.StringOutput {
+	return o.ApplyT(func(v UserSipChannel) string { return v.Uri }).(pulumi.StringOutput)
+}
+
+// Username for SIP authentication.
+func (o UserSipChannelOutput) Username() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v UserSipChannel) *string { return v.Username }).(pulumi.StringPtrOutput)
+}
+
+type UserSipChannelArrayOutput struct{ *pulumi.OutputState }
+
+func (UserSipChannelArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]UserSipChannel)(nil)).Elem()
+}
+
+func (o UserSipChannelArrayOutput) ToUserSipChannelArrayOutput() UserSipChannelArrayOutput {
+	return o
+}
+
+func (o UserSipChannelArrayOutput) ToUserSipChannelArrayOutputWithContext(ctx context.Context) UserSipChannelArrayOutput {
+	return o
+}
+
+func (o UserSipChannelArrayOutput) Index(i pulumi.IntInput) UserSipChannelOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) UserSipChannel {
+		return vs[0].([]UserSipChannel)[vs[1].(int)]
+	}).(UserSipChannelOutput)
+}
+
+type UserSummary struct {
+	// Human-friendly name, if set.
+	DisplayName *string `pulumi:"displayName"`
+	// Unique name of the user.
+	Name string `pulumi:"name"`
+	// User ID (USR-<uuid>).
+	UserId string `pulumi:"userId"`
+}
+
+type UserSummaryOutput struct{ *pulumi.OutputState }
+
+func (UserSummaryOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*UserSummary)(nil)).Elem()
+}
+
+func (o UserSummaryOutput) ToUserSummaryOutput() UserSummaryOutput {
+	return o
+}
+
+func (o UserSummaryOutput) ToUserSummaryOutputWithContext(ctx context.Context) UserSummaryOutput {
+	return o
+}
+
+// Human-friendly name, if set.
+func (o UserSummaryOutput) DisplayName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v UserSummary) *string { return v.DisplayName }).(pulumi.StringPtrOutput)
+}
+
+// Unique name of the user.
+func (o UserSummaryOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v UserSummary) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// User ID (USR-<uuid>).
+func (o UserSummaryOutput) UserId() pulumi.StringOutput {
+	return o.ApplyT(func(v UserSummary) string { return v.UserId }).(pulumi.StringOutput)
+}
+
+type UserSummaryArrayOutput struct{ *pulumi.OutputState }
+
+func (UserSummaryArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]UserSummary)(nil)).Elem()
+}
+
+func (o UserSummaryArrayOutput) ToUserSummaryArrayOutput() UserSummaryArrayOutput {
+	return o
+}
+
+func (o UserSummaryArrayOutput) ToUserSummaryArrayOutputWithContext(ctx context.Context) UserSummaryArrayOutput {
+	return o
+}
+
+func (o UserSummaryArrayOutput) Index(i pulumi.IntInput) UserSummaryOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) UserSummary {
+		return vs[0].([]UserSummary)[vs[1].(int)]
+	}).(UserSummaryOutput)
+}
+
+type UserVbcChannel struct {
+	// The Vonage Business Cloud extension.
+	Extension string `pulumi:"extension"`
+}
+
+// UserVbcChannelInput is an input type that accepts UserVbcChannelArgs and UserVbcChannelOutput values.
+// You can construct a concrete instance of `UserVbcChannelInput` via:
+//
+//	UserVbcChannelArgs{...}
+type UserVbcChannelInput interface {
+	pulumi.Input
+
+	ToUserVbcChannelOutput() UserVbcChannelOutput
+	ToUserVbcChannelOutputWithContext(context.Context) UserVbcChannelOutput
+}
+
+type UserVbcChannelArgs struct {
+	// The Vonage Business Cloud extension.
+	Extension pulumi.StringInput `pulumi:"extension"`
+}
+
+func (UserVbcChannelArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*UserVbcChannel)(nil)).Elem()
+}
+
+func (i UserVbcChannelArgs) ToUserVbcChannelOutput() UserVbcChannelOutput {
+	return i.ToUserVbcChannelOutputWithContext(context.Background())
+}
+
+func (i UserVbcChannelArgs) ToUserVbcChannelOutputWithContext(ctx context.Context) UserVbcChannelOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UserVbcChannelOutput)
+}
+
+// UserVbcChannelArrayInput is an input type that accepts UserVbcChannelArray and UserVbcChannelArrayOutput values.
+// You can construct a concrete instance of `UserVbcChannelArrayInput` via:
+//
+//	UserVbcChannelArray{ UserVbcChannelArgs{...} }
+type UserVbcChannelArrayInput interface {
+	pulumi.Input
+
+	ToUserVbcChannelArrayOutput() UserVbcChannelArrayOutput
+	ToUserVbcChannelArrayOutputWithContext(context.Context) UserVbcChannelArrayOutput
+}
+
+type UserVbcChannelArray []UserVbcChannelInput
+
+func (UserVbcChannelArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]UserVbcChannel)(nil)).Elem()
+}
+
+func (i UserVbcChannelArray) ToUserVbcChannelArrayOutput() UserVbcChannelArrayOutput {
+	return i.ToUserVbcChannelArrayOutputWithContext(context.Background())
+}
+
+func (i UserVbcChannelArray) ToUserVbcChannelArrayOutputWithContext(ctx context.Context) UserVbcChannelArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UserVbcChannelArrayOutput)
+}
+
+type UserVbcChannelOutput struct{ *pulumi.OutputState }
+
+func (UserVbcChannelOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*UserVbcChannel)(nil)).Elem()
+}
+
+func (o UserVbcChannelOutput) ToUserVbcChannelOutput() UserVbcChannelOutput {
+	return o
+}
+
+func (o UserVbcChannelOutput) ToUserVbcChannelOutputWithContext(ctx context.Context) UserVbcChannelOutput {
+	return o
+}
+
+// The Vonage Business Cloud extension.
+func (o UserVbcChannelOutput) Extension() pulumi.StringOutput {
+	return o.ApplyT(func(v UserVbcChannel) string { return v.Extension }).(pulumi.StringOutput)
+}
+
+type UserVbcChannelArrayOutput struct{ *pulumi.OutputState }
+
+func (UserVbcChannelArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]UserVbcChannel)(nil)).Elem()
+}
+
+func (o UserVbcChannelArrayOutput) ToUserVbcChannelArrayOutput() UserVbcChannelArrayOutput {
+	return o
+}
+
+func (o UserVbcChannelArrayOutput) ToUserVbcChannelArrayOutputWithContext(ctx context.Context) UserVbcChannelArrayOutput {
+	return o
+}
+
+func (o UserVbcChannelArrayOutput) Index(i pulumi.IntInput) UserVbcChannelOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) UserVbcChannel {
+		return vs[0].([]UserVbcChannel)[vs[1].(int)]
+	}).(UserVbcChannelOutput)
+}
+
+type UserWebsocketChannel struct {
+	// The audio format, for example audio/l16;rate=16000 (sent to Vonage as content-type).
+	ContentType *string `pulumi:"contentType"`
+	// Extra HTTP headers sent when Vonage connects to the WebSocket.
+	Headers map[string]string `pulumi:"headers"`
+	// The WebSocket URI, starting with ws:// or wss://.
+	Uri string `pulumi:"uri"`
+}
+
+// UserWebsocketChannelInput is an input type that accepts UserWebsocketChannelArgs and UserWebsocketChannelOutput values.
+// You can construct a concrete instance of `UserWebsocketChannelInput` via:
+//
+//	UserWebsocketChannelArgs{...}
+type UserWebsocketChannelInput interface {
+	pulumi.Input
+
+	ToUserWebsocketChannelOutput() UserWebsocketChannelOutput
+	ToUserWebsocketChannelOutputWithContext(context.Context) UserWebsocketChannelOutput
+}
+
+type UserWebsocketChannelArgs struct {
+	// The audio format, for example audio/l16;rate=16000 (sent to Vonage as content-type).
+	ContentType pulumi.StringPtrInput `pulumi:"contentType"`
+	// Extra HTTP headers sent when Vonage connects to the WebSocket.
+	Headers pulumi.StringMapInput `pulumi:"headers"`
+	// The WebSocket URI, starting with ws:// or wss://.
+	Uri pulumi.StringInput `pulumi:"uri"`
+}
+
+func (UserWebsocketChannelArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*UserWebsocketChannel)(nil)).Elem()
+}
+
+func (i UserWebsocketChannelArgs) ToUserWebsocketChannelOutput() UserWebsocketChannelOutput {
+	return i.ToUserWebsocketChannelOutputWithContext(context.Background())
+}
+
+func (i UserWebsocketChannelArgs) ToUserWebsocketChannelOutputWithContext(ctx context.Context) UserWebsocketChannelOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UserWebsocketChannelOutput)
+}
+
+// UserWebsocketChannelArrayInput is an input type that accepts UserWebsocketChannelArray and UserWebsocketChannelArrayOutput values.
+// You can construct a concrete instance of `UserWebsocketChannelArrayInput` via:
+//
+//	UserWebsocketChannelArray{ UserWebsocketChannelArgs{...} }
+type UserWebsocketChannelArrayInput interface {
+	pulumi.Input
+
+	ToUserWebsocketChannelArrayOutput() UserWebsocketChannelArrayOutput
+	ToUserWebsocketChannelArrayOutputWithContext(context.Context) UserWebsocketChannelArrayOutput
+}
+
+type UserWebsocketChannelArray []UserWebsocketChannelInput
+
+func (UserWebsocketChannelArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]UserWebsocketChannel)(nil)).Elem()
+}
+
+func (i UserWebsocketChannelArray) ToUserWebsocketChannelArrayOutput() UserWebsocketChannelArrayOutput {
+	return i.ToUserWebsocketChannelArrayOutputWithContext(context.Background())
+}
+
+func (i UserWebsocketChannelArray) ToUserWebsocketChannelArrayOutputWithContext(ctx context.Context) UserWebsocketChannelArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UserWebsocketChannelArrayOutput)
+}
+
+type UserWebsocketChannelOutput struct{ *pulumi.OutputState }
+
+func (UserWebsocketChannelOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*UserWebsocketChannel)(nil)).Elem()
+}
+
+func (o UserWebsocketChannelOutput) ToUserWebsocketChannelOutput() UserWebsocketChannelOutput {
+	return o
+}
+
+func (o UserWebsocketChannelOutput) ToUserWebsocketChannelOutputWithContext(ctx context.Context) UserWebsocketChannelOutput {
+	return o
+}
+
+// The audio format, for example audio/l16;rate=16000 (sent to Vonage as content-type).
+func (o UserWebsocketChannelOutput) ContentType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v UserWebsocketChannel) *string { return v.ContentType }).(pulumi.StringPtrOutput)
+}
+
+// Extra HTTP headers sent when Vonage connects to the WebSocket.
+func (o UserWebsocketChannelOutput) Headers() pulumi.StringMapOutput {
+	return o.ApplyT(func(v UserWebsocketChannel) map[string]string { return v.Headers }).(pulumi.StringMapOutput)
+}
+
+// The WebSocket URI, starting with ws:// or wss://.
+func (o UserWebsocketChannelOutput) Uri() pulumi.StringOutput {
+	return o.ApplyT(func(v UserWebsocketChannel) string { return v.Uri }).(pulumi.StringOutput)
+}
+
+type UserWebsocketChannelArrayOutput struct{ *pulumi.OutputState }
+
+func (UserWebsocketChannelArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]UserWebsocketChannel)(nil)).Elem()
+}
+
+func (o UserWebsocketChannelArrayOutput) ToUserWebsocketChannelArrayOutput() UserWebsocketChannelArrayOutput {
+	return o
+}
+
+func (o UserWebsocketChannelArrayOutput) ToUserWebsocketChannelArrayOutputWithContext(ctx context.Context) UserWebsocketChannelArrayOutput {
+	return o
+}
+
+func (o UserWebsocketChannelArrayOutput) Index(i pulumi.IntInput) UserWebsocketChannelOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) UserWebsocketChannel {
+		return vs[0].([]UserWebsocketChannel)[vs[1].(int)]
+	}).(UserWebsocketChannelOutput)
 }
 
 type VerifyCapability struct {
@@ -2729,8 +4838,25 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*MessagesCapabilityPtrInput)(nil)).Elem(), MessagesCapabilityArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NetworkApisCapabilityInput)(nil)).Elem(), NetworkApisCapabilityArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NetworkApisCapabilityPtrInput)(nil)).Elem(), NetworkApisCapabilityArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NetworkApplicationProfileApiInput)(nil)).Elem(), NetworkApplicationProfileApiArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NetworkApplicationProfileApiArrayInput)(nil)).Elem(), NetworkApplicationProfileApiArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NetworkBusinessInformationInput)(nil)).Elem(), NetworkBusinessInformationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RtcCapabilityInput)(nil)).Elem(), RtcCapabilityArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RtcCapabilityPtrInput)(nil)).Elem(), RtcCapabilityArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UserChannelsInput)(nil)).Elem(), UserChannelsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UserChannelsPtrInput)(nil)).Elem(), UserChannelsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UserMessengerChannelInput)(nil)).Elem(), UserMessengerChannelArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UserMessengerChannelArrayInput)(nil)).Elem(), UserMessengerChannelArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UserNumberChannelInput)(nil)).Elem(), UserNumberChannelArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UserNumberChannelArrayInput)(nil)).Elem(), UserNumberChannelArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UserPstnChannelInput)(nil)).Elem(), UserPstnChannelArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UserPstnChannelArrayInput)(nil)).Elem(), UserPstnChannelArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UserSipChannelInput)(nil)).Elem(), UserSipChannelArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UserSipChannelArrayInput)(nil)).Elem(), UserSipChannelArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UserVbcChannelInput)(nil)).Elem(), UserVbcChannelArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UserVbcChannelArrayInput)(nil)).Elem(), UserVbcChannelArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UserWebsocketChannelInput)(nil)).Elem(), UserWebsocketChannelArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UserWebsocketChannelArrayInput)(nil)).Elem(), UserWebsocketChannelArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VerifyCapabilityInput)(nil)).Elem(), VerifyCapabilityArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VerifyCapabilityPtrInput)(nil)).Elem(), VerifyCapabilityArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VideoCapabilityInput)(nil)).Elem(), VideoCapabilityArgs{})
@@ -2753,6 +4879,16 @@ func init() {
 	pulumi.RegisterOutputType(ApplicationSummaryArrayOutput{})
 	pulumi.RegisterOutputType(AvailableNumberOutput{})
 	pulumi.RegisterOutputType(AvailableNumberArrayOutput{})
+	pulumi.RegisterOutputType(CountryPricingOutput{})
+	pulumi.RegisterOutputType(CountryPricingArrayOutput{})
+	pulumi.RegisterOutputType(ExternalAccountSummaryOutput{})
+	pulumi.RegisterOutputType(ExternalAccountSummaryArrayOutput{})
+	pulumi.RegisterOutputType(GetNetworkApplicationProfileResultOutput{})
+	pulumi.RegisterOutputType(GetNetworkApplicationProfileResultArrayOutput{})
+	pulumi.RegisterOutputType(GetNetworkBusinessProfileResultOutput{})
+	pulumi.RegisterOutputType(GetNetworkBusinessProfileResultArrayOutput{})
+	pulumi.RegisterOutputType(GetNumberPoolResultOutput{})
+	pulumi.RegisterOutputType(GetNumberPoolResultArrayOutput{})
 	pulumi.RegisterOutputType(GetSubAccountResultOutput{})
 	pulumi.RegisterOutputType(GetSubAccountResultArrayOutput{})
 	pulumi.RegisterOutputType(MeetingsCapabilityOutput{})
@@ -2761,10 +4897,43 @@ func init() {
 	pulumi.RegisterOutputType(MessagesCapabilityPtrOutput{})
 	pulumi.RegisterOutputType(NetworkApisCapabilityOutput{})
 	pulumi.RegisterOutputType(NetworkApisCapabilityPtrOutput{})
+	pulumi.RegisterOutputType(NetworkApplicationProfileApiOutput{})
+	pulumi.RegisterOutputType(NetworkApplicationProfileApiArrayOutput{})
+	pulumi.RegisterOutputType(NetworkBusinessInformationOutput{})
+	pulumi.RegisterOutputType(NetworkRegistryCountryOutput{})
+	pulumi.RegisterOutputType(NetworkRegistryCountryArrayOutput{})
+	pulumi.RegisterOutputType(NetworkRegistryCspOutput{})
+	pulumi.RegisterOutputType(NetworkRegistryCspArrayOutput{})
+	pulumi.RegisterOutputType(NetworkRegistryEntryOutput{})
+	pulumi.RegisterOutputType(NetworkRegistryEntryArrayOutput{})
+	pulumi.RegisterOutputType(NetworkRegistryNetworkApiOutput{})
+	pulumi.RegisterOutputType(NetworkRegistryNetworkApiArrayOutput{})
+	pulumi.RegisterOutputType(NetworkRegistryPurposeOutput{})
+	pulumi.RegisterOutputType(NetworkRegistryPurposeArrayOutput{})
+	pulumi.RegisterOutputType(NetworkRegistryVettingLevelOutput{})
+	pulumi.RegisterOutputType(NetworkRegistryVettingLevelArrayOutput{})
 	pulumi.RegisterOutputType(OwnedNumberSummaryOutput{})
 	pulumi.RegisterOutputType(OwnedNumberSummaryArrayOutput{})
+	pulumi.RegisterOutputType(PricingNetworkOutput{})
+	pulumi.RegisterOutputType(PricingNetworkArrayOutput{})
 	pulumi.RegisterOutputType(RtcCapabilityOutput{})
 	pulumi.RegisterOutputType(RtcCapabilityPtrOutput{})
+	pulumi.RegisterOutputType(UserChannelsOutput{})
+	pulumi.RegisterOutputType(UserChannelsPtrOutput{})
+	pulumi.RegisterOutputType(UserMessengerChannelOutput{})
+	pulumi.RegisterOutputType(UserMessengerChannelArrayOutput{})
+	pulumi.RegisterOutputType(UserNumberChannelOutput{})
+	pulumi.RegisterOutputType(UserNumberChannelArrayOutput{})
+	pulumi.RegisterOutputType(UserPstnChannelOutput{})
+	pulumi.RegisterOutputType(UserPstnChannelArrayOutput{})
+	pulumi.RegisterOutputType(UserSipChannelOutput{})
+	pulumi.RegisterOutputType(UserSipChannelArrayOutput{})
+	pulumi.RegisterOutputType(UserSummaryOutput{})
+	pulumi.RegisterOutputType(UserSummaryArrayOutput{})
+	pulumi.RegisterOutputType(UserVbcChannelOutput{})
+	pulumi.RegisterOutputType(UserVbcChannelArrayOutput{})
+	pulumi.RegisterOutputType(UserWebsocketChannelOutput{})
+	pulumi.RegisterOutputType(UserWebsocketChannelArrayOutput{})
 	pulumi.RegisterOutputType(VerifyCapabilityOutput{})
 	pulumi.RegisterOutputType(VerifyCapabilityPtrOutput{})
 	pulumi.RegisterOutputType(VideoCapabilityOutput{})

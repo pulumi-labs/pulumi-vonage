@@ -21,14 +21,32 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "vonage:index:AccountSettings":
+		r = &AccountSettings{}
 	case "vonage:index:ApiSecret":
 		r = &ApiSecret{}
 	case "vonage:index:Application":
 		r = &Application{}
+	case "vonage:index:ExternalAccountApplicationLink":
+		r = &ExternalAccountApplicationLink{}
+	case "vonage:index:MessengerAccount":
+		r = &MessengerAccount{}
+	case "vonage:index:NetworkApplicationProfile":
+		r = &NetworkApplicationProfile{}
+	case "vonage:index:NetworkApplicationProfileShare":
+		r = &NetworkApplicationProfileShare{}
+	case "vonage:index:NetworkBusinessProfile":
+		r = &NetworkBusinessProfile{}
 	case "vonage:index:Number":
 		r = &Number{}
+	case "vonage:index:NumberPool":
+		r = &NumberPool{}
+	case "vonage:index:NumberPoolNumber":
+		r = &NumberPoolNumber{}
 	case "vonage:index:SubAccount":
 		r = &SubAccount{}
+	case "vonage:index:User":
+		r = &User{}
 	case "vonage:index:VerifyTemplate":
 		r = &VerifyTemplate{}
 	case "vonage:index:VerifyTemplateFragment":

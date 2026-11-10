@@ -20,9 +20,9 @@ type Provider struct {
 	ApiKey pulumi.StringPtrOutput `pulumi:"apiKey"`
 	// The Vonage account API secret. Falls back to the VONAGE_API_SECRET environment variable.
 	ApiSecret pulumi.StringPtrOutput `pulumi:"apiSecret"`
-	// Optional Vonage application ID for JWT-authenticated runtime APIs. Falls back to VONAGE_APPLICATION_ID. Not used by the resources in this release.
+	// Vonage application ID used to sign the JWT for the Users API (the User resource and the getUser and getUsers functions). Users belong to this application. Falls back to VONAGE_APPLICATION_ID.
 	ApplicationId pulumi.StringPtrOutput `pulumi:"applicationId"`
-	// Optional PEM private key for the application named by applicationId. Falls back to VONAGE_PRIVATE_KEY. Not used by the resources in this release.
+	// PEM private key of the application named by applicationId (PKCS#8 'BEGIN PRIVATE KEY' as downloaded from the dashboard, or PKCS#1). Newlines flattened to a literal backslash-n are accepted. Falls back to VONAGE_PRIVATE_KEY.
 	PrivateKey pulumi.StringPtrOutput `pulumi:"privateKey"`
 	// Override for the Vonage REST host used by the Numbers API (default https://rest.nexmo.com). Intended for testing against a mock server. Falls back to VONAGE_REST_BASE_URL.
 	RestBaseUrl pulumi.StringPtrOutput `pulumi:"restBaseUrl"`
@@ -92,9 +92,9 @@ type providerArgs struct {
 	ApiKey *string `pulumi:"apiKey"`
 	// The Vonage account API secret. Falls back to the VONAGE_API_SECRET environment variable.
 	ApiSecret *string `pulumi:"apiSecret"`
-	// Optional Vonage application ID for JWT-authenticated runtime APIs. Falls back to VONAGE_APPLICATION_ID. Not used by the resources in this release.
+	// Vonage application ID used to sign the JWT for the Users API (the User resource and the getUser and getUsers functions). Users belong to this application. Falls back to VONAGE_APPLICATION_ID.
 	ApplicationId *string `pulumi:"applicationId"`
-	// Optional PEM private key for the application named by applicationId. Falls back to VONAGE_PRIVATE_KEY. Not used by the resources in this release.
+	// PEM private key of the application named by applicationId (PKCS#8 'BEGIN PRIVATE KEY' as downloaded from the dashboard, or PKCS#1). Newlines flattened to a literal backslash-n are accepted. Falls back to VONAGE_PRIVATE_KEY.
 	PrivateKey *string `pulumi:"privateKey"`
 	// Override for the Vonage REST host used by the Numbers API (default https://rest.nexmo.com). Intended for testing against a mock server. Falls back to VONAGE_REST_BASE_URL.
 	RestBaseUrl *string `pulumi:"restBaseUrl"`
@@ -108,9 +108,9 @@ type ProviderArgs struct {
 	ApiKey pulumi.StringPtrInput
 	// The Vonage account API secret. Falls back to the VONAGE_API_SECRET environment variable.
 	ApiSecret pulumi.StringPtrInput
-	// Optional Vonage application ID for JWT-authenticated runtime APIs. Falls back to VONAGE_APPLICATION_ID. Not used by the resources in this release.
+	// Vonage application ID used to sign the JWT for the Users API (the User resource and the getUser and getUsers functions). Users belong to this application. Falls back to VONAGE_APPLICATION_ID.
 	ApplicationId pulumi.StringPtrInput
-	// Optional PEM private key for the application named by applicationId. Falls back to VONAGE_PRIVATE_KEY. Not used by the resources in this release.
+	// PEM private key of the application named by applicationId (PKCS#8 'BEGIN PRIVATE KEY' as downloaded from the dashboard, or PKCS#1). Newlines flattened to a literal backslash-n are accepted. Falls back to VONAGE_PRIVATE_KEY.
 	PrivateKey pulumi.StringPtrInput
 	// Override for the Vonage REST host used by the Numbers API (default https://rest.nexmo.com). Intended for testing against a mock server. Falls back to VONAGE_REST_BASE_URL.
 	RestBaseUrl pulumi.StringPtrInput
@@ -168,12 +168,12 @@ func (o ProviderOutput) ApiSecret() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.ApiSecret }).(pulumi.StringPtrOutput)
 }
 
-// Optional Vonage application ID for JWT-authenticated runtime APIs. Falls back to VONAGE_APPLICATION_ID. Not used by the resources in this release.
+// Vonage application ID used to sign the JWT for the Users API (the User resource and the getUser and getUsers functions). Users belong to this application. Falls back to VONAGE_APPLICATION_ID.
 func (o ProviderOutput) ApplicationId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.ApplicationId }).(pulumi.StringPtrOutput)
 }
 
-// Optional PEM private key for the application named by applicationId. Falls back to VONAGE_PRIVATE_KEY. Not used by the resources in this release.
+// PEM private key of the application named by applicationId (PKCS#8 'BEGIN PRIVATE KEY' as downloaded from the dashboard, or PKCS#1). Newlines flattened to a literal backslash-n are accepted. Falls back to VONAGE_PRIVATE_KEY.
 func (o ProviderOutput) PrivateKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.PrivateKey }).(pulumi.StringPtrOutput)
 }

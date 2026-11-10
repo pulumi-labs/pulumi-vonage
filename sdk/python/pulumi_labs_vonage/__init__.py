@@ -6,23 +6,52 @@ import builtins as _builtins
 from . import _utilities
 import typing
 # Export this package's modules as members:
+from .account_settings import *
 from .api_secret import *
 from .application import *
+from .external_account_application_link import *
 from .get_account_balance import *
+from .get_account_settings import *
 from .get_api_secret import *
 from .get_api_secrets import *
 from .get_application import *
 from .get_applications import *
 from .get_available_numbers import *
+from .get_external_account import *
+from .get_external_account_application_link import *
+from .get_external_accounts import *
+from .get_messenger_account import *
+from .get_network_application_profile import *
+from .get_network_application_profile_share import *
+from .get_network_application_profile_shares import *
+from .get_network_application_profiles import *
+from .get_network_business_profile import *
+from .get_network_business_profiles import *
+from .get_network_registry_catalogue import *
+from .get_network_terms_and_conditions import *
 from .get_number import *
+from .get_number_pool import *
+from .get_number_pool_number import *
+from .get_number_pool_numbers import *
+from .get_number_pools import *
 from .get_numbers import *
+from .get_pricing import *
 from .get_sub_account import *
 from .get_sub_accounts import *
+from .get_user import *
+from .get_users import *
 from .get_verify_template import *
 from .get_verify_template_fragment import *
+from .messenger_account import *
+from .network_application_profile import *
+from .network_application_profile_share import *
+from .network_business_profile import *
 from .number import *
+from .number_pool import *
+from .number_pool_number import *
 from .provider import *
 from .sub_account import *
+from .user import *
 from .verify_template import *
 from .verify_template_fragment import *
 from ._inputs import *
@@ -43,10 +72,19 @@ _utilities.register(
   "mod": "index",
   "fqn": "pulumi_labs_vonage",
   "classes": {
+   "vonage:index:AccountSettings": "AccountSettings",
    "vonage:index:ApiSecret": "ApiSecret",
    "vonage:index:Application": "Application",
+   "vonage:index:ExternalAccountApplicationLink": "ExternalAccountApplicationLink",
+   "vonage:index:MessengerAccount": "MessengerAccount",
+   "vonage:index:NetworkApplicationProfile": "NetworkApplicationProfile",
+   "vonage:index:NetworkApplicationProfileShare": "NetworkApplicationProfileShare",
+   "vonage:index:NetworkBusinessProfile": "NetworkBusinessProfile",
    "vonage:index:Number": "Number",
+   "vonage:index:NumberPool": "NumberPool",
+   "vonage:index:NumberPoolNumber": "NumberPoolNumber",
    "vonage:index:SubAccount": "SubAccount",
+   "vonage:index:User": "User",
    "vonage:index:VerifyTemplate": "VerifyTemplate",
    "vonage:index:VerifyTemplateFragment": "VerifyTemplateFragment"
   }
