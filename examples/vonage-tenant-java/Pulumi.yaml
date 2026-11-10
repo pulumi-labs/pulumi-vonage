@@ -1,3 +1,0 @@
-name: vonage-tenant-java
-runtime: java
-description: Provision a Vonage subaccount tenant with its own application and a rotatable API secret (Java)
