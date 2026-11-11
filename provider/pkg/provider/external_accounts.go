@@ -224,7 +224,7 @@ func (r *MessengerAccount) Check(ctx context.Context, req infer.CheckRequest) (i
 	if strings.TrimSpace(args.AccessToken) == "" {
 		failures = append(failures, p.CheckFailure{Property: "accessToken", Reason: "accessToken must not be empty"})
 	}
-	return infer.CheckResponse[MessengerAccountArgs]{Inputs: args, Failures: failures}, nil
+	return infer.CheckResponse[MessengerAccountArgs]{Inputs: args, Failures: dropUnknownFailures(failures, req.NewInputs)}, nil
 }
 
 // keepName reports the server name as an input: unset stays unset while the server has none.
@@ -393,7 +393,7 @@ func (r *ExternalAccountApplicationLink) Check(ctx context.Context, req infer.Ch
 	}
 	failures = append(failures, extIDFailure("externalId", args.ExternalID)...)
 	failures = append(failures, extIDFailure("applicationId", args.ApplicationID)...)
-	return infer.CheckResponse[ExternalAccountApplicationLinkArgs]{Inputs: args, Failures: failures}, nil
+	return infer.CheckResponse[ExternalAccountApplicationLinkArgs]{Inputs: args, Failures: dropUnknownFailures(failures, req.NewInputs)}, nil
 }
 
 func (r *ExternalAccountApplicationLink) Create(ctx context.Context, req infer.CreateRequest[ExternalAccountApplicationLinkArgs]) (infer.CreateResponse[ExternalAccountApplicationLinkState], error) {

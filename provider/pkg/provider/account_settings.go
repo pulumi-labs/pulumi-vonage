@@ -151,7 +151,7 @@ func (r *AccountSettings) Check(ctx context.Context, req infer.CheckRequest) (in
 			failures = append(failures, p.CheckFailure{Property: name, Reason: name + " must be an absolute http or https URL"})
 		}
 	}
-	return infer.CheckResponse[AccountSettingsArgs]{Inputs: args, Failures: failures}, nil
+	return infer.CheckResponse[AccountSettingsArgs]{Inputs: args, Failures: dropUnknownFailures(failures, req.NewInputs)}, nil
 }
 
 func accountSettingsState(args AccountSettingsArgs, w *wireAccountSettings) AccountSettingsState {

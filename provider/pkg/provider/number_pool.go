@@ -247,7 +247,7 @@ func (r *NumberPool) Check(ctx context.Context, req infer.CheckRequest) (infer.C
 	if !validFallback(args.Fallback) {
 		failures = append(failures, p.CheckFailure{Property: "fallback", Reason: "fallback must be one of Pool, CustomFrom, Reject"})
 	}
-	return infer.CheckResponse[NumberPoolArgs]{Inputs: args, Failures: failures}, nil
+	return infer.CheckResponse[NumberPoolArgs]{Inputs: args, Failures: dropUnknownFailures(failures, req.NewInputs)}, nil
 }
 
 // keepOptional reports a server flag as an input: unset stays unset while the server agrees
@@ -412,7 +412,7 @@ func (r *NumberPoolNumber) Check(ctx context.Context, req infer.CheckRequest) (i
 	if !poolNumberRE.MatchString(args.Number) {
 		failures = append(failures, p.CheckFailure{Property: "number", Reason: "number must be 7-15 digits with no leading plus"})
 	}
-	return infer.CheckResponse[NumberPoolNumberArgs]{Inputs: args, Failures: failures}, nil
+	return infer.CheckResponse[NumberPoolNumberArgs]{Inputs: args, Failures: dropUnknownFailures(failures, req.NewInputs)}, nil
 }
 
 func poolNumberID(poolID, number string) string { return poolID + "/" + number }

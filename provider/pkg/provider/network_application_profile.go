@@ -265,7 +265,7 @@ func (r *NetworkApplicationProfile) Check(ctx context.Context, req infer.CheckRe
 			fail("infrastructureLocations", fmt.Sprintf("%q is not a two-letter ISO 3166 country code", c))
 		}
 	}
-	return infer.CheckResponse[NetworkApplicationProfileArgs]{Inputs: args, Failures: failures}, nil
+	return infer.CheckResponse[NetworkApplicationProfileArgs]{Inputs: args, Failures: dropUnknownFailures(failures, req.NewInputs)}, nil
 }
 
 func nrAppBody(a NetworkApplicationProfileArgs) wireNRAppProfileIn {
@@ -458,7 +458,7 @@ func (r *NetworkApplicationProfileShare) Check(ctx context.Context, req infer.Ch
 			failures = append(failures, p.CheckFailure{Property: prop, Reason: prop + " must not be empty or contain a slash"})
 		}
 	}
-	return infer.CheckResponse[NetworkApplicationProfileShareArgs]{Inputs: args, Failures: failures}, nil
+	return infer.CheckResponse[NetworkApplicationProfileShareArgs]{Inputs: args, Failures: dropUnknownFailures(failures, req.NewInputs)}, nil
 }
 
 func nrShareID(profileID, accountID string) string { return profileID + "/" + accountID }

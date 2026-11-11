@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-11-11
+
+### Fixed
+
+- A resource input wired from another resource's output is no longer rejected at preview: the input checks of 15 resources (for example `Application`, `NumberPool`, `SubAccount`, `Number`, `NetworkApplicationProfile`, `VerifyTemplateFragment`) validated the zero value infer decodes an unknown to, so a program such as `applicationId: ${app.id}` failed with `must not be empty`. Check now skips the validation of values that are unknown at preview (also nested ones) and still validates the known ones; the apply-time Check is unchanged. Same bug class as namespace #1832.
+
 ## [0.2.0] - 2026-11-10
 
 ### Added

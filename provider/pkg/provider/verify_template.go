@@ -71,7 +71,7 @@ func (r *VerifyTemplate) Check(ctx context.Context, req infer.CheckRequest) (inf
 	if utf8.RuneCountInString(strings.TrimSpace(args.Name)) < 1 {
 		failures = append(failures, p.CheckFailure{Property: "name", Reason: "name must not be empty"})
 	}
-	return infer.CheckResponse[VerifyTemplateArgs]{Inputs: args, Failures: failures}, nil
+	return infer.CheckResponse[VerifyTemplateArgs]{Inputs: args, Failures: dropUnknownFailures(failures, req.NewInputs)}, nil
 }
 
 func (r *VerifyTemplate) Create(ctx context.Context, req infer.CreateRequest[VerifyTemplateArgs]) (infer.CreateResponse[VerifyTemplateState], error) {

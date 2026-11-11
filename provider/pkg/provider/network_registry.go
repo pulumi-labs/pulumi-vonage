@@ -437,7 +437,7 @@ func (r *NetworkBusinessProfile) Check(ctx context.Context, req infer.CheckReque
 	if !isCountryCode(bi.Country) {
 		fail("businessInformation", "businessInformation.country must be a two-letter ISO 3166 country code")
 	}
-	return infer.CheckResponse[NetworkBusinessProfileArgs]{Inputs: args, Failures: failures}, nil
+	return infer.CheckResponse[NetworkBusinessProfileArgs]{Inputs: args, Failures: dropUnknownFailures(failures, req.NewInputs)}, nil
 }
 
 func nrBody(a NetworkBusinessProfileArgs) wireNRBusinessProfileIn {

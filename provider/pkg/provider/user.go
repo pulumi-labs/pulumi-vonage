@@ -542,7 +542,7 @@ func (r *User) Check(ctx context.Context, req infer.CheckRequest) (infer.CheckRe
 			}
 		}
 	}
-	return infer.CheckResponse[UserArgs]{Inputs: args, Failures: failures}, nil
+	return infer.CheckResponse[UserArgs]{Inputs: args, Failures: dropUnknownFailures(failures, req.NewInputs)}, nil
 }
 
 func (r *User) Create(ctx context.Context, req infer.CreateRequest[UserArgs]) (infer.CreateResponse[UserState], error) {

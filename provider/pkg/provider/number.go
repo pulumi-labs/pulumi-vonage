@@ -148,7 +148,7 @@ func (r *Number) Check(ctx context.Context, req infer.CheckRequest) (infer.Check
 		failures = append(failures, p.CheckFailure{Property: "appId",
 			Reason: "appId cannot be combined with moHttpUrl, voiceCallbackType/Value or voiceStatusCallback; the application owns routing"})
 	}
-	return infer.CheckResponse[NumberArgs]{Inputs: args, Failures: failures}, nil
+	return infer.CheckResponse[NumberArgs]{Inputs: args, Failures: dropUnknownFailures(failures, req.NewInputs)}, nil
 }
 
 // Diff makes acquisition create-only. It only matters when the resource is

@@ -280,7 +280,7 @@ func (r *Application) Check(ctx context.Context, req infer.CheckRequest) (infer.
 		failures = append(failures, p.CheckFailure{Property: "networkApis.networkApplicationId",
 			Reason: "networkApplicationId must not be empty"})
 	}
-	return infer.CheckResponse[ApplicationArgs]{Inputs: args, Failures: failures}, nil
+	return infer.CheckResponse[ApplicationArgs]{Inputs: args, Failures: dropUnknownFailures(failures, req.NewInputs)}, nil
 }
 
 // --- args <-> wire conversion ---

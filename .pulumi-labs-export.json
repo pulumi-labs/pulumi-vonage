@@ -4,8 +4,8 @@
   "display_name": "Vonage",
   "exclude_platforms": [],
   "provider": "vonage",
-  "skill_commit": "6d559827271e2f3b5722cb70fe8e091d6bb041ee",
+  "skill_commit": "17da976cca658dfab4425a727e49859c44e2bdc1",
   "source_repo": "pulumi/autoregistry",
-  "source_sha": "27888910b56c361109a299b0b7a489f492e8abd0",
-  "source_version": "0.2.0"
+  "source_sha": "76cc8996690fd67c541f5ad2ba42a35a955124ae",
+  "source_version": "0.2.1"
 }
