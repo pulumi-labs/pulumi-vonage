@@ -88,7 +88,7 @@ func (r *VerifyTemplateFragment) Check(ctx context.Context, req infer.CheckReque
 	if strings.TrimSpace(args.Text) == "" {
 		failures = append(failures, p.CheckFailure{Property: "text", Reason: "text must not be empty"})
 	}
-	return infer.CheckResponse[VerifyTemplateFragmentArgs]{Inputs: args, Failures: failures}, nil
+	return infer.CheckResponse[VerifyTemplateFragmentArgs]{Inputs: args, Failures: dropUnknownFailures(failures, req.NewInputs)}, nil
 }
 
 func fragmentID(templateID, id string) string { return templateID + "/" + id }

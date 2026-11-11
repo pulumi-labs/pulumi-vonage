@@ -95,7 +95,7 @@ func (r *SubAccount) Check(ctx context.Context, req infer.CheckRequest) (infer.C
 		failures = append(failures, p.CheckFailure{Property: "secret",
 			Reason: "secret must be 8-25 characters with at least one lowercase letter, one uppercase letter and one digit"})
 	}
-	return infer.CheckResponse[SubAccountArgs]{Inputs: args, Failures: failures}, nil
+	return infer.CheckResponse[SubAccountArgs]{Inputs: args, Failures: dropUnknownFailures(failures, req.NewInputs)}, nil
 }
 
 func subStateFrom(args SubAccountArgs, s *wireSubaccount, generated *string) SubAccountState {

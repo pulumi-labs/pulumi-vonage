@@ -81,7 +81,7 @@ func (r *ApiSecret) Check(ctx context.Context, req infer.CheckRequest) (infer.Ch
 		failures = append(failures, p.CheckFailure{Property: "secret",
 			Reason: "secret must be 8-25 characters with at least one lowercase letter, one uppercase letter and one digit"})
 	}
-	return infer.CheckResponse[ApiSecretArgs]{Inputs: args, Failures: failures}, nil
+	return infer.CheckResponse[ApiSecretArgs]{Inputs: args, Failures: dropUnknownFailures(failures, req.NewInputs)}, nil
 }
 
 func ownerKey(ctx context.Context, a ApiSecretArgs) string {
