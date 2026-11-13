@@ -65,6 +65,30 @@ import com.pulumi.labs.vonage.inputs.GetSubAccountArgs;
 import com.pulumi.labs.vonage.inputs.GetSubAccountPlainArgs;
 import com.pulumi.labs.vonage.inputs.GetSubAccountsArgs;
 import com.pulumi.labs.vonage.inputs.GetSubAccountsPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcAccountSettingsArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcAccountSettingsPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcBrandArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcBrandPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcBrandsArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcBrandsPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcCampaignArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcCampaignNumberArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcCampaignNumberPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcCampaignNumbersArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcCampaignNumbersPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcCampaignPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcCampaignTermsAndConditionsArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcCampaignTermsAndConditionsPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcCampaignsArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcCampaignsPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcEnumsArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcEnumsPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcResellerArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcResellerPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcResellersArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcResellersPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcThroughputsArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcThroughputsPlainArgs;
 import com.pulumi.labs.vonage.inputs.GetUserArgs;
 import com.pulumi.labs.vonage.inputs.GetUserPlainArgs;
 import com.pulumi.labs.vonage.inputs.GetUsersArgs;
@@ -101,6 +125,18 @@ import com.pulumi.labs.vonage.outputs.GetNumbersResult;
 import com.pulumi.labs.vonage.outputs.GetPricingResult;
 import com.pulumi.labs.vonage.outputs.GetSubAccountInvokeResult;
 import com.pulumi.labs.vonage.outputs.GetSubAccountsResult;
+import com.pulumi.labs.vonage.outputs.GetTenDlcAccountSettingsResult;
+import com.pulumi.labs.vonage.outputs.GetTenDlcBrandResult;
+import com.pulumi.labs.vonage.outputs.GetTenDlcBrandsResult;
+import com.pulumi.labs.vonage.outputs.GetTenDlcCampaignNumberResult;
+import com.pulumi.labs.vonage.outputs.GetTenDlcCampaignNumbersResult;
+import com.pulumi.labs.vonage.outputs.GetTenDlcCampaignResult;
+import com.pulumi.labs.vonage.outputs.GetTenDlcCampaignTermsAndConditionsResult;
+import com.pulumi.labs.vonage.outputs.GetTenDlcCampaignsResult;
+import com.pulumi.labs.vonage.outputs.GetTenDlcEnumsResult;
+import com.pulumi.labs.vonage.outputs.GetTenDlcResellerResult;
+import com.pulumi.labs.vonage.outputs.GetTenDlcResellersResult;
+import com.pulumi.labs.vonage.outputs.GetTenDlcThroughputsResult;
 import com.pulumi.labs.vonage.outputs.GetUserResult;
 import com.pulumi.labs.vonage.outputs.GetUsersResult;
 import com.pulumi.labs.vonage.outputs.GetVerifyTemplateFragmentResult;
@@ -1269,6 +1305,510 @@ public final class VonageFunctions {
      */
     public static CompletableFuture<GetSubAccountsResult> getSubAccountsPlain(GetSubAccountsPlainArgs args, InvokeOptions options) {
         return Deployment.getInstance().invokeAsync("vonage:index:getSubAccounts", TypeShape.of(GetSubAccountsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Read the account-level 10DLC settings.
+     * 
+     */
+    public static Output<GetTenDlcAccountSettingsResult> getTenDlcAccountSettings() {
+        return getTenDlcAccountSettings(GetTenDlcAccountSettingsArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * Read the account-level 10DLC settings.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcAccountSettingsResult> getTenDlcAccountSettingsPlain() {
+        return getTenDlcAccountSettingsPlain(GetTenDlcAccountSettingsPlainArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * Read the account-level 10DLC settings.
+     * 
+     */
+    public static Output<GetTenDlcAccountSettingsResult> getTenDlcAccountSettings(GetTenDlcAccountSettingsArgs args) {
+        return getTenDlcAccountSettings(args, InvokeOptions.Empty);
+    }
+    /**
+     * Read the account-level 10DLC settings.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcAccountSettingsResult> getTenDlcAccountSettingsPlain(GetTenDlcAccountSettingsPlainArgs args) {
+        return getTenDlcAccountSettingsPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * Read the account-level 10DLC settings.
+     * 
+     */
+    public static Output<GetTenDlcAccountSettingsResult> getTenDlcAccountSettings(GetTenDlcAccountSettingsArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcAccountSettings", TypeShape.of(GetTenDlcAccountSettingsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Read the account-level 10DLC settings.
+     * 
+     */
+    public static Output<GetTenDlcAccountSettingsResult> getTenDlcAccountSettings(GetTenDlcAccountSettingsArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcAccountSettings", TypeShape.of(GetTenDlcAccountSettingsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Read the account-level 10DLC settings.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcAccountSettingsResult> getTenDlcAccountSettingsPlain(GetTenDlcAccountSettingsPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getTenDlcAccountSettings", TypeShape.of(GetTenDlcAccountSettingsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a 10DLC brand by ID. A deleted brand is reported as not found.
+     * 
+     */
+    public static Output<GetTenDlcBrandResult> getTenDlcBrand(GetTenDlcBrandArgs args) {
+        return getTenDlcBrand(args, InvokeOptions.Empty);
+    }
+    /**
+     * Look up a 10DLC brand by ID. A deleted brand is reported as not found.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcBrandResult> getTenDlcBrandPlain(GetTenDlcBrandPlainArgs args) {
+        return getTenDlcBrandPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * Look up a 10DLC brand by ID. A deleted brand is reported as not found.
+     * 
+     */
+    public static Output<GetTenDlcBrandResult> getTenDlcBrand(GetTenDlcBrandArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcBrand", TypeShape.of(GetTenDlcBrandResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a 10DLC brand by ID. A deleted brand is reported as not found.
+     * 
+     */
+    public static Output<GetTenDlcBrandResult> getTenDlcBrand(GetTenDlcBrandArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcBrand", TypeShape.of(GetTenDlcBrandResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a 10DLC brand by ID. A deleted brand is reported as not found.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcBrandResult> getTenDlcBrandPlain(GetTenDlcBrandPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getTenDlcBrand", TypeShape.of(GetTenDlcBrandResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the account&#39;s 10DLC brands, following every page.
+     * 
+     */
+    public static Output<GetTenDlcBrandsResult> getTenDlcBrands() {
+        return getTenDlcBrands(GetTenDlcBrandsArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * List the account&#39;s 10DLC brands, following every page.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcBrandsResult> getTenDlcBrandsPlain() {
+        return getTenDlcBrandsPlain(GetTenDlcBrandsPlainArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * List the account&#39;s 10DLC brands, following every page.
+     * 
+     */
+    public static Output<GetTenDlcBrandsResult> getTenDlcBrands(GetTenDlcBrandsArgs args) {
+        return getTenDlcBrands(args, InvokeOptions.Empty);
+    }
+    /**
+     * List the account&#39;s 10DLC brands, following every page.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcBrandsResult> getTenDlcBrandsPlain(GetTenDlcBrandsPlainArgs args) {
+        return getTenDlcBrandsPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * List the account&#39;s 10DLC brands, following every page.
+     * 
+     */
+    public static Output<GetTenDlcBrandsResult> getTenDlcBrands(GetTenDlcBrandsArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcBrands", TypeShape.of(GetTenDlcBrandsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the account&#39;s 10DLC brands, following every page.
+     * 
+     */
+    public static Output<GetTenDlcBrandsResult> getTenDlcBrands(GetTenDlcBrandsArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcBrands", TypeShape.of(GetTenDlcBrandsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the account&#39;s 10DLC brands, following every page.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcBrandsResult> getTenDlcBrandsPlain(GetTenDlcBrandsPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getTenDlcBrands", TypeShape.of(GetTenDlcBrandsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a 10DLC campaign by brand and campaign ID. An ended (terminated, canceled, expired or rejected) campaign is reported as not found.
+     * 
+     */
+    public static Output<GetTenDlcCampaignResult> getTenDlcCampaign(GetTenDlcCampaignArgs args) {
+        return getTenDlcCampaign(args, InvokeOptions.Empty);
+    }
+    /**
+     * Look up a 10DLC campaign by brand and campaign ID. An ended (terminated, canceled, expired or rejected) campaign is reported as not found.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcCampaignResult> getTenDlcCampaignPlain(GetTenDlcCampaignPlainArgs args) {
+        return getTenDlcCampaignPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * Look up a 10DLC campaign by brand and campaign ID. An ended (terminated, canceled, expired or rejected) campaign is reported as not found.
+     * 
+     */
+    public static Output<GetTenDlcCampaignResult> getTenDlcCampaign(GetTenDlcCampaignArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcCampaign", TypeShape.of(GetTenDlcCampaignResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a 10DLC campaign by brand and campaign ID. An ended (terminated, canceled, expired or rejected) campaign is reported as not found.
+     * 
+     */
+    public static Output<GetTenDlcCampaignResult> getTenDlcCampaign(GetTenDlcCampaignArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcCampaign", TypeShape.of(GetTenDlcCampaignResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a 10DLC campaign by brand and campaign ID. An ended (terminated, canceled, expired or rejected) campaign is reported as not found.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcCampaignResult> getTenDlcCampaignPlain(GetTenDlcCampaignPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getTenDlcCampaign", TypeShape.of(GetTenDlcCampaignResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a number linked to a 10DLC campaign. A number that is not linked (or already UNLINKED) is reported as not found.
+     * 
+     */
+    public static Output<GetTenDlcCampaignNumberResult> getTenDlcCampaignNumber(GetTenDlcCampaignNumberArgs args) {
+        return getTenDlcCampaignNumber(args, InvokeOptions.Empty);
+    }
+    /**
+     * Look up a number linked to a 10DLC campaign. A number that is not linked (or already UNLINKED) is reported as not found.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcCampaignNumberResult> getTenDlcCampaignNumberPlain(GetTenDlcCampaignNumberPlainArgs args) {
+        return getTenDlcCampaignNumberPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * Look up a number linked to a 10DLC campaign. A number that is not linked (or already UNLINKED) is reported as not found.
+     * 
+     */
+    public static Output<GetTenDlcCampaignNumberResult> getTenDlcCampaignNumber(GetTenDlcCampaignNumberArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcCampaignNumber", TypeShape.of(GetTenDlcCampaignNumberResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a number linked to a 10DLC campaign. A number that is not linked (or already UNLINKED) is reported as not found.
+     * 
+     */
+    public static Output<GetTenDlcCampaignNumberResult> getTenDlcCampaignNumber(GetTenDlcCampaignNumberArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcCampaignNumber", TypeShape.of(GetTenDlcCampaignNumberResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a number linked to a 10DLC campaign. A number that is not linked (or already UNLINKED) is reported as not found.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcCampaignNumberResult> getTenDlcCampaignNumberPlain(GetTenDlcCampaignNumberPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getTenDlcCampaignNumber", TypeShape.of(GetTenDlcCampaignNumberResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the numbers linked to a 10DLC campaign, following every page.
+     * 
+     */
+    public static Output<GetTenDlcCampaignNumbersResult> getTenDlcCampaignNumbers(GetTenDlcCampaignNumbersArgs args) {
+        return getTenDlcCampaignNumbers(args, InvokeOptions.Empty);
+    }
+    /**
+     * List the numbers linked to a 10DLC campaign, following every page.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcCampaignNumbersResult> getTenDlcCampaignNumbersPlain(GetTenDlcCampaignNumbersPlainArgs args) {
+        return getTenDlcCampaignNumbersPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * List the numbers linked to a 10DLC campaign, following every page.
+     * 
+     */
+    public static Output<GetTenDlcCampaignNumbersResult> getTenDlcCampaignNumbers(GetTenDlcCampaignNumbersArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcCampaignNumbers", TypeShape.of(GetTenDlcCampaignNumbersResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the numbers linked to a 10DLC campaign, following every page.
+     * 
+     */
+    public static Output<GetTenDlcCampaignNumbersResult> getTenDlcCampaignNumbers(GetTenDlcCampaignNumbersArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcCampaignNumbers", TypeShape.of(GetTenDlcCampaignNumbersResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the numbers linked to a 10DLC campaign, following every page.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcCampaignNumbersResult> getTenDlcCampaignNumbersPlain(GetTenDlcCampaignNumbersPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getTenDlcCampaignNumbers", TypeShape.of(GetTenDlcCampaignNumbersResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Read the 10DLC campaign terms and conditions that tcAgreed on a TenDlcCampaign accepts.
+     * 
+     */
+    public static Output<GetTenDlcCampaignTermsAndConditionsResult> getTenDlcCampaignTermsAndConditions() {
+        return getTenDlcCampaignTermsAndConditions(GetTenDlcCampaignTermsAndConditionsArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * Read the 10DLC campaign terms and conditions that tcAgreed on a TenDlcCampaign accepts.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcCampaignTermsAndConditionsResult> getTenDlcCampaignTermsAndConditionsPlain() {
+        return getTenDlcCampaignTermsAndConditionsPlain(GetTenDlcCampaignTermsAndConditionsPlainArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * Read the 10DLC campaign terms and conditions that tcAgreed on a TenDlcCampaign accepts.
+     * 
+     */
+    public static Output<GetTenDlcCampaignTermsAndConditionsResult> getTenDlcCampaignTermsAndConditions(GetTenDlcCampaignTermsAndConditionsArgs args) {
+        return getTenDlcCampaignTermsAndConditions(args, InvokeOptions.Empty);
+    }
+    /**
+     * Read the 10DLC campaign terms and conditions that tcAgreed on a TenDlcCampaign accepts.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcCampaignTermsAndConditionsResult> getTenDlcCampaignTermsAndConditionsPlain(GetTenDlcCampaignTermsAndConditionsPlainArgs args) {
+        return getTenDlcCampaignTermsAndConditionsPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * Read the 10DLC campaign terms and conditions that tcAgreed on a TenDlcCampaign accepts.
+     * 
+     */
+    public static Output<GetTenDlcCampaignTermsAndConditionsResult> getTenDlcCampaignTermsAndConditions(GetTenDlcCampaignTermsAndConditionsArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcCampaignTermsAndConditions", TypeShape.of(GetTenDlcCampaignTermsAndConditionsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Read the 10DLC campaign terms and conditions that tcAgreed on a TenDlcCampaign accepts.
+     * 
+     */
+    public static Output<GetTenDlcCampaignTermsAndConditionsResult> getTenDlcCampaignTermsAndConditions(GetTenDlcCampaignTermsAndConditionsArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcCampaignTermsAndConditions", TypeShape.of(GetTenDlcCampaignTermsAndConditionsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Read the 10DLC campaign terms and conditions that tcAgreed on a TenDlcCampaign accepts.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcCampaignTermsAndConditionsResult> getTenDlcCampaignTermsAndConditionsPlain(GetTenDlcCampaignTermsAndConditionsPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getTenDlcCampaignTermsAndConditions", TypeShape.of(GetTenDlcCampaignTermsAndConditionsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the 10DLC campaigns of a brand, following every page.
+     * 
+     */
+    public static Output<GetTenDlcCampaignsResult> getTenDlcCampaigns(GetTenDlcCampaignsArgs args) {
+        return getTenDlcCampaigns(args, InvokeOptions.Empty);
+    }
+    /**
+     * List the 10DLC campaigns of a brand, following every page.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcCampaignsResult> getTenDlcCampaignsPlain(GetTenDlcCampaignsPlainArgs args) {
+        return getTenDlcCampaignsPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * List the 10DLC campaigns of a brand, following every page.
+     * 
+     */
+    public static Output<GetTenDlcCampaignsResult> getTenDlcCampaigns(GetTenDlcCampaignsArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcCampaigns", TypeShape.of(GetTenDlcCampaignsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the 10DLC campaigns of a brand, following every page.
+     * 
+     */
+    public static Output<GetTenDlcCampaignsResult> getTenDlcCampaigns(GetTenDlcCampaignsArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcCampaigns", TypeShape.of(GetTenDlcCampaignsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the 10DLC campaigns of a brand, following every page.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcCampaignsResult> getTenDlcCampaignsPlain(GetTenDlcCampaignsPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getTenDlcCampaigns", TypeShape.of(GetTenDlcCampaignsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Read the 10DLC enumerations: campaign use cases and industry verticals with their details, and the IDs of every other list Vonage publishes (statuses, entity types, countries, carriers and so on).
+     * 
+     */
+    public static Output<GetTenDlcEnumsResult> getTenDlcEnums() {
+        return getTenDlcEnums(GetTenDlcEnumsArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * Read the 10DLC enumerations: campaign use cases and industry verticals with their details, and the IDs of every other list Vonage publishes (statuses, entity types, countries, carriers and so on).
+     * 
+     */
+    public static CompletableFuture<GetTenDlcEnumsResult> getTenDlcEnumsPlain() {
+        return getTenDlcEnumsPlain(GetTenDlcEnumsPlainArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * Read the 10DLC enumerations: campaign use cases and industry verticals with their details, and the IDs of every other list Vonage publishes (statuses, entity types, countries, carriers and so on).
+     * 
+     */
+    public static Output<GetTenDlcEnumsResult> getTenDlcEnums(GetTenDlcEnumsArgs args) {
+        return getTenDlcEnums(args, InvokeOptions.Empty);
+    }
+    /**
+     * Read the 10DLC enumerations: campaign use cases and industry verticals with their details, and the IDs of every other list Vonage publishes (statuses, entity types, countries, carriers and so on).
+     * 
+     */
+    public static CompletableFuture<GetTenDlcEnumsResult> getTenDlcEnumsPlain(GetTenDlcEnumsPlainArgs args) {
+        return getTenDlcEnumsPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * Read the 10DLC enumerations: campaign use cases and industry verticals with their details, and the IDs of every other list Vonage publishes (statuses, entity types, countries, carriers and so on).
+     * 
+     */
+    public static Output<GetTenDlcEnumsResult> getTenDlcEnums(GetTenDlcEnumsArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcEnums", TypeShape.of(GetTenDlcEnumsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Read the 10DLC enumerations: campaign use cases and industry verticals with their details, and the IDs of every other list Vonage publishes (statuses, entity types, countries, carriers and so on).
+     * 
+     */
+    public static Output<GetTenDlcEnumsResult> getTenDlcEnums(GetTenDlcEnumsArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcEnums", TypeShape.of(GetTenDlcEnumsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Read the 10DLC enumerations: campaign use cases and industry verticals with their details, and the IDs of every other list Vonage publishes (statuses, entity types, countries, carriers and so on).
+     * 
+     */
+    public static CompletableFuture<GetTenDlcEnumsResult> getTenDlcEnumsPlain(GetTenDlcEnumsPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getTenDlcEnums", TypeShape.of(GetTenDlcEnumsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a 10DLC reseller by ID.
+     * 
+     */
+    public static Output<GetTenDlcResellerResult> getTenDlcReseller(GetTenDlcResellerArgs args) {
+        return getTenDlcReseller(args, InvokeOptions.Empty);
+    }
+    /**
+     * Look up a 10DLC reseller by ID.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcResellerResult> getTenDlcResellerPlain(GetTenDlcResellerPlainArgs args) {
+        return getTenDlcResellerPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * Look up a 10DLC reseller by ID.
+     * 
+     */
+    public static Output<GetTenDlcResellerResult> getTenDlcReseller(GetTenDlcResellerArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcReseller", TypeShape.of(GetTenDlcResellerResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a 10DLC reseller by ID.
+     * 
+     */
+    public static Output<GetTenDlcResellerResult> getTenDlcReseller(GetTenDlcResellerArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcReseller", TypeShape.of(GetTenDlcResellerResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Look up a 10DLC reseller by ID.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcResellerResult> getTenDlcResellerPlain(GetTenDlcResellerPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getTenDlcReseller", TypeShape.of(GetTenDlcResellerResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the 10DLC resellers of the account, following every page.
+     * 
+     */
+    public static Output<GetTenDlcResellersResult> getTenDlcResellers() {
+        return getTenDlcResellers(GetTenDlcResellersArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * List the 10DLC resellers of the account, following every page.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcResellersResult> getTenDlcResellersPlain() {
+        return getTenDlcResellersPlain(GetTenDlcResellersPlainArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * List the 10DLC resellers of the account, following every page.
+     * 
+     */
+    public static Output<GetTenDlcResellersResult> getTenDlcResellers(GetTenDlcResellersArgs args) {
+        return getTenDlcResellers(args, InvokeOptions.Empty);
+    }
+    /**
+     * List the 10DLC resellers of the account, following every page.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcResellersResult> getTenDlcResellersPlain(GetTenDlcResellersPlainArgs args) {
+        return getTenDlcResellersPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * List the 10DLC resellers of the account, following every page.
+     * 
+     */
+    public static Output<GetTenDlcResellersResult> getTenDlcResellers(GetTenDlcResellersArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcResellers", TypeShape.of(GetTenDlcResellersResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the 10DLC resellers of the account, following every page.
+     * 
+     */
+    public static Output<GetTenDlcResellersResult> getTenDlcResellers(GetTenDlcResellersArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcResellers", TypeShape.of(GetTenDlcResellersResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the 10DLC resellers of the account, following every page.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcResellersResult> getTenDlcResellersPlain(GetTenDlcResellersPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getTenDlcResellers", TypeShape.of(GetTenDlcResellersResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the 10DLC throughput counters (messages per minute or day, by scope), optionally for one campaign, following every page.
+     * 
+     */
+    public static Output<GetTenDlcThroughputsResult> getTenDlcThroughputs() {
+        return getTenDlcThroughputs(GetTenDlcThroughputsArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * List the 10DLC throughput counters (messages per minute or day, by scope), optionally for one campaign, following every page.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcThroughputsResult> getTenDlcThroughputsPlain() {
+        return getTenDlcThroughputsPlain(GetTenDlcThroughputsPlainArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * List the 10DLC throughput counters (messages per minute or day, by scope), optionally for one campaign, following every page.
+     * 
+     */
+    public static Output<GetTenDlcThroughputsResult> getTenDlcThroughputs(GetTenDlcThroughputsArgs args) {
+        return getTenDlcThroughputs(args, InvokeOptions.Empty);
+    }
+    /**
+     * List the 10DLC throughput counters (messages per minute or day, by scope), optionally for one campaign, following every page.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcThroughputsResult> getTenDlcThroughputsPlain(GetTenDlcThroughputsPlainArgs args) {
+        return getTenDlcThroughputsPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * List the 10DLC throughput counters (messages per minute or day, by scope), optionally for one campaign, following every page.
+     * 
+     */
+    public static Output<GetTenDlcThroughputsResult> getTenDlcThroughputs(GetTenDlcThroughputsArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcThroughputs", TypeShape.of(GetTenDlcThroughputsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the 10DLC throughput counters (messages per minute or day, by scope), optionally for one campaign, following every page.
+     * 
+     */
+    public static Output<GetTenDlcThroughputsResult> getTenDlcThroughputs(GetTenDlcThroughputsArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcThroughputs", TypeShape.of(GetTenDlcThroughputsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * List the 10DLC throughput counters (messages per minute or day, by scope), optionally for one campaign, following every page.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcThroughputsResult> getTenDlcThroughputsPlain(GetTenDlcThroughputsPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getTenDlcThroughputs", TypeShape.of(GetTenDlcThroughputsResult.class), args, Utilities.withVersion(options));
     }
     /**
      * Look up a user of the configured application by ID or exact name. Needs applicationId and privateKey. Fails if the user does not exist.

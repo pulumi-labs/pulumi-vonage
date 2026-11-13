@@ -871,6 +871,672 @@
       },
       "type": "object"
     },
+    "vonage:index:TenDlcBrandInfo": {
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "Vonage account (API key) the brand belongs to."
+        },
+        "altBusinessId": {
+          "type": "string",
+          "description": "Alternative business ID; empty when unset."
+        },
+        "altBusinessIdType": {
+          "type": "string",
+          "description": "Alternative business ID type (DUNS, GIIN or LEI); empty when unset."
+        },
+        "brandId": {
+          "type": "string",
+          "description": "ID of the brand at The Campaign Registry."
+        },
+        "brandRelationship": {
+          "type": "string",
+          "description": "Relationship tier the registry assigned; empty when not yet known."
+        },
+        "campaignCount": {
+          "type": "integer",
+          "description": "Number of campaigns registered for the brand."
+        },
+        "carrierSuspensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/types/vonage:index:TenDlcCarrierSuspension"
+          },
+          "description": "Carrier suspensions of the brand, if any."
+        },
+        "city": {
+          "type": "string",
+          "description": "City; empty when unset."
+        },
+        "companyName": {
+          "type": "string",
+          "description": "Legal company name; empty when unset."
+        },
+        "country": {
+          "type": "string",
+          "description": "Country of the address; empty when unset."
+        },
+        "createdDate": {
+          "type": "string",
+          "description": "When the brand was created."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name; empty when unset."
+        },
+        "ein": {
+          "type": "string",
+          "description": "Tax ID (EIN); empty when unset."
+        },
+        "einIssuingCountry": {
+          "type": "string",
+          "description": "Country that issued the tax ID; empty when unset."
+        },
+        "email": {
+          "type": "string",
+          "description": "Contact email; empty when unset."
+        },
+        "entityType": {
+          "type": "string",
+          "description": "Legal form: PRIVATE_PROFIT, PUBLIC_PROFIT, NON_PROFIT, SOLE_PROPRIETOR or GOVERNMENT."
+        },
+        "firstName": {
+          "type": "string",
+          "description": "First name; empty when unset."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name; empty when unset."
+        },
+        "lastUpdated": {
+          "type": "string",
+          "description": "When the brand was last updated."
+        },
+        "mobilePhone": {
+          "type": "string",
+          "description": "Mobile phone number; empty when unset."
+        },
+        "owner": {
+          "type": "boolean",
+          "description": "Whether the account owns the brand."
+        },
+        "partner": {
+          "type": "boolean",
+          "description": "Whether the brand is a partner brand."
+        },
+        "phone": {
+          "type": "string",
+          "description": "Contact phone number; empty when unset."
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "Postal code; empty when unset."
+        },
+        "primaryAccountId": {
+          "type": "string",
+          "description": "API key of the primary account; empty when unset."
+        },
+        "referenceId": {
+          "type": "string",
+          "description": "Reference ID of the brand; empty when unset."
+        },
+        "reseller": {
+          "type": "boolean",
+          "description": "Whether the brand is a reseller."
+        },
+        "shared": {
+          "type": "boolean",
+          "description": "Whether the brand is shared with the account."
+        },
+        "state": {
+          "type": "string",
+          "description": "State or region; empty when unset."
+        },
+        "status": {
+          "type": "string",
+          "description": "ACTIVE or SUSPENDED (deleted brands are not returned)."
+        },
+        "stockExchange": {
+          "type": "string",
+          "description": "Stock exchange; empty when unset."
+        },
+        "stockSymbol": {
+          "type": "string",
+          "description": "Stock symbol; empty when unset."
+        },
+        "street": {
+          "type": "string",
+          "description": "Street address; empty when unset."
+        },
+        "universalEin": {
+          "type": "string",
+          "description": "Universal tax ID; empty when unset."
+        },
+        "verificationEmail": {
+          "type": "string",
+          "description": "Verification email address; empty when unset."
+        },
+        "verifiedDate": {
+          "type": "string",
+          "description": "When the brand was verified; empty when it has not been."
+        },
+        "vertical": {
+          "type": "string",
+          "description": "Industry vertical; empty when unset."
+        },
+        "website": {
+          "type": "string",
+          "description": "Website; empty when unset."
+        }
+      },
+      "type": "object",
+      "required": [
+        "brandId",
+        "accountId",
+        "primaryAccountId",
+        "entityType",
+        "firstName",
+        "lastName",
+        "displayName",
+        "companyName",
+        "ein",
+        "einIssuingCountry",
+        "universalEin",
+        "altBusinessIdType",
+        "altBusinessId",
+        "phone",
+        "mobilePhone",
+        "street",
+        "city",
+        "state",
+        "postalCode",
+        "country",
+        "email",
+        "stockSymbol",
+        "stockExchange",
+        "website",
+        "vertical",
+        "verificationEmail",
+        "reseller",
+        "status",
+        "brandRelationship",
+        "campaignCount",
+        "referenceId",
+        "verifiedDate",
+        "createdDate",
+        "lastUpdated",
+        "owner",
+        "partner",
+        "shared",
+        "carrierSuspensions"
+      ]
+    },
+    "vonage:index:TenDlcCampaignInfo": {
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "Vonage account (API key) the campaign belongs to."
+        },
+        "ageGated": {
+          "type": "boolean",
+          "description": "Whether the content is age-gated."
+        },
+        "autoRenewal": {
+          "type": "boolean",
+          "description": "Whether the campaign renews automatically."
+        },
+        "brandId": {
+          "type": "string",
+          "description": "ID of the brand the campaign belongs to."
+        },
+        "campaignId": {
+          "type": "string",
+          "description": "ID of the campaign."
+        },
+        "createdDate": {
+          "type": "string",
+          "description": "When the campaign was created."
+        },
+        "description": {
+          "type": "string",
+          "description": "What the campaign is for."
+        },
+        "directLending": {
+          "type": "boolean",
+          "description": "Whether the campaign involves direct lending."
+        },
+        "embeddedLink": {
+          "type": "boolean",
+          "description": "Whether messages contain embedded links."
+        },
+        "embeddedPhone": {
+          "type": "boolean",
+          "description": "Whether messages contain embedded phone numbers."
+        },
+        "helpKeywords": {
+          "type": "string",
+          "description": "Help keywords, comma separated; empty when unset."
+        },
+        "helpMessage": {
+          "type": "string",
+          "description": "Reply to the HELP keyword."
+        },
+        "hipaa": {
+          "type": "boolean",
+          "description": "Whether the campaign handles HIPAA-covered data."
+        },
+        "label": {
+          "type": "string",
+          "description": "Your label for the campaign; empty when unset."
+        },
+        "lastUpdated": {
+          "type": "string",
+          "description": "When the campaign was last updated."
+        },
+        "messageFlow": {
+          "type": "string",
+          "description": "How subscribers opt in and what they receive."
+        },
+        "optInKeywords": {
+          "type": "string",
+          "description": "Opt-in keywords, comma separated; empty when unset."
+        },
+        "optInMessage": {
+          "type": "string",
+          "description": "Confirmation sent when a subscriber opts in."
+        },
+        "optOutKeywords": {
+          "type": "string",
+          "description": "Opt-out keywords, comma separated; empty when unset."
+        },
+        "optOutMessage": {
+          "type": "string",
+          "description": "Confirmation sent when a subscriber opts out."
+        },
+        "registrationDate": {
+          "type": "string",
+          "description": "When the campaign was registered; empty when not yet."
+        },
+        "renewalDate": {
+          "type": "string",
+          "description": "When the campaign renews or ends; empty when unknown."
+        },
+        "reseller": {
+          "type": "boolean",
+          "description": "Whether a reseller registered the campaign."
+        },
+        "resellerId": {
+          "type": "string",
+          "description": "Reseller ID; empty when unset."
+        },
+        "samples": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The sample messages."
+        },
+        "status": {
+          "type": "string",
+          "description": "Campaign status (ended campaigns are not returned)."
+        },
+        "subUsecases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Sub use cases."
+        },
+        "tcrCampaignId": {
+          "type": "string",
+          "description": "ID of the campaign at The Campaign Registry; empty until it exists there."
+        },
+        "tcrStatus": {
+          "type": "string",
+          "description": "Status at The Campaign Registry; empty when unknown."
+        },
+        "trafficEnabled": {
+          "type": "boolean",
+          "description": "Whether the campaign can carry traffic."
+        },
+        "urlSamples": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The sample links."
+        },
+        "usecase": {
+          "type": "string",
+          "description": "Use case of the campaign."
+        },
+        "vertical": {
+          "type": "string",
+          "description": "Industry vertical; empty when unset."
+        }
+      },
+      "type": "object",
+      "required": [
+        "campaignId",
+        "brandId",
+        "accountId",
+        "tcrCampaignId",
+        "usecase",
+        "subUsecases",
+        "vertical",
+        "description",
+        "messageFlow",
+        "samples",
+        "urlSamples",
+        "helpMessage",
+        "helpKeywords",
+        "optInMessage",
+        "optInKeywords",
+        "optOutMessage",
+        "optOutKeywords",
+        "resellerId",
+        "reseller",
+        "label",
+        "ageGated",
+        "directLending",
+        "embeddedLink",
+        "embeddedPhone",
+        "hipaa",
+        "autoRenewal",
+        "status",
+        "tcrStatus",
+        "trafficEnabled",
+        "registrationDate",
+        "renewalDate",
+        "createdDate",
+        "lastUpdated"
+      ]
+    },
+    "vonage:index:TenDlcCampaignNumberInfo": {
+      "properties": {
+        "compliance": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Compliance findings Vonage reports for the number."
+        },
+        "country": {
+          "type": "string",
+          "description": "Two-letter country code of the number."
+        },
+        "number": {
+          "type": "string",
+          "description": "The number, digits only."
+        },
+        "status": {
+          "type": "string",
+          "description": "Link status: LINKING, LINKED, REJECTED or UNLINKING. Only LINKED allows traffic."
+        }
+      },
+      "type": "object",
+      "required": [
+        "number",
+        "country",
+        "status",
+        "compliance"
+      ]
+    },
+    "vonage:index:TenDlcCarrierSuspension": {
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "Category of the suspension."
+        },
+        "explanation": {
+          "type": "string",
+          "description": "The carrier's explanation."
+        }
+      },
+      "type": "object",
+      "required": [
+        "category",
+        "explanation"
+      ]
+    },
+    "vonage:index:TenDlcConsentMechanism": {
+      "properties": {
+        "attachment": {
+          "type": "string",
+          "description": "HTTP(S) link to evidence of the consent flow, such as a screenshot. Required for every method except TEXT_TO_JOIN."
+        },
+        "details": {
+          "type": "string",
+          "description": "Describes how consent is collected with this method."
+        },
+        "method": {
+          "type": "string",
+          "description": "How consent is collected: ONLINE_FORM, LIVE_OPERATOR, POINT_OF_SALE, TEXT_TO_JOIN or OTHER."
+        }
+      },
+      "type": "object",
+      "required": [
+        "method",
+        "details"
+      ]
+    },
+    "vonage:index:TenDlcMessageFlowDetails": {
+      "properties": {
+        "brandName": {
+          "type": "string",
+          "description": "Brand name shown in the generated text. Vonage does not require it for sole proprietors."
+        },
+        "carrierDisclaimer": {
+          "type": "boolean",
+          "description": "Whether the carriers are not liable for delayed or undelivered messages is disclosed. Only true is accepted; leave unset otherwise."
+        },
+        "consentMechanisms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/types/vonage:index:TenDlcConsentMechanism"
+          },
+          "description": "At least one way subscribers consent to receive messages."
+        },
+        "frequency": {
+          "type": "string",
+          "description": "How often messages are sent: ONE_TIME or RECURRING."
+        },
+        "pricingDisclosure": {
+          "type": "boolean",
+          "description": "Whether subscribers are told about message and data rates. Must be true."
+        },
+        "privacyPolicy": {
+          "type": "string",
+          "description": "Link to the privacy policy."
+        },
+        "termsAndConditions": {
+          "type": "string",
+          "description": "Link to the terms and conditions."
+        }
+      },
+      "type": "object",
+      "required": [
+        "consentMechanisms",
+        "pricingDisclosure",
+        "frequency",
+        "privacyPolicy",
+        "termsAndConditions"
+      ]
+    },
+    "vonage:index:TenDlcResellerInfo": {
+      "properties": {
+        "companyName": {
+          "type": "string",
+          "description": "Company name of the reseller."
+        },
+        "email": {
+          "type": "string",
+          "description": "Contact email address."
+        },
+        "phone": {
+          "type": "string",
+          "description": "Contact phone number, E.164 without the + prefix."
+        },
+        "rejectionReason": {
+          "type": "string",
+          "description": "Why the reseller was rejected; empty otherwise."
+        },
+        "resellerId": {
+          "type": "string",
+          "description": "ID of the reseller."
+        },
+        "status": {
+          "type": "string",
+          "description": "Review status: PENDING, APPROVED or REJECTED."
+        },
+        "tcrResellerId": {
+          "type": "string",
+          "description": "ID at The Campaign Registry; empty until the reseller is APPROVED."
+        }
+      },
+      "type": "object",
+      "required": [
+        "resellerId",
+        "tcrResellerId",
+        "companyName",
+        "phone",
+        "email",
+        "status",
+        "rejectionReason"
+      ]
+    },
+    "vonage:index:TenDlcThroughputInfo": {
+      "properties": {
+        "brandId": {
+          "type": "string",
+          "description": "Brand the throughput applies to; empty when not reported."
+        },
+        "campaignId": {
+          "type": "string",
+          "description": "Campaign the throughput applies to; empty when not reported."
+        },
+        "carriers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Carriers the throughput applies to."
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of the throughput; only custom overrides carry one."
+        },
+        "period": {
+          "type": "string",
+          "description": "Period the value covers: minute or day."
+        },
+        "scope": {
+          "type": "string",
+          "description": "What the throughput limits: campaign, brand or number."
+        },
+        "value": {
+          "$ref": "#/types/vonage:index:TenDlcThroughputValue",
+          "description": "How many messages are allowed per period."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id",
+        "brandId",
+        "campaignId",
+        "carriers",
+        "value",
+        "period",
+        "scope"
+      ]
+    },
+    "vonage:index:TenDlcThroughputValue": {
+      "properties": {
+        "mms": {
+          "type": "number",
+          "description": "MMS messages per period, when SMS and MMS are limited separately."
+        },
+        "shared": {
+          "type": "number",
+          "description": "Messages per period shared by SMS and MMS."
+        },
+        "sms": {
+          "type": "number",
+          "description": "SMS messages per period, when SMS and MMS are limited separately."
+        },
+        "unlimited": {
+          "type": "boolean",
+          "description": "True when the throughput is unlimited."
+        }
+      },
+      "type": "object"
+    },
+    "vonage:index:TenDlcUsecaseInfo": {
+      "properties": {
+        "classification": {
+          "type": "string",
+          "description": "Classification, for example STANDARD or SPECIAL."
+        },
+        "description": {
+          "type": "string",
+          "description": "What the use case covers."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name."
+        },
+        "id": {
+          "type": "string",
+          "description": "Use case ID, the usecase of a TenDlcCampaign."
+        },
+        "maxSubUsecases": {
+          "type": "number",
+          "description": "Most sub use cases a campaign may list; unset when not reported."
+        },
+        "minMsgSamples": {
+          "type": "number",
+          "description": "Fewest sample messages the use case needs; unset when not reported."
+        },
+        "minSubUsecases": {
+          "type": "number",
+          "description": "Fewest sub use cases a MIXED-style campaign needs; unset when not reported."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id",
+        "displayName",
+        "description",
+        "classification"
+      ]
+    },
+    "vonage:index:TenDlcVerticalInfo": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "What the vertical covers."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name."
+        },
+        "id": {
+          "type": "string",
+          "description": "Vertical ID, the vertical of a TenDlcCampaign."
+        },
+        "industryId": {
+          "type": "string",
+          "description": "Industry the vertical belongs to; empty when not reported."
+        }
+      },
+      "type": "object",
+      "required": [
+        "id",
+        "displayName",
+        "description",
+        "industryId"
+      ]
+    },
     "vonage:index:UserChannels": {
       "properties": {
         "messenger": {
@@ -2302,6 +2968,708 @@
       },
       "requiredInputs": [
         "name"
+      ]
+    },
+    "vonage:index:TenDlcAccountSettings": {
+      "description": "The account-level 10DLC settings (US A2P messaging registration). It is a singleton: the settings always exist, so create adopts them, the ID and import ID is the account API key, and destroy only stops managing them (the setting keeps its last value). Only the primary account may change them. Shapes follow the published Vonage 10DLC OpenAPI definition and were not verified against a live account.",
+      "properties": {
+        "optOutAssist": {
+          "type": "boolean",
+          "description": "Whether Vonage's opt-out assist is on: it handles opt-out keywords such as STOP for the account's 10DLC traffic."
+        }
+      },
+      "required": [
+        "optOutAssist"
+      ],
+      "inputProperties": {
+        "optOutAssist": {
+          "type": "boolean",
+          "description": "Whether Vonage's opt-out assist is on: it handles opt-out keywords such as STOP for the account's 10DLC traffic."
+        }
+      },
+      "requiredInputs": [
+        "optOutAssist"
+      ]
+    },
+    "vonage:index:TenDlcBrand": {
+      "description": "A 10DLC brand: the business or person behind US A2P SMS campaigns, registered with The Campaign Registry through Vonage. Registration is billed and may need vetting before campaigns can be made, so a brand is not created lightly and the API call is never retried. Destroy deletes the brand (it moves to DELETED at Vonage and then reads as gone); Vonage refuses while the brand has active campaigns. Optional inputs left unset are not managed. Shapes follow the published Vonage 10DLC OpenAPI definition and were not verified against a live account.",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "Vonage account (API key) the brand belongs to. Defaults to the provider's apiKey. Changing it replaces the brand."
+        },
+        "altBusinessId": {
+          "type": "string",
+          "description": "Alternative business ID of the type altBusinessIdType. Changing it replaces the brand."
+        },
+        "altBusinessIdType": {
+          "type": "string",
+          "description": "Type of the alternative business ID: DUNS, GIIN or LEI. Changing it replaces the brand."
+        },
+        "brandId": {
+          "type": "string",
+          "description": "The brand's ID at The Campaign Registry (seven characters, 0-9 and A-F). Campaigns refer to it."
+        },
+        "brandRelationship": {
+          "type": "string",
+          "description": "Relationship tier the registry assigned: BASIC_ACCOUNT, SMALL_ACCOUNT, MEDIUM_ACCOUNT, LARGE_ACCOUNT or KEY_ACCOUNT."
+        },
+        "campaignCount": {
+          "type": "integer",
+          "description": "Number of campaigns registered for the brand."
+        },
+        "city": {
+          "type": "string",
+          "description": "City (at most 100 characters)."
+        },
+        "companyName": {
+          "type": "string",
+          "description": "Legal company name (at most 255 characters)."
+        },
+        "country": {
+          "type": "string",
+          "description": "Two-letter ISO 3166 country code of the address."
+        },
+        "createdDate": {
+          "type": "string",
+          "description": "When the brand was created."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Name the brand is shown under (at most 255 characters)."
+        },
+        "ein": {
+          "type": "string",
+          "description": "Tax ID (EIN) of the company, as NN-NNNNNNN or NNNNNNNNN."
+        },
+        "einIssuingCountry": {
+          "type": "string",
+          "description": "Two-letter ISO 3166 code of the country that issued the tax ID, in capitals."
+        },
+        "email": {
+          "type": "string",
+          "description": "Contact email address (at most 100 characters)."
+        },
+        "entityType": {
+          "type": "string",
+          "description": "Legal form of the brand: PRIVATE_PROFIT, PUBLIC_PROFIT, NON_PROFIT, SOLE_PROPRIETOR or GOVERNMENT. It decides which other fields Vonage requires."
+        },
+        "firstName": {
+          "type": "string",
+          "description": "First name (sole proprietors; at most 100 characters)."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name (sole proprietors; at most 100 characters)."
+        },
+        "lastUpdated": {
+          "type": "string",
+          "description": "When the brand was last updated."
+        },
+        "mobilePhone": {
+          "type": "string",
+          "description": "Mobile phone number in E.164 form without the plus sign."
+        },
+        "owner": {
+          "type": "boolean",
+          "description": "Whether the account owns the brand."
+        },
+        "partner": {
+          "type": "boolean",
+          "description": "Whether the brand is a partner brand."
+        },
+        "phone": {
+          "type": "string",
+          "description": "Contact phone number."
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "Postal code (at most 10 characters)."
+        },
+        "primaryAccountId": {
+          "type": "string",
+          "description": "API key of the primary account, when the brand is registered for a subaccount. Changing it replaces the brand."
+        },
+        "referenceId": {
+          "type": "string",
+          "description": "Reference ID of the brand."
+        },
+        "reseller": {
+          "type": "boolean",
+          "description": "Whether the brand is a reseller."
+        },
+        "shared": {
+          "type": "boolean",
+          "description": "Whether the brand is shared with the account."
+        },
+        "state": {
+          "type": "string",
+          "description": "State or region (at most 20 characters)."
+        },
+        "status": {
+          "type": "string",
+          "description": "Brand status: ACTIVE or SUSPENDED. It changes as the registry reviews the brand."
+        },
+        "stockExchange": {
+          "type": "string",
+          "description": "Stock exchange of the symbol (for example NASDAQ, NYSE, or NONE)."
+        },
+        "stockSymbol": {
+          "type": "string",
+          "description": "Stock symbol (public companies)."
+        },
+        "street": {
+          "type": "string",
+          "description": "Street address (at most 100 characters)."
+        },
+        "universalEin": {
+          "type": "string",
+          "description": "Universal tax ID for companies outside the US. Changing it replaces the brand."
+        },
+        "verificationEmail": {
+          "type": "string",
+          "description": "Email address Vonage sends the brand's verification to. Changing it replaces the brand."
+        },
+        "verifiedDate": {
+          "type": "string",
+          "description": "When the brand was verified, if it has been."
+        },
+        "vertical": {
+          "type": "string",
+          "description": "Industry vertical, for example HEALTHCARE, RETAIL or EDUCATION (see getTenDlcEnums once available, or the Vonage 10DLC reference)."
+        },
+        "website": {
+          "type": "string",
+          "description": "Website of the brand."
+        }
+      },
+      "required": [
+        "entityType",
+        "brandId",
+        "status"
+      ],
+      "inputProperties": {
+        "accountId": {
+          "type": "string",
+          "description": "Vonage account (API key) the brand belongs to. Defaults to the provider's apiKey. Changing it replaces the brand."
+        },
+        "altBusinessId": {
+          "type": "string",
+          "description": "Alternative business ID of the type altBusinessIdType. Changing it replaces the brand."
+        },
+        "altBusinessIdType": {
+          "type": "string",
+          "description": "Type of the alternative business ID: DUNS, GIIN or LEI. Changing it replaces the brand."
+        },
+        "city": {
+          "type": "string",
+          "description": "City (at most 100 characters)."
+        },
+        "companyName": {
+          "type": "string",
+          "description": "Legal company name (at most 255 characters)."
+        },
+        "country": {
+          "type": "string",
+          "description": "Two-letter ISO 3166 country code of the address."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Name the brand is shown under (at most 255 characters)."
+        },
+        "ein": {
+          "type": "string",
+          "description": "Tax ID (EIN) of the company, as NN-NNNNNNN or NNNNNNNNN."
+        },
+        "einIssuingCountry": {
+          "type": "string",
+          "description": "Two-letter ISO 3166 code of the country that issued the tax ID, in capitals."
+        },
+        "email": {
+          "type": "string",
+          "description": "Contact email address (at most 100 characters)."
+        },
+        "entityType": {
+          "type": "string",
+          "description": "Legal form of the brand: PRIVATE_PROFIT, PUBLIC_PROFIT, NON_PROFIT, SOLE_PROPRIETOR or GOVERNMENT. It decides which other fields Vonage requires."
+        },
+        "firstName": {
+          "type": "string",
+          "description": "First name (sole proprietors; at most 100 characters)."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name (sole proprietors; at most 100 characters)."
+        },
+        "mobilePhone": {
+          "type": "string",
+          "description": "Mobile phone number in E.164 form without the plus sign."
+        },
+        "phone": {
+          "type": "string",
+          "description": "Contact phone number."
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "Postal code (at most 10 characters)."
+        },
+        "primaryAccountId": {
+          "type": "string",
+          "description": "API key of the primary account, when the brand is registered for a subaccount. Changing it replaces the brand."
+        },
+        "reseller": {
+          "type": "boolean",
+          "description": "Whether the brand is a reseller."
+        },
+        "state": {
+          "type": "string",
+          "description": "State or region (at most 20 characters)."
+        },
+        "stockExchange": {
+          "type": "string",
+          "description": "Stock exchange of the symbol (for example NASDAQ, NYSE, or NONE)."
+        },
+        "stockSymbol": {
+          "type": "string",
+          "description": "Stock symbol (public companies)."
+        },
+        "street": {
+          "type": "string",
+          "description": "Street address (at most 100 characters)."
+        },
+        "universalEin": {
+          "type": "string",
+          "description": "Universal tax ID for companies outside the US. Changing it replaces the brand."
+        },
+        "verificationEmail": {
+          "type": "string",
+          "description": "Email address Vonage sends the brand's verification to. Changing it replaces the brand."
+        },
+        "vertical": {
+          "type": "string",
+          "description": "Industry vertical, for example HEALTHCARE, RETAIL or EDUCATION (see getTenDlcEnums once available, or the Vonage 10DLC reference)."
+        },
+        "website": {
+          "type": "string",
+          "description": "Website of the brand."
+        }
+      },
+      "requiredInputs": [
+        "entityType"
+      ]
+    },
+    "vonage:index:TenDlcCampaign": {
+      "description": "A 10DLC campaign: one messaging use case of a brand, registered with The Campaign Registry through Vonage. Registration is billed, reviewed by Vonage and the carriers (status moves from PENDING_REVIEW towards ACTIVE on its own) and never retried after an unknown outcome. Vonage cannot delete a campaign: destroy turns auto-renewal off, so it ends at its renewal date, and an ended campaign reads as gone. Fields Vonage locks after approval replace the campaign when changed. The resource ID is BRAND_ID/CAMPAIGN_ID. Shapes follow the published Vonage 10DLC OpenAPI definition and were not verified against a live account.",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "Vonage account (API key) the campaign belongs to. Defaults to the provider's apiKey. Changing it replaces the campaign."
+        },
+        "ageGated": {
+          "type": "boolean",
+          "description": "Whether the content is age-gated. Changing it replaces the campaign."
+        },
+        "autoRenewal": {
+          "type": "boolean",
+          "description": "Whether the campaign renews automatically. Destroy sets it to false."
+        },
+        "brandId": {
+          "type": "string",
+          "description": "ID of the TenDlcBrand the campaign belongs to. Changing it replaces the campaign."
+        },
+        "campaignId": {
+          "type": "string",
+          "description": "ID of the campaign (the resource ID is BRAND_ID/CAMPAIGN_ID)."
+        },
+        "createdDate": {
+          "type": "string",
+          "description": "When the campaign was created."
+        },
+        "description": {
+          "type": "string",
+          "description": "What the campaign is for and who receives the messages (40 to 4096 characters)."
+        },
+        "directLending": {
+          "type": "boolean",
+          "description": "Whether the campaign involves direct lending or loan arrangement. Changing it replaces the campaign."
+        },
+        "embeddedLink": {
+          "type": "boolean",
+          "description": "Whether messages contain embedded links. Changing it replaces the campaign."
+        },
+        "embeddedPhone": {
+          "type": "boolean",
+          "description": "Whether messages contain embedded phone numbers. Changing it replaces the campaign."
+        },
+        "helpKeywords": {
+          "type": "string",
+          "description": "Keywords that trigger the help message, comma separated (at most 255 characters)."
+        },
+        "helpMessage": {
+          "type": "string",
+          "description": "Reply to the HELP keyword (20 to 320 characters)."
+        },
+        "hipaa": {
+          "type": "boolean",
+          "description": "Whether the campaign handles HIPAA-covered data. Vonage only allows a change while no number was ever linked, so changing it replaces the campaign."
+        },
+        "label": {
+          "type": "string",
+          "description": "Your own label for the campaign (at most 50 characters)."
+        },
+        "lastUpdated": {
+          "type": "string",
+          "description": "When the campaign was last updated."
+        },
+        "messageFlow": {
+          "type": "string",
+          "description": "How subscribers opt in and what they receive (40 to 4096 characters). Set either this or messageFlowDetails, not both. Vonage marks the free-text field deprecated. In the state this is always the text Vonage holds, which is rendered from messageFlowDetails when those were used."
+        },
+        "messageFlowDetails": {
+          "$ref": "#/types/vonage:index:TenDlcMessageFlowDetails",
+          "description": "Structured description of the opt-in flow, the replacement for messageFlow. Set either this or messageFlow, not both. Vonage renders it into the message flow text. Switching between the two updates the campaign in place."
+        },
+        "optInKeywords": {
+          "type": "string",
+          "description": "Keywords that opt a subscriber in, comma separated. Needs optInMessage."
+        },
+        "optInMessage": {
+          "type": "string",
+          "description": "Confirmation sent when a subscriber opts in (20 to 320 characters)."
+        },
+        "optOutKeywords": {
+          "type": "string",
+          "description": "Keywords that opt a subscriber out, comma separated."
+        },
+        "optOutMessage": {
+          "type": "string",
+          "description": "Confirmation sent when a subscriber opts out (20 to 320 characters)."
+        },
+        "registrationDate": {
+          "type": "string",
+          "description": "When the campaign was registered."
+        },
+        "renewalDate": {
+          "type": "string",
+          "description": "When the campaign renews or ends."
+        },
+        "reseller": {
+          "type": "boolean",
+          "description": "Whether the campaign is registered by a reseller."
+        },
+        "resellerId": {
+          "type": "string",
+          "description": "ID of the reseller the campaign is registered for (at most 8 characters)."
+        },
+        "samples": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "One to five sample messages (20 to 1024 characters each). Vonage needs at least as many as the use case and the sub use cases require."
+        },
+        "status": {
+          "type": "string",
+          "description": "Campaign status: PENDING_REVIEW, UPDATES_REQUIRED, CARRIERS_REVIEW, ACTIVE, PENDING_CANCELLATION or SUSPENDED. It changes as Vonage and the carriers review the campaign; only ACTIVE lets traffic flow."
+        },
+        "subUsecases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Sub use cases of a MIXED-style campaign. Changing them replaces the campaign."
+        },
+        "tcAgreed": {
+          "type": "boolean",
+          "description": "Must be true: you agree to the 10DLC terms and conditions. Vonage never returns it, so it is not refreshed; an import sets it to true."
+        },
+        "tcrCampaignId": {
+          "type": "string",
+          "description": "ID of the campaign at The Campaign Registry, once it exists there."
+        },
+        "tcrStatus": {
+          "type": "string",
+          "description": "Status at The Campaign Registry: UNKNOWN, ACTIVE or CANCELED."
+        },
+        "trafficEnabled": {
+          "type": "boolean",
+          "description": "Whether the campaign can carry traffic."
+        },
+        "urlSamples": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Up to 15 sample links that might be sent to subscribers."
+        },
+        "usecase": {
+          "type": "string",
+          "description": "Use case: CUSTOMER_CARE, POLLING_VOTING, HIGHER_EDUCATION, PUBLIC_SERVICE_ANNOUNCEMENT, MARKETING or SECURITY_ALERT (the list can grow, see Vonage's enum endpoint). Read-only once Vonage approved the campaign, so changing it replaces the campaign."
+        },
+        "vertical": {
+          "type": "string",
+          "description": "Industry vertical. Read-only once the campaign is approved, so changing it replaces the campaign."
+        }
+      },
+      "required": [
+        "brandId",
+        "usecase",
+        "description",
+        "samples",
+        "helpMessage",
+        "optInMessage",
+        "optOutMessage",
+        "tcAgreed",
+        "campaignId",
+        "status"
+      ],
+      "inputProperties": {
+        "accountId": {
+          "type": "string",
+          "description": "Vonage account (API key) the campaign belongs to. Defaults to the provider's apiKey. Changing it replaces the campaign."
+        },
+        "ageGated": {
+          "type": "boolean",
+          "description": "Whether the content is age-gated. Changing it replaces the campaign."
+        },
+        "autoRenewal": {
+          "type": "boolean",
+          "description": "Whether the campaign renews automatically. Destroy sets it to false."
+        },
+        "brandId": {
+          "type": "string",
+          "description": "ID of the TenDlcBrand the campaign belongs to. Changing it replaces the campaign."
+        },
+        "description": {
+          "type": "string",
+          "description": "What the campaign is for and who receives the messages (40 to 4096 characters)."
+        },
+        "directLending": {
+          "type": "boolean",
+          "description": "Whether the campaign involves direct lending or loan arrangement. Changing it replaces the campaign."
+        },
+        "embeddedLink": {
+          "type": "boolean",
+          "description": "Whether messages contain embedded links. Changing it replaces the campaign."
+        },
+        "embeddedPhone": {
+          "type": "boolean",
+          "description": "Whether messages contain embedded phone numbers. Changing it replaces the campaign."
+        },
+        "helpKeywords": {
+          "type": "string",
+          "description": "Keywords that trigger the help message, comma separated (at most 255 characters)."
+        },
+        "helpMessage": {
+          "type": "string",
+          "description": "Reply to the HELP keyword (20 to 320 characters)."
+        },
+        "hipaa": {
+          "type": "boolean",
+          "description": "Whether the campaign handles HIPAA-covered data. Vonage only allows a change while no number was ever linked, so changing it replaces the campaign."
+        },
+        "label": {
+          "type": "string",
+          "description": "Your own label for the campaign (at most 50 characters)."
+        },
+        "messageFlow": {
+          "type": "string",
+          "description": "How subscribers opt in and what they receive (40 to 4096 characters). Set either this or messageFlowDetails, not both. Vonage marks the free-text field deprecated. In the state this is always the text Vonage holds, which is rendered from messageFlowDetails when those were used."
+        },
+        "messageFlowDetails": {
+          "$ref": "#/types/vonage:index:TenDlcMessageFlowDetails",
+          "description": "Structured description of the opt-in flow, the replacement for messageFlow. Set either this or messageFlow, not both. Vonage renders it into the message flow text. Switching between the two updates the campaign in place."
+        },
+        "optInKeywords": {
+          "type": "string",
+          "description": "Keywords that opt a subscriber in, comma separated. Needs optInMessage."
+        },
+        "optInMessage": {
+          "type": "string",
+          "description": "Confirmation sent when a subscriber opts in (20 to 320 characters)."
+        },
+        "optOutKeywords": {
+          "type": "string",
+          "description": "Keywords that opt a subscriber out, comma separated."
+        },
+        "optOutMessage": {
+          "type": "string",
+          "description": "Confirmation sent when a subscriber opts out (20 to 320 characters)."
+        },
+        "reseller": {
+          "type": "boolean",
+          "description": "Whether the campaign is registered by a reseller."
+        },
+        "resellerId": {
+          "type": "string",
+          "description": "ID of the reseller the campaign is registered for (at most 8 characters)."
+        },
+        "samples": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "One to five sample messages (20 to 1024 characters each). Vonage needs at least as many as the use case and the sub use cases require."
+        },
+        "subUsecases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Sub use cases of a MIXED-style campaign. Changing them replaces the campaign."
+        },
+        "tcAgreed": {
+          "type": "boolean",
+          "description": "Must be true: you agree to the 10DLC terms and conditions. Vonage never returns it, so it is not refreshed; an import sets it to true."
+        },
+        "urlSamples": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Up to 15 sample links that might be sent to subscribers."
+        },
+        "usecase": {
+          "type": "string",
+          "description": "Use case: CUSTOMER_CARE, POLLING_VOTING, HIGHER_EDUCATION, PUBLIC_SERVICE_ANNOUNCEMENT, MARKETING or SECURITY_ALERT (the list can grow, see Vonage's enum endpoint). Read-only once Vonage approved the campaign, so changing it replaces the campaign."
+        },
+        "vertical": {
+          "type": "string",
+          "description": "Industry vertical. Read-only once the campaign is approved, so changing it replaces the campaign."
+        }
+      },
+      "requiredInputs": [
+        "brandId",
+        "usecase",
+        "description",
+        "samples",
+        "helpMessage",
+        "optInMessage",
+        "optOutMessage",
+        "tcAgreed"
+      ]
+    },
+    "vonage:index:TenDlcCampaignNumber": {
+      "description": "Links an owned Vonage number to a 10DLC campaign so it may send campaign traffic. Vonage accepts the link asynchronously (HTTP 202), so the status starts as LINKING; the create then reads the link back and, if Vonage rejected it, reports the resource as partially created (it stays in state, so the next apply or destroy handles it). The resource ID is BRAND_ID/CAMPAIGN_ID/NUMBER. Every input replaces the link, and destroy unlinks the number. Shapes follow the published Vonage 10DLC OpenAPI definition and were not verified against a live account.",
+      "properties": {
+        "brandId": {
+          "type": "string",
+          "description": "ID of the brand that owns the campaign. Changing it replaces the link."
+        },
+        "campaignId": {
+          "type": "string",
+          "description": "ID of the campaign (the campaignId of a TenDlcCampaign). Changing it replaces the link."
+        },
+        "compliance": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Compliance findings Vonage reports for the number, if any."
+        },
+        "country": {
+          "type": "string",
+          "description": "Two-letter ISO 3166 country code of the number, in capitals. Changing it replaces the link."
+        },
+        "number": {
+          "type": "string",
+          "description": "The Vonage number to link, digits only with the country code (7 to 15 digits). It must be owned by the account. Changing it replaces the link."
+        },
+        "status": {
+          "type": "string",
+          "description": "Link status: LINKING, LINKED or UNLINKING. Only LINKED allows traffic. It moves on its own; a link Vonage rejects fails the create."
+        }
+      },
+      "required": [
+        "brandId",
+        "campaignId",
+        "country",
+        "number",
+        "status",
+        "compliance"
+      ],
+      "inputProperties": {
+        "brandId": {
+          "type": "string",
+          "description": "ID of the brand that owns the campaign. Changing it replaces the link."
+        },
+        "campaignId": {
+          "type": "string",
+          "description": "ID of the campaign (the campaignId of a TenDlcCampaign). Changing it replaces the link."
+        },
+        "country": {
+          "type": "string",
+          "description": "Two-letter ISO 3166 country code of the number, in capitals. Changing it replaces the link."
+        },
+        "number": {
+          "type": "string",
+          "description": "The Vonage number to link, digits only with the country code (7 to 15 digits). It must be owned by the account. Changing it replaces the link."
+        }
+      },
+      "requiredInputs": [
+        "brandId",
+        "campaignId",
+        "country",
+        "number"
+      ]
+    },
+    "vonage:index:TenDlcReseller": {
+      "description": "A 10DLC reseller, registered with Vonage and The Campaign Registry. Vonage has no call to update or delete a reseller: every input replaces it (a new reseller is registered) and destroy only removes it from Pulumi state, the reseller stays registered on the account. Registration is reviewed (status moves from PENDING to APPROVED or REJECTED), possibly billed, and never retried after an unknown outcome. A REJECTED reseller is kept in state with its status and rejection reason. Import with the reseller ID. Shapes follow the published Vonage 10DLC OpenAPI definition and were not verified against a live account.",
+      "properties": {
+        "companyName": {
+          "type": "string",
+          "description": "Company name of the reseller (at most 100 characters). Changing it replaces the reseller."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the reseller contact (at most 100 characters). Changing it replaces the reseller."
+        },
+        "phone": {
+          "type": "string",
+          "description": "Mobile phone number of the reseller contact in E.164 format without the + prefix, for example 14155550100. Changing it replaces the reseller."
+        },
+        "rejectionReason": {
+          "type": "string",
+          "description": "Why the reseller was rejected; only present when the status is REJECTED."
+        },
+        "resellerId": {
+          "type": "string",
+          "description": "ID of the reseller (also the resource ID); this is the resellerId a TenDlcCampaign takes."
+        },
+        "status": {
+          "type": "string",
+          "description": "Review status: PENDING, APPROVED or REJECTED. It changes on its own as the reseller is reviewed."
+        },
+        "tcrResellerId": {
+          "type": "string",
+          "description": "ID of the reseller at The Campaign Registry; only present once the reseller is APPROVED."
+        }
+      },
+      "required": [
+        "companyName",
+        "phone",
+        "email",
+        "resellerId",
+        "status"
+      ],
+      "inputProperties": {
+        "companyName": {
+          "type": "string",
+          "description": "Company name of the reseller (at most 100 characters). Changing it replaces the reseller."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the reseller contact (at most 100 characters). Changing it replaces the reseller."
+        },
+        "phone": {
+          "type": "string",
+          "description": "Mobile phone number of the reseller contact in E.164 format without the + prefix, for example 14155550100. Changing it replaces the reseller."
+        }
+      },
+      "requiredInputs": [
+        "companyName",
+        "phone",
+        "email"
       ]
     },
     "vonage:index:User": {
@@ -3797,6 +5165,757 @@
         "required": [
           "primaryAccountApiKey",
           "subAccounts"
+        ],
+        "type": "object"
+      }
+    },
+    "vonage:index:getTenDlcAccountSettings": {
+      "description": "Read the account-level 10DLC settings.",
+      "inputs": {
+        "type": "object"
+      },
+      "outputs": {
+        "properties": {
+          "optOutAssist": {
+            "description": "Whether Vonage's opt-out assist is on for the account's 10DLC traffic.",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "optOutAssist"
+        ],
+        "type": "object"
+      }
+    },
+    "vonage:index:getTenDlcBrand": {
+      "description": "Look up a 10DLC brand by ID. A deleted brand is reported as not found.",
+      "inputs": {
+        "properties": {
+          "brandId": {
+            "type": "string",
+            "description": "ID of the brand (seven characters, 0-9 and A-F)."
+          }
+        },
+        "type": "object",
+        "required": [
+          "brandId"
+        ]
+      },
+      "outputs": {
+        "properties": {
+          "accountId": {
+            "description": "Vonage account (API key) the brand belongs to.",
+            "type": "string"
+          },
+          "altBusinessId": {
+            "description": "Alternative business ID; empty when unset.",
+            "type": "string"
+          },
+          "altBusinessIdType": {
+            "description": "Alternative business ID type (DUNS, GIIN or LEI); empty when unset.",
+            "type": "string"
+          },
+          "brandId": {
+            "description": "ID of the brand at The Campaign Registry.",
+            "type": "string"
+          },
+          "brandRelationship": {
+            "description": "Relationship tier the registry assigned; empty when not yet known.",
+            "type": "string"
+          },
+          "campaignCount": {
+            "description": "Number of campaigns registered for the brand.",
+            "type": "integer"
+          },
+          "carrierSuspensions": {
+            "description": "Carrier suspensions of the brand, if any.",
+            "items": {
+              "$ref": "#/types/vonage:index:TenDlcCarrierSuspension"
+            },
+            "type": "array"
+          },
+          "city": {
+            "description": "City; empty when unset.",
+            "type": "string"
+          },
+          "companyName": {
+            "description": "Legal company name; empty when unset.",
+            "type": "string"
+          },
+          "country": {
+            "description": "Country of the address; empty when unset.",
+            "type": "string"
+          },
+          "createdDate": {
+            "description": "When the brand was created.",
+            "type": "string"
+          },
+          "displayName": {
+            "description": "Display name; empty when unset.",
+            "type": "string"
+          },
+          "ein": {
+            "description": "Tax ID (EIN); empty when unset.",
+            "type": "string"
+          },
+          "einIssuingCountry": {
+            "description": "Country that issued the tax ID; empty when unset.",
+            "type": "string"
+          },
+          "email": {
+            "description": "Contact email; empty when unset.",
+            "type": "string"
+          },
+          "entityType": {
+            "description": "Legal form: PRIVATE_PROFIT, PUBLIC_PROFIT, NON_PROFIT, SOLE_PROPRIETOR or GOVERNMENT.",
+            "type": "string"
+          },
+          "firstName": {
+            "description": "First name; empty when unset.",
+            "type": "string"
+          },
+          "lastName": {
+            "description": "Last name; empty when unset.",
+            "type": "string"
+          },
+          "lastUpdated": {
+            "description": "When the brand was last updated.",
+            "type": "string"
+          },
+          "mobilePhone": {
+            "description": "Mobile phone number; empty when unset.",
+            "type": "string"
+          },
+          "owner": {
+            "description": "Whether the account owns the brand.",
+            "type": "boolean"
+          },
+          "partner": {
+            "description": "Whether the brand is a partner brand.",
+            "type": "boolean"
+          },
+          "phone": {
+            "description": "Contact phone number; empty when unset.",
+            "type": "string"
+          },
+          "postalCode": {
+            "description": "Postal code; empty when unset.",
+            "type": "string"
+          },
+          "primaryAccountId": {
+            "description": "API key of the primary account; empty when unset.",
+            "type": "string"
+          },
+          "referenceId": {
+            "description": "Reference ID of the brand; empty when unset.",
+            "type": "string"
+          },
+          "reseller": {
+            "description": "Whether the brand is a reseller.",
+            "type": "boolean"
+          },
+          "shared": {
+            "description": "Whether the brand is shared with the account.",
+            "type": "boolean"
+          },
+          "state": {
+            "description": "State or region; empty when unset.",
+            "type": "string"
+          },
+          "status": {
+            "description": "ACTIVE or SUSPENDED (deleted brands are not returned).",
+            "type": "string"
+          },
+          "stockExchange": {
+            "description": "Stock exchange; empty when unset.",
+            "type": "string"
+          },
+          "stockSymbol": {
+            "description": "Stock symbol; empty when unset.",
+            "type": "string"
+          },
+          "street": {
+            "description": "Street address; empty when unset.",
+            "type": "string"
+          },
+          "universalEin": {
+            "description": "Universal tax ID; empty when unset.",
+            "type": "string"
+          },
+          "verificationEmail": {
+            "description": "Verification email address; empty when unset.",
+            "type": "string"
+          },
+          "verifiedDate": {
+            "description": "When the brand was verified; empty when it has not been.",
+            "type": "string"
+          },
+          "vertical": {
+            "description": "Industry vertical; empty when unset.",
+            "type": "string"
+          },
+          "website": {
+            "description": "Website; empty when unset.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "brandId",
+          "accountId",
+          "primaryAccountId",
+          "entityType",
+          "firstName",
+          "lastName",
+          "displayName",
+          "companyName",
+          "ein",
+          "einIssuingCountry",
+          "universalEin",
+          "altBusinessIdType",
+          "altBusinessId",
+          "phone",
+          "mobilePhone",
+          "street",
+          "city",
+          "state",
+          "postalCode",
+          "country",
+          "email",
+          "stockSymbol",
+          "stockExchange",
+          "website",
+          "vertical",
+          "verificationEmail",
+          "reseller",
+          "status",
+          "brandRelationship",
+          "campaignCount",
+          "referenceId",
+          "verifiedDate",
+          "createdDate",
+          "lastUpdated",
+          "owner",
+          "partner",
+          "shared",
+          "carrierSuspensions"
+        ],
+        "type": "object"
+      }
+    },
+    "vonage:index:getTenDlcBrands": {
+      "description": "List the account's 10DLC brands, following every page.",
+      "inputs": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Only list brands with this status (ACTIVE, SUSPENDED or TERMINATED). Vonage lists ACTIVE and SUSPENDED brands when it is unset."
+          }
+        },
+        "type": "object"
+      },
+      "outputs": {
+        "properties": {
+          "brands": {
+            "description": "The brands, every page, deleted ones excluded.",
+            "items": {
+              "$ref": "#/types/vonage:index:TenDlcBrandInfo"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "brands"
+        ],
+        "type": "object"
+      }
+    },
+    "vonage:index:getTenDlcCampaign": {
+      "description": "Look up a 10DLC campaign by brand and campaign ID. An ended (terminated, canceled, expired or rejected) campaign is reported as not found.",
+      "inputs": {
+        "properties": {
+          "brandId": {
+            "type": "string",
+            "description": "ID of the brand."
+          },
+          "campaignId": {
+            "type": "string",
+            "description": "ID of the campaign."
+          }
+        },
+        "type": "object",
+        "required": [
+          "brandId",
+          "campaignId"
+        ]
+      },
+      "outputs": {
+        "properties": {
+          "accountId": {
+            "description": "Vonage account (API key) the campaign belongs to.",
+            "type": "string"
+          },
+          "ageGated": {
+            "description": "Whether the content is age-gated.",
+            "type": "boolean"
+          },
+          "autoRenewal": {
+            "description": "Whether the campaign renews automatically.",
+            "type": "boolean"
+          },
+          "brandId": {
+            "description": "ID of the brand the campaign belongs to.",
+            "type": "string"
+          },
+          "campaignId": {
+            "description": "ID of the campaign.",
+            "type": "string"
+          },
+          "createdDate": {
+            "description": "When the campaign was created.",
+            "type": "string"
+          },
+          "description": {
+            "description": "What the campaign is for.",
+            "type": "string"
+          },
+          "directLending": {
+            "description": "Whether the campaign involves direct lending.",
+            "type": "boolean"
+          },
+          "embeddedLink": {
+            "description": "Whether messages contain embedded links.",
+            "type": "boolean"
+          },
+          "embeddedPhone": {
+            "description": "Whether messages contain embedded phone numbers.",
+            "type": "boolean"
+          },
+          "helpKeywords": {
+            "description": "Help keywords, comma separated; empty when unset.",
+            "type": "string"
+          },
+          "helpMessage": {
+            "description": "Reply to the HELP keyword.",
+            "type": "string"
+          },
+          "hipaa": {
+            "description": "Whether the campaign handles HIPAA-covered data.",
+            "type": "boolean"
+          },
+          "label": {
+            "description": "Your label for the campaign; empty when unset.",
+            "type": "string"
+          },
+          "lastUpdated": {
+            "description": "When the campaign was last updated.",
+            "type": "string"
+          },
+          "messageFlow": {
+            "description": "How subscribers opt in and what they receive.",
+            "type": "string"
+          },
+          "optInKeywords": {
+            "description": "Opt-in keywords, comma separated; empty when unset.",
+            "type": "string"
+          },
+          "optInMessage": {
+            "description": "Confirmation sent when a subscriber opts in.",
+            "type": "string"
+          },
+          "optOutKeywords": {
+            "description": "Opt-out keywords, comma separated; empty when unset.",
+            "type": "string"
+          },
+          "optOutMessage": {
+            "description": "Confirmation sent when a subscriber opts out.",
+            "type": "string"
+          },
+          "registrationDate": {
+            "description": "When the campaign was registered; empty when not yet.",
+            "type": "string"
+          },
+          "renewalDate": {
+            "description": "When the campaign renews or ends; empty when unknown.",
+            "type": "string"
+          },
+          "reseller": {
+            "description": "Whether a reseller registered the campaign.",
+            "type": "boolean"
+          },
+          "resellerId": {
+            "description": "Reseller ID; empty when unset.",
+            "type": "string"
+          },
+          "samples": {
+            "description": "The sample messages.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "status": {
+            "description": "Campaign status (ended campaigns are not returned).",
+            "type": "string"
+          },
+          "subUsecases": {
+            "description": "Sub use cases.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "tcrCampaignId": {
+            "description": "ID of the campaign at The Campaign Registry; empty until it exists there.",
+            "type": "string"
+          },
+          "tcrStatus": {
+            "description": "Status at The Campaign Registry; empty when unknown.",
+            "type": "string"
+          },
+          "trafficEnabled": {
+            "description": "Whether the campaign can carry traffic.",
+            "type": "boolean"
+          },
+          "urlSamples": {
+            "description": "The sample links.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "usecase": {
+            "description": "Use case of the campaign.",
+            "type": "string"
+          },
+          "vertical": {
+            "description": "Industry vertical; empty when unset.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "campaignId",
+          "brandId",
+          "accountId",
+          "tcrCampaignId",
+          "usecase",
+          "subUsecases",
+          "vertical",
+          "description",
+          "messageFlow",
+          "samples",
+          "urlSamples",
+          "helpMessage",
+          "helpKeywords",
+          "optInMessage",
+          "optInKeywords",
+          "optOutMessage",
+          "optOutKeywords",
+          "resellerId",
+          "reseller",
+          "label",
+          "ageGated",
+          "directLending",
+          "embeddedLink",
+          "embeddedPhone",
+          "hipaa",
+          "autoRenewal",
+          "status",
+          "tcrStatus",
+          "trafficEnabled",
+          "registrationDate",
+          "renewalDate",
+          "createdDate",
+          "lastUpdated"
+        ],
+        "type": "object"
+      }
+    },
+    "vonage:index:getTenDlcCampaignNumber": {
+      "description": "Look up a number linked to a 10DLC campaign. A number that is not linked (or already UNLINKED) is reported as not found.",
+      "inputs": {
+        "properties": {
+          "brandId": {
+            "type": "string",
+            "description": "ID of the brand."
+          },
+          "campaignId": {
+            "type": "string",
+            "description": "ID of the campaign."
+          },
+          "number": {
+            "type": "string",
+            "description": "The number, digits only."
+          }
+        },
+        "type": "object",
+        "required": [
+          "brandId",
+          "campaignId",
+          "number"
+        ]
+      },
+      "outputs": {
+        "properties": {
+          "compliance": {
+            "description": "Compliance findings Vonage reports for the number.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "country": {
+            "description": "Two-letter country code of the number.",
+            "type": "string"
+          },
+          "number": {
+            "description": "The number, digits only.",
+            "type": "string"
+          },
+          "status": {
+            "description": "Link status: LINKING, LINKED, REJECTED or UNLINKING. Only LINKED allows traffic.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "number",
+          "country",
+          "status",
+          "compliance"
+        ],
+        "type": "object"
+      }
+    },
+    "vonage:index:getTenDlcCampaignNumbers": {
+      "description": "List the numbers linked to a 10DLC campaign, following every page.",
+      "inputs": {
+        "properties": {
+          "brandId": {
+            "type": "string",
+            "description": "ID of the brand."
+          },
+          "campaignId": {
+            "type": "string",
+            "description": "ID of the campaign."
+          }
+        },
+        "type": "object",
+        "required": [
+          "brandId",
+          "campaignId"
+        ]
+      },
+      "outputs": {
+        "properties": {
+          "numbers": {
+            "description": "The numbers linked to the campaign, every page, unlinked ones excluded.",
+            "items": {
+              "$ref": "#/types/vonage:index:TenDlcCampaignNumberInfo"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "numbers"
+        ],
+        "type": "object"
+      }
+    },
+    "vonage:index:getTenDlcCampaignTermsAndConditions": {
+      "description": "Read the 10DLC campaign terms and conditions that tcAgreed on a TenDlcCampaign accepts.",
+      "inputs": {
+        "type": "object"
+      },
+      "outputs": {
+        "properties": {
+          "subTerms": {
+            "description": "The terms and conditions a campaign owner agrees to by setting tcAgreed on a TenDlcCampaign.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "subTerms"
+        ],
+        "type": "object"
+      }
+    },
+    "vonage:index:getTenDlcCampaigns": {
+      "description": "List the 10DLC campaigns of a brand, following every page.",
+      "inputs": {
+        "properties": {
+          "brandId": {
+            "type": "string",
+            "description": "ID of the brand."
+          },
+          "status": {
+            "type": "string",
+            "description": "Only list campaigns with this status, for example ACTIVE."
+          }
+        },
+        "type": "object",
+        "required": [
+          "brandId"
+        ]
+      },
+      "outputs": {
+        "properties": {
+          "campaigns": {
+            "description": "The campaigns of the brand, every page, ended ones excluded.",
+            "items": {
+              "$ref": "#/types/vonage:index:TenDlcCampaignInfo"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "campaigns"
+        ],
+        "type": "object"
+      }
+    },
+    "vonage:index:getTenDlcEnums": {
+      "description": "Read the 10DLC enumerations: campaign use cases and industry verticals with their details, and the IDs of every other list Vonage publishes (statuses, entity types, countries, carriers and so on).",
+      "inputs": {
+        "type": "object"
+      },
+      "outputs": {
+        "properties": {
+          "usecases": {
+            "description": "The campaign use cases with their rules.",
+            "items": {
+              "$ref": "#/types/vonage:index:TenDlcUsecaseInfo"
+            },
+            "type": "array"
+          },
+          "values": {
+            "additionalProperties": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "description": "The IDs of every enumeration Vonage lists, keyed by the name the API uses, for example campaign_status, brand_status, entity_type, country, usstate, mno, vetting_provider or tmo_brand_tier (usecase and vertical included).",
+            "type": "object"
+          },
+          "verticals": {
+            "description": "The industry verticals.",
+            "items": {
+              "$ref": "#/types/vonage:index:TenDlcVerticalInfo"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "usecases",
+          "verticals",
+          "values"
+        ],
+        "type": "object"
+      }
+    },
+    "vonage:index:getTenDlcReseller": {
+      "description": "Look up a 10DLC reseller by ID.",
+      "inputs": {
+        "properties": {
+          "resellerId": {
+            "type": "string",
+            "description": "ID of the reseller."
+          }
+        },
+        "type": "object",
+        "required": [
+          "resellerId"
+        ]
+      },
+      "outputs": {
+        "properties": {
+          "companyName": {
+            "description": "Company name of the reseller.",
+            "type": "string"
+          },
+          "email": {
+            "description": "Contact email address.",
+            "type": "string"
+          },
+          "phone": {
+            "description": "Contact phone number, E.164 without the + prefix.",
+            "type": "string"
+          },
+          "rejectionReason": {
+            "description": "Why the reseller was rejected; empty otherwise.",
+            "type": "string"
+          },
+          "resellerId": {
+            "description": "ID of the reseller.",
+            "type": "string"
+          },
+          "status": {
+            "description": "Review status: PENDING, APPROVED or REJECTED.",
+            "type": "string"
+          },
+          "tcrResellerId": {
+            "description": "ID at The Campaign Registry; empty until the reseller is APPROVED.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "resellerId",
+          "tcrResellerId",
+          "companyName",
+          "phone",
+          "email",
+          "status",
+          "rejectionReason"
+        ],
+        "type": "object"
+      }
+    },
+    "vonage:index:getTenDlcResellers": {
+      "description": "List the 10DLC resellers of the account, following every page.",
+      "inputs": {
+        "type": "object"
+      },
+      "outputs": {
+        "properties": {
+          "resellers": {
+            "description": "Every reseller of the account, every page.",
+            "items": {
+              "$ref": "#/types/vonage:index:TenDlcResellerInfo"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "resellers"
+        ],
+        "type": "object"
+      }
+    },
+    "vonage:index:getTenDlcThroughputs": {
+      "description": "List the 10DLC throughput counters (messages per minute or day, by scope), optionally for one campaign, following every page.",
+      "inputs": {
+        "properties": {
+          "campaignId": {
+            "type": "string",
+            "description": "Only list the throughputs of this campaign."
+          }
+        },
+        "type": "object"
+      },
+      "outputs": {
+        "properties": {
+          "throughputs": {
+            "description": "The throughput counters, every page.",
+            "items": {
+              "$ref": "#/types/vonage:index:TenDlcThroughputInfo"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "throughputs"
         ],
         "type": "object"
       }

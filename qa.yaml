@@ -52,6 +52,21 @@ resources:
   - type: vonage:index:NetworkBusinessProfile
     test: false
     reason: Registering a business profile is a legal submission that Vonage and mobile operators review (tax number, privacy policy, address), it cannot be created with throwaway data, and a deleted profile is only soft-deleted. The lookups cover the read paths.
+  - type: vonage:index:TenDlcAccountSettings
+    test: false
+    reason: A singleton that switches opt-out handling for all of the account's 10DLC traffic, only the primary account may change it, and destroy cannot restore the previous value. Exercise manually on a throwaway account. getTenDlcAccountSettings covers the read path.
+  - type: vonage:index:TenDlcBrand
+    test: false
+    reason: Registering a brand is a billed submission to The Campaign Registry (tax ID, business identity) that cannot be made with throwaway data, and a deleted brand only moves to DELETED. getTenDlcBrands covers the read path.
+  - type: vonage:index:TenDlcCampaign
+    test: false
+    reason: Registering a campaign is a billed submission that Vonage and the carriers review, it needs a registered brand, and it cannot be deleted before it expires (destroy only turns auto-renewal off). getTenDlcCampaigns covers the read path.
+  - type: vonage:index:TenDlcCampaignNumber
+    test: false
+    reason: Needs an approved campaign and an owned number, and linking a number to a campaign is billed; the tests have neither. getTenDlcCampaignNumbers covers the read path.
+  - type: vonage:index:TenDlcReseller
+    test: false
+    reason: Registering a reseller is a reviewed (possibly billed) submission to The Campaign Registry, and Vonage has no call to update or delete one, so a test would leave a reseller behind on the account. getTenDlcResellers covers the read path.
   - type: vonage:index:User
     test: true
     update: displayName
@@ -132,6 +147,36 @@ functions:
   - name: getNetworkTermsAndConditions
     test: false
     reason: Needs a terms and conditions document ID from getNetworkRegistryCatalogue, which the test cannot know in advance.
+  - name: getTenDlcAccountSettings
+    test: true
+  - name: getTenDlcBrand
+    test: false
+    reason: Needs a brand already registered on the account, and the tests must not register one.
+  - name: getTenDlcBrands
+    test: true
+  - name: getTenDlcCampaignTermsAndConditions
+    test: true
+  - name: getTenDlcEnums
+    test: true
+  - name: getTenDlcReseller
+    test: false
+    reason: Needs a reseller already registered on the account, and the tests must not register one.
+  - name: getTenDlcResellers
+    test: true
+  - name: getTenDlcThroughputs
+    test: true
+  - name: getTenDlcCampaign
+    test: false
+    reason: Needs a campaign already registered on the account, and the tests must not register one.
+  - name: getTenDlcCampaignNumber
+    test: false
+    reason: Needs a number linked to a campaign, and the tests have neither.
+  - name: getTenDlcCampaignNumbers
+    test: false
+    reason: Needs a campaign already registered on the account, and the tests must not register one.
+  - name: getTenDlcCampaigns
+    test: false
+    reason: Needs a brand already registered on the account, and the tests must not register one.
   - name: getUser
     test: true
   - name: getUsers

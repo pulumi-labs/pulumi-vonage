@@ -103,6 +103,27 @@ type mockVonage struct {
 	nrApps     map[string]map[string]any
 	nrAppNext  int
 	nrAppShare map[string][]string
+
+	// 10DLC: account settings, brands by ID, and the size of a listing page (tdPageSize, when > 0).
+	tdOptOut   bool
+	tdBrands   map[string]map[string]any
+	tdNext     int
+	tdPageSize int
+	// 10DLC resellers by ID (new ones get tdResellerStatus, PENDING when empty) and throughputs.
+	tdResellers      map[string]map[string]any
+	tdResellerNext   int
+	tdResellerStatus string
+	tdThroughputs    []map[string]any
+	// 10DLC campaigns by "brand/campaign", linked numbers by "brand/campaign/number"; tdRejectLinks
+	// makes new links come back REJECTED.
+	tdCampaigns   map[string]map[string]any
+	tdCampNext    int
+	tdNumbers     map[string]map[string]any
+	tdRejectLinks bool
+	// tdBodies records the create and update bodies of campaigns that carry a message flow; tdFailNumberGet makes
+	// reading a linked number fail.
+	tdBodies        []map[string]any
+	tdFailNumberGet bool
 }
 
 // The fake follows the documented Vonage semantics rather than the provider's assumptions:
@@ -506,6 +527,8 @@ func (m *mockVonage) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		m.servePools(w, r, body)
 	case strings.HasPrefix(p, "/v1/network-registry/"):
 		m.serveNetworkRegistry(w, r, body)
+	case strings.HasPrefix(p, "/v1/10dlc/"):
+		m.serveTenDlc(w, r, body)
 	case strings.HasPrefix(p, "/beta/chatapp-accounts"):
 		m.serveExtAccounts(w, r, body)
 	case strings.HasPrefix(p, "/v2/verify/templates"):

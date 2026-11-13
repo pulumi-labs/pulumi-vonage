@@ -70,6 +70,11 @@ func newProvider() (provider.Provider, error) {
 			infer.Resource[*NetworkBusinessProfile, NetworkBusinessProfileArgs, NetworkBusinessProfileState](&NetworkBusinessProfile{}),
 			infer.Resource[*NetworkApplicationProfile, NetworkApplicationProfileArgs, NetworkApplicationProfileState](&NetworkApplicationProfile{}),
 			infer.Resource[*NetworkApplicationProfileShare, NetworkApplicationProfileShareArgs, NetworkApplicationProfileShareState](&NetworkApplicationProfileShare{}),
+			infer.Resource[*TenDlcAccountSettings, TenDlcAccountSettingsArgs, TenDlcAccountSettingsState](&TenDlcAccountSettings{}),
+			infer.Resource[*TenDlcBrand, TenDlcBrandArgs, TenDlcBrandState](&TenDlcBrand{}),
+			infer.Resource[*TenDlcCampaign, TenDlcCampaignArgs, TenDlcCampaignState](&TenDlcCampaign{}),
+			infer.Resource[*TenDlcCampaignNumber, TenDlcCampaignNumberArgs, TenDlcCampaignNumberState](&TenDlcCampaignNumber{}),
+			infer.Resource[*TenDlcReseller, TenDlcResellerArgs, TenDlcResellerState](&TenDlcReseller{}),
 		).
 		WithFunctions(
 			infer.Function[*GetApplication, GetApplicationArgs, GetApplicationResult](&GetApplication{}),
@@ -104,6 +109,18 @@ func newProvider() (provider.Provider, error) {
 			infer.Function[*GetNetworkApplicationProfileShares, GetNetworkApplicationProfileSharesArgs, GetNetworkApplicationProfileSharesResult](&GetNetworkApplicationProfileShares{}),
 			infer.Function[*GetNetworkRegistryCatalogue, GetNetworkRegistryCatalogueArgs, GetNetworkRegistryCatalogueResult](&GetNetworkRegistryCatalogue{}),
 			infer.Function[*GetNetworkTermsAndConditions, GetNetworkTermsAndConditionsArgs, GetNetworkTermsAndConditionsResult](&GetNetworkTermsAndConditions{}),
+			infer.Function[*GetTenDlcAccountSettings, GetTenDlcAccountSettingsArgs, GetTenDlcAccountSettingsResult](&GetTenDlcAccountSettings{}),
+			infer.Function[*GetTenDlcBrand, GetTenDlcBrandArgs, TenDlcBrandInfo](&GetTenDlcBrand{}),
+			infer.Function[*GetTenDlcBrands, GetTenDlcBrandsArgs, GetTenDlcBrandsResult](&GetTenDlcBrands{}),
+			infer.Function[*GetTenDlcCampaign, GetTenDlcCampaignArgs, TenDlcCampaignInfo](&GetTenDlcCampaign{}),
+			infer.Function[*GetTenDlcCampaigns, GetTenDlcCampaignsArgs, GetTenDlcCampaignsResult](&GetTenDlcCampaigns{}),
+			infer.Function[*GetTenDlcCampaignNumber, GetTenDlcCampaignNumberArgs, TenDlcCampaignNumberInfo](&GetTenDlcCampaignNumber{}),
+			infer.Function[*GetTenDlcCampaignNumbers, GetTenDlcCampaignNumbersArgs, GetTenDlcCampaignNumbersResult](&GetTenDlcCampaignNumbers{}),
+			infer.Function[*GetTenDlcReseller, GetTenDlcResellerArgs, TenDlcResellerInfo](&GetTenDlcReseller{}),
+			infer.Function[*GetTenDlcResellers, GetTenDlcResellersArgs, GetTenDlcResellersResult](&GetTenDlcResellers{}),
+			infer.Function[*GetTenDlcCampaignTermsAndConditions, GetTenDlcCampaignTermsAndConditionsArgs, GetTenDlcCampaignTermsAndConditionsResult](&GetTenDlcCampaignTermsAndConditions{}),
+			infer.Function[*GetTenDlcThroughputs, GetTenDlcThroughputsArgs, GetTenDlcThroughputsResult](&GetTenDlcThroughputs{}),
+			infer.Function[*GetTenDlcEnums, GetTenDlcEnumsArgs, GetTenDlcEnumsResult](&GetTenDlcEnums{}),
 		).
 		Build()
 }

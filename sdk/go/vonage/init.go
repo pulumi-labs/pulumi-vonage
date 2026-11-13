@@ -45,6 +45,16 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &NumberPoolNumber{}
 	case "vonage:index:SubAccount":
 		r = &SubAccount{}
+	case "vonage:index:TenDlcAccountSettings":
+		r = &TenDlcAccountSettings{}
+	case "vonage:index:TenDlcBrand":
+		r = &TenDlcBrand{}
+	case "vonage:index:TenDlcCampaign":
+		r = &TenDlcCampaign{}
+	case "vonage:index:TenDlcCampaignNumber":
+		r = &TenDlcCampaignNumber{}
+	case "vonage:index:TenDlcReseller":
+		r = &TenDlcReseller{}
 	case "vonage:index:User":
 		r = &User{}
 	case "vonage:index:VerifyTemplate":

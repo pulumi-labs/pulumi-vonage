@@ -39,6 +39,17 @@ __all__ = [
     'OwnedNumberSummary',
     'PricingNetwork',
     'RtcCapability',
+    'TenDlcBrandInfo',
+    'TenDlcCampaignInfo',
+    'TenDlcCampaignNumberInfo',
+    'TenDlcCarrierSuspension',
+    'TenDlcConsentMechanism',
+    'TenDlcMessageFlowDetails',
+    'TenDlcResellerInfo',
+    'TenDlcThroughputInfo',
+    'TenDlcThroughputValue',
+    'TenDlcUsecaseInfo',
+    'TenDlcVerticalInfo',
     'UserChannels',
     'UserMessengerChannel',
     'UserNumberChannel',
@@ -1648,6 +1659,1396 @@ class RtcCapability(dict):
         Whether Vonage signs webhook requests.
         """
         return pulumi.get(self, "signed_callbacks")
+
+
+@pulumi.output_type
+class TenDlcBrandInfo(dict):
+    def __init__(__self__, *,
+                 account_id: _builtins.str,
+                 alt_business_id: _builtins.str,
+                 alt_business_id_type: _builtins.str,
+                 brand_id: _builtins.str,
+                 brand_relationship: _builtins.str,
+                 campaign_count: _builtins.int,
+                 carrier_suspensions: Sequence['outputs.TenDlcCarrierSuspension'],
+                 city: _builtins.str,
+                 company_name: _builtins.str,
+                 country: _builtins.str,
+                 created_date: _builtins.str,
+                 display_name: _builtins.str,
+                 ein: _builtins.str,
+                 ein_issuing_country: _builtins.str,
+                 email: _builtins.str,
+                 entity_type: _builtins.str,
+                 first_name: _builtins.str,
+                 last_name: _builtins.str,
+                 last_updated: _builtins.str,
+                 mobile_phone: _builtins.str,
+                 owner: _builtins.bool,
+                 partner: _builtins.bool,
+                 phone: _builtins.str,
+                 postal_code: _builtins.str,
+                 primary_account_id: _builtins.str,
+                 reference_id: _builtins.str,
+                 reseller: _builtins.bool,
+                 shared: _builtins.bool,
+                 state: _builtins.str,
+                 status: _builtins.str,
+                 stock_exchange: _builtins.str,
+                 stock_symbol: _builtins.str,
+                 street: _builtins.str,
+                 universal_ein: _builtins.str,
+                 verification_email: _builtins.str,
+                 verified_date: _builtins.str,
+                 vertical: _builtins.str,
+                 website: _builtins.str):
+        """
+        :param _builtins.str account_id: Vonage account (API key) the brand belongs to.
+        :param _builtins.str alt_business_id: Alternative business ID; empty when unset.
+        :param _builtins.str alt_business_id_type: Alternative business ID type (DUNS, GIIN or LEI); empty when unset.
+        :param _builtins.str brand_id: ID of the brand at The Campaign Registry.
+        :param _builtins.str brand_relationship: Relationship tier the registry assigned; empty when not yet known.
+        :param _builtins.int campaign_count: Number of campaigns registered for the brand.
+        :param Sequence['TenDlcCarrierSuspension'] carrier_suspensions: Carrier suspensions of the brand, if any.
+        :param _builtins.str city: City; empty when unset.
+        :param _builtins.str company_name: Legal company name; empty when unset.
+        :param _builtins.str country: Country of the address; empty when unset.
+        :param _builtins.str created_date: When the brand was created.
+        :param _builtins.str display_name: Display name; empty when unset.
+        :param _builtins.str ein: Tax ID (EIN); empty when unset.
+        :param _builtins.str ein_issuing_country: Country that issued the tax ID; empty when unset.
+        :param _builtins.str email: Contact email; empty when unset.
+        :param _builtins.str entity_type: Legal form: PRIVATE_PROFIT, PUBLIC_PROFIT, NON_PROFIT, SOLE_PROPRIETOR or GOVERNMENT.
+        :param _builtins.str first_name: First name; empty when unset.
+        :param _builtins.str last_name: Last name; empty when unset.
+        :param _builtins.str last_updated: When the brand was last updated.
+        :param _builtins.str mobile_phone: Mobile phone number; empty when unset.
+        :param _builtins.bool owner: Whether the account owns the brand.
+        :param _builtins.bool partner: Whether the brand is a partner brand.
+        :param _builtins.str phone: Contact phone number; empty when unset.
+        :param _builtins.str postal_code: Postal code; empty when unset.
+        :param _builtins.str primary_account_id: API key of the primary account; empty when unset.
+        :param _builtins.str reference_id: Reference ID of the brand; empty when unset.
+        :param _builtins.bool reseller: Whether the brand is a reseller.
+        :param _builtins.bool shared: Whether the brand is shared with the account.
+        :param _builtins.str state: State or region; empty when unset.
+        :param _builtins.str status: ACTIVE or SUSPENDED (deleted brands are not returned).
+        :param _builtins.str stock_exchange: Stock exchange; empty when unset.
+        :param _builtins.str stock_symbol: Stock symbol; empty when unset.
+        :param _builtins.str street: Street address; empty when unset.
+        :param _builtins.str universal_ein: Universal tax ID; empty when unset.
+        :param _builtins.str verification_email: Verification email address; empty when unset.
+        :param _builtins.str verified_date: When the brand was verified; empty when it has not been.
+        :param _builtins.str vertical: Industry vertical; empty when unset.
+        :param _builtins.str website: Website; empty when unset.
+        """
+        pulumi.set(__self__, "account_id", account_id)
+        pulumi.set(__self__, "alt_business_id", alt_business_id)
+        pulumi.set(__self__, "alt_business_id_type", alt_business_id_type)
+        pulumi.set(__self__, "brand_id", brand_id)
+        pulumi.set(__self__, "brand_relationship", brand_relationship)
+        pulumi.set(__self__, "campaign_count", campaign_count)
+        pulumi.set(__self__, "carrier_suspensions", carrier_suspensions)
+        pulumi.set(__self__, "city", city)
+        pulumi.set(__self__, "company_name", company_name)
+        pulumi.set(__self__, "country", country)
+        pulumi.set(__self__, "created_date", created_date)
+        pulumi.set(__self__, "display_name", display_name)
+        pulumi.set(__self__, "ein", ein)
+        pulumi.set(__self__, "ein_issuing_country", ein_issuing_country)
+        pulumi.set(__self__, "email", email)
+        pulumi.set(__self__, "entity_type", entity_type)
+        pulumi.set(__self__, "first_name", first_name)
+        pulumi.set(__self__, "last_name", last_name)
+        pulumi.set(__self__, "last_updated", last_updated)
+        pulumi.set(__self__, "mobile_phone", mobile_phone)
+        pulumi.set(__self__, "owner", owner)
+        pulumi.set(__self__, "partner", partner)
+        pulumi.set(__self__, "phone", phone)
+        pulumi.set(__self__, "postal_code", postal_code)
+        pulumi.set(__self__, "primary_account_id", primary_account_id)
+        pulumi.set(__self__, "reference_id", reference_id)
+        pulumi.set(__self__, "reseller", reseller)
+        pulumi.set(__self__, "shared", shared)
+        pulumi.set(__self__, "state", state)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "stock_exchange", stock_exchange)
+        pulumi.set(__self__, "stock_symbol", stock_symbol)
+        pulumi.set(__self__, "street", street)
+        pulumi.set(__self__, "universal_ein", universal_ein)
+        pulumi.set(__self__, "verification_email", verification_email)
+        pulumi.set(__self__, "verified_date", verified_date)
+        pulumi.set(__self__, "vertical", vertical)
+        pulumi.set(__self__, "website", website)
+
+    @_builtins.property
+    @pulumi.getter(name="accountId")
+    def account_id(self) -> _builtins.str:
+        """
+        Vonage account (API key) the brand belongs to.
+        """
+        return pulumi.get(self, "account_id")
+
+    @_builtins.property
+    @pulumi.getter(name="altBusinessId")
+    def alt_business_id(self) -> _builtins.str:
+        """
+        Alternative business ID; empty when unset.
+        """
+        return pulumi.get(self, "alt_business_id")
+
+    @_builtins.property
+    @pulumi.getter(name="altBusinessIdType")
+    def alt_business_id_type(self) -> _builtins.str:
+        """
+        Alternative business ID type (DUNS, GIIN or LEI); empty when unset.
+        """
+        return pulumi.get(self, "alt_business_id_type")
+
+    @_builtins.property
+    @pulumi.getter(name="brandId")
+    def brand_id(self) -> _builtins.str:
+        """
+        ID of the brand at The Campaign Registry.
+        """
+        return pulumi.get(self, "brand_id")
+
+    @_builtins.property
+    @pulumi.getter(name="brandRelationship")
+    def brand_relationship(self) -> _builtins.str:
+        """
+        Relationship tier the registry assigned; empty when not yet known.
+        """
+        return pulumi.get(self, "brand_relationship")
+
+    @_builtins.property
+    @pulumi.getter(name="campaignCount")
+    def campaign_count(self) -> _builtins.int:
+        """
+        Number of campaigns registered for the brand.
+        """
+        return pulumi.get(self, "campaign_count")
+
+    @_builtins.property
+    @pulumi.getter(name="carrierSuspensions")
+    def carrier_suspensions(self) -> Sequence['outputs.TenDlcCarrierSuspension']:
+        """
+        Carrier suspensions of the brand, if any.
+        """
+        return pulumi.get(self, "carrier_suspensions")
+
+    @_builtins.property
+    @pulumi.getter
+    def city(self) -> _builtins.str:
+        """
+        City; empty when unset.
+        """
+        return pulumi.get(self, "city")
+
+    @_builtins.property
+    @pulumi.getter(name="companyName")
+    def company_name(self) -> _builtins.str:
+        """
+        Legal company name; empty when unset.
+        """
+        return pulumi.get(self, "company_name")
+
+    @_builtins.property
+    @pulumi.getter
+    def country(self) -> _builtins.str:
+        """
+        Country of the address; empty when unset.
+        """
+        return pulumi.get(self, "country")
+
+    @_builtins.property
+    @pulumi.getter(name="createdDate")
+    def created_date(self) -> _builtins.str:
+        """
+        When the brand was created.
+        """
+        return pulumi.get(self, "created_date")
+
+    @_builtins.property
+    @pulumi.getter(name="displayName")
+    def display_name(self) -> _builtins.str:
+        """
+        Display name; empty when unset.
+        """
+        return pulumi.get(self, "display_name")
+
+    @_builtins.property
+    @pulumi.getter
+    def ein(self) -> _builtins.str:
+        """
+        Tax ID (EIN); empty when unset.
+        """
+        return pulumi.get(self, "ein")
+
+    @_builtins.property
+    @pulumi.getter(name="einIssuingCountry")
+    def ein_issuing_country(self) -> _builtins.str:
+        """
+        Country that issued the tax ID; empty when unset.
+        """
+        return pulumi.get(self, "ein_issuing_country")
+
+    @_builtins.property
+    @pulumi.getter
+    def email(self) -> _builtins.str:
+        """
+        Contact email; empty when unset.
+        """
+        return pulumi.get(self, "email")
+
+    @_builtins.property
+    @pulumi.getter(name="entityType")
+    def entity_type(self) -> _builtins.str:
+        """
+        Legal form: PRIVATE_PROFIT, PUBLIC_PROFIT, NON_PROFIT, SOLE_PROPRIETOR or GOVERNMENT.
+        """
+        return pulumi.get(self, "entity_type")
+
+    @_builtins.property
+    @pulumi.getter(name="firstName")
+    def first_name(self) -> _builtins.str:
+        """
+        First name; empty when unset.
+        """
+        return pulumi.get(self, "first_name")
+
+    @_builtins.property
+    @pulumi.getter(name="lastName")
+    def last_name(self) -> _builtins.str:
+        """
+        Last name; empty when unset.
+        """
+        return pulumi.get(self, "last_name")
+
+    @_builtins.property
+    @pulumi.getter(name="lastUpdated")
+    def last_updated(self) -> _builtins.str:
+        """
+        When the brand was last updated.
+        """
+        return pulumi.get(self, "last_updated")
+
+    @_builtins.property
+    @pulumi.getter(name="mobilePhone")
+    def mobile_phone(self) -> _builtins.str:
+        """
+        Mobile phone number; empty when unset.
+        """
+        return pulumi.get(self, "mobile_phone")
+
+    @_builtins.property
+    @pulumi.getter
+    def owner(self) -> _builtins.bool:
+        """
+        Whether the account owns the brand.
+        """
+        return pulumi.get(self, "owner")
+
+    @_builtins.property
+    @pulumi.getter
+    def partner(self) -> _builtins.bool:
+        """
+        Whether the brand is a partner brand.
+        """
+        return pulumi.get(self, "partner")
+
+    @_builtins.property
+    @pulumi.getter
+    def phone(self) -> _builtins.str:
+        """
+        Contact phone number; empty when unset.
+        """
+        return pulumi.get(self, "phone")
+
+    @_builtins.property
+    @pulumi.getter(name="postalCode")
+    def postal_code(self) -> _builtins.str:
+        """
+        Postal code; empty when unset.
+        """
+        return pulumi.get(self, "postal_code")
+
+    @_builtins.property
+    @pulumi.getter(name="primaryAccountId")
+    def primary_account_id(self) -> _builtins.str:
+        """
+        API key of the primary account; empty when unset.
+        """
+        return pulumi.get(self, "primary_account_id")
+
+    @_builtins.property
+    @pulumi.getter(name="referenceId")
+    def reference_id(self) -> _builtins.str:
+        """
+        Reference ID of the brand; empty when unset.
+        """
+        return pulumi.get(self, "reference_id")
+
+    @_builtins.property
+    @pulumi.getter
+    def reseller(self) -> _builtins.bool:
+        """
+        Whether the brand is a reseller.
+        """
+        return pulumi.get(self, "reseller")
+
+    @_builtins.property
+    @pulumi.getter
+    def shared(self) -> _builtins.bool:
+        """
+        Whether the brand is shared with the account.
+        """
+        return pulumi.get(self, "shared")
+
+    @_builtins.property
+    @pulumi.getter
+    def state(self) -> _builtins.str:
+        """
+        State or region; empty when unset.
+        """
+        return pulumi.get(self, "state")
+
+    @_builtins.property
+    @pulumi.getter
+    def status(self) -> _builtins.str:
+        """
+        ACTIVE or SUSPENDED (deleted brands are not returned).
+        """
+        return pulumi.get(self, "status")
+
+    @_builtins.property
+    @pulumi.getter(name="stockExchange")
+    def stock_exchange(self) -> _builtins.str:
+        """
+        Stock exchange; empty when unset.
+        """
+        return pulumi.get(self, "stock_exchange")
+
+    @_builtins.property
+    @pulumi.getter(name="stockSymbol")
+    def stock_symbol(self) -> _builtins.str:
+        """
+        Stock symbol; empty when unset.
+        """
+        return pulumi.get(self, "stock_symbol")
+
+    @_builtins.property
+    @pulumi.getter
+    def street(self) -> _builtins.str:
+        """
+        Street address; empty when unset.
+        """
+        return pulumi.get(self, "street")
+
+    @_builtins.property
+    @pulumi.getter(name="universalEin")
+    def universal_ein(self) -> _builtins.str:
+        """
+        Universal tax ID; empty when unset.
+        """
+        return pulumi.get(self, "universal_ein")
+
+    @_builtins.property
+    @pulumi.getter(name="verificationEmail")
+    def verification_email(self) -> _builtins.str:
+        """
+        Verification email address; empty when unset.
+        """
+        return pulumi.get(self, "verification_email")
+
+    @_builtins.property
+    @pulumi.getter(name="verifiedDate")
+    def verified_date(self) -> _builtins.str:
+        """
+        When the brand was verified; empty when it has not been.
+        """
+        return pulumi.get(self, "verified_date")
+
+    @_builtins.property
+    @pulumi.getter
+    def vertical(self) -> _builtins.str:
+        """
+        Industry vertical; empty when unset.
+        """
+        return pulumi.get(self, "vertical")
+
+    @_builtins.property
+    @pulumi.getter
+    def website(self) -> _builtins.str:
+        """
+        Website; empty when unset.
+        """
+        return pulumi.get(self, "website")
+
+
+@pulumi.output_type
+class TenDlcCampaignInfo(dict):
+    def __init__(__self__, *,
+                 account_id: _builtins.str,
+                 age_gated: _builtins.bool,
+                 auto_renewal: _builtins.bool,
+                 brand_id: _builtins.str,
+                 campaign_id: _builtins.str,
+                 created_date: _builtins.str,
+                 description: _builtins.str,
+                 direct_lending: _builtins.bool,
+                 embedded_link: _builtins.bool,
+                 embedded_phone: _builtins.bool,
+                 help_keywords: _builtins.str,
+                 help_message: _builtins.str,
+                 hipaa: _builtins.bool,
+                 label: _builtins.str,
+                 last_updated: _builtins.str,
+                 message_flow: _builtins.str,
+                 opt_in_keywords: _builtins.str,
+                 opt_in_message: _builtins.str,
+                 opt_out_keywords: _builtins.str,
+                 opt_out_message: _builtins.str,
+                 registration_date: _builtins.str,
+                 renewal_date: _builtins.str,
+                 reseller: _builtins.bool,
+                 reseller_id: _builtins.str,
+                 samples: Sequence[_builtins.str],
+                 status: _builtins.str,
+                 sub_usecases: Sequence[_builtins.str],
+                 tcr_campaign_id: _builtins.str,
+                 tcr_status: _builtins.str,
+                 traffic_enabled: _builtins.bool,
+                 url_samples: Sequence[_builtins.str],
+                 usecase: _builtins.str,
+                 vertical: _builtins.str):
+        """
+        :param _builtins.str account_id: Vonage account (API key) the campaign belongs to.
+        :param _builtins.bool age_gated: Whether the content is age-gated.
+        :param _builtins.bool auto_renewal: Whether the campaign renews automatically.
+        :param _builtins.str brand_id: ID of the brand the campaign belongs to.
+        :param _builtins.str campaign_id: ID of the campaign.
+        :param _builtins.str created_date: When the campaign was created.
+        :param _builtins.str description: What the campaign is for.
+        :param _builtins.bool direct_lending: Whether the campaign involves direct lending.
+        :param _builtins.bool embedded_link: Whether messages contain embedded links.
+        :param _builtins.bool embedded_phone: Whether messages contain embedded phone numbers.
+        :param _builtins.str help_keywords: Help keywords, comma separated; empty when unset.
+        :param _builtins.str help_message: Reply to the HELP keyword.
+        :param _builtins.bool hipaa: Whether the campaign handles HIPAA-covered data.
+        :param _builtins.str label: Your label for the campaign; empty when unset.
+        :param _builtins.str last_updated: When the campaign was last updated.
+        :param _builtins.str message_flow: How subscribers opt in and what they receive.
+        :param _builtins.str opt_in_keywords: Opt-in keywords, comma separated; empty when unset.
+        :param _builtins.str opt_in_message: Confirmation sent when a subscriber opts in.
+        :param _builtins.str opt_out_keywords: Opt-out keywords, comma separated; empty when unset.
+        :param _builtins.str opt_out_message: Confirmation sent when a subscriber opts out.
+        :param _builtins.str registration_date: When the campaign was registered; empty when not yet.
+        :param _builtins.str renewal_date: When the campaign renews or ends; empty when unknown.
+        :param _builtins.bool reseller: Whether a reseller registered the campaign.
+        :param _builtins.str reseller_id: Reseller ID; empty when unset.
+        :param Sequence[_builtins.str] samples: The sample messages.
+        :param _builtins.str status: Campaign status (ended campaigns are not returned).
+        :param Sequence[_builtins.str] sub_usecases: Sub use cases.
+        :param _builtins.str tcr_campaign_id: ID of the campaign at The Campaign Registry; empty until it exists there.
+        :param _builtins.str tcr_status: Status at The Campaign Registry; empty when unknown.
+        :param _builtins.bool traffic_enabled: Whether the campaign can carry traffic.
+        :param Sequence[_builtins.str] url_samples: The sample links.
+        :param _builtins.str usecase: Use case of the campaign.
+        :param _builtins.str vertical: Industry vertical; empty when unset.
+        """
+        pulumi.set(__self__, "account_id", account_id)
+        pulumi.set(__self__, "age_gated", age_gated)
+        pulumi.set(__self__, "auto_renewal", auto_renewal)
+        pulumi.set(__self__, "brand_id", brand_id)
+        pulumi.set(__self__, "campaign_id", campaign_id)
+        pulumi.set(__self__, "created_date", created_date)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "direct_lending", direct_lending)
+        pulumi.set(__self__, "embedded_link", embedded_link)
+        pulumi.set(__self__, "embedded_phone", embedded_phone)
+        pulumi.set(__self__, "help_keywords", help_keywords)
+        pulumi.set(__self__, "help_message", help_message)
+        pulumi.set(__self__, "hipaa", hipaa)
+        pulumi.set(__self__, "label", label)
+        pulumi.set(__self__, "last_updated", last_updated)
+        pulumi.set(__self__, "message_flow", message_flow)
+        pulumi.set(__self__, "opt_in_keywords", opt_in_keywords)
+        pulumi.set(__self__, "opt_in_message", opt_in_message)
+        pulumi.set(__self__, "opt_out_keywords", opt_out_keywords)
+        pulumi.set(__self__, "opt_out_message", opt_out_message)
+        pulumi.set(__self__, "registration_date", registration_date)
+        pulumi.set(__self__, "renewal_date", renewal_date)
+        pulumi.set(__self__, "reseller", reseller)
+        pulumi.set(__self__, "reseller_id", reseller_id)
+        pulumi.set(__self__, "samples", samples)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "sub_usecases", sub_usecases)
+        pulumi.set(__self__, "tcr_campaign_id", tcr_campaign_id)
+        pulumi.set(__self__, "tcr_status", tcr_status)
+        pulumi.set(__self__, "traffic_enabled", traffic_enabled)
+        pulumi.set(__self__, "url_samples", url_samples)
+        pulumi.set(__self__, "usecase", usecase)
+        pulumi.set(__self__, "vertical", vertical)
+
+    @_builtins.property
+    @pulumi.getter(name="accountId")
+    def account_id(self) -> _builtins.str:
+        """
+        Vonage account (API key) the campaign belongs to.
+        """
+        return pulumi.get(self, "account_id")
+
+    @_builtins.property
+    @pulumi.getter(name="ageGated")
+    def age_gated(self) -> _builtins.bool:
+        """
+        Whether the content is age-gated.
+        """
+        return pulumi.get(self, "age_gated")
+
+    @_builtins.property
+    @pulumi.getter(name="autoRenewal")
+    def auto_renewal(self) -> _builtins.bool:
+        """
+        Whether the campaign renews automatically.
+        """
+        return pulumi.get(self, "auto_renewal")
+
+    @_builtins.property
+    @pulumi.getter(name="brandId")
+    def brand_id(self) -> _builtins.str:
+        """
+        ID of the brand the campaign belongs to.
+        """
+        return pulumi.get(self, "brand_id")
+
+    @_builtins.property
+    @pulumi.getter(name="campaignId")
+    def campaign_id(self) -> _builtins.str:
+        """
+        ID of the campaign.
+        """
+        return pulumi.get(self, "campaign_id")
+
+    @_builtins.property
+    @pulumi.getter(name="createdDate")
+    def created_date(self) -> _builtins.str:
+        """
+        When the campaign was created.
+        """
+        return pulumi.get(self, "created_date")
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> _builtins.str:
+        """
+        What the campaign is for.
+        """
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter(name="directLending")
+    def direct_lending(self) -> _builtins.bool:
+        """
+        Whether the campaign involves direct lending.
+        """
+        return pulumi.get(self, "direct_lending")
+
+    @_builtins.property
+    @pulumi.getter(name="embeddedLink")
+    def embedded_link(self) -> _builtins.bool:
+        """
+        Whether messages contain embedded links.
+        """
+        return pulumi.get(self, "embedded_link")
+
+    @_builtins.property
+    @pulumi.getter(name="embeddedPhone")
+    def embedded_phone(self) -> _builtins.bool:
+        """
+        Whether messages contain embedded phone numbers.
+        """
+        return pulumi.get(self, "embedded_phone")
+
+    @_builtins.property
+    @pulumi.getter(name="helpKeywords")
+    def help_keywords(self) -> _builtins.str:
+        """
+        Help keywords, comma separated; empty when unset.
+        """
+        return pulumi.get(self, "help_keywords")
+
+    @_builtins.property
+    @pulumi.getter(name="helpMessage")
+    def help_message(self) -> _builtins.str:
+        """
+        Reply to the HELP keyword.
+        """
+        return pulumi.get(self, "help_message")
+
+    @_builtins.property
+    @pulumi.getter
+    def hipaa(self) -> _builtins.bool:
+        """
+        Whether the campaign handles HIPAA-covered data.
+        """
+        return pulumi.get(self, "hipaa")
+
+    @_builtins.property
+    @pulumi.getter
+    def label(self) -> _builtins.str:
+        """
+        Your label for the campaign; empty when unset.
+        """
+        return pulumi.get(self, "label")
+
+    @_builtins.property
+    @pulumi.getter(name="lastUpdated")
+    def last_updated(self) -> _builtins.str:
+        """
+        When the campaign was last updated.
+        """
+        return pulumi.get(self, "last_updated")
+
+    @_builtins.property
+    @pulumi.getter(name="messageFlow")
+    def message_flow(self) -> _builtins.str:
+        """
+        How subscribers opt in and what they receive.
+        """
+        return pulumi.get(self, "message_flow")
+
+    @_builtins.property
+    @pulumi.getter(name="optInKeywords")
+    def opt_in_keywords(self) -> _builtins.str:
+        """
+        Opt-in keywords, comma separated; empty when unset.
+        """
+        return pulumi.get(self, "opt_in_keywords")
+
+    @_builtins.property
+    @pulumi.getter(name="optInMessage")
+    def opt_in_message(self) -> _builtins.str:
+        """
+        Confirmation sent when a subscriber opts in.
+        """
+        return pulumi.get(self, "opt_in_message")
+
+    @_builtins.property
+    @pulumi.getter(name="optOutKeywords")
+    def opt_out_keywords(self) -> _builtins.str:
+        """
+        Opt-out keywords, comma separated; empty when unset.
+        """
+        return pulumi.get(self, "opt_out_keywords")
+
+    @_builtins.property
+    @pulumi.getter(name="optOutMessage")
+    def opt_out_message(self) -> _builtins.str:
+        """
+        Confirmation sent when a subscriber opts out.
+        """
+        return pulumi.get(self, "opt_out_message")
+
+    @_builtins.property
+    @pulumi.getter(name="registrationDate")
+    def registration_date(self) -> _builtins.str:
+        """
+        When the campaign was registered; empty when not yet.
+        """
+        return pulumi.get(self, "registration_date")
+
+    @_builtins.property
+    @pulumi.getter(name="renewalDate")
+    def renewal_date(self) -> _builtins.str:
+        """
+        When the campaign renews or ends; empty when unknown.
+        """
+        return pulumi.get(self, "renewal_date")
+
+    @_builtins.property
+    @pulumi.getter
+    def reseller(self) -> _builtins.bool:
+        """
+        Whether a reseller registered the campaign.
+        """
+        return pulumi.get(self, "reseller")
+
+    @_builtins.property
+    @pulumi.getter(name="resellerId")
+    def reseller_id(self) -> _builtins.str:
+        """
+        Reseller ID; empty when unset.
+        """
+        return pulumi.get(self, "reseller_id")
+
+    @_builtins.property
+    @pulumi.getter
+    def samples(self) -> Sequence[_builtins.str]:
+        """
+        The sample messages.
+        """
+        return pulumi.get(self, "samples")
+
+    @_builtins.property
+    @pulumi.getter
+    def status(self) -> _builtins.str:
+        """
+        Campaign status (ended campaigns are not returned).
+        """
+        return pulumi.get(self, "status")
+
+    @_builtins.property
+    @pulumi.getter(name="subUsecases")
+    def sub_usecases(self) -> Sequence[_builtins.str]:
+        """
+        Sub use cases.
+        """
+        return pulumi.get(self, "sub_usecases")
+
+    @_builtins.property
+    @pulumi.getter(name="tcrCampaignId")
+    def tcr_campaign_id(self) -> _builtins.str:
+        """
+        ID of the campaign at The Campaign Registry; empty until it exists there.
+        """
+        return pulumi.get(self, "tcr_campaign_id")
+
+    @_builtins.property
+    @pulumi.getter(name="tcrStatus")
+    def tcr_status(self) -> _builtins.str:
+        """
+        Status at The Campaign Registry; empty when unknown.
+        """
+        return pulumi.get(self, "tcr_status")
+
+    @_builtins.property
+    @pulumi.getter(name="trafficEnabled")
+    def traffic_enabled(self) -> _builtins.bool:
+        """
+        Whether the campaign can carry traffic.
+        """
+        return pulumi.get(self, "traffic_enabled")
+
+    @_builtins.property
+    @pulumi.getter(name="urlSamples")
+    def url_samples(self) -> Sequence[_builtins.str]:
+        """
+        The sample links.
+        """
+        return pulumi.get(self, "url_samples")
+
+    @_builtins.property
+    @pulumi.getter
+    def usecase(self) -> _builtins.str:
+        """
+        Use case of the campaign.
+        """
+        return pulumi.get(self, "usecase")
+
+    @_builtins.property
+    @pulumi.getter
+    def vertical(self) -> _builtins.str:
+        """
+        Industry vertical; empty when unset.
+        """
+        return pulumi.get(self, "vertical")
+
+
+@pulumi.output_type
+class TenDlcCampaignNumberInfo(dict):
+    def __init__(__self__, *,
+                 compliance: Sequence[_builtins.str],
+                 country: _builtins.str,
+                 number: _builtins.str,
+                 status: _builtins.str):
+        """
+        :param Sequence[_builtins.str] compliance: Compliance findings Vonage reports for the number.
+        :param _builtins.str country: Two-letter country code of the number.
+        :param _builtins.str number: The number, digits only.
+        :param _builtins.str status: Link status: LINKING, LINKED, REJECTED or UNLINKING. Only LINKED allows traffic.
+        """
+        pulumi.set(__self__, "compliance", compliance)
+        pulumi.set(__self__, "country", country)
+        pulumi.set(__self__, "number", number)
+        pulumi.set(__self__, "status", status)
+
+    @_builtins.property
+    @pulumi.getter
+    def compliance(self) -> Sequence[_builtins.str]:
+        """
+        Compliance findings Vonage reports for the number.
+        """
+        return pulumi.get(self, "compliance")
+
+    @_builtins.property
+    @pulumi.getter
+    def country(self) -> _builtins.str:
+        """
+        Two-letter country code of the number.
+        """
+        return pulumi.get(self, "country")
+
+    @_builtins.property
+    @pulumi.getter
+    def number(self) -> _builtins.str:
+        """
+        The number, digits only.
+        """
+        return pulumi.get(self, "number")
+
+    @_builtins.property
+    @pulumi.getter
+    def status(self) -> _builtins.str:
+        """
+        Link status: LINKING, LINKED, REJECTED or UNLINKING. Only LINKED allows traffic.
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class TenDlcCarrierSuspension(dict):
+    def __init__(__self__, *,
+                 category: _builtins.str,
+                 explanation: _builtins.str):
+        """
+        :param _builtins.str category: Category of the suspension.
+        :param _builtins.str explanation: The carrier's explanation.
+        """
+        pulumi.set(__self__, "category", category)
+        pulumi.set(__self__, "explanation", explanation)
+
+    @_builtins.property
+    @pulumi.getter
+    def category(self) -> _builtins.str:
+        """
+        Category of the suspension.
+        """
+        return pulumi.get(self, "category")
+
+    @_builtins.property
+    @pulumi.getter
+    def explanation(self) -> _builtins.str:
+        """
+        The carrier's explanation.
+        """
+        return pulumi.get(self, "explanation")
+
+
+@pulumi.output_type
+class TenDlcConsentMechanism(dict):
+    def __init__(__self__, *,
+                 details: _builtins.str,
+                 method: _builtins.str,
+                 attachment: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str details: Describes how consent is collected with this method.
+        :param _builtins.str method: How consent is collected: ONLINE_FORM, LIVE_OPERATOR, POINT_OF_SALE, TEXT_TO_JOIN or OTHER.
+        :param _builtins.str attachment: HTTP(S) link to evidence of the consent flow, such as a screenshot. Required for every method except TEXT_TO_JOIN.
+        """
+        pulumi.set(__self__, "details", details)
+        pulumi.set(__self__, "method", method)
+        if attachment is not None:
+            pulumi.set(__self__, "attachment", attachment)
+
+    @_builtins.property
+    @pulumi.getter
+    def details(self) -> _builtins.str:
+        """
+        Describes how consent is collected with this method.
+        """
+        return pulumi.get(self, "details")
+
+    @_builtins.property
+    @pulumi.getter
+    def method(self) -> _builtins.str:
+        """
+        How consent is collected: ONLINE_FORM, LIVE_OPERATOR, POINT_OF_SALE, TEXT_TO_JOIN or OTHER.
+        """
+        return pulumi.get(self, "method")
+
+    @_builtins.property
+    @pulumi.getter
+    def attachment(self) -> Optional[_builtins.str]:
+        """
+        HTTP(S) link to evidence of the consent flow, such as a screenshot. Required for every method except TEXT_TO_JOIN.
+        """
+        return pulumi.get(self, "attachment")
+
+
+@pulumi.output_type
+class TenDlcMessageFlowDetails(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "consentMechanisms":
+            suggest = "consent_mechanisms"
+        elif key == "pricingDisclosure":
+            suggest = "pricing_disclosure"
+        elif key == "privacyPolicy":
+            suggest = "privacy_policy"
+        elif key == "termsAndConditions":
+            suggest = "terms_and_conditions"
+        elif key == "brandName":
+            suggest = "brand_name"
+        elif key == "carrierDisclaimer":
+            suggest = "carrier_disclaimer"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in TenDlcMessageFlowDetails. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        TenDlcMessageFlowDetails.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        TenDlcMessageFlowDetails.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 consent_mechanisms: Sequence['outputs.TenDlcConsentMechanism'],
+                 frequency: _builtins.str,
+                 pricing_disclosure: _builtins.bool,
+                 privacy_policy: _builtins.str,
+                 terms_and_conditions: _builtins.str,
+                 brand_name: Optional[_builtins.str] = None,
+                 carrier_disclaimer: Optional[_builtins.bool] = None):
+        """
+        :param Sequence['TenDlcConsentMechanism'] consent_mechanisms: At least one way subscribers consent to receive messages.
+        :param _builtins.str frequency: How often messages are sent: ONE_TIME or RECURRING.
+        :param _builtins.bool pricing_disclosure: Whether subscribers are told about message and data rates. Must be true.
+        :param _builtins.str privacy_policy: Link to the privacy policy.
+        :param _builtins.str terms_and_conditions: Link to the terms and conditions.
+        :param _builtins.str brand_name: Brand name shown in the generated text. Vonage does not require it for sole proprietors.
+        :param _builtins.bool carrier_disclaimer: Whether the carriers are not liable for delayed or undelivered messages is disclosed. Only true is accepted; leave unset otherwise.
+        """
+        pulumi.set(__self__, "consent_mechanisms", consent_mechanisms)
+        pulumi.set(__self__, "frequency", frequency)
+        pulumi.set(__self__, "pricing_disclosure", pricing_disclosure)
+        pulumi.set(__self__, "privacy_policy", privacy_policy)
+        pulumi.set(__self__, "terms_and_conditions", terms_and_conditions)
+        if brand_name is not None:
+            pulumi.set(__self__, "brand_name", brand_name)
+        if carrier_disclaimer is not None:
+            pulumi.set(__self__, "carrier_disclaimer", carrier_disclaimer)
+
+    @_builtins.property
+    @pulumi.getter(name="consentMechanisms")
+    def consent_mechanisms(self) -> Sequence['outputs.TenDlcConsentMechanism']:
+        """
+        At least one way subscribers consent to receive messages.
+        """
+        return pulumi.get(self, "consent_mechanisms")
+
+    @_builtins.property
+    @pulumi.getter
+    def frequency(self) -> _builtins.str:
+        """
+        How often messages are sent: ONE_TIME or RECURRING.
+        """
+        return pulumi.get(self, "frequency")
+
+    @_builtins.property
+    @pulumi.getter(name="pricingDisclosure")
+    def pricing_disclosure(self) -> _builtins.bool:
+        """
+        Whether subscribers are told about message and data rates. Must be true.
+        """
+        return pulumi.get(self, "pricing_disclosure")
+
+    @_builtins.property
+    @pulumi.getter(name="privacyPolicy")
+    def privacy_policy(self) -> _builtins.str:
+        """
+        Link to the privacy policy.
+        """
+        return pulumi.get(self, "privacy_policy")
+
+    @_builtins.property
+    @pulumi.getter(name="termsAndConditions")
+    def terms_and_conditions(self) -> _builtins.str:
+        """
+        Link to the terms and conditions.
+        """
+        return pulumi.get(self, "terms_and_conditions")
+
+    @_builtins.property
+    @pulumi.getter(name="brandName")
+    def brand_name(self) -> Optional[_builtins.str]:
+        """
+        Brand name shown in the generated text. Vonage does not require it for sole proprietors.
+        """
+        return pulumi.get(self, "brand_name")
+
+    @_builtins.property
+    @pulumi.getter(name="carrierDisclaimer")
+    def carrier_disclaimer(self) -> Optional[_builtins.bool]:
+        """
+        Whether the carriers are not liable for delayed or undelivered messages is disclosed. Only true is accepted; leave unset otherwise.
+        """
+        return pulumi.get(self, "carrier_disclaimer")
+
+
+@pulumi.output_type
+class TenDlcResellerInfo(dict):
+    def __init__(__self__, *,
+                 company_name: _builtins.str,
+                 email: _builtins.str,
+                 phone: _builtins.str,
+                 rejection_reason: _builtins.str,
+                 reseller_id: _builtins.str,
+                 status: _builtins.str,
+                 tcr_reseller_id: _builtins.str):
+        """
+        :param _builtins.str company_name: Company name of the reseller.
+        :param _builtins.str email: Contact email address.
+        :param _builtins.str phone: Contact phone number, E.164 without the + prefix.
+        :param _builtins.str rejection_reason: Why the reseller was rejected; empty otherwise.
+        :param _builtins.str reseller_id: ID of the reseller.
+        :param _builtins.str status: Review status: PENDING, APPROVED or REJECTED.
+        :param _builtins.str tcr_reseller_id: ID at The Campaign Registry; empty until the reseller is APPROVED.
+        """
+        pulumi.set(__self__, "company_name", company_name)
+        pulumi.set(__self__, "email", email)
+        pulumi.set(__self__, "phone", phone)
+        pulumi.set(__self__, "rejection_reason", rejection_reason)
+        pulumi.set(__self__, "reseller_id", reseller_id)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "tcr_reseller_id", tcr_reseller_id)
+
+    @_builtins.property
+    @pulumi.getter(name="companyName")
+    def company_name(self) -> _builtins.str:
+        """
+        Company name of the reseller.
+        """
+        return pulumi.get(self, "company_name")
+
+    @_builtins.property
+    @pulumi.getter
+    def email(self) -> _builtins.str:
+        """
+        Contact email address.
+        """
+        return pulumi.get(self, "email")
+
+    @_builtins.property
+    @pulumi.getter
+    def phone(self) -> _builtins.str:
+        """
+        Contact phone number, E.164 without the + prefix.
+        """
+        return pulumi.get(self, "phone")
+
+    @_builtins.property
+    @pulumi.getter(name="rejectionReason")
+    def rejection_reason(self) -> _builtins.str:
+        """
+        Why the reseller was rejected; empty otherwise.
+        """
+        return pulumi.get(self, "rejection_reason")
+
+    @_builtins.property
+    @pulumi.getter(name="resellerId")
+    def reseller_id(self) -> _builtins.str:
+        """
+        ID of the reseller.
+        """
+        return pulumi.get(self, "reseller_id")
+
+    @_builtins.property
+    @pulumi.getter
+    def status(self) -> _builtins.str:
+        """
+        Review status: PENDING, APPROVED or REJECTED.
+        """
+        return pulumi.get(self, "status")
+
+    @_builtins.property
+    @pulumi.getter(name="tcrResellerId")
+    def tcr_reseller_id(self) -> _builtins.str:
+        """
+        ID at The Campaign Registry; empty until the reseller is APPROVED.
+        """
+        return pulumi.get(self, "tcr_reseller_id")
+
+
+@pulumi.output_type
+class TenDlcThroughputInfo(dict):
+    def __init__(__self__, *,
+                 brand_id: _builtins.str,
+                 campaign_id: _builtins.str,
+                 carriers: Sequence[_builtins.str],
+                 id: _builtins.str,
+                 period: _builtins.str,
+                 scope: _builtins.str,
+                 value: 'outputs.TenDlcThroughputValue'):
+        """
+        :param _builtins.str brand_id: Brand the throughput applies to; empty when not reported.
+        :param _builtins.str campaign_id: Campaign the throughput applies to; empty when not reported.
+        :param Sequence[_builtins.str] carriers: Carriers the throughput applies to.
+        :param _builtins.str id: ID of the throughput; only custom overrides carry one.
+        :param _builtins.str period: Period the value covers: minute or day.
+        :param _builtins.str scope: What the throughput limits: campaign, brand or number.
+        :param 'TenDlcThroughputValue' value: How many messages are allowed per period.
+        """
+        pulumi.set(__self__, "brand_id", brand_id)
+        pulumi.set(__self__, "campaign_id", campaign_id)
+        pulumi.set(__self__, "carriers", carriers)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "period", period)
+        pulumi.set(__self__, "scope", scope)
+        pulumi.set(__self__, "value", value)
+
+    @_builtins.property
+    @pulumi.getter(name="brandId")
+    def brand_id(self) -> _builtins.str:
+        """
+        Brand the throughput applies to; empty when not reported.
+        """
+        return pulumi.get(self, "brand_id")
+
+    @_builtins.property
+    @pulumi.getter(name="campaignId")
+    def campaign_id(self) -> _builtins.str:
+        """
+        Campaign the throughput applies to; empty when not reported.
+        """
+        return pulumi.get(self, "campaign_id")
+
+    @_builtins.property
+    @pulumi.getter
+    def carriers(self) -> Sequence[_builtins.str]:
+        """
+        Carriers the throughput applies to.
+        """
+        return pulumi.get(self, "carriers")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> _builtins.str:
+        """
+        ID of the throughput; only custom overrides carry one.
+        """
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter
+    def period(self) -> _builtins.str:
+        """
+        Period the value covers: minute or day.
+        """
+        return pulumi.get(self, "period")
+
+    @_builtins.property
+    @pulumi.getter
+    def scope(self) -> _builtins.str:
+        """
+        What the throughput limits: campaign, brand or number.
+        """
+        return pulumi.get(self, "scope")
+
+    @_builtins.property
+    @pulumi.getter
+    def value(self) -> 'outputs.TenDlcThroughputValue':
+        """
+        How many messages are allowed per period.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class TenDlcThroughputValue(dict):
+    def __init__(__self__, *,
+                 mms: Optional[_builtins.float] = None,
+                 shared: Optional[_builtins.float] = None,
+                 sms: Optional[_builtins.float] = None,
+                 unlimited: Optional[_builtins.bool] = None):
+        """
+        :param _builtins.float mms: MMS messages per period, when SMS and MMS are limited separately.
+        :param _builtins.float shared: Messages per period shared by SMS and MMS.
+        :param _builtins.float sms: SMS messages per period, when SMS and MMS are limited separately.
+        :param _builtins.bool unlimited: True when the throughput is unlimited.
+        """
+        if mms is not None:
+            pulumi.set(__self__, "mms", mms)
+        if shared is not None:
+            pulumi.set(__self__, "shared", shared)
+        if sms is not None:
+            pulumi.set(__self__, "sms", sms)
+        if unlimited is not None:
+            pulumi.set(__self__, "unlimited", unlimited)
+
+    @_builtins.property
+    @pulumi.getter
+    def mms(self) -> Optional[_builtins.float]:
+        """
+        MMS messages per period, when SMS and MMS are limited separately.
+        """
+        return pulumi.get(self, "mms")
+
+    @_builtins.property
+    @pulumi.getter
+    def shared(self) -> Optional[_builtins.float]:
+        """
+        Messages per period shared by SMS and MMS.
+        """
+        return pulumi.get(self, "shared")
+
+    @_builtins.property
+    @pulumi.getter
+    def sms(self) -> Optional[_builtins.float]:
+        """
+        SMS messages per period, when SMS and MMS are limited separately.
+        """
+        return pulumi.get(self, "sms")
+
+    @_builtins.property
+    @pulumi.getter
+    def unlimited(self) -> Optional[_builtins.bool]:
+        """
+        True when the throughput is unlimited.
+        """
+        return pulumi.get(self, "unlimited")
+
+
+@pulumi.output_type
+class TenDlcUsecaseInfo(dict):
+    def __init__(__self__, *,
+                 classification: _builtins.str,
+                 description: _builtins.str,
+                 display_name: _builtins.str,
+                 id: _builtins.str,
+                 max_sub_usecases: Optional[_builtins.float] = None,
+                 min_msg_samples: Optional[_builtins.float] = None,
+                 min_sub_usecases: Optional[_builtins.float] = None):
+        """
+        :param _builtins.str classification: Classification, for example STANDARD or SPECIAL.
+        :param _builtins.str description: What the use case covers.
+        :param _builtins.str display_name: Display name.
+        :param _builtins.str id: Use case ID, the usecase of a TenDlcCampaign.
+        :param _builtins.float max_sub_usecases: Most sub use cases a campaign may list; unset when not reported.
+        :param _builtins.float min_msg_samples: Fewest sample messages the use case needs; unset when not reported.
+        :param _builtins.float min_sub_usecases: Fewest sub use cases a MIXED-style campaign needs; unset when not reported.
+        """
+        pulumi.set(__self__, "classification", classification)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "display_name", display_name)
+        pulumi.set(__self__, "id", id)
+        if max_sub_usecases is not None:
+            pulumi.set(__self__, "max_sub_usecases", max_sub_usecases)
+        if min_msg_samples is not None:
+            pulumi.set(__self__, "min_msg_samples", min_msg_samples)
+        if min_sub_usecases is not None:
+            pulumi.set(__self__, "min_sub_usecases", min_sub_usecases)
+
+    @_builtins.property
+    @pulumi.getter
+    def classification(self) -> _builtins.str:
+        """
+        Classification, for example STANDARD or SPECIAL.
+        """
+        return pulumi.get(self, "classification")
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> _builtins.str:
+        """
+        What the use case covers.
+        """
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter(name="displayName")
+    def display_name(self) -> _builtins.str:
+        """
+        Display name.
+        """
+        return pulumi.get(self, "display_name")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> _builtins.str:
+        """
+        Use case ID, the usecase of a TenDlcCampaign.
+        """
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter(name="maxSubUsecases")
+    def max_sub_usecases(self) -> Optional[_builtins.float]:
+        """
+        Most sub use cases a campaign may list; unset when not reported.
+        """
+        return pulumi.get(self, "max_sub_usecases")
+
+    @_builtins.property
+    @pulumi.getter(name="minMsgSamples")
+    def min_msg_samples(self) -> Optional[_builtins.float]:
+        """
+        Fewest sample messages the use case needs; unset when not reported.
+        """
+        return pulumi.get(self, "min_msg_samples")
+
+    @_builtins.property
+    @pulumi.getter(name="minSubUsecases")
+    def min_sub_usecases(self) -> Optional[_builtins.float]:
+        """
+        Fewest sub use cases a MIXED-style campaign needs; unset when not reported.
+        """
+        return pulumi.get(self, "min_sub_usecases")
+
+
+@pulumi.output_type
+class TenDlcVerticalInfo(dict):
+    def __init__(__self__, *,
+                 description: _builtins.str,
+                 display_name: _builtins.str,
+                 id: _builtins.str,
+                 industry_id: _builtins.str):
+        """
+        :param _builtins.str description: What the vertical covers.
+        :param _builtins.str display_name: Display name.
+        :param _builtins.str id: Vertical ID, the vertical of a TenDlcCampaign.
+        :param _builtins.str industry_id: Industry the vertical belongs to; empty when not reported.
+        """
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "display_name", display_name)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "industry_id", industry_id)
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> _builtins.str:
+        """
+        What the vertical covers.
+        """
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter(name="displayName")
+    def display_name(self) -> _builtins.str:
+        """
+        Display name.
+        """
+        return pulumi.get(self, "display_name")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> _builtins.str:
+        """
+        Vertical ID, the vertical of a TenDlcCampaign.
+        """
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter(name="industryId")
+    def industry_id(self) -> _builtins.str:
+        """
+        Industry the vertical belongs to; empty when not reported.
+        """
+        return pulumi.get(self, "industry_id")
 
 
 @pulumi.output_type

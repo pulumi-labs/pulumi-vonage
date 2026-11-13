@@ -27,6 +27,10 @@ __all__ = [
     'NetworkBusinessInformationArgsDict',
     'RtcCapabilityArgs',
     'RtcCapabilityArgsDict',
+    'TenDlcConsentMechanismArgs',
+    'TenDlcConsentMechanismArgsDict',
+    'TenDlcMessageFlowDetailsArgs',
+    'TenDlcMessageFlowDetailsArgsDict',
     'UserChannelsArgs',
     'UserChannelsArgsDict',
     'UserMessengerChannelArgs',
@@ -484,6 +488,217 @@ class RtcCapabilityArgs:
     @signed_callbacks.setter
     def signed_callbacks(self, value: Optional[pulumi.Input[_builtins.bool]]):
         pulumi.set(self, "signed_callbacks", value)
+
+
+class TenDlcConsentMechanismArgsDict(TypedDict):
+    details: pulumi.Input[_builtins.str]
+    """
+    Describes how consent is collected with this method.
+    """
+    method: pulumi.Input[_builtins.str]
+    """
+    How consent is collected: ONLINE_FORM, LIVE_OPERATOR, POINT_OF_SALE, TEXT_TO_JOIN or OTHER.
+    """
+    attachment: NotRequired[Optional[pulumi.Input[_builtins.str]]]
+    """
+    HTTP(S) link to evidence of the consent flow, such as a screenshot. Required for every method except TEXT_TO_JOIN.
+    """
+
+@pulumi.input_type
+class TenDlcConsentMechanismArgs:
+    def __init__(__self__, *,
+                 details: pulumi.Input[_builtins.str],
+                 method: pulumi.Input[_builtins.str],
+                 attachment: Optional[pulumi.Input[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] details: Describes how consent is collected with this method.
+        :param pulumi.Input[_builtins.str] method: How consent is collected: ONLINE_FORM, LIVE_OPERATOR, POINT_OF_SALE, TEXT_TO_JOIN or OTHER.
+        :param pulumi.Input[_builtins.str] attachment: HTTP(S) link to evidence of the consent flow, such as a screenshot. Required for every method except TEXT_TO_JOIN.
+        """
+        pulumi.set(__self__, "details", details)
+        pulumi.set(__self__, "method", method)
+        if attachment is not None:
+            pulumi.set(__self__, "attachment", attachment)
+
+    @_builtins.property
+    @pulumi.getter
+    def details(self) -> pulumi.Input[_builtins.str]:
+        """
+        Describes how consent is collected with this method.
+        """
+        return pulumi.get(self, "details")
+
+    @details.setter
+    def details(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "details", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def method(self) -> pulumi.Input[_builtins.str]:
+        """
+        How consent is collected: ONLINE_FORM, LIVE_OPERATOR, POINT_OF_SALE, TEXT_TO_JOIN or OTHER.
+        """
+        return pulumi.get(self, "method")
+
+    @method.setter
+    def method(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "method", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def attachment(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        HTTP(S) link to evidence of the consent flow, such as a screenshot. Required for every method except TEXT_TO_JOIN.
+        """
+        return pulumi.get(self, "attachment")
+
+    @attachment.setter
+    def attachment(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "attachment", value)
+
+
+class TenDlcMessageFlowDetailsArgsDict(TypedDict):
+    consent_mechanisms: pulumi.Input[Sequence[pulumi.Input['TenDlcConsentMechanismArgsDict']]]
+    """
+    At least one way subscribers consent to receive messages.
+    """
+    frequency: pulumi.Input[_builtins.str]
+    """
+    How often messages are sent: ONE_TIME or RECURRING.
+    """
+    pricing_disclosure: pulumi.Input[_builtins.bool]
+    """
+    Whether subscribers are told about message and data rates. Must be true.
+    """
+    privacy_policy: pulumi.Input[_builtins.str]
+    """
+    Link to the privacy policy.
+    """
+    terms_and_conditions: pulumi.Input[_builtins.str]
+    """
+    Link to the terms and conditions.
+    """
+    brand_name: NotRequired[Optional[pulumi.Input[_builtins.str]]]
+    """
+    Brand name shown in the generated text. Vonage does not require it for sole proprietors.
+    """
+    carrier_disclaimer: NotRequired[Optional[pulumi.Input[_builtins.bool]]]
+    """
+    Whether the carriers are not liable for delayed or undelivered messages is disclosed. Only true is accepted; leave unset otherwise.
+    """
+
+@pulumi.input_type
+class TenDlcMessageFlowDetailsArgs:
+    def __init__(__self__, *,
+                 consent_mechanisms: pulumi.Input[Sequence[pulumi.Input['TenDlcConsentMechanismArgs']]],
+                 frequency: pulumi.Input[_builtins.str],
+                 pricing_disclosure: pulumi.Input[_builtins.bool],
+                 privacy_policy: pulumi.Input[_builtins.str],
+                 terms_and_conditions: pulumi.Input[_builtins.str],
+                 brand_name: Optional[pulumi.Input[_builtins.str]] = None,
+                 carrier_disclaimer: Optional[pulumi.Input[_builtins.bool]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['TenDlcConsentMechanismArgs']]] consent_mechanisms: At least one way subscribers consent to receive messages.
+        :param pulumi.Input[_builtins.str] frequency: How often messages are sent: ONE_TIME or RECURRING.
+        :param pulumi.Input[_builtins.bool] pricing_disclosure: Whether subscribers are told about message and data rates. Must be true.
+        :param pulumi.Input[_builtins.str] privacy_policy: Link to the privacy policy.
+        :param pulumi.Input[_builtins.str] terms_and_conditions: Link to the terms and conditions.
+        :param pulumi.Input[_builtins.str] brand_name: Brand name shown in the generated text. Vonage does not require it for sole proprietors.
+        :param pulumi.Input[_builtins.bool] carrier_disclaimer: Whether the carriers are not liable for delayed or undelivered messages is disclosed. Only true is accepted; leave unset otherwise.
+        """
+        pulumi.set(__self__, "consent_mechanisms", consent_mechanisms)
+        pulumi.set(__self__, "frequency", frequency)
+        pulumi.set(__self__, "pricing_disclosure", pricing_disclosure)
+        pulumi.set(__self__, "privacy_policy", privacy_policy)
+        pulumi.set(__self__, "terms_and_conditions", terms_and_conditions)
+        if brand_name is not None:
+            pulumi.set(__self__, "brand_name", brand_name)
+        if carrier_disclaimer is not None:
+            pulumi.set(__self__, "carrier_disclaimer", carrier_disclaimer)
+
+    @_builtins.property
+    @pulumi.getter(name="consentMechanisms")
+    def consent_mechanisms(self) -> pulumi.Input[Sequence[pulumi.Input['TenDlcConsentMechanismArgs']]]:
+        """
+        At least one way subscribers consent to receive messages.
+        """
+        return pulumi.get(self, "consent_mechanisms")
+
+    @consent_mechanisms.setter
+    def consent_mechanisms(self, value: pulumi.Input[Sequence[pulumi.Input['TenDlcConsentMechanismArgs']]]):
+        pulumi.set(self, "consent_mechanisms", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def frequency(self) -> pulumi.Input[_builtins.str]:
+        """
+        How often messages are sent: ONE_TIME or RECURRING.
+        """
+        return pulumi.get(self, "frequency")
+
+    @frequency.setter
+    def frequency(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "frequency", value)
+
+    @_builtins.property
+    @pulumi.getter(name="pricingDisclosure")
+    def pricing_disclosure(self) -> pulumi.Input[_builtins.bool]:
+        """
+        Whether subscribers are told about message and data rates. Must be true.
+        """
+        return pulumi.get(self, "pricing_disclosure")
+
+    @pricing_disclosure.setter
+    def pricing_disclosure(self, value: pulumi.Input[_builtins.bool]):
+        pulumi.set(self, "pricing_disclosure", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privacyPolicy")
+    def privacy_policy(self) -> pulumi.Input[_builtins.str]:
+        """
+        Link to the privacy policy.
+        """
+        return pulumi.get(self, "privacy_policy")
+
+    @privacy_policy.setter
+    def privacy_policy(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "privacy_policy", value)
+
+    @_builtins.property
+    @pulumi.getter(name="termsAndConditions")
+    def terms_and_conditions(self) -> pulumi.Input[_builtins.str]:
+        """
+        Link to the terms and conditions.
+        """
+        return pulumi.get(self, "terms_and_conditions")
+
+    @terms_and_conditions.setter
+    def terms_and_conditions(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "terms_and_conditions", value)
+
+    @_builtins.property
+    @pulumi.getter(name="brandName")
+    def brand_name(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        Brand name shown in the generated text. Vonage does not require it for sole proprietors.
+        """
+        return pulumi.get(self, "brand_name")
+
+    @brand_name.setter
+    def brand_name(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "brand_name", value)
+
+    @_builtins.property
+    @pulumi.getter(name="carrierDisclaimer")
+    def carrier_disclaimer(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        Whether the carriers are not liable for delayed or undelivered messages is disclosed. Only true is accepted; leave unset otherwise.
+        """
+        return pulumi.get(self, "carrier_disclaimer")
+
+    @carrier_disclaimer.setter
+    def carrier_disclaimer(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "carrier_disclaimer", value)
 
 
 class UserChannelsArgsDict(TypedDict):

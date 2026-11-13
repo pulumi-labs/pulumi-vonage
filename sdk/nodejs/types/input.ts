@@ -99,6 +99,52 @@ export interface RtcCapabilityArgs {
     signedCallbacks?: pulumi.Input<boolean | undefined>;
 }
 
+export interface TenDlcConsentMechanismArgs {
+    /**
+     * HTTP(S) link to evidence of the consent flow, such as a screenshot. Required for every method except TEXT_TO_JOIN.
+     */
+    attachment?: pulumi.Input<string | undefined>;
+    /**
+     * Describes how consent is collected with this method.
+     */
+    details: pulumi.Input<string>;
+    /**
+     * How consent is collected: ONLINE_FORM, LIVE_OPERATOR, POINT_OF_SALE, TEXT_TO_JOIN or OTHER.
+     */
+    method: pulumi.Input<string>;
+}
+
+export interface TenDlcMessageFlowDetailsArgs {
+    /**
+     * Brand name shown in the generated text. Vonage does not require it for sole proprietors.
+     */
+    brandName?: pulumi.Input<string | undefined>;
+    /**
+     * Whether the carriers are not liable for delayed or undelivered messages is disclosed. Only true is accepted; leave unset otherwise.
+     */
+    carrierDisclaimer?: pulumi.Input<boolean | undefined>;
+    /**
+     * At least one way subscribers consent to receive messages.
+     */
+    consentMechanisms: pulumi.Input<pulumi.Input<inputs.TenDlcConsentMechanismArgs>[]>;
+    /**
+     * How often messages are sent: ONE_TIME or RECURRING.
+     */
+    frequency: pulumi.Input<string>;
+    /**
+     * Whether subscribers are told about message and data rates. Must be true.
+     */
+    pricingDisclosure: pulumi.Input<boolean>;
+    /**
+     * Link to the privacy policy.
+     */
+    privacyPolicy: pulumi.Input<string>;
+    /**
+     * Link to the terms and conditions.
+     */
+    termsAndConditions: pulumi.Input<string>;
+}
+
 export interface UserChannelsArgs {
     /**
      * Facebook Messenger IDs of the user.

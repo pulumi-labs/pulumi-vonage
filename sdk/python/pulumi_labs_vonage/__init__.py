@@ -38,6 +38,18 @@ from .get_numbers import *
 from .get_pricing import *
 from .get_sub_account import *
 from .get_sub_accounts import *
+from .get_ten_dlc_account_settings import *
+from .get_ten_dlc_brand import *
+from .get_ten_dlc_brands import *
+from .get_ten_dlc_campaign import *
+from .get_ten_dlc_campaign_number import *
+from .get_ten_dlc_campaign_numbers import *
+from .get_ten_dlc_campaign_terms_and_conditions import *
+from .get_ten_dlc_campaigns import *
+from .get_ten_dlc_enums import *
+from .get_ten_dlc_reseller import *
+from .get_ten_dlc_resellers import *
+from .get_ten_dlc_throughputs import *
 from .get_user import *
 from .get_users import *
 from .get_verify_template import *
@@ -51,6 +63,11 @@ from .number_pool import *
 from .number_pool_number import *
 from .provider import *
 from .sub_account import *
+from .ten_dlc_account_settings import *
+from .ten_dlc_brand import *
+from .ten_dlc_campaign import *
+from .ten_dlc_campaign_number import *
+from .ten_dlc_reseller import *
 from .user import *
 from .verify_template import *
 from .verify_template_fragment import *
@@ -84,6 +101,11 @@ _utilities.register(
    "vonage:index:NumberPool": "NumberPool",
    "vonage:index:NumberPoolNumber": "NumberPoolNumber",
    "vonage:index:SubAccount": "SubAccount",
+   "vonage:index:TenDlcAccountSettings": "TenDlcAccountSettings",
+   "vonage:index:TenDlcBrand": "TenDlcBrand",
+   "vonage:index:TenDlcCampaign": "TenDlcCampaign",
+   "vonage:index:TenDlcCampaignNumber": "TenDlcCampaignNumber",
+   "vonage:index:TenDlcReseller": "TenDlcReseller",
    "vonage:index:User": "User",
    "vonage:index:VerifyTemplate": "VerifyTemplate",
    "vonage:index:VerifyTemplateFragment": "VerifyTemplateFragment"
