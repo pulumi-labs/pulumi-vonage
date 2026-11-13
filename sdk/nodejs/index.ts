@@ -165,6 +165,66 @@ export const getSubAccounts: typeof import("./getSubAccounts").getSubAccounts = 
 export const getSubAccountsOutput: typeof import("./getSubAccounts").getSubAccountsOutput = null as any;
 utilities.lazyLoad(exports, ["getSubAccounts","getSubAccountsOutput"], () => require("./getSubAccounts"));
 
+export { GetTenDlcAccountSettingsArgs, GetTenDlcAccountSettingsResult } from "./getTenDlcAccountSettings";
+export const getTenDlcAccountSettings: typeof import("./getTenDlcAccountSettings").getTenDlcAccountSettings = null as any;
+export const getTenDlcAccountSettingsOutput: typeof import("./getTenDlcAccountSettings").getTenDlcAccountSettingsOutput = null as any;
+utilities.lazyLoad(exports, ["getTenDlcAccountSettings","getTenDlcAccountSettingsOutput"], () => require("./getTenDlcAccountSettings"));
+
+export { GetTenDlcBrandArgs, GetTenDlcBrandResult, GetTenDlcBrandOutputArgs } from "./getTenDlcBrand";
+export const getTenDlcBrand: typeof import("./getTenDlcBrand").getTenDlcBrand = null as any;
+export const getTenDlcBrandOutput: typeof import("./getTenDlcBrand").getTenDlcBrandOutput = null as any;
+utilities.lazyLoad(exports, ["getTenDlcBrand","getTenDlcBrandOutput"], () => require("./getTenDlcBrand"));
+
+export { GetTenDlcBrandsArgs, GetTenDlcBrandsResult, GetTenDlcBrandsOutputArgs } from "./getTenDlcBrands";
+export const getTenDlcBrands: typeof import("./getTenDlcBrands").getTenDlcBrands = null as any;
+export const getTenDlcBrandsOutput: typeof import("./getTenDlcBrands").getTenDlcBrandsOutput = null as any;
+utilities.lazyLoad(exports, ["getTenDlcBrands","getTenDlcBrandsOutput"], () => require("./getTenDlcBrands"));
+
+export { GetTenDlcCampaignArgs, GetTenDlcCampaignResult, GetTenDlcCampaignOutputArgs } from "./getTenDlcCampaign";
+export const getTenDlcCampaign: typeof import("./getTenDlcCampaign").getTenDlcCampaign = null as any;
+export const getTenDlcCampaignOutput: typeof import("./getTenDlcCampaign").getTenDlcCampaignOutput = null as any;
+utilities.lazyLoad(exports, ["getTenDlcCampaign","getTenDlcCampaignOutput"], () => require("./getTenDlcCampaign"));
+
+export { GetTenDlcCampaignNumberArgs, GetTenDlcCampaignNumberResult, GetTenDlcCampaignNumberOutputArgs } from "./getTenDlcCampaignNumber";
+export const getTenDlcCampaignNumber: typeof import("./getTenDlcCampaignNumber").getTenDlcCampaignNumber = null as any;
+export const getTenDlcCampaignNumberOutput: typeof import("./getTenDlcCampaignNumber").getTenDlcCampaignNumberOutput = null as any;
+utilities.lazyLoad(exports, ["getTenDlcCampaignNumber","getTenDlcCampaignNumberOutput"], () => require("./getTenDlcCampaignNumber"));
+
+export { GetTenDlcCampaignNumbersArgs, GetTenDlcCampaignNumbersResult, GetTenDlcCampaignNumbersOutputArgs } from "./getTenDlcCampaignNumbers";
+export const getTenDlcCampaignNumbers: typeof import("./getTenDlcCampaignNumbers").getTenDlcCampaignNumbers = null as any;
+export const getTenDlcCampaignNumbersOutput: typeof import("./getTenDlcCampaignNumbers").getTenDlcCampaignNumbersOutput = null as any;
+utilities.lazyLoad(exports, ["getTenDlcCampaignNumbers","getTenDlcCampaignNumbersOutput"], () => require("./getTenDlcCampaignNumbers"));
+
+export { GetTenDlcCampaignTermsAndConditionsArgs, GetTenDlcCampaignTermsAndConditionsResult } from "./getTenDlcCampaignTermsAndConditions";
+export const getTenDlcCampaignTermsAndConditions: typeof import("./getTenDlcCampaignTermsAndConditions").getTenDlcCampaignTermsAndConditions = null as any;
+export const getTenDlcCampaignTermsAndConditionsOutput: typeof import("./getTenDlcCampaignTermsAndConditions").getTenDlcCampaignTermsAndConditionsOutput = null as any;
+utilities.lazyLoad(exports, ["getTenDlcCampaignTermsAndConditions","getTenDlcCampaignTermsAndConditionsOutput"], () => require("./getTenDlcCampaignTermsAndConditions"));
+
+export { GetTenDlcCampaignsArgs, GetTenDlcCampaignsResult, GetTenDlcCampaignsOutputArgs } from "./getTenDlcCampaigns";
+export const getTenDlcCampaigns: typeof import("./getTenDlcCampaigns").getTenDlcCampaigns = null as any;
+export const getTenDlcCampaignsOutput: typeof import("./getTenDlcCampaigns").getTenDlcCampaignsOutput = null as any;
+utilities.lazyLoad(exports, ["getTenDlcCampaigns","getTenDlcCampaignsOutput"], () => require("./getTenDlcCampaigns"));
+
+export { GetTenDlcEnumsArgs, GetTenDlcEnumsResult } from "./getTenDlcEnums";
+export const getTenDlcEnums: typeof import("./getTenDlcEnums").getTenDlcEnums = null as any;
+export const getTenDlcEnumsOutput: typeof import("./getTenDlcEnums").getTenDlcEnumsOutput = null as any;
+utilities.lazyLoad(exports, ["getTenDlcEnums","getTenDlcEnumsOutput"], () => require("./getTenDlcEnums"));
+
+export { GetTenDlcResellerArgs, GetTenDlcResellerResult, GetTenDlcResellerOutputArgs } from "./getTenDlcReseller";
+export const getTenDlcReseller: typeof import("./getTenDlcReseller").getTenDlcReseller = null as any;
+export const getTenDlcResellerOutput: typeof import("./getTenDlcReseller").getTenDlcResellerOutput = null as any;
+utilities.lazyLoad(exports, ["getTenDlcReseller","getTenDlcResellerOutput"], () => require("./getTenDlcReseller"));
+
+export { GetTenDlcResellersArgs, GetTenDlcResellersResult } from "./getTenDlcResellers";
+export const getTenDlcResellers: typeof import("./getTenDlcResellers").getTenDlcResellers = null as any;
+export const getTenDlcResellersOutput: typeof import("./getTenDlcResellers").getTenDlcResellersOutput = null as any;
+utilities.lazyLoad(exports, ["getTenDlcResellers","getTenDlcResellersOutput"], () => require("./getTenDlcResellers"));
+
+export { GetTenDlcThroughputsArgs, GetTenDlcThroughputsResult, GetTenDlcThroughputsOutputArgs } from "./getTenDlcThroughputs";
+export const getTenDlcThroughputs: typeof import("./getTenDlcThroughputs").getTenDlcThroughputs = null as any;
+export const getTenDlcThroughputsOutput: typeof import("./getTenDlcThroughputs").getTenDlcThroughputsOutput = null as any;
+utilities.lazyLoad(exports, ["getTenDlcThroughputs","getTenDlcThroughputsOutput"], () => require("./getTenDlcThroughputs"));
+
 export { GetUserArgs, GetUserResult, GetUserOutputArgs } from "./getUser";
 export const getUser: typeof import("./getUser").getUser = null as any;
 export const getUserOutput: typeof import("./getUser").getUserOutput = null as any;
@@ -230,6 +290,31 @@ export type SubAccount = import("./subAccount").SubAccount;
 export const SubAccount: typeof import("./subAccount").SubAccount = null as any;
 utilities.lazyLoad(exports, ["SubAccount"], () => require("./subAccount"));
 
+export { TenDlcAccountSettingsArgs } from "./tenDlcAccountSettings";
+export type TenDlcAccountSettings = import("./tenDlcAccountSettings").TenDlcAccountSettings;
+export const TenDlcAccountSettings: typeof import("./tenDlcAccountSettings").TenDlcAccountSettings = null as any;
+utilities.lazyLoad(exports, ["TenDlcAccountSettings"], () => require("./tenDlcAccountSettings"));
+
+export { TenDlcBrandArgs } from "./tenDlcBrand";
+export type TenDlcBrand = import("./tenDlcBrand").TenDlcBrand;
+export const TenDlcBrand: typeof import("./tenDlcBrand").TenDlcBrand = null as any;
+utilities.lazyLoad(exports, ["TenDlcBrand"], () => require("./tenDlcBrand"));
+
+export { TenDlcCampaignArgs } from "./tenDlcCampaign";
+export type TenDlcCampaign = import("./tenDlcCampaign").TenDlcCampaign;
+export const TenDlcCampaign: typeof import("./tenDlcCampaign").TenDlcCampaign = null as any;
+utilities.lazyLoad(exports, ["TenDlcCampaign"], () => require("./tenDlcCampaign"));
+
+export { TenDlcCampaignNumberArgs } from "./tenDlcCampaignNumber";
+export type TenDlcCampaignNumber = import("./tenDlcCampaignNumber").TenDlcCampaignNumber;
+export const TenDlcCampaignNumber: typeof import("./tenDlcCampaignNumber").TenDlcCampaignNumber = null as any;
+utilities.lazyLoad(exports, ["TenDlcCampaignNumber"], () => require("./tenDlcCampaignNumber"));
+
+export { TenDlcResellerArgs } from "./tenDlcReseller";
+export type TenDlcReseller = import("./tenDlcReseller").TenDlcReseller;
+export const TenDlcReseller: typeof import("./tenDlcReseller").TenDlcReseller = null as any;
+utilities.lazyLoad(exports, ["TenDlcReseller"], () => require("./tenDlcReseller"));
+
 export { UserArgs } from "./user";
 export type User = import("./user").User;
 export const User: typeof import("./user").User = null as any;
@@ -283,6 +368,16 @@ const _module = {
                 return new NumberPoolNumber(name, <any>undefined, { urn })
             case "vonage:index:SubAccount":
                 return new SubAccount(name, <any>undefined, { urn })
+            case "vonage:index:TenDlcAccountSettings":
+                return new TenDlcAccountSettings(name, <any>undefined, { urn })
+            case "vonage:index:TenDlcBrand":
+                return new TenDlcBrand(name, <any>undefined, { urn })
+            case "vonage:index:TenDlcCampaign":
+                return new TenDlcCampaign(name, <any>undefined, { urn })
+            case "vonage:index:TenDlcCampaignNumber":
+                return new TenDlcCampaignNumber(name, <any>undefined, { urn })
+            case "vonage:index:TenDlcReseller":
+                return new TenDlcReseller(name, <any>undefined, { urn })
             case "vonage:index:User":
                 return new User(name, <any>undefined, { urn })
             case "vonage:index:VerifyTemplate":

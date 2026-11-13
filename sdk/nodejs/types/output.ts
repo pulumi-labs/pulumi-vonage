@@ -546,6 +546,503 @@ export interface RtcCapability {
     signedCallbacks?: boolean;
 }
 
+export interface TenDlcBrandInfo {
+    /**
+     * Vonage account (API key) the brand belongs to.
+     */
+    accountId: string;
+    /**
+     * Alternative business ID; empty when unset.
+     */
+    altBusinessId: string;
+    /**
+     * Alternative business ID type (DUNS, GIIN or LEI); empty when unset.
+     */
+    altBusinessIdType: string;
+    /**
+     * ID of the brand at The Campaign Registry.
+     */
+    brandId: string;
+    /**
+     * Relationship tier the registry assigned; empty when not yet known.
+     */
+    brandRelationship: string;
+    /**
+     * Number of campaigns registered for the brand.
+     */
+    campaignCount: number;
+    /**
+     * Carrier suspensions of the brand, if any.
+     */
+    carrierSuspensions: outputs.TenDlcCarrierSuspension[];
+    /**
+     * City; empty when unset.
+     */
+    city: string;
+    /**
+     * Legal company name; empty when unset.
+     */
+    companyName: string;
+    /**
+     * Country of the address; empty when unset.
+     */
+    country: string;
+    /**
+     * When the brand was created.
+     */
+    createdDate: string;
+    /**
+     * Display name; empty when unset.
+     */
+    displayName: string;
+    /**
+     * Tax ID (EIN); empty when unset.
+     */
+    ein: string;
+    /**
+     * Country that issued the tax ID; empty when unset.
+     */
+    einIssuingCountry: string;
+    /**
+     * Contact email; empty when unset.
+     */
+    email: string;
+    /**
+     * Legal form: PRIVATE_PROFIT, PUBLIC_PROFIT, NON_PROFIT, SOLE_PROPRIETOR or GOVERNMENT.
+     */
+    entityType: string;
+    /**
+     * First name; empty when unset.
+     */
+    firstName: string;
+    /**
+     * Last name; empty when unset.
+     */
+    lastName: string;
+    /**
+     * When the brand was last updated.
+     */
+    lastUpdated: string;
+    /**
+     * Mobile phone number; empty when unset.
+     */
+    mobilePhone: string;
+    /**
+     * Whether the account owns the brand.
+     */
+    owner: boolean;
+    /**
+     * Whether the brand is a partner brand.
+     */
+    partner: boolean;
+    /**
+     * Contact phone number; empty when unset.
+     */
+    phone: string;
+    /**
+     * Postal code; empty when unset.
+     */
+    postalCode: string;
+    /**
+     * API key of the primary account; empty when unset.
+     */
+    primaryAccountId: string;
+    /**
+     * Reference ID of the brand; empty when unset.
+     */
+    referenceId: string;
+    /**
+     * Whether the brand is a reseller.
+     */
+    reseller: boolean;
+    /**
+     * Whether the brand is shared with the account.
+     */
+    shared: boolean;
+    /**
+     * State or region; empty when unset.
+     */
+    state: string;
+    /**
+     * ACTIVE or SUSPENDED (deleted brands are not returned).
+     */
+    status: string;
+    /**
+     * Stock exchange; empty when unset.
+     */
+    stockExchange: string;
+    /**
+     * Stock symbol; empty when unset.
+     */
+    stockSymbol: string;
+    /**
+     * Street address; empty when unset.
+     */
+    street: string;
+    /**
+     * Universal tax ID; empty when unset.
+     */
+    universalEin: string;
+    /**
+     * Verification email address; empty when unset.
+     */
+    verificationEmail: string;
+    /**
+     * When the brand was verified; empty when it has not been.
+     */
+    verifiedDate: string;
+    /**
+     * Industry vertical; empty when unset.
+     */
+    vertical: string;
+    /**
+     * Website; empty when unset.
+     */
+    website: string;
+}
+
+export interface TenDlcCampaignInfo {
+    /**
+     * Vonage account (API key) the campaign belongs to.
+     */
+    accountId: string;
+    /**
+     * Whether the content is age-gated.
+     */
+    ageGated: boolean;
+    /**
+     * Whether the campaign renews automatically.
+     */
+    autoRenewal: boolean;
+    /**
+     * ID of the brand the campaign belongs to.
+     */
+    brandId: string;
+    /**
+     * ID of the campaign.
+     */
+    campaignId: string;
+    /**
+     * When the campaign was created.
+     */
+    createdDate: string;
+    /**
+     * What the campaign is for.
+     */
+    description: string;
+    /**
+     * Whether the campaign involves direct lending.
+     */
+    directLending: boolean;
+    /**
+     * Whether messages contain embedded links.
+     */
+    embeddedLink: boolean;
+    /**
+     * Whether messages contain embedded phone numbers.
+     */
+    embeddedPhone: boolean;
+    /**
+     * Help keywords, comma separated; empty when unset.
+     */
+    helpKeywords: string;
+    /**
+     * Reply to the HELP keyword.
+     */
+    helpMessage: string;
+    /**
+     * Whether the campaign handles HIPAA-covered data.
+     */
+    hipaa: boolean;
+    /**
+     * Your label for the campaign; empty when unset.
+     */
+    label: string;
+    /**
+     * When the campaign was last updated.
+     */
+    lastUpdated: string;
+    /**
+     * How subscribers opt in and what they receive.
+     */
+    messageFlow: string;
+    /**
+     * Opt-in keywords, comma separated; empty when unset.
+     */
+    optInKeywords: string;
+    /**
+     * Confirmation sent when a subscriber opts in.
+     */
+    optInMessage: string;
+    /**
+     * Opt-out keywords, comma separated; empty when unset.
+     */
+    optOutKeywords: string;
+    /**
+     * Confirmation sent when a subscriber opts out.
+     */
+    optOutMessage: string;
+    /**
+     * When the campaign was registered; empty when not yet.
+     */
+    registrationDate: string;
+    /**
+     * When the campaign renews or ends; empty when unknown.
+     */
+    renewalDate: string;
+    /**
+     * Whether a reseller registered the campaign.
+     */
+    reseller: boolean;
+    /**
+     * Reseller ID; empty when unset.
+     */
+    resellerId: string;
+    /**
+     * The sample messages.
+     */
+    samples: string[];
+    /**
+     * Campaign status (ended campaigns are not returned).
+     */
+    status: string;
+    /**
+     * Sub use cases.
+     */
+    subUsecases: string[];
+    /**
+     * ID of the campaign at The Campaign Registry; empty until it exists there.
+     */
+    tcrCampaignId: string;
+    /**
+     * Status at The Campaign Registry; empty when unknown.
+     */
+    tcrStatus: string;
+    /**
+     * Whether the campaign can carry traffic.
+     */
+    trafficEnabled: boolean;
+    /**
+     * The sample links.
+     */
+    urlSamples: string[];
+    /**
+     * Use case of the campaign.
+     */
+    usecase: string;
+    /**
+     * Industry vertical; empty when unset.
+     */
+    vertical: string;
+}
+
+export interface TenDlcCampaignNumberInfo {
+    /**
+     * Compliance findings Vonage reports for the number.
+     */
+    compliance: string[];
+    /**
+     * Two-letter country code of the number.
+     */
+    country: string;
+    /**
+     * The number, digits only.
+     */
+    number: string;
+    /**
+     * Link status: LINKING, LINKED, REJECTED or UNLINKING. Only LINKED allows traffic.
+     */
+    status: string;
+}
+
+export interface TenDlcCarrierSuspension {
+    /**
+     * Category of the suspension.
+     */
+    category: string;
+    /**
+     * The carrier's explanation.
+     */
+    explanation: string;
+}
+
+export interface TenDlcConsentMechanism {
+    /**
+     * HTTP(S) link to evidence of the consent flow, such as a screenshot. Required for every method except TEXT_TO_JOIN.
+     */
+    attachment?: string;
+    /**
+     * Describes how consent is collected with this method.
+     */
+    details: string;
+    /**
+     * How consent is collected: ONLINE_FORM, LIVE_OPERATOR, POINT_OF_SALE, TEXT_TO_JOIN or OTHER.
+     */
+    method: string;
+}
+
+export interface TenDlcMessageFlowDetails {
+    /**
+     * Brand name shown in the generated text. Vonage does not require it for sole proprietors.
+     */
+    brandName?: string;
+    /**
+     * Whether the carriers are not liable for delayed or undelivered messages is disclosed. Only true is accepted; leave unset otherwise.
+     */
+    carrierDisclaimer?: boolean;
+    /**
+     * At least one way subscribers consent to receive messages.
+     */
+    consentMechanisms: outputs.TenDlcConsentMechanism[];
+    /**
+     * How often messages are sent: ONE_TIME or RECURRING.
+     */
+    frequency: string;
+    /**
+     * Whether subscribers are told about message and data rates. Must be true.
+     */
+    pricingDisclosure: boolean;
+    /**
+     * Link to the privacy policy.
+     */
+    privacyPolicy: string;
+    /**
+     * Link to the terms and conditions.
+     */
+    termsAndConditions: string;
+}
+
+export interface TenDlcResellerInfo {
+    /**
+     * Company name of the reseller.
+     */
+    companyName: string;
+    /**
+     * Contact email address.
+     */
+    email: string;
+    /**
+     * Contact phone number, E.164 without the + prefix.
+     */
+    phone: string;
+    /**
+     * Why the reseller was rejected; empty otherwise.
+     */
+    rejectionReason: string;
+    /**
+     * ID of the reseller.
+     */
+    resellerId: string;
+    /**
+     * Review status: PENDING, APPROVED or REJECTED.
+     */
+    status: string;
+    /**
+     * ID at The Campaign Registry; empty until the reseller is APPROVED.
+     */
+    tcrResellerId: string;
+}
+
+export interface TenDlcThroughputInfo {
+    /**
+     * Brand the throughput applies to; empty when not reported.
+     */
+    brandId: string;
+    /**
+     * Campaign the throughput applies to; empty when not reported.
+     */
+    campaignId: string;
+    /**
+     * Carriers the throughput applies to.
+     */
+    carriers: string[];
+    /**
+     * ID of the throughput; only custom overrides carry one.
+     */
+    id: string;
+    /**
+     * Period the value covers: minute or day.
+     */
+    period: string;
+    /**
+     * What the throughput limits: campaign, brand or number.
+     */
+    scope: string;
+    /**
+     * How many messages are allowed per period.
+     */
+    value: outputs.TenDlcThroughputValue;
+}
+
+export interface TenDlcThroughputValue {
+    /**
+     * MMS messages per period, when SMS and MMS are limited separately.
+     */
+    mms?: number;
+    /**
+     * Messages per period shared by SMS and MMS.
+     */
+    shared?: number;
+    /**
+     * SMS messages per period, when SMS and MMS are limited separately.
+     */
+    sms?: number;
+    /**
+     * True when the throughput is unlimited.
+     */
+    unlimited?: boolean;
+}
+
+export interface TenDlcUsecaseInfo {
+    /**
+     * Classification, for example STANDARD or SPECIAL.
+     */
+    classification: string;
+    /**
+     * What the use case covers.
+     */
+    description: string;
+    /**
+     * Display name.
+     */
+    displayName: string;
+    /**
+     * Use case ID, the usecase of a TenDlcCampaign.
+     */
+    id: string;
+    /**
+     * Most sub use cases a campaign may list; unset when not reported.
+     */
+    maxSubUsecases?: number;
+    /**
+     * Fewest sample messages the use case needs; unset when not reported.
+     */
+    minMsgSamples?: number;
+    /**
+     * Fewest sub use cases a MIXED-style campaign needs; unset when not reported.
+     */
+    minSubUsecases?: number;
+}
+
+export interface TenDlcVerticalInfo {
+    /**
+     * What the vertical covers.
+     */
+    description: string;
+    /**
+     * Display name.
+     */
+    displayName: string;
+    /**
+     * Vertical ID, the vertical of a TenDlcCampaign.
+     */
+    id: string;
+    /**
+     * Industry the vertical belongs to; empty when not reported.
+     */
+    industryId: string;
+}
+
 export interface UserChannels {
     /**
      * Facebook Messenger IDs of the user.

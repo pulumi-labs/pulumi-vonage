@@ -2219,6 +2219,1427 @@ func (o RtcCapabilityPtrOutput) SignedCallbacks() pulumi.BoolPtrOutput {
 	}).(pulumi.BoolPtrOutput)
 }
 
+type TenDlcBrandInfo struct {
+	// Vonage account (API key) the brand belongs to.
+	AccountId string `pulumi:"accountId"`
+	// Alternative business ID; empty when unset.
+	AltBusinessId string `pulumi:"altBusinessId"`
+	// Alternative business ID type (DUNS, GIIN or LEI); empty when unset.
+	AltBusinessIdType string `pulumi:"altBusinessIdType"`
+	// ID of the brand at The Campaign Registry.
+	BrandId string `pulumi:"brandId"`
+	// Relationship tier the registry assigned; empty when not yet known.
+	BrandRelationship string `pulumi:"brandRelationship"`
+	// Number of campaigns registered for the brand.
+	CampaignCount int `pulumi:"campaignCount"`
+	// Carrier suspensions of the brand, if any.
+	CarrierSuspensions []TenDlcCarrierSuspension `pulumi:"carrierSuspensions"`
+	// City; empty when unset.
+	City string `pulumi:"city"`
+	// Legal company name; empty when unset.
+	CompanyName string `pulumi:"companyName"`
+	// Country of the address; empty when unset.
+	Country string `pulumi:"country"`
+	// When the brand was created.
+	CreatedDate string `pulumi:"createdDate"`
+	// Display name; empty when unset.
+	DisplayName string `pulumi:"displayName"`
+	// Tax ID (EIN); empty when unset.
+	Ein string `pulumi:"ein"`
+	// Country that issued the tax ID; empty when unset.
+	EinIssuingCountry string `pulumi:"einIssuingCountry"`
+	// Contact email; empty when unset.
+	Email string `pulumi:"email"`
+	// Legal form: PRIVATE_PROFIT, PUBLIC_PROFIT, NON_PROFIT, SOLE_PROPRIETOR or GOVERNMENT.
+	EntityType string `pulumi:"entityType"`
+	// First name; empty when unset.
+	FirstName string `pulumi:"firstName"`
+	// Last name; empty when unset.
+	LastName string `pulumi:"lastName"`
+	// When the brand was last updated.
+	LastUpdated string `pulumi:"lastUpdated"`
+	// Mobile phone number; empty when unset.
+	MobilePhone string `pulumi:"mobilePhone"`
+	// Whether the account owns the brand.
+	Owner bool `pulumi:"owner"`
+	// Whether the brand is a partner brand.
+	Partner bool `pulumi:"partner"`
+	// Contact phone number; empty when unset.
+	Phone string `pulumi:"phone"`
+	// Postal code; empty when unset.
+	PostalCode string `pulumi:"postalCode"`
+	// API key of the primary account; empty when unset.
+	PrimaryAccountId string `pulumi:"primaryAccountId"`
+	// Reference ID of the brand; empty when unset.
+	ReferenceId string `pulumi:"referenceId"`
+	// Whether the brand is a reseller.
+	Reseller bool `pulumi:"reseller"`
+	// Whether the brand is shared with the account.
+	Shared bool `pulumi:"shared"`
+	// State or region; empty when unset.
+	State string `pulumi:"state"`
+	// ACTIVE or SUSPENDED (deleted brands are not returned).
+	Status string `pulumi:"status"`
+	// Stock exchange; empty when unset.
+	StockExchange string `pulumi:"stockExchange"`
+	// Stock symbol; empty when unset.
+	StockSymbol string `pulumi:"stockSymbol"`
+	// Street address; empty when unset.
+	Street string `pulumi:"street"`
+	// Universal tax ID; empty when unset.
+	UniversalEin string `pulumi:"universalEin"`
+	// Verification email address; empty when unset.
+	VerificationEmail string `pulumi:"verificationEmail"`
+	// When the brand was verified; empty when it has not been.
+	VerifiedDate string `pulumi:"verifiedDate"`
+	// Industry vertical; empty when unset.
+	Vertical string `pulumi:"vertical"`
+	// Website; empty when unset.
+	Website string `pulumi:"website"`
+}
+
+type TenDlcBrandInfoOutput struct{ *pulumi.OutputState }
+
+func (TenDlcBrandInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TenDlcBrandInfo)(nil)).Elem()
+}
+
+func (o TenDlcBrandInfoOutput) ToTenDlcBrandInfoOutput() TenDlcBrandInfoOutput {
+	return o
+}
+
+func (o TenDlcBrandInfoOutput) ToTenDlcBrandInfoOutputWithContext(ctx context.Context) TenDlcBrandInfoOutput {
+	return o
+}
+
+// Vonage account (API key) the brand belongs to.
+func (o TenDlcBrandInfoOutput) AccountId() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.AccountId }).(pulumi.StringOutput)
+}
+
+// Alternative business ID; empty when unset.
+func (o TenDlcBrandInfoOutput) AltBusinessId() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.AltBusinessId }).(pulumi.StringOutput)
+}
+
+// Alternative business ID type (DUNS, GIIN or LEI); empty when unset.
+func (o TenDlcBrandInfoOutput) AltBusinessIdType() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.AltBusinessIdType }).(pulumi.StringOutput)
+}
+
+// ID of the brand at The Campaign Registry.
+func (o TenDlcBrandInfoOutput) BrandId() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.BrandId }).(pulumi.StringOutput)
+}
+
+// Relationship tier the registry assigned; empty when not yet known.
+func (o TenDlcBrandInfoOutput) BrandRelationship() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.BrandRelationship }).(pulumi.StringOutput)
+}
+
+// Number of campaigns registered for the brand.
+func (o TenDlcBrandInfoOutput) CampaignCount() pulumi.IntOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) int { return v.CampaignCount }).(pulumi.IntOutput)
+}
+
+// Carrier suspensions of the brand, if any.
+func (o TenDlcBrandInfoOutput) CarrierSuspensions() TenDlcCarrierSuspensionArrayOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) []TenDlcCarrierSuspension { return v.CarrierSuspensions }).(TenDlcCarrierSuspensionArrayOutput)
+}
+
+// City; empty when unset.
+func (o TenDlcBrandInfoOutput) City() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.City }).(pulumi.StringOutput)
+}
+
+// Legal company name; empty when unset.
+func (o TenDlcBrandInfoOutput) CompanyName() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.CompanyName }).(pulumi.StringOutput)
+}
+
+// Country of the address; empty when unset.
+func (o TenDlcBrandInfoOutput) Country() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.Country }).(pulumi.StringOutput)
+}
+
+// When the brand was created.
+func (o TenDlcBrandInfoOutput) CreatedDate() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.CreatedDate }).(pulumi.StringOutput)
+}
+
+// Display name; empty when unset.
+func (o TenDlcBrandInfoOutput) DisplayName() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.DisplayName }).(pulumi.StringOutput)
+}
+
+// Tax ID (EIN); empty when unset.
+func (o TenDlcBrandInfoOutput) Ein() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.Ein }).(pulumi.StringOutput)
+}
+
+// Country that issued the tax ID; empty when unset.
+func (o TenDlcBrandInfoOutput) EinIssuingCountry() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.EinIssuingCountry }).(pulumi.StringOutput)
+}
+
+// Contact email; empty when unset.
+func (o TenDlcBrandInfoOutput) Email() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.Email }).(pulumi.StringOutput)
+}
+
+// Legal form: PRIVATE_PROFIT, PUBLIC_PROFIT, NON_PROFIT, SOLE_PROPRIETOR or GOVERNMENT.
+func (o TenDlcBrandInfoOutput) EntityType() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.EntityType }).(pulumi.StringOutput)
+}
+
+// First name; empty when unset.
+func (o TenDlcBrandInfoOutput) FirstName() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.FirstName }).(pulumi.StringOutput)
+}
+
+// Last name; empty when unset.
+func (o TenDlcBrandInfoOutput) LastName() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.LastName }).(pulumi.StringOutput)
+}
+
+// When the brand was last updated.
+func (o TenDlcBrandInfoOutput) LastUpdated() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.LastUpdated }).(pulumi.StringOutput)
+}
+
+// Mobile phone number; empty when unset.
+func (o TenDlcBrandInfoOutput) MobilePhone() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.MobilePhone }).(pulumi.StringOutput)
+}
+
+// Whether the account owns the brand.
+func (o TenDlcBrandInfoOutput) Owner() pulumi.BoolOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) bool { return v.Owner }).(pulumi.BoolOutput)
+}
+
+// Whether the brand is a partner brand.
+func (o TenDlcBrandInfoOutput) Partner() pulumi.BoolOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) bool { return v.Partner }).(pulumi.BoolOutput)
+}
+
+// Contact phone number; empty when unset.
+func (o TenDlcBrandInfoOutput) Phone() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.Phone }).(pulumi.StringOutput)
+}
+
+// Postal code; empty when unset.
+func (o TenDlcBrandInfoOutput) PostalCode() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.PostalCode }).(pulumi.StringOutput)
+}
+
+// API key of the primary account; empty when unset.
+func (o TenDlcBrandInfoOutput) PrimaryAccountId() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.PrimaryAccountId }).(pulumi.StringOutput)
+}
+
+// Reference ID of the brand; empty when unset.
+func (o TenDlcBrandInfoOutput) ReferenceId() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.ReferenceId }).(pulumi.StringOutput)
+}
+
+// Whether the brand is a reseller.
+func (o TenDlcBrandInfoOutput) Reseller() pulumi.BoolOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) bool { return v.Reseller }).(pulumi.BoolOutput)
+}
+
+// Whether the brand is shared with the account.
+func (o TenDlcBrandInfoOutput) Shared() pulumi.BoolOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) bool { return v.Shared }).(pulumi.BoolOutput)
+}
+
+// State or region; empty when unset.
+func (o TenDlcBrandInfoOutput) State() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.State }).(pulumi.StringOutput)
+}
+
+// ACTIVE or SUSPENDED (deleted brands are not returned).
+func (o TenDlcBrandInfoOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Stock exchange; empty when unset.
+func (o TenDlcBrandInfoOutput) StockExchange() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.StockExchange }).(pulumi.StringOutput)
+}
+
+// Stock symbol; empty when unset.
+func (o TenDlcBrandInfoOutput) StockSymbol() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.StockSymbol }).(pulumi.StringOutput)
+}
+
+// Street address; empty when unset.
+func (o TenDlcBrandInfoOutput) Street() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.Street }).(pulumi.StringOutput)
+}
+
+// Universal tax ID; empty when unset.
+func (o TenDlcBrandInfoOutput) UniversalEin() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.UniversalEin }).(pulumi.StringOutput)
+}
+
+// Verification email address; empty when unset.
+func (o TenDlcBrandInfoOutput) VerificationEmail() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.VerificationEmail }).(pulumi.StringOutput)
+}
+
+// When the brand was verified; empty when it has not been.
+func (o TenDlcBrandInfoOutput) VerifiedDate() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.VerifiedDate }).(pulumi.StringOutput)
+}
+
+// Industry vertical; empty when unset.
+func (o TenDlcBrandInfoOutput) Vertical() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.Vertical }).(pulumi.StringOutput)
+}
+
+// Website; empty when unset.
+func (o TenDlcBrandInfoOutput) Website() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcBrandInfo) string { return v.Website }).(pulumi.StringOutput)
+}
+
+type TenDlcBrandInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (TenDlcBrandInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TenDlcBrandInfo)(nil)).Elem()
+}
+
+func (o TenDlcBrandInfoArrayOutput) ToTenDlcBrandInfoArrayOutput() TenDlcBrandInfoArrayOutput {
+	return o
+}
+
+func (o TenDlcBrandInfoArrayOutput) ToTenDlcBrandInfoArrayOutputWithContext(ctx context.Context) TenDlcBrandInfoArrayOutput {
+	return o
+}
+
+func (o TenDlcBrandInfoArrayOutput) Index(i pulumi.IntInput) TenDlcBrandInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TenDlcBrandInfo {
+		return vs[0].([]TenDlcBrandInfo)[vs[1].(int)]
+	}).(TenDlcBrandInfoOutput)
+}
+
+type TenDlcCampaignInfo struct {
+	// Vonage account (API key) the campaign belongs to.
+	AccountId string `pulumi:"accountId"`
+	// Whether the content is age-gated.
+	AgeGated bool `pulumi:"ageGated"`
+	// Whether the campaign renews automatically.
+	AutoRenewal bool `pulumi:"autoRenewal"`
+	// ID of the brand the campaign belongs to.
+	BrandId string `pulumi:"brandId"`
+	// ID of the campaign.
+	CampaignId string `pulumi:"campaignId"`
+	// When the campaign was created.
+	CreatedDate string `pulumi:"createdDate"`
+	// What the campaign is for.
+	Description string `pulumi:"description"`
+	// Whether the campaign involves direct lending.
+	DirectLending bool `pulumi:"directLending"`
+	// Whether messages contain embedded links.
+	EmbeddedLink bool `pulumi:"embeddedLink"`
+	// Whether messages contain embedded phone numbers.
+	EmbeddedPhone bool `pulumi:"embeddedPhone"`
+	// Help keywords, comma separated; empty when unset.
+	HelpKeywords string `pulumi:"helpKeywords"`
+	// Reply to the HELP keyword.
+	HelpMessage string `pulumi:"helpMessage"`
+	// Whether the campaign handles HIPAA-covered data.
+	Hipaa bool `pulumi:"hipaa"`
+	// Your label for the campaign; empty when unset.
+	Label string `pulumi:"label"`
+	// When the campaign was last updated.
+	LastUpdated string `pulumi:"lastUpdated"`
+	// How subscribers opt in and what they receive.
+	MessageFlow string `pulumi:"messageFlow"`
+	// Opt-in keywords, comma separated; empty when unset.
+	OptInKeywords string `pulumi:"optInKeywords"`
+	// Confirmation sent when a subscriber opts in.
+	OptInMessage string `pulumi:"optInMessage"`
+	// Opt-out keywords, comma separated; empty when unset.
+	OptOutKeywords string `pulumi:"optOutKeywords"`
+	// Confirmation sent when a subscriber opts out.
+	OptOutMessage string `pulumi:"optOutMessage"`
+	// When the campaign was registered; empty when not yet.
+	RegistrationDate string `pulumi:"registrationDate"`
+	// When the campaign renews or ends; empty when unknown.
+	RenewalDate string `pulumi:"renewalDate"`
+	// Whether a reseller registered the campaign.
+	Reseller bool `pulumi:"reseller"`
+	// Reseller ID; empty when unset.
+	ResellerId string `pulumi:"resellerId"`
+	// The sample messages.
+	Samples []string `pulumi:"samples"`
+	// Campaign status (ended campaigns are not returned).
+	Status string `pulumi:"status"`
+	// Sub use cases.
+	SubUsecases []string `pulumi:"subUsecases"`
+	// ID of the campaign at The Campaign Registry; empty until it exists there.
+	TcrCampaignId string `pulumi:"tcrCampaignId"`
+	// Status at The Campaign Registry; empty when unknown.
+	TcrStatus string `pulumi:"tcrStatus"`
+	// Whether the campaign can carry traffic.
+	TrafficEnabled bool `pulumi:"trafficEnabled"`
+	// The sample links.
+	UrlSamples []string `pulumi:"urlSamples"`
+	// Use case of the campaign.
+	Usecase string `pulumi:"usecase"`
+	// Industry vertical; empty when unset.
+	Vertical string `pulumi:"vertical"`
+}
+
+type TenDlcCampaignInfoOutput struct{ *pulumi.OutputState }
+
+func (TenDlcCampaignInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TenDlcCampaignInfo)(nil)).Elem()
+}
+
+func (o TenDlcCampaignInfoOutput) ToTenDlcCampaignInfoOutput() TenDlcCampaignInfoOutput {
+	return o
+}
+
+func (o TenDlcCampaignInfoOutput) ToTenDlcCampaignInfoOutputWithContext(ctx context.Context) TenDlcCampaignInfoOutput {
+	return o
+}
+
+// Vonage account (API key) the campaign belongs to.
+func (o TenDlcCampaignInfoOutput) AccountId() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) string { return v.AccountId }).(pulumi.StringOutput)
+}
+
+// Whether the content is age-gated.
+func (o TenDlcCampaignInfoOutput) AgeGated() pulumi.BoolOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) bool { return v.AgeGated }).(pulumi.BoolOutput)
+}
+
+// Whether the campaign renews automatically.
+func (o TenDlcCampaignInfoOutput) AutoRenewal() pulumi.BoolOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) bool { return v.AutoRenewal }).(pulumi.BoolOutput)
+}
+
+// ID of the brand the campaign belongs to.
+func (o TenDlcCampaignInfoOutput) BrandId() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) string { return v.BrandId }).(pulumi.StringOutput)
+}
+
+// ID of the campaign.
+func (o TenDlcCampaignInfoOutput) CampaignId() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) string { return v.CampaignId }).(pulumi.StringOutput)
+}
+
+// When the campaign was created.
+func (o TenDlcCampaignInfoOutput) CreatedDate() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) string { return v.CreatedDate }).(pulumi.StringOutput)
+}
+
+// What the campaign is for.
+func (o TenDlcCampaignInfoOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Whether the campaign involves direct lending.
+func (o TenDlcCampaignInfoOutput) DirectLending() pulumi.BoolOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) bool { return v.DirectLending }).(pulumi.BoolOutput)
+}
+
+// Whether messages contain embedded links.
+func (o TenDlcCampaignInfoOutput) EmbeddedLink() pulumi.BoolOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) bool { return v.EmbeddedLink }).(pulumi.BoolOutput)
+}
+
+// Whether messages contain embedded phone numbers.
+func (o TenDlcCampaignInfoOutput) EmbeddedPhone() pulumi.BoolOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) bool { return v.EmbeddedPhone }).(pulumi.BoolOutput)
+}
+
+// Help keywords, comma separated; empty when unset.
+func (o TenDlcCampaignInfoOutput) HelpKeywords() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) string { return v.HelpKeywords }).(pulumi.StringOutput)
+}
+
+// Reply to the HELP keyword.
+func (o TenDlcCampaignInfoOutput) HelpMessage() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) string { return v.HelpMessage }).(pulumi.StringOutput)
+}
+
+// Whether the campaign handles HIPAA-covered data.
+func (o TenDlcCampaignInfoOutput) Hipaa() pulumi.BoolOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) bool { return v.Hipaa }).(pulumi.BoolOutput)
+}
+
+// Your label for the campaign; empty when unset.
+func (o TenDlcCampaignInfoOutput) Label() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) string { return v.Label }).(pulumi.StringOutput)
+}
+
+// When the campaign was last updated.
+func (o TenDlcCampaignInfoOutput) LastUpdated() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) string { return v.LastUpdated }).(pulumi.StringOutput)
+}
+
+// How subscribers opt in and what they receive.
+func (o TenDlcCampaignInfoOutput) MessageFlow() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) string { return v.MessageFlow }).(pulumi.StringOutput)
+}
+
+// Opt-in keywords, comma separated; empty when unset.
+func (o TenDlcCampaignInfoOutput) OptInKeywords() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) string { return v.OptInKeywords }).(pulumi.StringOutput)
+}
+
+// Confirmation sent when a subscriber opts in.
+func (o TenDlcCampaignInfoOutput) OptInMessage() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) string { return v.OptInMessage }).(pulumi.StringOutput)
+}
+
+// Opt-out keywords, comma separated; empty when unset.
+func (o TenDlcCampaignInfoOutput) OptOutKeywords() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) string { return v.OptOutKeywords }).(pulumi.StringOutput)
+}
+
+// Confirmation sent when a subscriber opts out.
+func (o TenDlcCampaignInfoOutput) OptOutMessage() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) string { return v.OptOutMessage }).(pulumi.StringOutput)
+}
+
+// When the campaign was registered; empty when not yet.
+func (o TenDlcCampaignInfoOutput) RegistrationDate() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) string { return v.RegistrationDate }).(pulumi.StringOutput)
+}
+
+// When the campaign renews or ends; empty when unknown.
+func (o TenDlcCampaignInfoOutput) RenewalDate() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) string { return v.RenewalDate }).(pulumi.StringOutput)
+}
+
+// Whether a reseller registered the campaign.
+func (o TenDlcCampaignInfoOutput) Reseller() pulumi.BoolOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) bool { return v.Reseller }).(pulumi.BoolOutput)
+}
+
+// Reseller ID; empty when unset.
+func (o TenDlcCampaignInfoOutput) ResellerId() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) string { return v.ResellerId }).(pulumi.StringOutput)
+}
+
+// The sample messages.
+func (o TenDlcCampaignInfoOutput) Samples() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) []string { return v.Samples }).(pulumi.StringArrayOutput)
+}
+
+// Campaign status (ended campaigns are not returned).
+func (o TenDlcCampaignInfoOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Sub use cases.
+func (o TenDlcCampaignInfoOutput) SubUsecases() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) []string { return v.SubUsecases }).(pulumi.StringArrayOutput)
+}
+
+// ID of the campaign at The Campaign Registry; empty until it exists there.
+func (o TenDlcCampaignInfoOutput) TcrCampaignId() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) string { return v.TcrCampaignId }).(pulumi.StringOutput)
+}
+
+// Status at The Campaign Registry; empty when unknown.
+func (o TenDlcCampaignInfoOutput) TcrStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) string { return v.TcrStatus }).(pulumi.StringOutput)
+}
+
+// Whether the campaign can carry traffic.
+func (o TenDlcCampaignInfoOutput) TrafficEnabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) bool { return v.TrafficEnabled }).(pulumi.BoolOutput)
+}
+
+// The sample links.
+func (o TenDlcCampaignInfoOutput) UrlSamples() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) []string { return v.UrlSamples }).(pulumi.StringArrayOutput)
+}
+
+// Use case of the campaign.
+func (o TenDlcCampaignInfoOutput) Usecase() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) string { return v.Usecase }).(pulumi.StringOutput)
+}
+
+// Industry vertical; empty when unset.
+func (o TenDlcCampaignInfoOutput) Vertical() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcCampaignInfo) string { return v.Vertical }).(pulumi.StringOutput)
+}
+
+type TenDlcCampaignInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (TenDlcCampaignInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TenDlcCampaignInfo)(nil)).Elem()
+}
+
+func (o TenDlcCampaignInfoArrayOutput) ToTenDlcCampaignInfoArrayOutput() TenDlcCampaignInfoArrayOutput {
+	return o
+}
+
+func (o TenDlcCampaignInfoArrayOutput) ToTenDlcCampaignInfoArrayOutputWithContext(ctx context.Context) TenDlcCampaignInfoArrayOutput {
+	return o
+}
+
+func (o TenDlcCampaignInfoArrayOutput) Index(i pulumi.IntInput) TenDlcCampaignInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TenDlcCampaignInfo {
+		return vs[0].([]TenDlcCampaignInfo)[vs[1].(int)]
+	}).(TenDlcCampaignInfoOutput)
+}
+
+type TenDlcCampaignNumberInfo struct {
+	// Compliance findings Vonage reports for the number.
+	Compliance []string `pulumi:"compliance"`
+	// Two-letter country code of the number.
+	Country string `pulumi:"country"`
+	// The number, digits only.
+	Number string `pulumi:"number"`
+	// Link status: LINKING, LINKED, REJECTED or UNLINKING. Only LINKED allows traffic.
+	Status string `pulumi:"status"`
+}
+
+type TenDlcCampaignNumberInfoOutput struct{ *pulumi.OutputState }
+
+func (TenDlcCampaignNumberInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TenDlcCampaignNumberInfo)(nil)).Elem()
+}
+
+func (o TenDlcCampaignNumberInfoOutput) ToTenDlcCampaignNumberInfoOutput() TenDlcCampaignNumberInfoOutput {
+	return o
+}
+
+func (o TenDlcCampaignNumberInfoOutput) ToTenDlcCampaignNumberInfoOutputWithContext(ctx context.Context) TenDlcCampaignNumberInfoOutput {
+	return o
+}
+
+// Compliance findings Vonage reports for the number.
+func (o TenDlcCampaignNumberInfoOutput) Compliance() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v TenDlcCampaignNumberInfo) []string { return v.Compliance }).(pulumi.StringArrayOutput)
+}
+
+// Two-letter country code of the number.
+func (o TenDlcCampaignNumberInfoOutput) Country() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcCampaignNumberInfo) string { return v.Country }).(pulumi.StringOutput)
+}
+
+// The number, digits only.
+func (o TenDlcCampaignNumberInfoOutput) Number() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcCampaignNumberInfo) string { return v.Number }).(pulumi.StringOutput)
+}
+
+// Link status: LINKING, LINKED, REJECTED or UNLINKING. Only LINKED allows traffic.
+func (o TenDlcCampaignNumberInfoOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcCampaignNumberInfo) string { return v.Status }).(pulumi.StringOutput)
+}
+
+type TenDlcCampaignNumberInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (TenDlcCampaignNumberInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TenDlcCampaignNumberInfo)(nil)).Elem()
+}
+
+func (o TenDlcCampaignNumberInfoArrayOutput) ToTenDlcCampaignNumberInfoArrayOutput() TenDlcCampaignNumberInfoArrayOutput {
+	return o
+}
+
+func (o TenDlcCampaignNumberInfoArrayOutput) ToTenDlcCampaignNumberInfoArrayOutputWithContext(ctx context.Context) TenDlcCampaignNumberInfoArrayOutput {
+	return o
+}
+
+func (o TenDlcCampaignNumberInfoArrayOutput) Index(i pulumi.IntInput) TenDlcCampaignNumberInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TenDlcCampaignNumberInfo {
+		return vs[0].([]TenDlcCampaignNumberInfo)[vs[1].(int)]
+	}).(TenDlcCampaignNumberInfoOutput)
+}
+
+type TenDlcCarrierSuspension struct {
+	// Category of the suspension.
+	Category string `pulumi:"category"`
+	// The carrier's explanation.
+	Explanation string `pulumi:"explanation"`
+}
+
+type TenDlcCarrierSuspensionOutput struct{ *pulumi.OutputState }
+
+func (TenDlcCarrierSuspensionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TenDlcCarrierSuspension)(nil)).Elem()
+}
+
+func (o TenDlcCarrierSuspensionOutput) ToTenDlcCarrierSuspensionOutput() TenDlcCarrierSuspensionOutput {
+	return o
+}
+
+func (o TenDlcCarrierSuspensionOutput) ToTenDlcCarrierSuspensionOutputWithContext(ctx context.Context) TenDlcCarrierSuspensionOutput {
+	return o
+}
+
+// Category of the suspension.
+func (o TenDlcCarrierSuspensionOutput) Category() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcCarrierSuspension) string { return v.Category }).(pulumi.StringOutput)
+}
+
+// The carrier's explanation.
+func (o TenDlcCarrierSuspensionOutput) Explanation() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcCarrierSuspension) string { return v.Explanation }).(pulumi.StringOutput)
+}
+
+type TenDlcCarrierSuspensionArrayOutput struct{ *pulumi.OutputState }
+
+func (TenDlcCarrierSuspensionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TenDlcCarrierSuspension)(nil)).Elem()
+}
+
+func (o TenDlcCarrierSuspensionArrayOutput) ToTenDlcCarrierSuspensionArrayOutput() TenDlcCarrierSuspensionArrayOutput {
+	return o
+}
+
+func (o TenDlcCarrierSuspensionArrayOutput) ToTenDlcCarrierSuspensionArrayOutputWithContext(ctx context.Context) TenDlcCarrierSuspensionArrayOutput {
+	return o
+}
+
+func (o TenDlcCarrierSuspensionArrayOutput) Index(i pulumi.IntInput) TenDlcCarrierSuspensionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TenDlcCarrierSuspension {
+		return vs[0].([]TenDlcCarrierSuspension)[vs[1].(int)]
+	}).(TenDlcCarrierSuspensionOutput)
+}
+
+type TenDlcConsentMechanism struct {
+	// HTTP(S) link to evidence of the consent flow, such as a screenshot. Required for every method except TEXT_TO_JOIN.
+	Attachment *string `pulumi:"attachment"`
+	// Describes how consent is collected with this method.
+	Details string `pulumi:"details"`
+	// How consent is collected: ONLINE_FORM, LIVE_OPERATOR, POINT_OF_SALE, TEXT_TO_JOIN or OTHER.
+	Method string `pulumi:"method"`
+}
+
+// TenDlcConsentMechanismInput is an input type that accepts TenDlcConsentMechanismArgs and TenDlcConsentMechanismOutput values.
+// You can construct a concrete instance of `TenDlcConsentMechanismInput` via:
+//
+//	TenDlcConsentMechanismArgs{...}
+type TenDlcConsentMechanismInput interface {
+	pulumi.Input
+
+	ToTenDlcConsentMechanismOutput() TenDlcConsentMechanismOutput
+	ToTenDlcConsentMechanismOutputWithContext(context.Context) TenDlcConsentMechanismOutput
+}
+
+type TenDlcConsentMechanismArgs struct {
+	// HTTP(S) link to evidence of the consent flow, such as a screenshot. Required for every method except TEXT_TO_JOIN.
+	Attachment pulumi.StringPtrInput `pulumi:"attachment"`
+	// Describes how consent is collected with this method.
+	Details pulumi.StringInput `pulumi:"details"`
+	// How consent is collected: ONLINE_FORM, LIVE_OPERATOR, POINT_OF_SALE, TEXT_TO_JOIN or OTHER.
+	Method pulumi.StringInput `pulumi:"method"`
+}
+
+func (TenDlcConsentMechanismArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TenDlcConsentMechanism)(nil)).Elem()
+}
+
+func (i TenDlcConsentMechanismArgs) ToTenDlcConsentMechanismOutput() TenDlcConsentMechanismOutput {
+	return i.ToTenDlcConsentMechanismOutputWithContext(context.Background())
+}
+
+func (i TenDlcConsentMechanismArgs) ToTenDlcConsentMechanismOutputWithContext(ctx context.Context) TenDlcConsentMechanismOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TenDlcConsentMechanismOutput)
+}
+
+// TenDlcConsentMechanismArrayInput is an input type that accepts TenDlcConsentMechanismArray and TenDlcConsentMechanismArrayOutput values.
+// You can construct a concrete instance of `TenDlcConsentMechanismArrayInput` via:
+//
+//	TenDlcConsentMechanismArray{ TenDlcConsentMechanismArgs{...} }
+type TenDlcConsentMechanismArrayInput interface {
+	pulumi.Input
+
+	ToTenDlcConsentMechanismArrayOutput() TenDlcConsentMechanismArrayOutput
+	ToTenDlcConsentMechanismArrayOutputWithContext(context.Context) TenDlcConsentMechanismArrayOutput
+}
+
+type TenDlcConsentMechanismArray []TenDlcConsentMechanismInput
+
+func (TenDlcConsentMechanismArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TenDlcConsentMechanism)(nil)).Elem()
+}
+
+func (i TenDlcConsentMechanismArray) ToTenDlcConsentMechanismArrayOutput() TenDlcConsentMechanismArrayOutput {
+	return i.ToTenDlcConsentMechanismArrayOutputWithContext(context.Background())
+}
+
+func (i TenDlcConsentMechanismArray) ToTenDlcConsentMechanismArrayOutputWithContext(ctx context.Context) TenDlcConsentMechanismArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TenDlcConsentMechanismArrayOutput)
+}
+
+type TenDlcConsentMechanismOutput struct{ *pulumi.OutputState }
+
+func (TenDlcConsentMechanismOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TenDlcConsentMechanism)(nil)).Elem()
+}
+
+func (o TenDlcConsentMechanismOutput) ToTenDlcConsentMechanismOutput() TenDlcConsentMechanismOutput {
+	return o
+}
+
+func (o TenDlcConsentMechanismOutput) ToTenDlcConsentMechanismOutputWithContext(ctx context.Context) TenDlcConsentMechanismOutput {
+	return o
+}
+
+// HTTP(S) link to evidence of the consent flow, such as a screenshot. Required for every method except TEXT_TO_JOIN.
+func (o TenDlcConsentMechanismOutput) Attachment() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TenDlcConsentMechanism) *string { return v.Attachment }).(pulumi.StringPtrOutput)
+}
+
+// Describes how consent is collected with this method.
+func (o TenDlcConsentMechanismOutput) Details() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcConsentMechanism) string { return v.Details }).(pulumi.StringOutput)
+}
+
+// How consent is collected: ONLINE_FORM, LIVE_OPERATOR, POINT_OF_SALE, TEXT_TO_JOIN or OTHER.
+func (o TenDlcConsentMechanismOutput) Method() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcConsentMechanism) string { return v.Method }).(pulumi.StringOutput)
+}
+
+type TenDlcConsentMechanismArrayOutput struct{ *pulumi.OutputState }
+
+func (TenDlcConsentMechanismArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TenDlcConsentMechanism)(nil)).Elem()
+}
+
+func (o TenDlcConsentMechanismArrayOutput) ToTenDlcConsentMechanismArrayOutput() TenDlcConsentMechanismArrayOutput {
+	return o
+}
+
+func (o TenDlcConsentMechanismArrayOutput) ToTenDlcConsentMechanismArrayOutputWithContext(ctx context.Context) TenDlcConsentMechanismArrayOutput {
+	return o
+}
+
+func (o TenDlcConsentMechanismArrayOutput) Index(i pulumi.IntInput) TenDlcConsentMechanismOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TenDlcConsentMechanism {
+		return vs[0].([]TenDlcConsentMechanism)[vs[1].(int)]
+	}).(TenDlcConsentMechanismOutput)
+}
+
+type TenDlcMessageFlowDetails struct {
+	// Brand name shown in the generated text. Vonage does not require it for sole proprietors.
+	BrandName *string `pulumi:"brandName"`
+	// Whether the carriers are not liable for delayed or undelivered messages is disclosed. Only true is accepted; leave unset otherwise.
+	CarrierDisclaimer *bool `pulumi:"carrierDisclaimer"`
+	// At least one way subscribers consent to receive messages.
+	ConsentMechanisms []TenDlcConsentMechanism `pulumi:"consentMechanisms"`
+	// How often messages are sent: ONE_TIME or RECURRING.
+	Frequency string `pulumi:"frequency"`
+	// Whether subscribers are told about message and data rates. Must be true.
+	PricingDisclosure bool `pulumi:"pricingDisclosure"`
+	// Link to the privacy policy.
+	PrivacyPolicy string `pulumi:"privacyPolicy"`
+	// Link to the terms and conditions.
+	TermsAndConditions string `pulumi:"termsAndConditions"`
+}
+
+// TenDlcMessageFlowDetailsInput is an input type that accepts TenDlcMessageFlowDetailsArgs and TenDlcMessageFlowDetailsOutput values.
+// You can construct a concrete instance of `TenDlcMessageFlowDetailsInput` via:
+//
+//	TenDlcMessageFlowDetailsArgs{...}
+type TenDlcMessageFlowDetailsInput interface {
+	pulumi.Input
+
+	ToTenDlcMessageFlowDetailsOutput() TenDlcMessageFlowDetailsOutput
+	ToTenDlcMessageFlowDetailsOutputWithContext(context.Context) TenDlcMessageFlowDetailsOutput
+}
+
+type TenDlcMessageFlowDetailsArgs struct {
+	// Brand name shown in the generated text. Vonage does not require it for sole proprietors.
+	BrandName pulumi.StringPtrInput `pulumi:"brandName"`
+	// Whether the carriers are not liable for delayed or undelivered messages is disclosed. Only true is accepted; leave unset otherwise.
+	CarrierDisclaimer pulumi.BoolPtrInput `pulumi:"carrierDisclaimer"`
+	// At least one way subscribers consent to receive messages.
+	ConsentMechanisms TenDlcConsentMechanismArrayInput `pulumi:"consentMechanisms"`
+	// How often messages are sent: ONE_TIME or RECURRING.
+	Frequency pulumi.StringInput `pulumi:"frequency"`
+	// Whether subscribers are told about message and data rates. Must be true.
+	PricingDisclosure pulumi.BoolInput `pulumi:"pricingDisclosure"`
+	// Link to the privacy policy.
+	PrivacyPolicy pulumi.StringInput `pulumi:"privacyPolicy"`
+	// Link to the terms and conditions.
+	TermsAndConditions pulumi.StringInput `pulumi:"termsAndConditions"`
+}
+
+func (TenDlcMessageFlowDetailsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TenDlcMessageFlowDetails)(nil)).Elem()
+}
+
+func (i TenDlcMessageFlowDetailsArgs) ToTenDlcMessageFlowDetailsOutput() TenDlcMessageFlowDetailsOutput {
+	return i.ToTenDlcMessageFlowDetailsOutputWithContext(context.Background())
+}
+
+func (i TenDlcMessageFlowDetailsArgs) ToTenDlcMessageFlowDetailsOutputWithContext(ctx context.Context) TenDlcMessageFlowDetailsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TenDlcMessageFlowDetailsOutput)
+}
+
+func (i TenDlcMessageFlowDetailsArgs) ToTenDlcMessageFlowDetailsPtrOutput() TenDlcMessageFlowDetailsPtrOutput {
+	return i.ToTenDlcMessageFlowDetailsPtrOutputWithContext(context.Background())
+}
+
+func (i TenDlcMessageFlowDetailsArgs) ToTenDlcMessageFlowDetailsPtrOutputWithContext(ctx context.Context) TenDlcMessageFlowDetailsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TenDlcMessageFlowDetailsOutput).ToTenDlcMessageFlowDetailsPtrOutputWithContext(ctx)
+}
+
+// TenDlcMessageFlowDetailsPtrInput is an input type that accepts TenDlcMessageFlowDetailsArgs, TenDlcMessageFlowDetailsPtr and TenDlcMessageFlowDetailsPtrOutput values.
+// You can construct a concrete instance of `TenDlcMessageFlowDetailsPtrInput` via:
+//
+//	        TenDlcMessageFlowDetailsArgs{...}
+//
+//	or:
+//
+//	        nil
+type TenDlcMessageFlowDetailsPtrInput interface {
+	pulumi.Input
+
+	ToTenDlcMessageFlowDetailsPtrOutput() TenDlcMessageFlowDetailsPtrOutput
+	ToTenDlcMessageFlowDetailsPtrOutputWithContext(context.Context) TenDlcMessageFlowDetailsPtrOutput
+}
+
+type tenDlcMessageFlowDetailsPtrType TenDlcMessageFlowDetailsArgs
+
+func TenDlcMessageFlowDetailsPtr(v *TenDlcMessageFlowDetailsArgs) TenDlcMessageFlowDetailsPtrInput {
+	return (*tenDlcMessageFlowDetailsPtrType)(v)
+}
+
+func (*tenDlcMessageFlowDetailsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**TenDlcMessageFlowDetails)(nil)).Elem()
+}
+
+func (i *tenDlcMessageFlowDetailsPtrType) ToTenDlcMessageFlowDetailsPtrOutput() TenDlcMessageFlowDetailsPtrOutput {
+	return i.ToTenDlcMessageFlowDetailsPtrOutputWithContext(context.Background())
+}
+
+func (i *tenDlcMessageFlowDetailsPtrType) ToTenDlcMessageFlowDetailsPtrOutputWithContext(ctx context.Context) TenDlcMessageFlowDetailsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TenDlcMessageFlowDetailsPtrOutput)
+}
+
+type TenDlcMessageFlowDetailsOutput struct{ *pulumi.OutputState }
+
+func (TenDlcMessageFlowDetailsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TenDlcMessageFlowDetails)(nil)).Elem()
+}
+
+func (o TenDlcMessageFlowDetailsOutput) ToTenDlcMessageFlowDetailsOutput() TenDlcMessageFlowDetailsOutput {
+	return o
+}
+
+func (o TenDlcMessageFlowDetailsOutput) ToTenDlcMessageFlowDetailsOutputWithContext(ctx context.Context) TenDlcMessageFlowDetailsOutput {
+	return o
+}
+
+func (o TenDlcMessageFlowDetailsOutput) ToTenDlcMessageFlowDetailsPtrOutput() TenDlcMessageFlowDetailsPtrOutput {
+	return o.ToTenDlcMessageFlowDetailsPtrOutputWithContext(context.Background())
+}
+
+func (o TenDlcMessageFlowDetailsOutput) ToTenDlcMessageFlowDetailsPtrOutputWithContext(ctx context.Context) TenDlcMessageFlowDetailsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v TenDlcMessageFlowDetails) *TenDlcMessageFlowDetails {
+		return &v
+	}).(TenDlcMessageFlowDetailsPtrOutput)
+}
+
+// Brand name shown in the generated text. Vonage does not require it for sole proprietors.
+func (o TenDlcMessageFlowDetailsOutput) BrandName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TenDlcMessageFlowDetails) *string { return v.BrandName }).(pulumi.StringPtrOutput)
+}
+
+// Whether the carriers are not liable for delayed or undelivered messages is disclosed. Only true is accepted; leave unset otherwise.
+func (o TenDlcMessageFlowDetailsOutput) CarrierDisclaimer() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v TenDlcMessageFlowDetails) *bool { return v.CarrierDisclaimer }).(pulumi.BoolPtrOutput)
+}
+
+// At least one way subscribers consent to receive messages.
+func (o TenDlcMessageFlowDetailsOutput) ConsentMechanisms() TenDlcConsentMechanismArrayOutput {
+	return o.ApplyT(func(v TenDlcMessageFlowDetails) []TenDlcConsentMechanism { return v.ConsentMechanisms }).(TenDlcConsentMechanismArrayOutput)
+}
+
+// How often messages are sent: ONE_TIME or RECURRING.
+func (o TenDlcMessageFlowDetailsOutput) Frequency() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcMessageFlowDetails) string { return v.Frequency }).(pulumi.StringOutput)
+}
+
+// Whether subscribers are told about message and data rates. Must be true.
+func (o TenDlcMessageFlowDetailsOutput) PricingDisclosure() pulumi.BoolOutput {
+	return o.ApplyT(func(v TenDlcMessageFlowDetails) bool { return v.PricingDisclosure }).(pulumi.BoolOutput)
+}
+
+// Link to the privacy policy.
+func (o TenDlcMessageFlowDetailsOutput) PrivacyPolicy() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcMessageFlowDetails) string { return v.PrivacyPolicy }).(pulumi.StringOutput)
+}
+
+// Link to the terms and conditions.
+func (o TenDlcMessageFlowDetailsOutput) TermsAndConditions() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcMessageFlowDetails) string { return v.TermsAndConditions }).(pulumi.StringOutput)
+}
+
+type TenDlcMessageFlowDetailsPtrOutput struct{ *pulumi.OutputState }
+
+func (TenDlcMessageFlowDetailsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**TenDlcMessageFlowDetails)(nil)).Elem()
+}
+
+func (o TenDlcMessageFlowDetailsPtrOutput) ToTenDlcMessageFlowDetailsPtrOutput() TenDlcMessageFlowDetailsPtrOutput {
+	return o
+}
+
+func (o TenDlcMessageFlowDetailsPtrOutput) ToTenDlcMessageFlowDetailsPtrOutputWithContext(ctx context.Context) TenDlcMessageFlowDetailsPtrOutput {
+	return o
+}
+
+func (o TenDlcMessageFlowDetailsPtrOutput) Elem() TenDlcMessageFlowDetailsOutput {
+	return o.ApplyT(func(v *TenDlcMessageFlowDetails) TenDlcMessageFlowDetails {
+		if v != nil {
+			return *v
+		}
+		var ret TenDlcMessageFlowDetails
+		return ret
+	}).(TenDlcMessageFlowDetailsOutput)
+}
+
+// Brand name shown in the generated text. Vonage does not require it for sole proprietors.
+func (o TenDlcMessageFlowDetailsPtrOutput) BrandName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TenDlcMessageFlowDetails) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BrandName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether the carriers are not liable for delayed or undelivered messages is disclosed. Only true is accepted; leave unset otherwise.
+func (o TenDlcMessageFlowDetailsPtrOutput) CarrierDisclaimer() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *TenDlcMessageFlowDetails) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.CarrierDisclaimer
+	}).(pulumi.BoolPtrOutput)
+}
+
+// At least one way subscribers consent to receive messages.
+func (o TenDlcMessageFlowDetailsPtrOutput) ConsentMechanisms() TenDlcConsentMechanismArrayOutput {
+	return o.ApplyT(func(v *TenDlcMessageFlowDetails) []TenDlcConsentMechanism {
+		if v == nil {
+			return nil
+		}
+		return v.ConsentMechanisms
+	}).(TenDlcConsentMechanismArrayOutput)
+}
+
+// How often messages are sent: ONE_TIME or RECURRING.
+func (o TenDlcMessageFlowDetailsPtrOutput) Frequency() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TenDlcMessageFlowDetails) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Frequency
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether subscribers are told about message and data rates. Must be true.
+func (o TenDlcMessageFlowDetailsPtrOutput) PricingDisclosure() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *TenDlcMessageFlowDetails) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.PricingDisclosure
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Link to the privacy policy.
+func (o TenDlcMessageFlowDetailsPtrOutput) PrivacyPolicy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TenDlcMessageFlowDetails) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PrivacyPolicy
+	}).(pulumi.StringPtrOutput)
+}
+
+// Link to the terms and conditions.
+func (o TenDlcMessageFlowDetailsPtrOutput) TermsAndConditions() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TenDlcMessageFlowDetails) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TermsAndConditions
+	}).(pulumi.StringPtrOutput)
+}
+
+type TenDlcResellerInfo struct {
+	// Company name of the reseller.
+	CompanyName string `pulumi:"companyName"`
+	// Contact email address.
+	Email string `pulumi:"email"`
+	// Contact phone number, E.164 without the + prefix.
+	Phone string `pulumi:"phone"`
+	// Why the reseller was rejected; empty otherwise.
+	RejectionReason string `pulumi:"rejectionReason"`
+	// ID of the reseller.
+	ResellerId string `pulumi:"resellerId"`
+	// Review status: PENDING, APPROVED or REJECTED.
+	Status string `pulumi:"status"`
+	// ID at The Campaign Registry; empty until the reseller is APPROVED.
+	TcrResellerId string `pulumi:"tcrResellerId"`
+}
+
+type TenDlcResellerInfoOutput struct{ *pulumi.OutputState }
+
+func (TenDlcResellerInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TenDlcResellerInfo)(nil)).Elem()
+}
+
+func (o TenDlcResellerInfoOutput) ToTenDlcResellerInfoOutput() TenDlcResellerInfoOutput {
+	return o
+}
+
+func (o TenDlcResellerInfoOutput) ToTenDlcResellerInfoOutputWithContext(ctx context.Context) TenDlcResellerInfoOutput {
+	return o
+}
+
+// Company name of the reseller.
+func (o TenDlcResellerInfoOutput) CompanyName() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcResellerInfo) string { return v.CompanyName }).(pulumi.StringOutput)
+}
+
+// Contact email address.
+func (o TenDlcResellerInfoOutput) Email() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcResellerInfo) string { return v.Email }).(pulumi.StringOutput)
+}
+
+// Contact phone number, E.164 without the + prefix.
+func (o TenDlcResellerInfoOutput) Phone() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcResellerInfo) string { return v.Phone }).(pulumi.StringOutput)
+}
+
+// Why the reseller was rejected; empty otherwise.
+func (o TenDlcResellerInfoOutput) RejectionReason() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcResellerInfo) string { return v.RejectionReason }).(pulumi.StringOutput)
+}
+
+// ID of the reseller.
+func (o TenDlcResellerInfoOutput) ResellerId() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcResellerInfo) string { return v.ResellerId }).(pulumi.StringOutput)
+}
+
+// Review status: PENDING, APPROVED or REJECTED.
+func (o TenDlcResellerInfoOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcResellerInfo) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// ID at The Campaign Registry; empty until the reseller is APPROVED.
+func (o TenDlcResellerInfoOutput) TcrResellerId() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcResellerInfo) string { return v.TcrResellerId }).(pulumi.StringOutput)
+}
+
+type TenDlcResellerInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (TenDlcResellerInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TenDlcResellerInfo)(nil)).Elem()
+}
+
+func (o TenDlcResellerInfoArrayOutput) ToTenDlcResellerInfoArrayOutput() TenDlcResellerInfoArrayOutput {
+	return o
+}
+
+func (o TenDlcResellerInfoArrayOutput) ToTenDlcResellerInfoArrayOutputWithContext(ctx context.Context) TenDlcResellerInfoArrayOutput {
+	return o
+}
+
+func (o TenDlcResellerInfoArrayOutput) Index(i pulumi.IntInput) TenDlcResellerInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TenDlcResellerInfo {
+		return vs[0].([]TenDlcResellerInfo)[vs[1].(int)]
+	}).(TenDlcResellerInfoOutput)
+}
+
+type TenDlcThroughputInfo struct {
+	// Brand the throughput applies to; empty when not reported.
+	BrandId string `pulumi:"brandId"`
+	// Campaign the throughput applies to; empty when not reported.
+	CampaignId string `pulumi:"campaignId"`
+	// Carriers the throughput applies to.
+	Carriers []string `pulumi:"carriers"`
+	// ID of the throughput; only custom overrides carry one.
+	Id string `pulumi:"id"`
+	// Period the value covers: minute or day.
+	Period string `pulumi:"period"`
+	// What the throughput limits: campaign, brand or number.
+	Scope string `pulumi:"scope"`
+	// How many messages are allowed per period.
+	Value TenDlcThroughputValue `pulumi:"value"`
+}
+
+type TenDlcThroughputInfoOutput struct{ *pulumi.OutputState }
+
+func (TenDlcThroughputInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TenDlcThroughputInfo)(nil)).Elem()
+}
+
+func (o TenDlcThroughputInfoOutput) ToTenDlcThroughputInfoOutput() TenDlcThroughputInfoOutput {
+	return o
+}
+
+func (o TenDlcThroughputInfoOutput) ToTenDlcThroughputInfoOutputWithContext(ctx context.Context) TenDlcThroughputInfoOutput {
+	return o
+}
+
+// Brand the throughput applies to; empty when not reported.
+func (o TenDlcThroughputInfoOutput) BrandId() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcThroughputInfo) string { return v.BrandId }).(pulumi.StringOutput)
+}
+
+// Campaign the throughput applies to; empty when not reported.
+func (o TenDlcThroughputInfoOutput) CampaignId() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcThroughputInfo) string { return v.CampaignId }).(pulumi.StringOutput)
+}
+
+// Carriers the throughput applies to.
+func (o TenDlcThroughputInfoOutput) Carriers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v TenDlcThroughputInfo) []string { return v.Carriers }).(pulumi.StringArrayOutput)
+}
+
+// ID of the throughput; only custom overrides carry one.
+func (o TenDlcThroughputInfoOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcThroughputInfo) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Period the value covers: minute or day.
+func (o TenDlcThroughputInfoOutput) Period() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcThroughputInfo) string { return v.Period }).(pulumi.StringOutput)
+}
+
+// What the throughput limits: campaign, brand or number.
+func (o TenDlcThroughputInfoOutput) Scope() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcThroughputInfo) string { return v.Scope }).(pulumi.StringOutput)
+}
+
+// How many messages are allowed per period.
+func (o TenDlcThroughputInfoOutput) Value() TenDlcThroughputValueOutput {
+	return o.ApplyT(func(v TenDlcThroughputInfo) TenDlcThroughputValue { return v.Value }).(TenDlcThroughputValueOutput)
+}
+
+type TenDlcThroughputInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (TenDlcThroughputInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TenDlcThroughputInfo)(nil)).Elem()
+}
+
+func (o TenDlcThroughputInfoArrayOutput) ToTenDlcThroughputInfoArrayOutput() TenDlcThroughputInfoArrayOutput {
+	return o
+}
+
+func (o TenDlcThroughputInfoArrayOutput) ToTenDlcThroughputInfoArrayOutputWithContext(ctx context.Context) TenDlcThroughputInfoArrayOutput {
+	return o
+}
+
+func (o TenDlcThroughputInfoArrayOutput) Index(i pulumi.IntInput) TenDlcThroughputInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TenDlcThroughputInfo {
+		return vs[0].([]TenDlcThroughputInfo)[vs[1].(int)]
+	}).(TenDlcThroughputInfoOutput)
+}
+
+type TenDlcThroughputValue struct {
+	// MMS messages per period, when SMS and MMS are limited separately.
+	Mms *float64 `pulumi:"mms"`
+	// Messages per period shared by SMS and MMS.
+	Shared *float64 `pulumi:"shared"`
+	// SMS messages per period, when SMS and MMS are limited separately.
+	Sms *float64 `pulumi:"sms"`
+	// True when the throughput is unlimited.
+	Unlimited *bool `pulumi:"unlimited"`
+}
+
+type TenDlcThroughputValueOutput struct{ *pulumi.OutputState }
+
+func (TenDlcThroughputValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TenDlcThroughputValue)(nil)).Elem()
+}
+
+func (o TenDlcThroughputValueOutput) ToTenDlcThroughputValueOutput() TenDlcThroughputValueOutput {
+	return o
+}
+
+func (o TenDlcThroughputValueOutput) ToTenDlcThroughputValueOutputWithContext(ctx context.Context) TenDlcThroughputValueOutput {
+	return o
+}
+
+// MMS messages per period, when SMS and MMS are limited separately.
+func (o TenDlcThroughputValueOutput) Mms() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v TenDlcThroughputValue) *float64 { return v.Mms }).(pulumi.Float64PtrOutput)
+}
+
+// Messages per period shared by SMS and MMS.
+func (o TenDlcThroughputValueOutput) Shared() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v TenDlcThroughputValue) *float64 { return v.Shared }).(pulumi.Float64PtrOutput)
+}
+
+// SMS messages per period, when SMS and MMS are limited separately.
+func (o TenDlcThroughputValueOutput) Sms() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v TenDlcThroughputValue) *float64 { return v.Sms }).(pulumi.Float64PtrOutput)
+}
+
+// True when the throughput is unlimited.
+func (o TenDlcThroughputValueOutput) Unlimited() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v TenDlcThroughputValue) *bool { return v.Unlimited }).(pulumi.BoolPtrOutput)
+}
+
+type TenDlcUsecaseInfo struct {
+	// Classification, for example STANDARD or SPECIAL.
+	Classification string `pulumi:"classification"`
+	// What the use case covers.
+	Description string `pulumi:"description"`
+	// Display name.
+	DisplayName string `pulumi:"displayName"`
+	// Use case ID, the usecase of a TenDlcCampaign.
+	Id string `pulumi:"id"`
+	// Most sub use cases a campaign may list; unset when not reported.
+	MaxSubUsecases *float64 `pulumi:"maxSubUsecases"`
+	// Fewest sample messages the use case needs; unset when not reported.
+	MinMsgSamples *float64 `pulumi:"minMsgSamples"`
+	// Fewest sub use cases a MIXED-style campaign needs; unset when not reported.
+	MinSubUsecases *float64 `pulumi:"minSubUsecases"`
+}
+
+type TenDlcUsecaseInfoOutput struct{ *pulumi.OutputState }
+
+func (TenDlcUsecaseInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TenDlcUsecaseInfo)(nil)).Elem()
+}
+
+func (o TenDlcUsecaseInfoOutput) ToTenDlcUsecaseInfoOutput() TenDlcUsecaseInfoOutput {
+	return o
+}
+
+func (o TenDlcUsecaseInfoOutput) ToTenDlcUsecaseInfoOutputWithContext(ctx context.Context) TenDlcUsecaseInfoOutput {
+	return o
+}
+
+// Classification, for example STANDARD or SPECIAL.
+func (o TenDlcUsecaseInfoOutput) Classification() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcUsecaseInfo) string { return v.Classification }).(pulumi.StringOutput)
+}
+
+// What the use case covers.
+func (o TenDlcUsecaseInfoOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcUsecaseInfo) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Display name.
+func (o TenDlcUsecaseInfoOutput) DisplayName() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcUsecaseInfo) string { return v.DisplayName }).(pulumi.StringOutput)
+}
+
+// Use case ID, the usecase of a TenDlcCampaign.
+func (o TenDlcUsecaseInfoOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcUsecaseInfo) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Most sub use cases a campaign may list; unset when not reported.
+func (o TenDlcUsecaseInfoOutput) MaxSubUsecases() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v TenDlcUsecaseInfo) *float64 { return v.MaxSubUsecases }).(pulumi.Float64PtrOutput)
+}
+
+// Fewest sample messages the use case needs; unset when not reported.
+func (o TenDlcUsecaseInfoOutput) MinMsgSamples() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v TenDlcUsecaseInfo) *float64 { return v.MinMsgSamples }).(pulumi.Float64PtrOutput)
+}
+
+// Fewest sub use cases a MIXED-style campaign needs; unset when not reported.
+func (o TenDlcUsecaseInfoOutput) MinSubUsecases() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v TenDlcUsecaseInfo) *float64 { return v.MinSubUsecases }).(pulumi.Float64PtrOutput)
+}
+
+type TenDlcUsecaseInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (TenDlcUsecaseInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TenDlcUsecaseInfo)(nil)).Elem()
+}
+
+func (o TenDlcUsecaseInfoArrayOutput) ToTenDlcUsecaseInfoArrayOutput() TenDlcUsecaseInfoArrayOutput {
+	return o
+}
+
+func (o TenDlcUsecaseInfoArrayOutput) ToTenDlcUsecaseInfoArrayOutputWithContext(ctx context.Context) TenDlcUsecaseInfoArrayOutput {
+	return o
+}
+
+func (o TenDlcUsecaseInfoArrayOutput) Index(i pulumi.IntInput) TenDlcUsecaseInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TenDlcUsecaseInfo {
+		return vs[0].([]TenDlcUsecaseInfo)[vs[1].(int)]
+	}).(TenDlcUsecaseInfoOutput)
+}
+
+type TenDlcVerticalInfo struct {
+	// What the vertical covers.
+	Description string `pulumi:"description"`
+	// Display name.
+	DisplayName string `pulumi:"displayName"`
+	// Vertical ID, the vertical of a TenDlcCampaign.
+	Id string `pulumi:"id"`
+	// Industry the vertical belongs to; empty when not reported.
+	IndustryId string `pulumi:"industryId"`
+}
+
+type TenDlcVerticalInfoOutput struct{ *pulumi.OutputState }
+
+func (TenDlcVerticalInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TenDlcVerticalInfo)(nil)).Elem()
+}
+
+func (o TenDlcVerticalInfoOutput) ToTenDlcVerticalInfoOutput() TenDlcVerticalInfoOutput {
+	return o
+}
+
+func (o TenDlcVerticalInfoOutput) ToTenDlcVerticalInfoOutputWithContext(ctx context.Context) TenDlcVerticalInfoOutput {
+	return o
+}
+
+// What the vertical covers.
+func (o TenDlcVerticalInfoOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcVerticalInfo) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Display name.
+func (o TenDlcVerticalInfoOutput) DisplayName() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcVerticalInfo) string { return v.DisplayName }).(pulumi.StringOutput)
+}
+
+// Vertical ID, the vertical of a TenDlcCampaign.
+func (o TenDlcVerticalInfoOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcVerticalInfo) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Industry the vertical belongs to; empty when not reported.
+func (o TenDlcVerticalInfoOutput) IndustryId() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcVerticalInfo) string { return v.IndustryId }).(pulumi.StringOutput)
+}
+
+type TenDlcVerticalInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (TenDlcVerticalInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TenDlcVerticalInfo)(nil)).Elem()
+}
+
+func (o TenDlcVerticalInfoArrayOutput) ToTenDlcVerticalInfoArrayOutput() TenDlcVerticalInfoArrayOutput {
+	return o
+}
+
+func (o TenDlcVerticalInfoArrayOutput) ToTenDlcVerticalInfoArrayOutputWithContext(ctx context.Context) TenDlcVerticalInfoArrayOutput {
+	return o
+}
+
+func (o TenDlcVerticalInfoArrayOutput) Index(i pulumi.IntInput) TenDlcVerticalInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TenDlcVerticalInfo {
+		return vs[0].([]TenDlcVerticalInfo)[vs[1].(int)]
+	}).(TenDlcVerticalInfoOutput)
+}
+
 type UserChannels struct {
 	// Facebook Messenger IDs of the user.
 	Messenger []UserMessengerChannel `pulumi:"messenger"`
@@ -4843,6 +6264,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*NetworkBusinessInformationInput)(nil)).Elem(), NetworkBusinessInformationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RtcCapabilityInput)(nil)).Elem(), RtcCapabilityArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RtcCapabilityPtrInput)(nil)).Elem(), RtcCapabilityArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TenDlcConsentMechanismInput)(nil)).Elem(), TenDlcConsentMechanismArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TenDlcConsentMechanismArrayInput)(nil)).Elem(), TenDlcConsentMechanismArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TenDlcMessageFlowDetailsInput)(nil)).Elem(), TenDlcMessageFlowDetailsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TenDlcMessageFlowDetailsPtrInput)(nil)).Elem(), TenDlcMessageFlowDetailsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*UserChannelsInput)(nil)).Elem(), UserChannelsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*UserChannelsPtrInput)(nil)).Elem(), UserChannelsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*UserMessengerChannelInput)(nil)).Elem(), UserMessengerChannelArgs{})
@@ -4918,6 +6343,27 @@ func init() {
 	pulumi.RegisterOutputType(PricingNetworkArrayOutput{})
 	pulumi.RegisterOutputType(RtcCapabilityOutput{})
 	pulumi.RegisterOutputType(RtcCapabilityPtrOutput{})
+	pulumi.RegisterOutputType(TenDlcBrandInfoOutput{})
+	pulumi.RegisterOutputType(TenDlcBrandInfoArrayOutput{})
+	pulumi.RegisterOutputType(TenDlcCampaignInfoOutput{})
+	pulumi.RegisterOutputType(TenDlcCampaignInfoArrayOutput{})
+	pulumi.RegisterOutputType(TenDlcCampaignNumberInfoOutput{})
+	pulumi.RegisterOutputType(TenDlcCampaignNumberInfoArrayOutput{})
+	pulumi.RegisterOutputType(TenDlcCarrierSuspensionOutput{})
+	pulumi.RegisterOutputType(TenDlcCarrierSuspensionArrayOutput{})
+	pulumi.RegisterOutputType(TenDlcConsentMechanismOutput{})
+	pulumi.RegisterOutputType(TenDlcConsentMechanismArrayOutput{})
+	pulumi.RegisterOutputType(TenDlcMessageFlowDetailsOutput{})
+	pulumi.RegisterOutputType(TenDlcMessageFlowDetailsPtrOutput{})
+	pulumi.RegisterOutputType(TenDlcResellerInfoOutput{})
+	pulumi.RegisterOutputType(TenDlcResellerInfoArrayOutput{})
+	pulumi.RegisterOutputType(TenDlcThroughputInfoOutput{})
+	pulumi.RegisterOutputType(TenDlcThroughputInfoArrayOutput{})
+	pulumi.RegisterOutputType(TenDlcThroughputValueOutput{})
+	pulumi.RegisterOutputType(TenDlcUsecaseInfoOutput{})
+	pulumi.RegisterOutputType(TenDlcUsecaseInfoArrayOutput{})
+	pulumi.RegisterOutputType(TenDlcVerticalInfoOutput{})
+	pulumi.RegisterOutputType(TenDlcVerticalInfoArrayOutput{})
 	pulumi.RegisterOutputType(UserChannelsOutput{})
 	pulumi.RegisterOutputType(UserChannelsPtrOutput{})
 	pulumi.RegisterOutputType(UserMessengerChannelOutput{})
