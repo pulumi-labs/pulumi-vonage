@@ -53,7 +53,7 @@ func newProvider() (provider.Provider, error) {
 		WithModuleMap(map[tokens.ModuleName]tokens.ModuleName{
 			"provider": "index",
 		}).
-		WithConfig(infer.Config(Config{})).
+		WithConfig(infer.Config(&Config{})).
 		WithResources(
 			infer.Resource[*Application, ApplicationArgs, ApplicationState](&Application{}),
 			infer.Resource[*Number, NumberArgs, NumberState](&Number{}),
