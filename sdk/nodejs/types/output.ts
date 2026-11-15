@@ -866,6 +866,21 @@ export interface TenDlcCarrierSuspension {
     explanation: string;
 }
 
+export interface TenDlcComplaintInfo {
+    /**
+     * When the complaint was recorded (date-time).
+     */
+    createdAt: string;
+    /**
+     * Name of the direct connect aggregator the complaint came through.
+     */
+    dca: string;
+    /**
+     * Description of the complaint.
+     */
+    description: string;
+}
+
 export interface TenDlcConsentMechanism {
     /**
      * HTTP(S) link to evidence of the consent flow, such as a screenshot. Required for every method except TEXT_TO_JOIN.
@@ -879,6 +894,21 @@ export interface TenDlcConsentMechanism {
      * How consent is collected: ONLINE_FORM, LIVE_OPERATOR, POINT_OF_SALE, TEXT_TO_JOIN or OTHER.
      */
     method: string;
+}
+
+export interface TenDlcFeedbackCategoryInfo {
+    /**
+     * What the category says about the brand.
+     */
+    description: string;
+    /**
+     * The brand fields the feedback concerns.
+     */
+    fields: string[];
+    /**
+     * Name of the feedback category.
+     */
+    name: string;
 }
 
 export interface TenDlcMessageFlowDetails {
@@ -910,6 +940,85 @@ export interface TenDlcMessageFlowDetails {
      * Link to the terms and conditions.
      */
     termsAndConditions: string;
+}
+
+export interface TenDlcMnoQualification {
+    /**
+     * AT&T only: MMS messages per minute qualified for the use case.
+     */
+    attMmsTpm?: number;
+    /**
+     * AT&T only: the message class the operator assigned. Empty for other operators.
+     */
+    attMsgClass: string;
+    /**
+     * AT&T only: whether the throughput applies per number rather than per campaign.
+     */
+    attNumberBased?: boolean;
+    /**
+     * AT&T only: SMS messages per minute qualified for the use case.
+     */
+    attTpm?: number;
+    /**
+     * Complaints the operator recorded against the brand.
+     */
+    complaints: outputs.TenDlcComplaintInfo[];
+    /**
+     * Minimum number of message samples the operator requires.
+     */
+    minMsgSamples?: number;
+    /**
+     * Name of the operator.
+     */
+    mno: string;
+    /**
+     * True when a campaign for the use case goes through the operator's manual review.
+     */
+    mnoReview?: boolean;
+    /**
+     * False when the operator cannot support the use case.
+     */
+    mnoSupport?: boolean;
+    /**
+     * Network ID of the operator.
+     */
+    networkId: string;
+    /**
+     * True when the operator forbids links in the messages.
+     */
+    noEmbeddedLink?: boolean;
+    /**
+     * True when the operator forbids phone numbers in the messages.
+     */
+    noEmbeddedPhone?: boolean;
+    /**
+     * False when the brand does not qualify for the use case on this operator.
+     */
+    qualify?: boolean;
+    /**
+     * True when the operator requires a help mechanism (HELP keywords).
+     */
+    reqSubscriberHelp?: boolean;
+    /**
+     * True when the operator requires the subscriber to opt in before messages are sent.
+     */
+    reqSubscriberOptIn?: boolean;
+    /**
+     * True when the operator requires an opt-out mechanism (STOP keywords).
+     */
+    reqSubscriberOptOut?: boolean;
+    /**
+     * The operator's campaign operation status (see getTenDlcEnums, campaign_op_status). Empty when not reported.
+     */
+    status: string;
+    /**
+     * T-Mobile only: the brand tier that restricts the daily volume. Empty for other operators.
+     */
+    tmoBrandTier: string;
+    /**
+     * T-Mobile only: messages per day qualified for the use case.
+     */
+    tmoTpd?: number;
 }
 
 export interface TenDlcResellerInfo {

@@ -99,6 +99,21 @@ export interface RtcCapabilityArgs {
     signedCallbacks?: pulumi.Input<boolean | undefined>;
 }
 
+export interface TenDlcConsentMechanism {
+    /**
+     * HTTP(S) link to evidence of the consent flow, such as a screenshot. Required for every method except TEXT_TO_JOIN.
+     */
+    attachment?: string;
+    /**
+     * Describes how consent is collected with this method.
+     */
+    details: string;
+    /**
+     * How consent is collected: ONLINE_FORM, LIVE_OPERATOR, POINT_OF_SALE, TEXT_TO_JOIN or OTHER.
+     */
+    method: string;
+}
+
 export interface TenDlcConsentMechanismArgs {
     /**
      * HTTP(S) link to evidence of the consent flow, such as a screenshot. Required for every method except TEXT_TO_JOIN.

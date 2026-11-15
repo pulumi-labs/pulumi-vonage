@@ -165,6 +165,17 @@ functions:
     test: true
   - name: getTenDlcThroughputs
     test: true
+  - name: getTenDlcBrandFeedback
+    test: false
+    reason: Needs a brand already registered on the account (registration is billed and reviewed), and the tests must not register one. Unverified against a live account.
+  - name: getTenDlcBrandUseCaseQualification
+    test: false
+    reason: Needs a brand already registered on the account, and the tests must not register one. Unverified against a live account.
+  - name: getTenDlcPartnerCampaign
+    test: false
+    reason: Needs a partner campaign that was imported into the account, which needs a special account capability. Unverified against a live account.
+  - name: getTenDlcMessageFlowPreview
+    test: true
   - name: getTenDlcCampaign
     test: false
     reason: Needs a campaign already registered on the account, and the tests must not register one.

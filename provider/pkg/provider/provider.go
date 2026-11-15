@@ -120,6 +120,10 @@ func newProvider() (provider.Provider, error) {
 			infer.Function[*GetTenDlcResellers, GetTenDlcResellersArgs, GetTenDlcResellersResult](&GetTenDlcResellers{}),
 			infer.Function[*GetTenDlcCampaignTermsAndConditions, GetTenDlcCampaignTermsAndConditionsArgs, GetTenDlcCampaignTermsAndConditionsResult](&GetTenDlcCampaignTermsAndConditions{}),
 			infer.Function[*GetTenDlcThroughputs, GetTenDlcThroughputsArgs, GetTenDlcThroughputsResult](&GetTenDlcThroughputs{}),
+			infer.Function[*GetTenDlcBrandFeedback, GetTenDlcBrandFeedbackArgs, GetTenDlcBrandFeedbackResult](&GetTenDlcBrandFeedback{}),
+			infer.Function[*GetTenDlcBrandUseCaseQualification, GetTenDlcBrandUseCaseQualificationArgs, GetTenDlcBrandUseCaseQualificationResult](&GetTenDlcBrandUseCaseQualification{}),
+			infer.Function[*GetTenDlcPartnerCampaign, GetTenDlcPartnerCampaignArgs, GetTenDlcPartnerCampaignResult](&GetTenDlcPartnerCampaign{}),
+			infer.Function[*GetTenDlcMessageFlowPreview, GetTenDlcMessageFlowPreviewArgs, GetTenDlcMessageFlowPreviewResult](&GetTenDlcMessageFlowPreview{}),
 			infer.Function[*GetTenDlcEnums, GetTenDlcEnumsArgs, GetTenDlcEnumsResult](&GetTenDlcEnums{}),
 		).
 		Build()

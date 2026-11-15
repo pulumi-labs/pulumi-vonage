@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-11-15
+
+- Security: updated `golang.org/x/crypto` to v0.59.0 (and its `golang.org/x` companions), clearing GO-2026-5932 (the unmaintained `x/crypto/openpgp` package) for scanners; the provider does not import `openpgp`. Not breaking.
+
+- Added: lookups `getTenDlcBrandFeedback` (the identity feedback of a brand), `getTenDlcBrandUseCaseQualification` (the fees and per-operator requirements of a use case for a brand), `getTenDlcPartnerCampaign` (the sharing status of a partner campaign) and `getTenDlcMessageFlowPreview` (the message flow text Vonage renders from consent details; a read-only POST) for the 10DLC API (fixes #1952, part of #1788). Tested against a mocked Vonage API only. Not breaking.
+
 ## [0.3.1] - 2026-11-14
 
 - Security: the Go SDK `go.mod` in the mirror now requires OpenTelemetry `sdk/log` v1.47.0 instead of v0.21.0, fixing GHSA-q7gw-24fr-5p69 (vulnerable >= 0.9.0, < 1.47.0) and clearing the pulumi-labs/pulumi-vonage Dependabot alert once released (fixes #1972). SDK generation change only. Not breaking.

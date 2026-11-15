@@ -27,6 +27,8 @@ __all__ = [
     'NetworkBusinessInformationArgsDict',
     'RtcCapabilityArgs',
     'RtcCapabilityArgsDict',
+    'TenDlcConsentMechanism',
+    'TenDlcConsentMechanismDict',
     'TenDlcConsentMechanismArgs',
     'TenDlcConsentMechanismArgsDict',
     'TenDlcMessageFlowDetailsArgs',
@@ -488,6 +490,73 @@ class RtcCapabilityArgs:
     @signed_callbacks.setter
     def signed_callbacks(self, value: Optional[pulumi.Input[_builtins.bool]]):
         pulumi.set(self, "signed_callbacks", value)
+
+
+class TenDlcConsentMechanismDict(TypedDict):
+    details: _builtins.str
+    """
+    Describes how consent is collected with this method.
+    """
+    method: _builtins.str
+    """
+    How consent is collected: ONLINE_FORM, LIVE_OPERATOR, POINT_OF_SALE, TEXT_TO_JOIN or OTHER.
+    """
+    attachment: NotRequired[_builtins.str]
+    """
+    HTTP(S) link to evidence of the consent flow, such as a screenshot. Required for every method except TEXT_TO_JOIN.
+    """
+
+@pulumi.input_type
+class TenDlcConsentMechanism:
+    def __init__(__self__, *,
+                 details: _builtins.str,
+                 method: _builtins.str,
+                 attachment: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str details: Describes how consent is collected with this method.
+        :param _builtins.str method: How consent is collected: ONLINE_FORM, LIVE_OPERATOR, POINT_OF_SALE, TEXT_TO_JOIN or OTHER.
+        :param _builtins.str attachment: HTTP(S) link to evidence of the consent flow, such as a screenshot. Required for every method except TEXT_TO_JOIN.
+        """
+        pulumi.set(__self__, "details", details)
+        pulumi.set(__self__, "method", method)
+        if attachment is not None:
+            pulumi.set(__self__, "attachment", attachment)
+
+    @_builtins.property
+    @pulumi.getter
+    def details(self) -> _builtins.str:
+        """
+        Describes how consent is collected with this method.
+        """
+        return pulumi.get(self, "details")
+
+    @details.setter
+    def details(self, value: _builtins.str):
+        pulumi.set(self, "details", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def method(self) -> _builtins.str:
+        """
+        How consent is collected: ONLINE_FORM, LIVE_OPERATOR, POINT_OF_SALE, TEXT_TO_JOIN or OTHER.
+        """
+        return pulumi.get(self, "method")
+
+    @method.setter
+    def method(self, value: _builtins.str):
+        pulumi.set(self, "method", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def attachment(self) -> Optional[_builtins.str]:
+        """
+        HTTP(S) link to evidence of the consent flow, such as a screenshot. Required for every method except TEXT_TO_JOIN.
+        """
+        return pulumi.get(self, "attachment")
+
+    @attachment.setter
+    def attachment(self, value: Optional[_builtins.str]):
+        pulumi.set(self, "attachment", value)
 
 
 class TenDlcConsentMechanismArgsDict(TypedDict):
