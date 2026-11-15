@@ -1,3 +1,0 @@
-name: vonage-csharp
-runtime: dotnet
-description: Provision a Vonage voice and messaging application and link an owned number to it (C#)
