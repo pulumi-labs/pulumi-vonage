@@ -2906,6 +2906,64 @@ func (o TenDlcCarrierSuspensionArrayOutput) Index(i pulumi.IntInput) TenDlcCarri
 	}).(TenDlcCarrierSuspensionOutput)
 }
 
+type TenDlcComplaintInfo struct {
+	// When the complaint was recorded (date-time).
+	CreatedAt string `pulumi:"createdAt"`
+	// Name of the direct connect aggregator the complaint came through.
+	Dca string `pulumi:"dca"`
+	// Description of the complaint.
+	Description string `pulumi:"description"`
+}
+
+type TenDlcComplaintInfoOutput struct{ *pulumi.OutputState }
+
+func (TenDlcComplaintInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TenDlcComplaintInfo)(nil)).Elem()
+}
+
+func (o TenDlcComplaintInfoOutput) ToTenDlcComplaintInfoOutput() TenDlcComplaintInfoOutput {
+	return o
+}
+
+func (o TenDlcComplaintInfoOutput) ToTenDlcComplaintInfoOutputWithContext(ctx context.Context) TenDlcComplaintInfoOutput {
+	return o
+}
+
+// When the complaint was recorded (date-time).
+func (o TenDlcComplaintInfoOutput) CreatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcComplaintInfo) string { return v.CreatedAt }).(pulumi.StringOutput)
+}
+
+// Name of the direct connect aggregator the complaint came through.
+func (o TenDlcComplaintInfoOutput) Dca() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcComplaintInfo) string { return v.Dca }).(pulumi.StringOutput)
+}
+
+// Description of the complaint.
+func (o TenDlcComplaintInfoOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcComplaintInfo) string { return v.Description }).(pulumi.StringOutput)
+}
+
+type TenDlcComplaintInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (TenDlcComplaintInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TenDlcComplaintInfo)(nil)).Elem()
+}
+
+func (o TenDlcComplaintInfoArrayOutput) ToTenDlcComplaintInfoArrayOutput() TenDlcComplaintInfoArrayOutput {
+	return o
+}
+
+func (o TenDlcComplaintInfoArrayOutput) ToTenDlcComplaintInfoArrayOutputWithContext(ctx context.Context) TenDlcComplaintInfoArrayOutput {
+	return o
+}
+
+func (o TenDlcComplaintInfoArrayOutput) Index(i pulumi.IntInput) TenDlcComplaintInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TenDlcComplaintInfo {
+		return vs[0].([]TenDlcComplaintInfo)[vs[1].(int)]
+	}).(TenDlcComplaintInfoOutput)
+}
+
 type TenDlcConsentMechanism struct {
 	// HTTP(S) link to evidence of the consent flow, such as a screenshot. Required for every method except TEXT_TO_JOIN.
 	Attachment *string `pulumi:"attachment"`
@@ -3019,6 +3077,64 @@ func (o TenDlcConsentMechanismArrayOutput) Index(i pulumi.IntInput) TenDlcConsen
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TenDlcConsentMechanism {
 		return vs[0].([]TenDlcConsentMechanism)[vs[1].(int)]
 	}).(TenDlcConsentMechanismOutput)
+}
+
+type TenDlcFeedbackCategoryInfo struct {
+	// What the category says about the brand.
+	Description string `pulumi:"description"`
+	// The brand fields the feedback concerns.
+	Fields []string `pulumi:"fields"`
+	// Name of the feedback category.
+	Name string `pulumi:"name"`
+}
+
+type TenDlcFeedbackCategoryInfoOutput struct{ *pulumi.OutputState }
+
+func (TenDlcFeedbackCategoryInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TenDlcFeedbackCategoryInfo)(nil)).Elem()
+}
+
+func (o TenDlcFeedbackCategoryInfoOutput) ToTenDlcFeedbackCategoryInfoOutput() TenDlcFeedbackCategoryInfoOutput {
+	return o
+}
+
+func (o TenDlcFeedbackCategoryInfoOutput) ToTenDlcFeedbackCategoryInfoOutputWithContext(ctx context.Context) TenDlcFeedbackCategoryInfoOutput {
+	return o
+}
+
+// What the category says about the brand.
+func (o TenDlcFeedbackCategoryInfoOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcFeedbackCategoryInfo) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// The brand fields the feedback concerns.
+func (o TenDlcFeedbackCategoryInfoOutput) Fields() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v TenDlcFeedbackCategoryInfo) []string { return v.Fields }).(pulumi.StringArrayOutput)
+}
+
+// Name of the feedback category.
+func (o TenDlcFeedbackCategoryInfoOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcFeedbackCategoryInfo) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type TenDlcFeedbackCategoryInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (TenDlcFeedbackCategoryInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TenDlcFeedbackCategoryInfo)(nil)).Elem()
+}
+
+func (o TenDlcFeedbackCategoryInfoArrayOutput) ToTenDlcFeedbackCategoryInfoArrayOutput() TenDlcFeedbackCategoryInfoArrayOutput {
+	return o
+}
+
+func (o TenDlcFeedbackCategoryInfoArrayOutput) ToTenDlcFeedbackCategoryInfoArrayOutputWithContext(ctx context.Context) TenDlcFeedbackCategoryInfoArrayOutput {
+	return o
+}
+
+func (o TenDlcFeedbackCategoryInfoArrayOutput) Index(i pulumi.IntInput) TenDlcFeedbackCategoryInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TenDlcFeedbackCategoryInfo {
+		return vs[0].([]TenDlcFeedbackCategoryInfo)[vs[1].(int)]
+	}).(TenDlcFeedbackCategoryInfoOutput)
 }
 
 type TenDlcMessageFlowDetails struct {
@@ -3270,6 +3386,176 @@ func (o TenDlcMessageFlowDetailsPtrOutput) TermsAndConditions() pulumi.StringPtr
 		}
 		return &v.TermsAndConditions
 	}).(pulumi.StringPtrOutput)
+}
+
+type TenDlcMnoQualification struct {
+	// AT&T only: MMS messages per minute qualified for the use case.
+	AttMmsTpm *int `pulumi:"attMmsTpm"`
+	// AT&T only: the message class the operator assigned. Empty for other operators.
+	AttMsgClass string `pulumi:"attMsgClass"`
+	// AT&T only: whether the throughput applies per number rather than per campaign.
+	AttNumberBased *bool `pulumi:"attNumberBased"`
+	// AT&T only: SMS messages per minute qualified for the use case.
+	AttTpm *int `pulumi:"attTpm"`
+	// Complaints the operator recorded against the brand.
+	Complaints []TenDlcComplaintInfo `pulumi:"complaints"`
+	// Minimum number of message samples the operator requires.
+	MinMsgSamples *int `pulumi:"minMsgSamples"`
+	// Name of the operator.
+	Mno string `pulumi:"mno"`
+	// True when a campaign for the use case goes through the operator's manual review.
+	MnoReview *bool `pulumi:"mnoReview"`
+	// False when the operator cannot support the use case.
+	MnoSupport *bool `pulumi:"mnoSupport"`
+	// Network ID of the operator.
+	NetworkId string `pulumi:"networkId"`
+	// True when the operator forbids links in the messages.
+	NoEmbeddedLink *bool `pulumi:"noEmbeddedLink"`
+	// True when the operator forbids phone numbers in the messages.
+	NoEmbeddedPhone *bool `pulumi:"noEmbeddedPhone"`
+	// False when the brand does not qualify for the use case on this operator.
+	Qualify *bool `pulumi:"qualify"`
+	// True when the operator requires a help mechanism (HELP keywords).
+	ReqSubscriberHelp *bool `pulumi:"reqSubscriberHelp"`
+	// True when the operator requires the subscriber to opt in before messages are sent.
+	ReqSubscriberOptIn *bool `pulumi:"reqSubscriberOptIn"`
+	// True when the operator requires an opt-out mechanism (STOP keywords).
+	ReqSubscriberOptOut *bool `pulumi:"reqSubscriberOptOut"`
+	// The operator's campaign operation status (see getTenDlcEnums, campaign_op_status). Empty when not reported.
+	Status string `pulumi:"status"`
+	// T-Mobile only: the brand tier that restricts the daily volume. Empty for other operators.
+	TmoBrandTier string `pulumi:"tmoBrandTier"`
+	// T-Mobile only: messages per day qualified for the use case.
+	TmoTpd *int `pulumi:"tmoTpd"`
+}
+
+type TenDlcMnoQualificationOutput struct{ *pulumi.OutputState }
+
+func (TenDlcMnoQualificationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TenDlcMnoQualification)(nil)).Elem()
+}
+
+func (o TenDlcMnoQualificationOutput) ToTenDlcMnoQualificationOutput() TenDlcMnoQualificationOutput {
+	return o
+}
+
+func (o TenDlcMnoQualificationOutput) ToTenDlcMnoQualificationOutputWithContext(ctx context.Context) TenDlcMnoQualificationOutput {
+	return o
+}
+
+// AT&T only: MMS messages per minute qualified for the use case.
+func (o TenDlcMnoQualificationOutput) AttMmsTpm() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TenDlcMnoQualification) *int { return v.AttMmsTpm }).(pulumi.IntPtrOutput)
+}
+
+// AT&T only: the message class the operator assigned. Empty for other operators.
+func (o TenDlcMnoQualificationOutput) AttMsgClass() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcMnoQualification) string { return v.AttMsgClass }).(pulumi.StringOutput)
+}
+
+// AT&T only: whether the throughput applies per number rather than per campaign.
+func (o TenDlcMnoQualificationOutput) AttNumberBased() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v TenDlcMnoQualification) *bool { return v.AttNumberBased }).(pulumi.BoolPtrOutput)
+}
+
+// AT&T only: SMS messages per minute qualified for the use case.
+func (o TenDlcMnoQualificationOutput) AttTpm() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TenDlcMnoQualification) *int { return v.AttTpm }).(pulumi.IntPtrOutput)
+}
+
+// Complaints the operator recorded against the brand.
+func (o TenDlcMnoQualificationOutput) Complaints() TenDlcComplaintInfoArrayOutput {
+	return o.ApplyT(func(v TenDlcMnoQualification) []TenDlcComplaintInfo { return v.Complaints }).(TenDlcComplaintInfoArrayOutput)
+}
+
+// Minimum number of message samples the operator requires.
+func (o TenDlcMnoQualificationOutput) MinMsgSamples() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TenDlcMnoQualification) *int { return v.MinMsgSamples }).(pulumi.IntPtrOutput)
+}
+
+// Name of the operator.
+func (o TenDlcMnoQualificationOutput) Mno() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcMnoQualification) string { return v.Mno }).(pulumi.StringOutput)
+}
+
+// True when a campaign for the use case goes through the operator's manual review.
+func (o TenDlcMnoQualificationOutput) MnoReview() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v TenDlcMnoQualification) *bool { return v.MnoReview }).(pulumi.BoolPtrOutput)
+}
+
+// False when the operator cannot support the use case.
+func (o TenDlcMnoQualificationOutput) MnoSupport() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v TenDlcMnoQualification) *bool { return v.MnoSupport }).(pulumi.BoolPtrOutput)
+}
+
+// Network ID of the operator.
+func (o TenDlcMnoQualificationOutput) NetworkId() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcMnoQualification) string { return v.NetworkId }).(pulumi.StringOutput)
+}
+
+// True when the operator forbids links in the messages.
+func (o TenDlcMnoQualificationOutput) NoEmbeddedLink() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v TenDlcMnoQualification) *bool { return v.NoEmbeddedLink }).(pulumi.BoolPtrOutput)
+}
+
+// True when the operator forbids phone numbers in the messages.
+func (o TenDlcMnoQualificationOutput) NoEmbeddedPhone() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v TenDlcMnoQualification) *bool { return v.NoEmbeddedPhone }).(pulumi.BoolPtrOutput)
+}
+
+// False when the brand does not qualify for the use case on this operator.
+func (o TenDlcMnoQualificationOutput) Qualify() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v TenDlcMnoQualification) *bool { return v.Qualify }).(pulumi.BoolPtrOutput)
+}
+
+// True when the operator requires a help mechanism (HELP keywords).
+func (o TenDlcMnoQualificationOutput) ReqSubscriberHelp() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v TenDlcMnoQualification) *bool { return v.ReqSubscriberHelp }).(pulumi.BoolPtrOutput)
+}
+
+// True when the operator requires the subscriber to opt in before messages are sent.
+func (o TenDlcMnoQualificationOutput) ReqSubscriberOptIn() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v TenDlcMnoQualification) *bool { return v.ReqSubscriberOptIn }).(pulumi.BoolPtrOutput)
+}
+
+// True when the operator requires an opt-out mechanism (STOP keywords).
+func (o TenDlcMnoQualificationOutput) ReqSubscriberOptOut() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v TenDlcMnoQualification) *bool { return v.ReqSubscriberOptOut }).(pulumi.BoolPtrOutput)
+}
+
+// The operator's campaign operation status (see getTenDlcEnums, campaign_op_status). Empty when not reported.
+func (o TenDlcMnoQualificationOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcMnoQualification) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// T-Mobile only: the brand tier that restricts the daily volume. Empty for other operators.
+func (o TenDlcMnoQualificationOutput) TmoBrandTier() pulumi.StringOutput {
+	return o.ApplyT(func(v TenDlcMnoQualification) string { return v.TmoBrandTier }).(pulumi.StringOutput)
+}
+
+// T-Mobile only: messages per day qualified for the use case.
+func (o TenDlcMnoQualificationOutput) TmoTpd() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TenDlcMnoQualification) *int { return v.TmoTpd }).(pulumi.IntPtrOutput)
+}
+
+type TenDlcMnoQualificationArrayOutput struct{ *pulumi.OutputState }
+
+func (TenDlcMnoQualificationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TenDlcMnoQualification)(nil)).Elem()
+}
+
+func (o TenDlcMnoQualificationArrayOutput) ToTenDlcMnoQualificationArrayOutput() TenDlcMnoQualificationArrayOutput {
+	return o
+}
+
+func (o TenDlcMnoQualificationArrayOutput) ToTenDlcMnoQualificationArrayOutputWithContext(ctx context.Context) TenDlcMnoQualificationArrayOutput {
+	return o
+}
+
+func (o TenDlcMnoQualificationArrayOutput) Index(i pulumi.IntInput) TenDlcMnoQualificationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TenDlcMnoQualification {
+		return vs[0].([]TenDlcMnoQualification)[vs[1].(int)]
+	}).(TenDlcMnoQualificationOutput)
 }
 
 type TenDlcResellerInfo struct {
@@ -6351,10 +6637,16 @@ func init() {
 	pulumi.RegisterOutputType(TenDlcCampaignNumberInfoArrayOutput{})
 	pulumi.RegisterOutputType(TenDlcCarrierSuspensionOutput{})
 	pulumi.RegisterOutputType(TenDlcCarrierSuspensionArrayOutput{})
+	pulumi.RegisterOutputType(TenDlcComplaintInfoOutput{})
+	pulumi.RegisterOutputType(TenDlcComplaintInfoArrayOutput{})
 	pulumi.RegisterOutputType(TenDlcConsentMechanismOutput{})
 	pulumi.RegisterOutputType(TenDlcConsentMechanismArrayOutput{})
+	pulumi.RegisterOutputType(TenDlcFeedbackCategoryInfoOutput{})
+	pulumi.RegisterOutputType(TenDlcFeedbackCategoryInfoArrayOutput{})
 	pulumi.RegisterOutputType(TenDlcMessageFlowDetailsOutput{})
 	pulumi.RegisterOutputType(TenDlcMessageFlowDetailsPtrOutput{})
+	pulumi.RegisterOutputType(TenDlcMnoQualificationOutput{})
+	pulumi.RegisterOutputType(TenDlcMnoQualificationArrayOutput{})
 	pulumi.RegisterOutputType(TenDlcResellerInfoOutput{})
 	pulumi.RegisterOutputType(TenDlcResellerInfoArrayOutput{})
 	pulumi.RegisterOutputType(TenDlcThroughputInfoOutput{})

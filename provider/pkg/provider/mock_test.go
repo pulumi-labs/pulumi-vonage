@@ -110,10 +110,11 @@ type mockVonage struct {
 	tdNext     int
 	tdPageSize int
 	// 10DLC resellers by ID (new ones get tdResellerStatus, PENDING when empty) and throughputs.
-	tdResellers      map[string]map[string]any
-	tdResellerNext   int
-	tdResellerStatus string
-	tdThroughputs    []map[string]any
+	tdResellers        map[string]map[string]any
+	tdResellerNext     int
+	tdResellerStatus   string
+	tdThroughputs      []map[string]any
+	tdPartnerCampaigns map[string]map[string]any
 	// 10DLC campaigns by "brand/campaign", linked numbers by "brand/campaign/number"; tdRejectLinks
 	// makes new links come back REJECTED.
 	tdCampaigns   map[string]map[string]any

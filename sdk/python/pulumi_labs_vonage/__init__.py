@@ -40,6 +40,8 @@ from .get_sub_account import *
 from .get_sub_accounts import *
 from .get_ten_dlc_account_settings import *
 from .get_ten_dlc_brand import *
+from .get_ten_dlc_brand_feedback import *
+from .get_ten_dlc_brand_use_case_qualification import *
 from .get_ten_dlc_brands import *
 from .get_ten_dlc_campaign import *
 from .get_ten_dlc_campaign_number import *
@@ -47,6 +49,8 @@ from .get_ten_dlc_campaign_numbers import *
 from .get_ten_dlc_campaign_terms_and_conditions import *
 from .get_ten_dlc_campaigns import *
 from .get_ten_dlc_enums import *
+from .get_ten_dlc_message_flow_preview import *
+from .get_ten_dlc_partner_campaign import *
 from .get_ten_dlc_reseller import *
 from .get_ten_dlc_resellers import *
 from .get_ten_dlc_throughputs import *

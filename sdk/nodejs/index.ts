@@ -175,6 +175,16 @@ export const getTenDlcBrand: typeof import("./getTenDlcBrand").getTenDlcBrand = 
 export const getTenDlcBrandOutput: typeof import("./getTenDlcBrand").getTenDlcBrandOutput = null as any;
 utilities.lazyLoad(exports, ["getTenDlcBrand","getTenDlcBrandOutput"], () => require("./getTenDlcBrand"));
 
+export { GetTenDlcBrandFeedbackArgs, GetTenDlcBrandFeedbackResult, GetTenDlcBrandFeedbackOutputArgs } from "./getTenDlcBrandFeedback";
+export const getTenDlcBrandFeedback: typeof import("./getTenDlcBrandFeedback").getTenDlcBrandFeedback = null as any;
+export const getTenDlcBrandFeedbackOutput: typeof import("./getTenDlcBrandFeedback").getTenDlcBrandFeedbackOutput = null as any;
+utilities.lazyLoad(exports, ["getTenDlcBrandFeedback","getTenDlcBrandFeedbackOutput"], () => require("./getTenDlcBrandFeedback"));
+
+export { GetTenDlcBrandUseCaseQualificationArgs, GetTenDlcBrandUseCaseQualificationResult, GetTenDlcBrandUseCaseQualificationOutputArgs } from "./getTenDlcBrandUseCaseQualification";
+export const getTenDlcBrandUseCaseQualification: typeof import("./getTenDlcBrandUseCaseQualification").getTenDlcBrandUseCaseQualification = null as any;
+export const getTenDlcBrandUseCaseQualificationOutput: typeof import("./getTenDlcBrandUseCaseQualification").getTenDlcBrandUseCaseQualificationOutput = null as any;
+utilities.lazyLoad(exports, ["getTenDlcBrandUseCaseQualification","getTenDlcBrandUseCaseQualificationOutput"], () => require("./getTenDlcBrandUseCaseQualification"));
+
 export { GetTenDlcBrandsArgs, GetTenDlcBrandsResult, GetTenDlcBrandsOutputArgs } from "./getTenDlcBrands";
 export const getTenDlcBrands: typeof import("./getTenDlcBrands").getTenDlcBrands = null as any;
 export const getTenDlcBrandsOutput: typeof import("./getTenDlcBrands").getTenDlcBrandsOutput = null as any;
@@ -209,6 +219,16 @@ export { GetTenDlcEnumsArgs, GetTenDlcEnumsResult } from "./getTenDlcEnums";
 export const getTenDlcEnums: typeof import("./getTenDlcEnums").getTenDlcEnums = null as any;
 export const getTenDlcEnumsOutput: typeof import("./getTenDlcEnums").getTenDlcEnumsOutput = null as any;
 utilities.lazyLoad(exports, ["getTenDlcEnums","getTenDlcEnumsOutput"], () => require("./getTenDlcEnums"));
+
+export { GetTenDlcMessageFlowPreviewArgs, GetTenDlcMessageFlowPreviewResult, GetTenDlcMessageFlowPreviewOutputArgs } from "./getTenDlcMessageFlowPreview";
+export const getTenDlcMessageFlowPreview: typeof import("./getTenDlcMessageFlowPreview").getTenDlcMessageFlowPreview = null as any;
+export const getTenDlcMessageFlowPreviewOutput: typeof import("./getTenDlcMessageFlowPreview").getTenDlcMessageFlowPreviewOutput = null as any;
+utilities.lazyLoad(exports, ["getTenDlcMessageFlowPreview","getTenDlcMessageFlowPreviewOutput"], () => require("./getTenDlcMessageFlowPreview"));
+
+export { GetTenDlcPartnerCampaignArgs, GetTenDlcPartnerCampaignResult, GetTenDlcPartnerCampaignOutputArgs } from "./getTenDlcPartnerCampaign";
+export const getTenDlcPartnerCampaign: typeof import("./getTenDlcPartnerCampaign").getTenDlcPartnerCampaign = null as any;
+export const getTenDlcPartnerCampaignOutput: typeof import("./getTenDlcPartnerCampaign").getTenDlcPartnerCampaignOutput = null as any;
+utilities.lazyLoad(exports, ["getTenDlcPartnerCampaign","getTenDlcPartnerCampaignOutput"], () => require("./getTenDlcPartnerCampaign"));
 
 export { GetTenDlcResellerArgs, GetTenDlcResellerResult, GetTenDlcResellerOutputArgs } from "./getTenDlcReseller";
 export const getTenDlcReseller: typeof import("./getTenDlcReseller").getTenDlcReseller = null as any;

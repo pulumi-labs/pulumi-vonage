@@ -43,8 +43,11 @@ __all__ = [
     'TenDlcCampaignInfo',
     'TenDlcCampaignNumberInfo',
     'TenDlcCarrierSuspension',
+    'TenDlcComplaintInfo',
     'TenDlcConsentMechanism',
+    'TenDlcFeedbackCategoryInfo',
     'TenDlcMessageFlowDetails',
+    'TenDlcMnoQualification',
     'TenDlcResellerInfo',
     'TenDlcThroughputInfo',
     'TenDlcThroughputValue',
@@ -2537,6 +2540,46 @@ class TenDlcCarrierSuspension(dict):
 
 
 @pulumi.output_type
+class TenDlcComplaintInfo(dict):
+    def __init__(__self__, *,
+                 created_at: _builtins.str,
+                 dca: _builtins.str,
+                 description: _builtins.str):
+        """
+        :param _builtins.str created_at: When the complaint was recorded (date-time).
+        :param _builtins.str dca: Name of the direct connect aggregator the complaint came through.
+        :param _builtins.str description: Description of the complaint.
+        """
+        pulumi.set(__self__, "created_at", created_at)
+        pulumi.set(__self__, "dca", dca)
+        pulumi.set(__self__, "description", description)
+
+    @_builtins.property
+    @pulumi.getter(name="createdAt")
+    def created_at(self) -> _builtins.str:
+        """
+        When the complaint was recorded (date-time).
+        """
+        return pulumi.get(self, "created_at")
+
+    @_builtins.property
+    @pulumi.getter
+    def dca(self) -> _builtins.str:
+        """
+        Name of the direct connect aggregator the complaint came through.
+        """
+        return pulumi.get(self, "dca")
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> _builtins.str:
+        """
+        Description of the complaint.
+        """
+        return pulumi.get(self, "description")
+
+
+@pulumi.output_type
 class TenDlcConsentMechanism(dict):
     def __init__(__self__, *,
                  details: _builtins.str,
@@ -2575,6 +2618,46 @@ class TenDlcConsentMechanism(dict):
         HTTP(S) link to evidence of the consent flow, such as a screenshot. Required for every method except TEXT_TO_JOIN.
         """
         return pulumi.get(self, "attachment")
+
+
+@pulumi.output_type
+class TenDlcFeedbackCategoryInfo(dict):
+    def __init__(__self__, *,
+                 description: _builtins.str,
+                 fields: Sequence[_builtins.str],
+                 name: _builtins.str):
+        """
+        :param _builtins.str description: What the category says about the brand.
+        :param Sequence[_builtins.str] fields: The brand fields the feedback concerns.
+        :param _builtins.str name: Name of the feedback category.
+        """
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "fields", fields)
+        pulumi.set(__self__, "name", name)
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> _builtins.str:
+        """
+        What the category says about the brand.
+        """
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter
+    def fields(self) -> Sequence[_builtins.str]:
+        """
+        The brand fields the feedback concerns.
+        """
+        return pulumi.get(self, "fields")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        Name of the feedback category.
+        """
+        return pulumi.get(self, "name")
 
 
 @pulumi.output_type
@@ -2688,6 +2771,235 @@ class TenDlcMessageFlowDetails(dict):
         Whether the carriers are not liable for delayed or undelivered messages is disclosed. Only true is accepted; leave unset otherwise.
         """
         return pulumi.get(self, "carrier_disclaimer")
+
+
+@pulumi.output_type
+class TenDlcMnoQualification(dict):
+    def __init__(__self__, *,
+                 att_msg_class: _builtins.str,
+                 complaints: Sequence['outputs.TenDlcComplaintInfo'],
+                 mno: _builtins.str,
+                 network_id: _builtins.str,
+                 status: _builtins.str,
+                 tmo_brand_tier: _builtins.str,
+                 att_mms_tpm: Optional[_builtins.int] = None,
+                 att_number_based: Optional[_builtins.bool] = None,
+                 att_tpm: Optional[_builtins.int] = None,
+                 min_msg_samples: Optional[_builtins.int] = None,
+                 mno_review: Optional[_builtins.bool] = None,
+                 mno_support: Optional[_builtins.bool] = None,
+                 no_embedded_link: Optional[_builtins.bool] = None,
+                 no_embedded_phone: Optional[_builtins.bool] = None,
+                 qualify: Optional[_builtins.bool] = None,
+                 req_subscriber_help: Optional[_builtins.bool] = None,
+                 req_subscriber_opt_in: Optional[_builtins.bool] = None,
+                 req_subscriber_opt_out: Optional[_builtins.bool] = None,
+                 tmo_tpd: Optional[_builtins.int] = None):
+        """
+        :param _builtins.str att_msg_class: AT&T only: the message class the operator assigned. Empty for other operators.
+        :param Sequence['TenDlcComplaintInfo'] complaints: Complaints the operator recorded against the brand.
+        :param _builtins.str mno: Name of the operator.
+        :param _builtins.str network_id: Network ID of the operator.
+        :param _builtins.str status: The operator's campaign operation status (see getTenDlcEnums, campaign_op_status). Empty when not reported.
+        :param _builtins.str tmo_brand_tier: T-Mobile only: the brand tier that restricts the daily volume. Empty for other operators.
+        :param _builtins.int att_mms_tpm: AT&T only: MMS messages per minute qualified for the use case.
+        :param _builtins.bool att_number_based: AT&T only: whether the throughput applies per number rather than per campaign.
+        :param _builtins.int att_tpm: AT&T only: SMS messages per minute qualified for the use case.
+        :param _builtins.int min_msg_samples: Minimum number of message samples the operator requires.
+        :param _builtins.bool mno_review: True when a campaign for the use case goes through the operator's manual review.
+        :param _builtins.bool mno_support: False when the operator cannot support the use case.
+        :param _builtins.bool no_embedded_link: True when the operator forbids links in the messages.
+        :param _builtins.bool no_embedded_phone: True when the operator forbids phone numbers in the messages.
+        :param _builtins.bool qualify: False when the brand does not qualify for the use case on this operator.
+        :param _builtins.bool req_subscriber_help: True when the operator requires a help mechanism (HELP keywords).
+        :param _builtins.bool req_subscriber_opt_in: True when the operator requires the subscriber to opt in before messages are sent.
+        :param _builtins.bool req_subscriber_opt_out: True when the operator requires an opt-out mechanism (STOP keywords).
+        :param _builtins.int tmo_tpd: T-Mobile only: messages per day qualified for the use case.
+        """
+        pulumi.set(__self__, "att_msg_class", att_msg_class)
+        pulumi.set(__self__, "complaints", complaints)
+        pulumi.set(__self__, "mno", mno)
+        pulumi.set(__self__, "network_id", network_id)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "tmo_brand_tier", tmo_brand_tier)
+        if att_mms_tpm is not None:
+            pulumi.set(__self__, "att_mms_tpm", att_mms_tpm)
+        if att_number_based is not None:
+            pulumi.set(__self__, "att_number_based", att_number_based)
+        if att_tpm is not None:
+            pulumi.set(__self__, "att_tpm", att_tpm)
+        if min_msg_samples is not None:
+            pulumi.set(__self__, "min_msg_samples", min_msg_samples)
+        if mno_review is not None:
+            pulumi.set(__self__, "mno_review", mno_review)
+        if mno_support is not None:
+            pulumi.set(__self__, "mno_support", mno_support)
+        if no_embedded_link is not None:
+            pulumi.set(__self__, "no_embedded_link", no_embedded_link)
+        if no_embedded_phone is not None:
+            pulumi.set(__self__, "no_embedded_phone", no_embedded_phone)
+        if qualify is not None:
+            pulumi.set(__self__, "qualify", qualify)
+        if req_subscriber_help is not None:
+            pulumi.set(__self__, "req_subscriber_help", req_subscriber_help)
+        if req_subscriber_opt_in is not None:
+            pulumi.set(__self__, "req_subscriber_opt_in", req_subscriber_opt_in)
+        if req_subscriber_opt_out is not None:
+            pulumi.set(__self__, "req_subscriber_opt_out", req_subscriber_opt_out)
+        if tmo_tpd is not None:
+            pulumi.set(__self__, "tmo_tpd", tmo_tpd)
+
+    @_builtins.property
+    @pulumi.getter(name="attMsgClass")
+    def att_msg_class(self) -> _builtins.str:
+        """
+        AT&T only: the message class the operator assigned. Empty for other operators.
+        """
+        return pulumi.get(self, "att_msg_class")
+
+    @_builtins.property
+    @pulumi.getter
+    def complaints(self) -> Sequence['outputs.TenDlcComplaintInfo']:
+        """
+        Complaints the operator recorded against the brand.
+        """
+        return pulumi.get(self, "complaints")
+
+    @_builtins.property
+    @pulumi.getter
+    def mno(self) -> _builtins.str:
+        """
+        Name of the operator.
+        """
+        return pulumi.get(self, "mno")
+
+    @_builtins.property
+    @pulumi.getter(name="networkId")
+    def network_id(self) -> _builtins.str:
+        """
+        Network ID of the operator.
+        """
+        return pulumi.get(self, "network_id")
+
+    @_builtins.property
+    @pulumi.getter
+    def status(self) -> _builtins.str:
+        """
+        The operator's campaign operation status (see getTenDlcEnums, campaign_op_status). Empty when not reported.
+        """
+        return pulumi.get(self, "status")
+
+    @_builtins.property
+    @pulumi.getter(name="tmoBrandTier")
+    def tmo_brand_tier(self) -> _builtins.str:
+        """
+        T-Mobile only: the brand tier that restricts the daily volume. Empty for other operators.
+        """
+        return pulumi.get(self, "tmo_brand_tier")
+
+    @_builtins.property
+    @pulumi.getter(name="attMmsTpm")
+    def att_mms_tpm(self) -> Optional[_builtins.int]:
+        """
+        AT&T only: MMS messages per minute qualified for the use case.
+        """
+        return pulumi.get(self, "att_mms_tpm")
+
+    @_builtins.property
+    @pulumi.getter(name="attNumberBased")
+    def att_number_based(self) -> Optional[_builtins.bool]:
+        """
+        AT&T only: whether the throughput applies per number rather than per campaign.
+        """
+        return pulumi.get(self, "att_number_based")
+
+    @_builtins.property
+    @pulumi.getter(name="attTpm")
+    def att_tpm(self) -> Optional[_builtins.int]:
+        """
+        AT&T only: SMS messages per minute qualified for the use case.
+        """
+        return pulumi.get(self, "att_tpm")
+
+    @_builtins.property
+    @pulumi.getter(name="minMsgSamples")
+    def min_msg_samples(self) -> Optional[_builtins.int]:
+        """
+        Minimum number of message samples the operator requires.
+        """
+        return pulumi.get(self, "min_msg_samples")
+
+    @_builtins.property
+    @pulumi.getter(name="mnoReview")
+    def mno_review(self) -> Optional[_builtins.bool]:
+        """
+        True when a campaign for the use case goes through the operator's manual review.
+        """
+        return pulumi.get(self, "mno_review")
+
+    @_builtins.property
+    @pulumi.getter(name="mnoSupport")
+    def mno_support(self) -> Optional[_builtins.bool]:
+        """
+        False when the operator cannot support the use case.
+        """
+        return pulumi.get(self, "mno_support")
+
+    @_builtins.property
+    @pulumi.getter(name="noEmbeddedLink")
+    def no_embedded_link(self) -> Optional[_builtins.bool]:
+        """
+        True when the operator forbids links in the messages.
+        """
+        return pulumi.get(self, "no_embedded_link")
+
+    @_builtins.property
+    @pulumi.getter(name="noEmbeddedPhone")
+    def no_embedded_phone(self) -> Optional[_builtins.bool]:
+        """
+        True when the operator forbids phone numbers in the messages.
+        """
+        return pulumi.get(self, "no_embedded_phone")
+
+    @_builtins.property
+    @pulumi.getter
+    def qualify(self) -> Optional[_builtins.bool]:
+        """
+        False when the brand does not qualify for the use case on this operator.
+        """
+        return pulumi.get(self, "qualify")
+
+    @_builtins.property
+    @pulumi.getter(name="reqSubscriberHelp")
+    def req_subscriber_help(self) -> Optional[_builtins.bool]:
+        """
+        True when the operator requires a help mechanism (HELP keywords).
+        """
+        return pulumi.get(self, "req_subscriber_help")
+
+    @_builtins.property
+    @pulumi.getter(name="reqSubscriberOptIn")
+    def req_subscriber_opt_in(self) -> Optional[_builtins.bool]:
+        """
+        True when the operator requires the subscriber to opt in before messages are sent.
+        """
+        return pulumi.get(self, "req_subscriber_opt_in")
+
+    @_builtins.property
+    @pulumi.getter(name="reqSubscriberOptOut")
+    def req_subscriber_opt_out(self) -> Optional[_builtins.bool]:
+        """
+        True when the operator requires an opt-out mechanism (STOP keywords).
+        """
+        return pulumi.get(self, "req_subscriber_opt_out")
+
+    @_builtins.property
+    @pulumi.getter(name="tmoTpd")
+    def tmo_tpd(self) -> Optional[_builtins.int]:
+        """
+        T-Mobile only: messages per day qualified for the use case.
+        """
+        return pulumi.get(self, "tmo_tpd")
 
 
 @pulumi.output_type

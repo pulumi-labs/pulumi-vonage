@@ -142,6 +142,65 @@ func (m *mockVonage) serveTenDlc(w http.ResponseWriter, r *http.Request, body []
 		default:
 			w.WriteHeader(405)
 		}
+	case parts[0] == "brands" && len(parts) == 3 && parts[2] == "feedback" && r.Method == "GET":
+		// Feedback exists only for an UNVERIFIED brand; a PENDING identity check answers 422.
+		b, ok := m.tdBrands[parts[1]]
+		if !ok {
+			writeJSON(w, 404, map[string]any{"title": "Brand not found"})
+			return
+		}
+		switch b["identity_status"] {
+		case "PENDING":
+			writeJSON(w, 422, map[string]any{"title": "The identity check is still pending"})
+		case "UNVERIFIED":
+			writeJSON(w, 200, map[string]any{"categories": []any{map[string]any{"name": "ADDRESS", "description": "The address does not match", "fields": []any{"street", "city"}}}})
+		default:
+			writeJSON(w, 200, map[string]any{"categories": []any{}})
+		}
+	case parts[0] == "brands" && len(parts) == 4 && parts[2] == "usecases" && r.Method == "GET":
+		if _, ok := m.tdBrands[parts[1]]; !ok {
+			writeJSON(w, 404, map[string]any{"title": "Brand not found"})
+			return
+		}
+		if parts[3] == "UNKNOWN" {
+			writeJSON(w, 404, map[string]any{"title": "Unknown use case"})
+			return
+		}
+		writeJSON(w, 200, map[string]any{"usecase": parts[3], "quarterly_fee": 30, "annual_fee": 60, "mno_metadata": []any{
+			map[string]any{"network_id": "10017", "mno": "AT&T", "status": "ACTIVE", "mno_support": true, "mno_review": false, "qualify": true, "min_msg_samples": 2,
+				"req_subscriber_opt_in": true, "req_subscriber_opt_out": true, "req_subscriber_help": false, "no_embedded_link": false, "no_embedded_phone": true,
+				"att_msg_class": "Q", "att_tpm": 2000, "att_mms_tpm": 1000, "att_number_based": false,
+				"complaints": []any{map[string]any{"description": "Spam", "dca": "SINCH", "created_at": "2026-11-01T10:00:00Z"}}},
+			map[string]any{"network_id": "10035", "mno": "T-Mobile", "qualify": false, "tmo_brand_tier": "LOW", "tmo_tpd": 2000},
+		}})
+	case parts[0] == "partnercampaigns" && len(parts) == 2 && r.Method == "GET":
+		pc, ok := m.tdPartnerCampaigns[parts[1]]
+		if !ok {
+			writeJSON(w, 404, map[string]any{"title": "Campaign not found"})
+			return
+		}
+		writeJSON(w, 200, pc)
+	case parts[0] == "campaigns" && len(parts) == 2 && parts[1] == "message_flow" && r.Method == "POST":
+		var in map[string]any
+		_ = json.Unmarshal(body, &in)
+		for _, k := range []string{"brand_name", "consent_mechanisms", "pricing_disclosure", "frequency", "privacy_policy", "terms_and_conditions"} {
+			if in[k] == nil {
+				writeJSON(w, 422, map[string]any{"title": k + " is required"})
+				return
+			}
+		}
+		text := fmt.Sprintf("Brand: %v - Frequency: %v - Message & data rates may apply.", in["brand_name"], in["frequency"])
+		if in["carrier_disclaimer"] == true {
+			text += " Carriers are not liable for delayed or undelivered messages."
+		}
+		if kw, ok := in["opt_in_keywords"].(string); ok {
+			text += " Opt-in keywords: " + kw + "."
+		}
+		if in["brand_name"] == "REFUSED" || len(text) < 40 || len(text) > 4096 {
+			writeJSON(w, 422, map[string]any{"title": "message_flow length"})
+			return
+		}
+		writeJSON(w, 200, map[string]any{"message_flow": text})
 	case parts[0] == "brands" && len(parts) >= 3 && parts[2] == "campaigns":
 		m.serveTenDlcCampaigns(w, r, body, parts)
 	case parts[0] == "resellers" || parts[0] == "enum" || parts[0] == "throughputs" || (parts[0] == "campaigns" && len(parts) == 2 && parts[1] == "terms_and_conditions"):

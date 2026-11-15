@@ -1299,6 +1299,28 @@
         "explanation"
       ]
     },
+    "vonage:index:TenDlcComplaintInfo": {
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "description": "When the complaint was recorded (date-time)."
+        },
+        "dca": {
+          "type": "string",
+          "description": "Name of the direct connect aggregator the complaint came through."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the complaint."
+        }
+      },
+      "type": "object",
+      "required": [
+        "description",
+        "dca",
+        "createdAt"
+      ]
+    },
     "vonage:index:TenDlcConsentMechanism": {
       "properties": {
         "attachment": {
@@ -1318,6 +1340,31 @@
       "required": [
         "method",
         "details"
+      ]
+    },
+    "vonage:index:TenDlcFeedbackCategoryInfo": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "What the category says about the brand."
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The brand fields the feedback concerns."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the feedback category."
+        }
+      },
+      "type": "object",
+      "required": [
+        "name",
+        "description",
+        "fields"
       ]
     },
     "vonage:index:TenDlcMessageFlowDetails": {
@@ -1361,6 +1408,98 @@
         "frequency",
         "privacyPolicy",
         "termsAndConditions"
+      ]
+    },
+    "vonage:index:TenDlcMnoQualification": {
+      "properties": {
+        "attMmsTpm": {
+          "type": "integer",
+          "description": "AT&T only: MMS messages per minute qualified for the use case."
+        },
+        "attMsgClass": {
+          "type": "string",
+          "description": "AT&T only: the message class the operator assigned. Empty for other operators."
+        },
+        "attNumberBased": {
+          "type": "boolean",
+          "description": "AT&T only: whether the throughput applies per number rather than per campaign."
+        },
+        "attTpm": {
+          "type": "integer",
+          "description": "AT&T only: SMS messages per minute qualified for the use case."
+        },
+        "complaints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/types/vonage:index:TenDlcComplaintInfo"
+          },
+          "description": "Complaints the operator recorded against the brand."
+        },
+        "minMsgSamples": {
+          "type": "integer",
+          "description": "Minimum number of message samples the operator requires."
+        },
+        "mno": {
+          "type": "string",
+          "description": "Name of the operator."
+        },
+        "mnoReview": {
+          "type": "boolean",
+          "description": "True when a campaign for the use case goes through the operator's manual review."
+        },
+        "mnoSupport": {
+          "type": "boolean",
+          "description": "False when the operator cannot support the use case."
+        },
+        "networkId": {
+          "type": "string",
+          "description": "Network ID of the operator."
+        },
+        "noEmbeddedLink": {
+          "type": "boolean",
+          "description": "True when the operator forbids links in the messages."
+        },
+        "noEmbeddedPhone": {
+          "type": "boolean",
+          "description": "True when the operator forbids phone numbers in the messages."
+        },
+        "qualify": {
+          "type": "boolean",
+          "description": "False when the brand does not qualify for the use case on this operator."
+        },
+        "reqSubscriberHelp": {
+          "type": "boolean",
+          "description": "True when the operator requires a help mechanism (HELP keywords)."
+        },
+        "reqSubscriberOptIn": {
+          "type": "boolean",
+          "description": "True when the operator requires the subscriber to opt in before messages are sent."
+        },
+        "reqSubscriberOptOut": {
+          "type": "boolean",
+          "description": "True when the operator requires an opt-out mechanism (STOP keywords)."
+        },
+        "status": {
+          "type": "string",
+          "description": "The operator's campaign operation status (see getTenDlcEnums, campaign_op_status). Empty when not reported."
+        },
+        "tmoBrandTier": {
+          "type": "string",
+          "description": "T-Mobile only: the brand tier that restricts the daily volume. Empty for other operators."
+        },
+        "tmoTpd": {
+          "type": "integer",
+          "description": "T-Mobile only: messages per day qualified for the use case."
+        }
+      },
+      "type": "object",
+      "required": [
+        "networkId",
+        "mno",
+        "status",
+        "attMsgClass",
+        "tmoBrandTier",
+        "complaints"
       ]
     },
     "vonage:index:TenDlcResellerInfo": {
@@ -5402,6 +5541,84 @@
         "type": "object"
       }
     },
+    "vonage:index:getTenDlcBrandFeedback": {
+      "description": "Read the feedback Vonage and The Campaign Registry give on a brand that failed identity verification (GET /v1/10dlc/brands/{brand_id}/feedback). Vonage answers with a 422 error while the identity check is still PENDING, and with an empty list unless the identity status is UNVERIFIED. Not verified against a live account.",
+      "inputs": {
+        "properties": {
+          "brandId": {
+            "type": "string",
+            "description": "The TCR brand ID of the brand (TenDlcBrand.brandId)."
+          }
+        },
+        "type": "object",
+        "required": [
+          "brandId"
+        ]
+      },
+      "outputs": {
+        "properties": {
+          "categories": {
+            "description": "The feedback categories. Empty when the brand's identity status is not UNVERIFIED, which is the only status that has feedback.",
+            "items": {
+              "$ref": "#/types/vonage:index:TenDlcFeedbackCategoryInfo"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "categories"
+        ],
+        "type": "object"
+      }
+    },
+    "vonage:index:getTenDlcBrandUseCaseQualification": {
+      "description": "Check whether a brand qualifies to run a campaign for a use case (GET /v1/10dlc/brands/{brand_id}/usecases/{usecase}). Vonage asks a brand to check this before creating a campaign; a use case that does not qualify may be added through third-party vetting, which is not managed here. Not verified against a live account.",
+      "inputs": {
+        "properties": {
+          "brandId": {
+            "type": "string",
+            "description": "The TCR brand ID of the brand (TenDlcBrand.brandId)."
+          },
+          "usecase": {
+            "type": "string",
+            "description": "The use case to check, for example MARKETING, 2FA or LOW_VOLUME (see getTenDlcEnums for the current list; it is what TenDlcCampaign.usecase takes)."
+          }
+        },
+        "type": "object",
+        "required": [
+          "brandId",
+          "usecase"
+        ]
+      },
+      "outputs": {
+        "properties": {
+          "annualFee": {
+            "description": "The annual fee of the use case, if Vonage reports one.",
+            "type": "integer"
+          },
+          "mnos": {
+            "description": "What each mobile network operator requires of a campaign for the use case, and whether the brand qualifies.",
+            "items": {
+              "$ref": "#/types/vonage:index:TenDlcMnoQualification"
+            },
+            "type": "array"
+          },
+          "quarterlyFee": {
+            "description": "The quarterly fee of the use case, if Vonage reports one.",
+            "type": "integer"
+          },
+          "usecase": {
+            "description": "The use case checked.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "usecase",
+          "mnos"
+        ],
+        "type": "object"
+      }
+    },
     "vonage:index:getTenDlcBrands": {
       "description": "List the account's 10DLC brands, following every page.",
       "inputs": {
@@ -5811,6 +6028,111 @@
           "usecases",
           "verticals",
           "values"
+        ],
+        "type": "object"
+      }
+    },
+    "vonage:index:getTenDlcMessageFlowPreview": {
+      "description": "Preview the message flow text Vonage renders from structured consent details (POST /v1/10dlc/campaigns/message_flow). It is a read-only computation that creates nothing; Vonage answers with a 422 error when the resulting text is not 40 to 4096 characters long. Not verified against a live account.",
+      "inputs": {
+        "properties": {
+          "brandName": {
+            "type": "string",
+            "description": "A brand name associated with the campaign; it can differ from the name of the brand the campaign belongs to."
+          },
+          "carrierDisclaimer": {
+            "type": "boolean",
+            "description": "When true, adds the disclaimer that carriers are not liable for delayed or undelivered messages."
+          },
+          "consentMechanisms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/types/vonage:index:TenDlcConsentMechanism"
+            },
+            "description": "The mechanisms a customer may use to consent to the campaign."
+          },
+          "frequency": {
+            "type": "string",
+            "description": "How often the campaign sends messages: ONE_TIME or RECURRING."
+          },
+          "optInKeywords": {
+            "type": "string",
+            "description": "Opt-in keywords, separated by commas, up to 255 characters."
+          },
+          "pricingDisclosure": {
+            "type": "boolean",
+            "description": "Must be true: adds the pricing disclosure (message and data rates may apply) to the text."
+          },
+          "privacyPolicy": {
+            "type": "string",
+            "description": "Link to the campaign's privacy policy."
+          },
+          "termsAndConditions": {
+            "type": "string",
+            "description": "Link to the campaign's terms and conditions."
+          }
+        },
+        "type": "object",
+        "required": [
+          "brandName",
+          "consentMechanisms",
+          "pricingDisclosure",
+          "frequency",
+          "privacyPolicy",
+          "termsAndConditions"
+        ]
+      },
+      "outputs": {
+        "properties": {
+          "messageFlow": {
+            "description": "The message flow (call to action) text Vonage computes from the details, the same text a campaign gets from messageFlowDetails.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "messageFlow"
+        ],
+        "type": "object"
+      }
+    },
+    "vonage:index:getTenDlcPartnerCampaign": {
+      "description": "Read the sharing information of a partner campaign that was shared with Vonage (GET /v1/10dlc/partnercampaigns/{campaign_id}). Importing a partner campaign is a one-off workflow step and is not managed. Not verified against a live account.",
+      "inputs": {
+        "properties": {
+          "campaignId": {
+            "type": "string",
+            "description": "The Vonage campaign ID of the partner campaign (as returned when the campaign was imported)."
+          }
+        },
+        "type": "object",
+        "required": [
+          "campaignId"
+        ]
+      },
+      "outputs": {
+        "properties": {
+          "campaignId": {
+            "description": "The Vonage campaign ID.",
+            "type": "string"
+          },
+          "downstreamCnpId": {
+            "description": "The downstream connectivity partner (CNP) ID, empty when not reported.",
+            "type": "string"
+          },
+          "sharingStatus": {
+            "description": "The sharing status: PENDING, ACCEPTED or DECLINED (see getTenDlcEnums for the current list).",
+            "type": "string"
+          },
+          "upstreamCnpId": {
+            "description": "The upstream connectivity partner (CNP) ID, empty when not reported.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "campaignId",
+          "sharingStatus",
+          "downstreamCnpId",
+          "upstreamCnpId"
         ],
         "type": "object"
       }

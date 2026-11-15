@@ -68,7 +68,11 @@ import com.pulumi.labs.vonage.inputs.GetSubAccountsPlainArgs;
 import com.pulumi.labs.vonage.inputs.GetTenDlcAccountSettingsArgs;
 import com.pulumi.labs.vonage.inputs.GetTenDlcAccountSettingsPlainArgs;
 import com.pulumi.labs.vonage.inputs.GetTenDlcBrandArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcBrandFeedbackArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcBrandFeedbackPlainArgs;
 import com.pulumi.labs.vonage.inputs.GetTenDlcBrandPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcBrandUseCaseQualificationArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcBrandUseCaseQualificationPlainArgs;
 import com.pulumi.labs.vonage.inputs.GetTenDlcBrandsArgs;
 import com.pulumi.labs.vonage.inputs.GetTenDlcBrandsPlainArgs;
 import com.pulumi.labs.vonage.inputs.GetTenDlcCampaignArgs;
@@ -83,6 +87,10 @@ import com.pulumi.labs.vonage.inputs.GetTenDlcCampaignsArgs;
 import com.pulumi.labs.vonage.inputs.GetTenDlcCampaignsPlainArgs;
 import com.pulumi.labs.vonage.inputs.GetTenDlcEnumsArgs;
 import com.pulumi.labs.vonage.inputs.GetTenDlcEnumsPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcMessageFlowPreviewArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcMessageFlowPreviewPlainArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcPartnerCampaignArgs;
+import com.pulumi.labs.vonage.inputs.GetTenDlcPartnerCampaignPlainArgs;
 import com.pulumi.labs.vonage.inputs.GetTenDlcResellerArgs;
 import com.pulumi.labs.vonage.inputs.GetTenDlcResellerPlainArgs;
 import com.pulumi.labs.vonage.inputs.GetTenDlcResellersArgs;
@@ -126,7 +134,9 @@ import com.pulumi.labs.vonage.outputs.GetPricingResult;
 import com.pulumi.labs.vonage.outputs.GetSubAccountInvokeResult;
 import com.pulumi.labs.vonage.outputs.GetSubAccountsResult;
 import com.pulumi.labs.vonage.outputs.GetTenDlcAccountSettingsResult;
+import com.pulumi.labs.vonage.outputs.GetTenDlcBrandFeedbackResult;
 import com.pulumi.labs.vonage.outputs.GetTenDlcBrandResult;
+import com.pulumi.labs.vonage.outputs.GetTenDlcBrandUseCaseQualificationResult;
 import com.pulumi.labs.vonage.outputs.GetTenDlcBrandsResult;
 import com.pulumi.labs.vonage.outputs.GetTenDlcCampaignNumberResult;
 import com.pulumi.labs.vonage.outputs.GetTenDlcCampaignNumbersResult;
@@ -134,6 +144,8 @@ import com.pulumi.labs.vonage.outputs.GetTenDlcCampaignResult;
 import com.pulumi.labs.vonage.outputs.GetTenDlcCampaignTermsAndConditionsResult;
 import com.pulumi.labs.vonage.outputs.GetTenDlcCampaignsResult;
 import com.pulumi.labs.vonage.outputs.GetTenDlcEnumsResult;
+import com.pulumi.labs.vonage.outputs.GetTenDlcMessageFlowPreviewResult;
+import com.pulumi.labs.vonage.outputs.GetTenDlcPartnerCampaignResult;
 import com.pulumi.labs.vonage.outputs.GetTenDlcResellerResult;
 import com.pulumi.labs.vonage.outputs.GetTenDlcResellersResult;
 import com.pulumi.labs.vonage.outputs.GetTenDlcThroughputsResult;
@@ -1391,6 +1403,76 @@ public final class VonageFunctions {
         return Deployment.getInstance().invokeAsync("vonage:index:getTenDlcBrand", TypeShape.of(GetTenDlcBrandResult.class), args, Utilities.withVersion(options));
     }
     /**
+     * Read the feedback Vonage and The Campaign Registry give on a brand that failed identity verification (GET /v1/10dlc/brands/{brand_id}/feedback). Vonage answers with a 422 error while the identity check is still PENDING, and with an empty list unless the identity status is UNVERIFIED. Not verified against a live account.
+     * 
+     */
+    public static Output<GetTenDlcBrandFeedbackResult> getTenDlcBrandFeedback(GetTenDlcBrandFeedbackArgs args) {
+        return getTenDlcBrandFeedback(args, InvokeOptions.Empty);
+    }
+    /**
+     * Read the feedback Vonage and The Campaign Registry give on a brand that failed identity verification (GET /v1/10dlc/brands/{brand_id}/feedback). Vonage answers with a 422 error while the identity check is still PENDING, and with an empty list unless the identity status is UNVERIFIED. Not verified against a live account.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcBrandFeedbackResult> getTenDlcBrandFeedbackPlain(GetTenDlcBrandFeedbackPlainArgs args) {
+        return getTenDlcBrandFeedbackPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * Read the feedback Vonage and The Campaign Registry give on a brand that failed identity verification (GET /v1/10dlc/brands/{brand_id}/feedback). Vonage answers with a 422 error while the identity check is still PENDING, and with an empty list unless the identity status is UNVERIFIED. Not verified against a live account.
+     * 
+     */
+    public static Output<GetTenDlcBrandFeedbackResult> getTenDlcBrandFeedback(GetTenDlcBrandFeedbackArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcBrandFeedback", TypeShape.of(GetTenDlcBrandFeedbackResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Read the feedback Vonage and The Campaign Registry give on a brand that failed identity verification (GET /v1/10dlc/brands/{brand_id}/feedback). Vonage answers with a 422 error while the identity check is still PENDING, and with an empty list unless the identity status is UNVERIFIED. Not verified against a live account.
+     * 
+     */
+    public static Output<GetTenDlcBrandFeedbackResult> getTenDlcBrandFeedback(GetTenDlcBrandFeedbackArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcBrandFeedback", TypeShape.of(GetTenDlcBrandFeedbackResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Read the feedback Vonage and The Campaign Registry give on a brand that failed identity verification (GET /v1/10dlc/brands/{brand_id}/feedback). Vonage answers with a 422 error while the identity check is still PENDING, and with an empty list unless the identity status is UNVERIFIED. Not verified against a live account.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcBrandFeedbackResult> getTenDlcBrandFeedbackPlain(GetTenDlcBrandFeedbackPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getTenDlcBrandFeedback", TypeShape.of(GetTenDlcBrandFeedbackResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Check whether a brand qualifies to run a campaign for a use case (GET /v1/10dlc/brands/{brand_id}/usecases/{usecase}). Vonage asks a brand to check this before creating a campaign; a use case that does not qualify may be added through third-party vetting, which is not managed here. Not verified against a live account.
+     * 
+     */
+    public static Output<GetTenDlcBrandUseCaseQualificationResult> getTenDlcBrandUseCaseQualification(GetTenDlcBrandUseCaseQualificationArgs args) {
+        return getTenDlcBrandUseCaseQualification(args, InvokeOptions.Empty);
+    }
+    /**
+     * Check whether a brand qualifies to run a campaign for a use case (GET /v1/10dlc/brands/{brand_id}/usecases/{usecase}). Vonage asks a brand to check this before creating a campaign; a use case that does not qualify may be added through third-party vetting, which is not managed here. Not verified against a live account.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcBrandUseCaseQualificationResult> getTenDlcBrandUseCaseQualificationPlain(GetTenDlcBrandUseCaseQualificationPlainArgs args) {
+        return getTenDlcBrandUseCaseQualificationPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * Check whether a brand qualifies to run a campaign for a use case (GET /v1/10dlc/brands/{brand_id}/usecases/{usecase}). Vonage asks a brand to check this before creating a campaign; a use case that does not qualify may be added through third-party vetting, which is not managed here. Not verified against a live account.
+     * 
+     */
+    public static Output<GetTenDlcBrandUseCaseQualificationResult> getTenDlcBrandUseCaseQualification(GetTenDlcBrandUseCaseQualificationArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcBrandUseCaseQualification", TypeShape.of(GetTenDlcBrandUseCaseQualificationResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Check whether a brand qualifies to run a campaign for a use case (GET /v1/10dlc/brands/{brand_id}/usecases/{usecase}). Vonage asks a brand to check this before creating a campaign; a use case that does not qualify may be added through third-party vetting, which is not managed here. Not verified against a live account.
+     * 
+     */
+    public static Output<GetTenDlcBrandUseCaseQualificationResult> getTenDlcBrandUseCaseQualification(GetTenDlcBrandUseCaseQualificationArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcBrandUseCaseQualification", TypeShape.of(GetTenDlcBrandUseCaseQualificationResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Check whether a brand qualifies to run a campaign for a use case (GET /v1/10dlc/brands/{brand_id}/usecases/{usecase}). Vonage asks a brand to check this before creating a campaign; a use case that does not qualify may be added through third-party vetting, which is not managed here. Not verified against a live account.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcBrandUseCaseQualificationResult> getTenDlcBrandUseCaseQualificationPlain(GetTenDlcBrandUseCaseQualificationPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getTenDlcBrandUseCaseQualification", TypeShape.of(GetTenDlcBrandUseCaseQualificationResult.class), args, Utilities.withVersion(options));
+    }
+    /**
      * List the account&#39;s 10DLC brands, following every page.
      * 
      */
@@ -1676,6 +1758,76 @@ public final class VonageFunctions {
      */
     public static CompletableFuture<GetTenDlcEnumsResult> getTenDlcEnumsPlain(GetTenDlcEnumsPlainArgs args, InvokeOptions options) {
         return Deployment.getInstance().invokeAsync("vonage:index:getTenDlcEnums", TypeShape.of(GetTenDlcEnumsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Preview the message flow text Vonage renders from structured consent details (POST /v1/10dlc/campaigns/message_flow). It is a read-only computation that creates nothing; Vonage answers with a 422 error when the resulting text is not 40 to 4096 characters long. Not verified against a live account.
+     * 
+     */
+    public static Output<GetTenDlcMessageFlowPreviewResult> getTenDlcMessageFlowPreview(GetTenDlcMessageFlowPreviewArgs args) {
+        return getTenDlcMessageFlowPreview(args, InvokeOptions.Empty);
+    }
+    /**
+     * Preview the message flow text Vonage renders from structured consent details (POST /v1/10dlc/campaigns/message_flow). It is a read-only computation that creates nothing; Vonage answers with a 422 error when the resulting text is not 40 to 4096 characters long. Not verified against a live account.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcMessageFlowPreviewResult> getTenDlcMessageFlowPreviewPlain(GetTenDlcMessageFlowPreviewPlainArgs args) {
+        return getTenDlcMessageFlowPreviewPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * Preview the message flow text Vonage renders from structured consent details (POST /v1/10dlc/campaigns/message_flow). It is a read-only computation that creates nothing; Vonage answers with a 422 error when the resulting text is not 40 to 4096 characters long. Not verified against a live account.
+     * 
+     */
+    public static Output<GetTenDlcMessageFlowPreviewResult> getTenDlcMessageFlowPreview(GetTenDlcMessageFlowPreviewArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcMessageFlowPreview", TypeShape.of(GetTenDlcMessageFlowPreviewResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Preview the message flow text Vonage renders from structured consent details (POST /v1/10dlc/campaigns/message_flow). It is a read-only computation that creates nothing; Vonage answers with a 422 error when the resulting text is not 40 to 4096 characters long. Not verified against a live account.
+     * 
+     */
+    public static Output<GetTenDlcMessageFlowPreviewResult> getTenDlcMessageFlowPreview(GetTenDlcMessageFlowPreviewArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcMessageFlowPreview", TypeShape.of(GetTenDlcMessageFlowPreviewResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Preview the message flow text Vonage renders from structured consent details (POST /v1/10dlc/campaigns/message_flow). It is a read-only computation that creates nothing; Vonage answers with a 422 error when the resulting text is not 40 to 4096 characters long. Not verified against a live account.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcMessageFlowPreviewResult> getTenDlcMessageFlowPreviewPlain(GetTenDlcMessageFlowPreviewPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getTenDlcMessageFlowPreview", TypeShape.of(GetTenDlcMessageFlowPreviewResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Read the sharing information of a partner campaign that was shared with Vonage (GET /v1/10dlc/partnercampaigns/{campaign_id}). Importing a partner campaign is a one-off workflow step and is not managed. Not verified against a live account.
+     * 
+     */
+    public static Output<GetTenDlcPartnerCampaignResult> getTenDlcPartnerCampaign(GetTenDlcPartnerCampaignArgs args) {
+        return getTenDlcPartnerCampaign(args, InvokeOptions.Empty);
+    }
+    /**
+     * Read the sharing information of a partner campaign that was shared with Vonage (GET /v1/10dlc/partnercampaigns/{campaign_id}). Importing a partner campaign is a one-off workflow step and is not managed. Not verified against a live account.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcPartnerCampaignResult> getTenDlcPartnerCampaignPlain(GetTenDlcPartnerCampaignPlainArgs args) {
+        return getTenDlcPartnerCampaignPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * Read the sharing information of a partner campaign that was shared with Vonage (GET /v1/10dlc/partnercampaigns/{campaign_id}). Importing a partner campaign is a one-off workflow step and is not managed. Not verified against a live account.
+     * 
+     */
+    public static Output<GetTenDlcPartnerCampaignResult> getTenDlcPartnerCampaign(GetTenDlcPartnerCampaignArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcPartnerCampaign", TypeShape.of(GetTenDlcPartnerCampaignResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Read the sharing information of a partner campaign that was shared with Vonage (GET /v1/10dlc/partnercampaigns/{campaign_id}). Importing a partner campaign is a one-off workflow step and is not managed. Not verified against a live account.
+     * 
+     */
+    public static Output<GetTenDlcPartnerCampaignResult> getTenDlcPartnerCampaign(GetTenDlcPartnerCampaignArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("vonage:index:getTenDlcPartnerCampaign", TypeShape.of(GetTenDlcPartnerCampaignResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * Read the sharing information of a partner campaign that was shared with Vonage (GET /v1/10dlc/partnercampaigns/{campaign_id}). Importing a partner campaign is a one-off workflow step and is not managed. Not verified against a live account.
+     * 
+     */
+    public static CompletableFuture<GetTenDlcPartnerCampaignResult> getTenDlcPartnerCampaignPlain(GetTenDlcPartnerCampaignPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vonage:index:getTenDlcPartnerCampaign", TypeShape.of(GetTenDlcPartnerCampaignResult.class), args, Utilities.withVersion(options));
     }
     /**
      * Look up a 10DLC reseller by ID.
