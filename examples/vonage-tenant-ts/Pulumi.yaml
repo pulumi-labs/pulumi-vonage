@@ -1,3 +1,0 @@
-name: vonage-tenant-ts
-runtime: nodejs
-description: Provision a Vonage subaccount tenant with its own application and a rotatable API secret (TypeScript)
